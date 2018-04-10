@@ -19,10 +19,11 @@ module.exports = {
     });
   },
 
-  getLocationMatches: (startLocationId, endLocationId) => {
+  getLocationMatches: (startLocationId, endLocationId, gender) => {
     const params = {
       startLocationId,
-      endLocationId
+      endLocationId,
+      gender
     }
     const queryString = QueryString.stringify(params)
     const encodedURI = window.encodeURI(`${endpoint}/carpool/match?${queryString}`);

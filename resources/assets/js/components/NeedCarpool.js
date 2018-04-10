@@ -13,7 +13,7 @@ export default class NeedCarpool extends Component {
     this.state = {
       startLocation: null,
       endLocation: null,
-      preferredGender: null,
+      gender: null,
       carpoolQty: 2,
 
       willCarpoolFromPolls: true,
@@ -45,9 +45,9 @@ export default class NeedCarpool extends Component {
     })
   }
 
-  handleGenderChange(preferredGender) {
+  handleGenderChange(gender) {
     this.setState({
-      preferredGender
+      gender
     })
   }
 
@@ -82,77 +82,83 @@ export default class NeedCarpool extends Component {
   render() {
     return (
       <div>
-        <Row>
-          <Col md={12} xs={12}>
-            <Panel>
-              <Panel.Heading componentClass='h4'>Offer to carpool</Panel.Heading>
-              <Panel.Body>
-                <Row>
-                  <Col md={4}>
-                    <Panel>
-                      <Panel.Heading>
-                        I&apos;m currently in:
-                      </Panel.Heading>
-                      <Panel.Body>
-                        <LocationSelection onChange={this.startLocationChanged}/>
-                      </Panel.Body>
-                    </Panel>
-                  </Col>
-                  <Col md={4}>
-                    <Panel>
-                      <Panel.Heading>
-                        I&apos;m voting in:
-                      </Panel.Heading>
-                      <Panel.Body>
-                        <LocationSelection onChange={this.endLocationChanged}/>
-                      </Panel.Body>
-                    </Panel>
-                  </Col>
-                  <Col md={4}>
-                    <Panel>
-                      <Panel.Heading>
-                      My gender is
-                      </Panel.Heading>
-                      <Panel.Body>
-                        <div>
-                          <input
-                            type='radio'
-                            name='gender'
-                            value='male'
-                            onChange={(e) => this.handleGenderChange('male')}
-                            checked={this.state.preferredGender == 'male'}
-                            />Male<br />
-                          <input
-                            type='radio'
-                            name='gender'
-                            value='female'
-                            onChange={(e) => this.handleGenderChange('female')}
-                            checked={this.state.preferredGender == 'female'}
-                            />Female<br />
-                        </div>
-                      </Panel.Body>
-                    </Panel>
-                  </Col>
-                </Row>
-              </Panel.Body>
-              {this.getValidationState() &&
-                <Panel.Footer>
+        <div className="container">
+          <h1>Look for a carpool</h1>
+          <Row>
+            <Col md={12} xs={12}>
+              <Panel>
+                <Panel.Body>
                   <Row>
-                    <Col mdOffset={10} md={2}>
-                      <Button bsStyle='success'>Submit carpool request</Button>
+                    <Col md={4}>
+                      <Panel>
+                        <Panel.Heading>
+                          I&apos;m currently in:
+                        </Panel.Heading>
+                        <Panel.Body>
+                          <LocationSelection onChange={this.startLocationChanged}/>
+                        </Panel.Body>
+                      </Panel>
+                    </Col>
+                    <Col md={4}>
+                      <Panel>
+                        <Panel.Heading>
+                          I&apos;m voting in:
+                        </Panel.Heading>
+                        <Panel.Body>
+                          <LocationSelection onChange={this.endLocationChanged}/>
+                        </Panel.Body>
+                      </Panel>
+                    </Col>
+                    <Col md={4}>
+                      <Panel>
+                        <Panel.Heading>
+                        My gender is
+                        </Panel.Heading>
+                        <Panel.Body>
+                          <div>
+                            <input
+                              type='radio'
+                              name='gender'
+                              value='male'
+                              onChange={(e) => this.handleGenderChange('male')}
+                              checked={this.state.gender == 'male'}
+                              />Male<br />
+                            <input
+                              type='radio'
+                              name='gender'
+                              value='female'
+                              onChange={(e) => this.handleGenderChange('female')}
+                              checked={this.state.gender == 'female'}
+                              />Female<br />
+                          </div>
+                        </Panel.Body>
+                      </Panel>
                     </Col>
                   </Row>
-                </Panel.Footer>
-              }
-            </Panel>
-            {this.state.startLocation && this.state.endLocation &&
-              <CarpoolMatches
-                startLocation={this.state.startLocation}
-                endLocation={this.state.endLocation}
-              />
-            }
-          </Col>
-        </Row>
+                </Panel.Body>
+                {this.getValidationState() &&
+                  <Panel.Footer>
+                    <Row>
+                      <Col mdOffset={10} md={2}>
+                        <Button bsStyle='success'>Save carpool request</Button>
+                      </Col>
+                    </Row>
+                  </Panel.Footer>
+                }
+              </Panel>
+            </Col>
+          </Row>
+        </div>
+        {this.state.startLocation && this.state.endLocation && this.state.gender &&
+          <div className="container">
+            <h1>Results</h1>
+            <CarpoolMatches
+              gender={this.state.gender}
+              startLocation={this.state.startLocation}
+              endLocation={this.state.endLocation}
+            />
+          </div>
+        }
       </div>
     )
   }

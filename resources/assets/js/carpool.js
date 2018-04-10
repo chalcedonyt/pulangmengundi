@@ -9,14 +9,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import OfferCarpool from './components/OfferCarpool'
 import NeedCarpool from './components/NeedCarpool'
+import Carpool from './components/Carpool'
 import {Route, BrowserRouter, Switch} from 'react-router-dom'
+import {Navbar, Nav, NavItem} from 'react-bootstrap'
 
 ReactDOM.render(
     <BrowserRouter>
       <div>
+        <Navbar>
+          <Navbar.Header>
+            <Navbar.Brand>
+              #PulangMengundi
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Nav>
+            <NavItem eventKey={1} href='/carpool'>Carpooling</NavItem>
+            <NavItem eventKey={2}>Subsidies</NavItem>
+          </Nav>
+        </Navbar>
         <Switch>
-          <Route exact path='/offer/carpool' component={OfferCarpool} />
-          <Route exact path='/need/carpool' component={NeedCarpool} />
+          <Route exact path='/carpool' component={Carpool} />
+          <Route exact path='/carpool/offer' component={OfferCarpool} />
+          <Route exact path='/carpool/need' component={NeedCarpool} />
         </Switch>
       </div>
     </BrowserRouter>

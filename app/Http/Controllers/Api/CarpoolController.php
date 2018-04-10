@@ -29,15 +29,24 @@ class CarpoolController extends Controller
     {
         $location_start = Location::find($request->input('startLocationId'));
         $location_end = Location::find($request->input('endLocationId'));
+        $gender = $request->input('gender');
 
         $matches = CarpoolOffer::with('user')
         ->where('location_id_from', '=', $location_start->getKey())
         ->where('location_id_to', '=', $location_end->getKey())
+        ->where(function ($q) use ($gender) {
+            $q->whereNull('gender_preference')
+            ->orWhere('gender_preference', '=', $gender);
+        })
         ->get();
 
         $partial_matches = CarpoolOffer::with('user', 'locationFrom.locationState', 'locationTo.locationState')
         ->fromStateIs($location_start->state)
         ->toStateIs($location_end->state)
+        ->where(function ($q) use ($gender) {
+            $q->whereNull('gender_preference')
+            ->orWhere('gender_preference', '=', $gender);
+        })
         ->get();
         return response()->json([
             'matches' => $matches->toArray(),

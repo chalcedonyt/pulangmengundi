@@ -17,10 +17,13 @@ Route::get('/', function () {
 Route::get('login/google', 'Auth\LoginController@redirectToProvider');
 Route::get('google/callback', 'Auth\LoginController@handleProviderCallback');
 
-Route::get('need/carpool', function() {
+Route::get('carpool', function() {
     return view('carpool');
 });
-Route::get('offer/carpool', function() {
+Route::get('carpool/need', function() {
+    return view('carpool');
+});
+Route::get('carpool/offer', function() {
    return view('carpool');
 });
 
