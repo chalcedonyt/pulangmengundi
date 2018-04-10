@@ -1,0 +1,14 @@
+version: "2"
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      # - /var/lib/mysql
+      - ./docker/mysql/conf.d/custom.cnf:/etc/mysql/conf.d/custom.cnf
+    ports:
+      - "33068:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "gdp_pr"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "password"
