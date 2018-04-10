@@ -26,5 +26,8 @@
         "react-dom": "^16.2.0",
         "react-router-dom": "^4.2.2"
     },
-    "dependencies": {}
+    "dependencies": {
+        "moment": "^2.22.0",
+        "react-datepicker": "^1.4.1"
+    }
 }

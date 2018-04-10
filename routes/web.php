@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('home');
 });
-
 Route::get('login/google', 'Auth\LoginController@redirectToProvider');
 Route::get('google/callback', 'Auth\LoginController@handleProviderCallback');
+
+Route::get('offer/carpool', function() {
+   return view('offer.carpool');
+});
