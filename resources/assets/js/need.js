@@ -7,17 +7,16 @@
 window.__BASE_API_URL = '/api';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import OfferCarpool from './components/OfferCarpool'
-import OfferSubsidy from './components/OfferSubsidy'
+// import OfferCarpool from './components/NeedCar'
+import NeedSubsidy from './components/NeedSubsidy'
 import {Route, BrowserRouter, Switch} from 'react-router-dom'
 
 ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
-          <Route exact path='/offer/carpool' component={OfferCarpool} />
-          <Route exact path='/offer/subsidy' component={OfferSubsidy} />
+          <Route exact path='/need/subsidy' component={NeedSubsidy} />
         </Switch>
       </div>
     </BrowserRouter>
-, document.getElementById('offer'));
+, document.getElementById('need'));

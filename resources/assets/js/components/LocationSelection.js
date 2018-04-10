@@ -41,6 +41,7 @@ export default class LocationSelection extends Component {
       selectedState,
       selectedLocation: null
     }, () => {
+      this.props.onChange(null)
       api.getLocations(selectedState.name)
       .then(({locations: stateLocations}) => {
         this.setState({

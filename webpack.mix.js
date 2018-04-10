@@ -13,6 +13,7 @@ let mix = require('laravel-mix');
 
 mix
 .react('resources/assets/js/home.js', 'public/js')
+.react('resources/assets/js/need.js', 'public/js')
 .react('resources/assets/js/offer.js', 'public/js')
 .extract([
   'axios',

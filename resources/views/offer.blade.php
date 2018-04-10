@@ -1,6 +1,6 @@
 @extends('shared.master')
 
-@section('title', 'Home')
+@section('title', 'Offer to help')
 
 @section('content')
 <div id="offer"></div>
