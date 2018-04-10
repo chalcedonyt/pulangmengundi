@@ -17,6 +17,7 @@ class CreateOfferCarpoolTable extends Migration
             $table->increments('id');
             $table->datetime('go_at')->nullable();
             $table->datetime('go_back_at')->nullable();
+            $table->string('gender_preference')->nullable();
             $table->timestamps();
         });
     }

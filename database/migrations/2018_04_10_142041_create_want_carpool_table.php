@@ -15,6 +15,7 @@ class CreateWantCarpoolTable extends Migration
     {
         Schema::create('want_carpool', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('gender');
             $table->timestamps();
         });
     }

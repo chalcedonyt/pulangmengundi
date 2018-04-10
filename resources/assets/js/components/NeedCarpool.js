@@ -6,7 +6,7 @@ import {Button, Checkbox, Col, DropdownButton, FormControl, MenuItem, Radio, Row
 import DateSelection from './DateSelection'
 import LocationSelection from './LocationSelection'
 
-export default class OfferCarpool extends Component {
+export default class NeedCarpool extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,11 +24,6 @@ export default class OfferCarpool extends Component {
     this.endLocationChanged = this.endLocationChanged.bind(this)
     this.handleCarpoolQtyChange = this.handleCarpoolQtyChange.bind(this)
     this.handleGenderChange = this.handleGenderChange.bind(this)
-    this.handleCarpoolFromPollsDateChange = this.handleCarpoolFromPollsDateChange.bind(this)
-    this.handleCarpoolToPollsDateChange = this.handleCarpoolToPollsDateChange.bind(this)
-
-    this.handleWillCarpoolFromPollsChange = this.handleWillCarpoolFromPollsChange.bind(this)
-    this.handleWillCarpoolToPollsChange = this.handleWillCarpoolToPollsChange.bind(this)
   }
 
   startLocationChanged(startLocation) {
@@ -94,7 +89,12 @@ export default class OfferCarpool extends Component {
                 <Row>
                   <Col md={4}>
                     <Panel>
-                      <Panel.Heading>I&apos;m currently in:</Panel.Heading>
+                      <Panel.Heading>
+                      <input
+                          type="checkbox"
+                          onChange={this.handleNeedCarpoolToPollsChange}
+                          checked={this.state.needCarpoolToPolls}
+                        />&nbsp; I need a carpool to:</Panel.Heading>
                       <Panel.Body>
                         <LocationSelection onChange={this.startLocationChanged}/>
                       </Panel.Body>
@@ -102,30 +102,26 @@ export default class OfferCarpool extends Component {
                   </Col>
                   <Col md={4}>
                     <Panel>
-                      <Panel.Heading>I&apos;m voting in:</Panel.Heading>
+                      <Panel.Heading>
+                      <input
+                          type="checkbox"
+                          onChange={this.handleNeedCarpoolToPollsChange}
+                          checked={this.state.needCarpoolToPolls}
+                        />&nbsp; I need a carpool back from:</Panel.Heading>
                       <Panel.Body>
                         <LocationSelection onChange={this.endLocationChanged}/>
                       </Panel.Body>
                     </Panel>
                   </Col>
-                  <Col md={4}>
+                </Row>
+                <Row>
+                  <Col md={6}>
                     <Panel>
-                      <Panel.Heading>I can carpool with</Panel.Heading>
+                      <Panel.Heading>
+                      My gender is
+                      </Panel.Heading>
                       <Panel.Body>
                         <div>
-                          <FormControl
-                            onChange={this.handleCarpoolQtyChange}
-                            type='number'
-                            value={this.state.carpoolQty} /> people.
-                        </div>
-                        <div>
-                          <input
-                            type='radio'
-                            name='gender'
-                            value=''
-                            onChange={(e) => this.handleGenderChange(null)}
-                            checked={this.state.preferredGender == null}
-                            /> Any gender<br />
                           <input
                             type='radio'
                             name='gender'
@@ -145,52 +141,16 @@ export default class OfferCarpool extends Component {
                     </Panel>
                   </Col>
                 </Row>
-                {this.state.startLocation && this.state.endLocation &&
-                <Row>
-                  <Col md={6}>
-                    <Panel>
-                      <Panel.Heading>
-                        <input
-                          type="checkbox"
-                          onChange={this.handleWillCarpoolToPollsChange}
-                          checked={this.state.willCarpoolToPolls}
-                        />&nbsp; I'm offering a carpool TO the polls
-                      </Panel.Heading>
-                      <Panel.Body>
-                        <div>
-                          I'll leave <strong>{this.state.startLocation.name}</strong> for <strong>{this.state.endLocation.name}</strong> at:
-                          <DateSelection onChange={this.handleCarpoolToPollsDateChange} />
-                        </div>
-                      </Panel.Body>
-                    </Panel>
-                  </Col>
-                  <Col md={6}>
-                    <Panel>
-                      <Panel.Heading>
-                      <input
-                          type="checkbox"
-                          onChange={this.handleWillCarpoolFromPollsChange}
-                          checked={this.state.willCarpoolFromPolls}
-                        />&nbsp; I'm offering a carpool back AFTER the polls
-                      </Panel.Heading>
-                      <Panel.Body>
-                        <div>
-                          I'll leave <strong>{this.state.endLocation.name}</strong> for <strong>{this.state.startLocation.name}</strong> at:
-                          <DateSelection onChange={this.handleCarpoolFromPollsDateChange} />
-                        </div>
-                      </Panel.Body>
-                    </Panel>
-                  </Col>
-                </Row>
-                }
-                {this.getValidationState() &&
+              </Panel.Body>
+              {this.getValidationState() &&
+                <Panel.Footer>
                   <Row>
                     <Col mdOffset={10} md={2}>
-                      <Button bsStyle='success'>Submit carpool offer</Button>
+                      <Button bsStyle='success'>Submit carpool request</Button>
                     </Col>
                   </Row>
-                }
-              </Panel.Body>
+                </Panel.Footer>
+              }
             </Panel>
           </Col>
         </Row>

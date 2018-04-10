@@ -18,14 +18,8 @@ Route::get('login/google', 'Auth\LoginController@redirectToProvider');
 Route::get('google/callback', 'Auth\LoginController@handleProviderCallback');
 
 Route::get('need/carpool', function() {
-    return view('need');
-});
-Route::get('need/subsidy', function() {
-    return view('need');
+    return view('carpool');
 });
 Route::get('offer/carpool', function() {
-   return view('offer');
-});
-Route::get('offer/subsidy', function() {
-   return view('offer');
+   return view('carpool');
 });
