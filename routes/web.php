@@ -23,3 +23,12 @@ Route::get('need/carpool', function() {
 Route::get('offer/carpool', function() {
    return view('carpool');
 });
+
+Route::middleware('auth')->prefix('api')->group(function() {
+    Route::get('/states', ['uses' => 'Api\\LocationController@states']);
+    Route::get('/locations', ['uses' => 'Api\\LocationController@locations']);
+    Route::post('/carpool/offer', ['uses' => 'Api\\CarpoolController@offer']);
+    Route::post('/carpool/need', ['uses' => 'Api\\CarpoolController@need']);
+
+    Route::get('/carpool/match', ['uses' => 'Api\\CarpoolController@match']);
+});

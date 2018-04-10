@@ -5,6 +5,7 @@ import api from '../utils/api'
 import {Button, Checkbox, Col, DropdownButton, FormControl, MenuItem, Radio, Row, Panel} from 'react-bootstrap'
 import DateSelection from './DateSelection'
 import LocationSelection from './LocationSelection'
+import CarpoolMatches from './CarpoolMatches'
 
 export default class NeedCarpool extends Component {
   constructor(props) {
@@ -90,11 +91,8 @@ export default class NeedCarpool extends Component {
                   <Col md={4}>
                     <Panel>
                       <Panel.Heading>
-                      <input
-                          type="checkbox"
-                          onChange={this.handleNeedCarpoolToPollsChange}
-                          checked={this.state.needCarpoolToPolls}
-                        />&nbsp; I need a carpool to:</Panel.Heading>
+                        I&apos;m currently in:
+                      </Panel.Heading>
                       <Panel.Body>
                         <LocationSelection onChange={this.startLocationChanged}/>
                       </Panel.Body>
@@ -103,19 +101,14 @@ export default class NeedCarpool extends Component {
                   <Col md={4}>
                     <Panel>
                       <Panel.Heading>
-                      <input
-                          type="checkbox"
-                          onChange={this.handleNeedCarpoolToPollsChange}
-                          checked={this.state.needCarpoolToPolls}
-                        />&nbsp; I need a carpool back from:</Panel.Heading>
+                        I&apos;m voting in:
+                      </Panel.Heading>
                       <Panel.Body>
                         <LocationSelection onChange={this.endLocationChanged}/>
                       </Panel.Body>
                     </Panel>
                   </Col>
-                </Row>
-                <Row>
-                  <Col md={6}>
+                  <Col md={4}>
                     <Panel>
                       <Panel.Heading>
                       My gender is
@@ -152,6 +145,12 @@ export default class NeedCarpool extends Component {
                 </Panel.Footer>
               }
             </Panel>
+            {this.state.startLocation && this.state.endLocation &&
+              <CarpoolMatches
+                startLocation={this.state.startLocation}
+                endLocation={this.state.endLocation}
+              />
+            }
           </Col>
         </Row>
       </div>

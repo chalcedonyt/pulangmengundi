@@ -6,6 +6,9 @@ import {Button, Checkbox, Col, DropdownButton, FormControl, MenuItem, Radio, Row
 import DateSelection from './DateSelection'
 import LocationSelection from './LocationSelection'
 
+import moment from 'moment'
+import axios from 'axios'
+
 export default class OfferCarpool extends Component {
   constructor(props) {
     super(props)
@@ -17,8 +20,8 @@ export default class OfferCarpool extends Component {
 
       willCarpoolFromPolls: true,
       willCarpoolToPolls: true,
-      carpoolFromPollsDateTime: null,
-      carpoolToPollsDateTime: null
+      carpoolFromPollsDateTime: moment('20180509 18', 'YYYYMMDD HH'),
+      carpoolToPollsDateTime: moment('20180509 06', 'YYYYMMDD HH'),
     }
     this.startLocationChanged = this.startLocationChanged.bind(this)
     this.endLocationChanged = this.endLocationChanged.bind(this)
@@ -29,6 +32,8 @@ export default class OfferCarpool extends Component {
 
     this.handleWillCarpoolFromPollsChange = this.handleWillCarpoolFromPollsChange.bind(this)
     this.handleWillCarpoolToPollsChange = this.handleWillCarpoolToPollsChange.bind(this)
+
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   startLocationChanged(startLocation) {
@@ -81,6 +86,37 @@ export default class OfferCarpool extends Component {
 
   getValidationState() {
     return this.state.endLocation && this.state.startLocation
+  }
+
+  handleSubmit() {
+    var apis = []
+
+    if (this.state.willCarpoolToPolls) {
+      const params = {
+        carpoolQty: this.state.carpoolQty,
+        preferredGender: this.state.preferredGender,
+        fromLocationId: this.state.startLocation.id,
+        toLocationId: this.state.endLocation.id,
+        datetime: this.state.carpoolToPollsDateTime
+      }
+      apis.push(api.submitCarpoolOffer(params))
+    }
+
+    if (this.state.willCarpoolFromPolls) {
+      const params = {
+        carpoolQty: this.state.carpoolQty,
+        preferredGender: this.state.preferredGender,
+        fromLocationId: this.state.startLocation.id,
+        toLocationId: this.state.endLocation.id,
+        datetime: this.state.carpoolFromPollsDateTime
+      }
+      apis.push(api.submitCarpoolOffer(params))
+    }
+
+    axios.all(apis)
+    .then(axios.spread((...results) => {
+      console.log(results)
+    }))
   }
 
   render() {
@@ -159,7 +195,7 @@ export default class OfferCarpool extends Component {
                       <Panel.Body>
                         <div>
                           I'll leave <strong>{this.state.startLocation.name}</strong> for <strong>{this.state.endLocation.name}</strong> at:
-                          <DateSelection onChange={this.handleCarpoolToPollsDateChange} />
+                          <DateSelection date={this.carpoolToPollsDateTime} onChange={this.handleCarpoolToPollsDateChange} />
                         </div>
                       </Panel.Body>
                     </Panel>
@@ -176,7 +212,7 @@ export default class OfferCarpool extends Component {
                       <Panel.Body>
                         <div>
                           I'll leave <strong>{this.state.endLocation.name}</strong> for <strong>{this.state.startLocation.name}</strong> at:
-                          <DateSelection onChange={this.handleCarpoolFromPollsDateChange} />
+                          <DateSelection date={this.carpoolFromPollsDateTime} onChange={this.handleCarpoolFromPollsDateChange} />
                         </div>
                       </Panel.Body>
                     </Panel>
@@ -186,7 +222,7 @@ export default class OfferCarpool extends Component {
                 {this.getValidationState() &&
                   <Row>
                     <Col mdOffset={10} md={2}>
-                      <Button bsStyle='success'>Submit carpool offer</Button>
+                      <Button bsStyle='success' onClick={this.handleSubmit}>Submit carpool offer</Button>
                     </Col>
                   </Row>
                 }

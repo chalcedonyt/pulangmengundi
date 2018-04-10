@@ -15,10 +15,17 @@ class CreateOfferCarpoolTable extends Migration
     {
         Schema::create('offer_carpool', function (Blueprint $table) {
             $table->increments('id');
-            $table->datetime('go_at')->nullable();
-            $table->datetime('go_back_at')->nullable();
+            $table->integer('user_id');
+            $table->integer('location_id_from');
+            $table->integer('location_id_to');
             $table->string('gender_preference')->nullable();
+            $table->integer('carpool_qty');
+            $table->datetime('leave_at');
             $table->timestamps();
+
+            $table->index('user_id');
+            $table->index('location_id_from');
+            $table->index('location_id_to');
         });
     }
 

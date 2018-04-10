@@ -17,5 +17,27 @@ module.exports = {
     .then(function (response) {
       return response.data;
     });
+  },
+
+  getLocationMatches: (startLocationId, endLocationId) => {
+    const params = {
+      startLocationId,
+      endLocationId
+    }
+    const queryString = QueryString.stringify(params)
+    const encodedURI = window.encodeURI(`${endpoint}/carpool/match?${queryString}`);
+    return axios.get(encodedURI)
+    .then(function (response) {
+      return response.data;
+    });
+  },
+
+  submitCarpoolOffer: (params) => {
+    const encodedURI = window.encodeURI(`${endpoint}/carpool/offer`);
+    return axios.post(encodedURI, params, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   }
 }

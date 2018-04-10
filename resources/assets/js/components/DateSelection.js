@@ -12,14 +12,13 @@ export default class DateSelection extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      startDate: moment('20180509', 'YYYYMMDD')
+      startDate: props.date
     }
-
+    console.log("Date is %O", props)
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(date) {
-    console.log(date)
     this.setState({
       startDate: date
     })

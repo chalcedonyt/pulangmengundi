@@ -13,5 +13,3 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/states', ['uses' => 'Api\\LocationController@states']);
-Route::get('/locations', ['uses' => 'Api\\LocationController@locations']);
