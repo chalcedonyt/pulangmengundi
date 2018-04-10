@@ -9,6 +9,6 @@ services:
       - "33068:3306"
     environment:
       MYSQL_ROOT_PASSWORD: "password"
-      MYSQL_DATABASE: "gdp_pr"
+      MYSQL_DATABASE: "pmndi"
       MYSQL_USER: "user"
       MYSQL_PASSWORD: "password"
