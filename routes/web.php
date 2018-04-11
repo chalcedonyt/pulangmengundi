@@ -58,10 +58,14 @@ Route::middleware('auth')->group(function() {
         $user = \Auth::user()->toArray();
         return view('carpool')->with(['user' => $user]);
     });
+    Route::prefix('api')->group(function() {
+        Route::get('/states', ['uses' => 'Api\\LocationController@states']);
+        Route::get('/locations', ['uses' => 'Api\\LocationController@locations']);
+        Route::get('/carpool/offers', ['uses' => 'Api\\CarpoolController@offers']);
+        Route::get('/carpool/needs', ['uses' => 'Api\\CarpoolController@needs']);
+    });
 });
 Route::middleware('auth')->prefix('api')->group(function() {
-    Route::get('/states', ['uses' => 'Api\\LocationController@states']);
-    Route::get('/locations', ['uses' => 'Api\\LocationController@locations']);
 
     Route::post('/carpool/offer/{offer}/hide', ['uses' => 'Api\\CarpoolController@hide']);
     Route::post('/carpool/offer/{offer}/unhide', ['uses' => 'Api\\CarpoolController@unhide']);
@@ -74,7 +78,4 @@ Route::middleware('auth')->prefix('api')->group(function() {
     Route::get('/carpool/my-offers', ['uses' => 'Api\\CarpoolController@myOffers']);
     Route::get('/carpool/my-need', ['uses' => 'Api\\CarpoolController@myNeed']);
     Route::get('/carpool/matches', ['uses' => 'Api\\CarpoolController@matches']);
-
-    Route::get('/carpool/offers', ['uses' => 'Api\\CarpoolController@offers']);
-    Route::get('/carpool/needs', ['uses' => 'Api\\CarpoolController@needs']);
 });
