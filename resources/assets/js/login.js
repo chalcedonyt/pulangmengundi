@@ -21,13 +21,13 @@ ReactDOM.render(
             <Panel.Body>
               <Alert bsStyle='default'>
                 <p className='lead'>
-                <strong>carpool.pulangmengundi.com</strong> needs your social media login to determine you are a real person which helps prevent fraud.
+                <strong>carpool.pulangmengundi.com</strong> needs your social media login to determine you are a real person which helps prevent fraud. <strong>This helps prevent fraud and helps keep our users safe.</strong>
                 </p>
                 <br /><br />
                 <p className='lead'>
-                  We will <strong>not</strong> store your email addresses or ask for your list of friends.
-                  Your social media account will be passed to potential carpoolers so they can take the next time to make arrangements and verify who you are
-                  (and whether you will be a good roadtrip companion!)
+                  We will <strong>not</strong> store your email addresses.
+                  The link to your social media account will be <strong>shared with</strong> potential carpoolers / donors so that <strong>they are empowered</strong> to verify who you are (and hopefully determine that you will be a good roadtrip companion/voter!)
+
                 </p>
               </Alert>
               <GoogleLoginButton onClick={(e) => { window.location = '/google/login'}} />

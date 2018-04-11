@@ -49,8 +49,8 @@ class CarpoolController extends Controller
         $need = $user->need;
         $gender = $request->input('gender');
         $matches_from = CarpoolOffer::with('user')
-        ->where('location_id_from', '=', $need->locationFrom->getKey())
-        ->where('location_id_to', '=', $need->locationPoll->getKey())
+        ->where('location_id_from', '=', $need->fromLocation->getKey())
+        ->where('location_id_to', '=', $need->pollLocation->getKey())
         ->where('hidden', '=', 0)
         ->where(function ($q) use ($gender) {
             $q->whereNull('gender_preference')
@@ -59,8 +59,8 @@ class CarpoolController extends Controller
         ->get();
 
         $matches_to = CarpoolOffer::with('user')
-        ->where('location_id_to', '=', $need->locationFrom->getKey())
-        ->where('location_id_from', '=', $need->locationPoll->getKey())
+        ->where('location_id_to', '=', $need->fromLocation->getKey())
+        ->where('location_id_from', '=', $need->pollLocation->getKey())
         ->where('hidden', '=', 0)
         ->where(function ($q) use ($gender) {
             $q->whereNull('gender_preference')
@@ -68,9 +68,9 @@ class CarpoolController extends Controller
         })
         ->get();
 
-        $partial_matches_from = CarpoolOffer::with('user', 'locationFrom.locationState', 'locationTo.locationState')
-        ->fromStateIs($need->locationFrom->state)
-        ->toStateIs($need->locationPoll->state)
+        $partial_matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'locationTo.locationState')
+        ->fromStateIs($need->fromLocation->state)
+        ->toStateIs($need->pollLocation->state)
         ->where(function ($q) use ($gender) {
             $q->whereNull('gender_preference')
             ->orWhere('gender_preference', '=', $gender);
@@ -78,9 +78,9 @@ class CarpoolController extends Controller
         ->where('hidden', '=', 0)
         ->get();
 
-        $partial_matches_to = CarpoolOffer::with('user', 'locationFrom.locationState', 'locationTo.locationState')
-        ->toStateIs($need->locationFrom->state)
-        ->fromStateIs($need->locationPoll->state)
+        $partial_matches_to = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
+        ->toStateIs($need->fromLocation->state)
+        ->fromStateIs($need->pollLocation->state)
         ->where(function ($q) use ($gender) {
             $q->whereNull('gender_preference')
             ->orWhere('gender_preference', '=', $gender);
@@ -95,11 +95,35 @@ class CarpoolController extends Controller
 
     public function myOffers(Request $request)
     {
-        $offers = CarpoolOffer::with('user', 'locationFrom.locationState', 'locationTo.locationState')
+        $offers = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->where('user_id', '=', \Auth::user()->getKey())
         ->get();
 
         $data = fractal()->collection($offers, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
+        return response()->json($data);
+    }
+
+    public function myNeed(Request $request)
+    {
+        $need = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
+        ->where('user_id', '=', \Auth::user()->getKey())
+        ->first();
+
+        $data = fractal()->item($need, new \App\Transformers\CarpoolNeedTransformer)->toArray();
+        return response()->json($data);
+    }
+
+    public function updateNeed(Request $request, \App\Models\CarpoolNeed $need)
+    {
+        if ($need->user_id !== \Auth::user()->getKey()) {
+            return response("You can't do this", 403);
+        }
+        $need->information = $request->input('information');
+        $need->gender = $request->input('gender');
+        $need->location_id_from = $request->input('fromLocationId');
+        $need->location_id_poll = $request->input('pollLocationId');
+        $need->save();
+        $data = fractal()->item($need, new \App\Transformers\CarpoolNeedTransformer)->toArray();
         return response()->json($data);
     }
 
@@ -110,6 +134,17 @@ class CarpoolController extends Controller
 
         $offer->hidden = 1;
         $offer->save();
+        return response()->json([
+            'success' => 1
+        ]);
+    }
+
+    public function cancel(Request $request, \App\Models\CarpoolOffer $offer)
+    {
+        if (\Auth::user()->getKey() !== $offer->user_id)
+            return response("You can't do this", 403);
+
+        $offer->delete();
         return response()->json([
             'success' => 1
         ]);

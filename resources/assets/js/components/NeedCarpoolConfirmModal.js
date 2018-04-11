@@ -17,7 +17,7 @@ export default class NeedCarpoolConfirmModal extends Component {
           <p>You will be shown other voters who are travelling the same way as you.</p>
           <strong>Currently in:</strong>
           <p>
-            {this.props.startLocation.name} ({this.props.startLocation.state})
+            {this.props.fromLocation.name} ({this.props.fromLocation.state})
           </p>
           <strong>Voting in:</strong>
           <p>

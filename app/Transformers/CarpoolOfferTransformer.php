@@ -6,7 +6,7 @@ use League\Fractal\TransformerAbstract;
 
 class CarpoolOfferTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = ['user'];
+    protected $defaultIncludes = ['user', 'fromLocation', 'toLocation'];
 
     /**
      * A Fractal transformer.
@@ -23,5 +23,15 @@ class CarpoolOfferTransformer extends TransformerAbstract
     public function includeUser($offer)
     {
         return $this->item($offer->user, new UserTransformer);
+    }
+
+    public function includeToLocation($offer)
+    {
+        return $this->item($offer->toLocation, new LocationTransformer);
+    }
+
+    public function includeFromLocation($offer)
+    {
+        return $this->item($offer->fromLocation, new LocationTransformer);
     }
 }

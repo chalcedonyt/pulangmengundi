@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
-import {Button, Col, Grid, Panel, Row} from 'react-bootstrap'
+import {Alert, Button, Col, Grid, Panel, Row} from 'react-bootstrap'
 import HideOfferModal from './HideOfferModal'
 import UnhideOfferModal from './UnhideOfferModal'
+import CancelOfferModal from './CancelOfferModal'
 import moment from 'moment'
 
 export default class CarpoolOffer extends Component {
@@ -19,7 +20,9 @@ export default class CarpoolOffer extends Component {
     }
     this.handleHideOffer = this.handleHideOffer.bind(this)
     this.handleUnhideOffer = this.handleUnhideOffer.bind(this)
+    this.handleCancelOffer = this.handleCancelOffer.bind(this)
     this.setHideModal = this.setHideModal.bind(this)
+    this.setCancelModal = this.setCancelModal.bind(this)
   }
 
   handleHideOffer() {
@@ -32,6 +35,11 @@ export default class CarpoolOffer extends Component {
     .then(() => this.props.onChange())
   }
 
+  handleCancelOffer() {
+    api.cancelOffer(this.state.offer.id)
+    .then(() => this.props.onChange())
+  }
+
   setHideModal(showHideModal) {
     this.setState({
       showHideModal
@@ -41,6 +49,12 @@ export default class CarpoolOffer extends Component {
   setUnhideModal(showUnhideModal) {
     this.setState({
       showUnhideModal
+    })
+  }
+
+  setCancelModal(showCancelModal) {
+    this.setState({
+      showCancelModal
     })
   }
 
@@ -67,11 +81,11 @@ export default class CarpoolOffer extends Component {
               <div>
                 <strong>Leaving from:</strong>
                 <p>
-                  {this.state.offer.location_from.name}, {this.state.offer.location_from.state}
+                  {this.state.offer.fromLocation.name}, {this.state.offer.fromLocation.state}
                 </p>
                 <strong>To:</strong>
                 <p>
-                {this.state.offer.location_to.name}, {this.state.offer.location_to.state}
+                {this.state.offer.toLocation.name}, {this.state.offer.toLocation.state}
                 </p>
                 <strong>Time:</strong>
                 <p>{this.state.offer.leave_at_formatted}</p>
@@ -95,7 +109,7 @@ export default class CarpoolOffer extends Component {
             {this.state.offer.hidden == 0 &&
               <div>
                 <Button bsStyle='info' onClick={(e) => this.setHideModal(true)}>Hide Offer</Button>
-                <Button bsStyle='danger'>Cancel Offer</Button>
+                <Button bsStyle='danger' onClick={(e) => this.setCancelModal(true)}>Cancel Offer</Button>
               </div>
             }
             {this.state.offer.hidden == 1 &&
@@ -111,6 +125,7 @@ export default class CarpoolOffer extends Component {
           }
           <HideOfferModal show={this.state.showHideModal} onOK={this.handleHideOffer} onCancel={(e) => this.setHideModal(false)} />
           <UnhideOfferModal show={this.state.showUnhideModal} onOK={this.handleUnhideOffer} onCancel={(e) => this.setUnhideModal(false)} />
+          <CancelOfferModal show={this.state.showCancelModal} onOK={this.handleCancelOffer} onCancel={(e) => this.setCancelModal(false)} />
         </Panel.Footer>
       </Panel>
     )

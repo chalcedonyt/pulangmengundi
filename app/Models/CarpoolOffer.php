@@ -18,26 +18,26 @@ class CarpoolOffer extends Model
         return $this->belongsTo(\App\Models\User::class);
     }
 
-    public function locationFrom()
+    public function fromLocation()
     {
         return $this->belongsTo(\App\Models\Location::class, 'location_id_from');
     }
 
-    public function locationTo()
+    public function toLocation()
     {
         return $this->belongsTo(\App\Models\Location::class, 'location_id_to');
     }
 
     public function scopeFromStateIs($query, string $state)
     {
-        $query->whereHas('locationFrom.locationState', function ($q) use ($state) {
+        $query->whereHas('fromLocation.locationState', function ($q) use ($state) {
             $q->where('name', '=', $state);
         });
     }
 
     public function scopeToStateIs($query, string $state)
     {
-        $query->whereHas('locationTo.locationState', function ($q) use ($state) {
+        $query->whereHas('toLocation.locationState', function ($q) use ($state) {
             $q->where('name', '=', $state);
         });
     }

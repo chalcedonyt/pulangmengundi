@@ -45,6 +45,15 @@ module.exports = {
     })
   },
 
+  updateCarpoolNeed: (id, params) => {
+    const encodedURI = window.encodeURI(`${endpoint}/carpool/need/${id}`);
+    return axios.put(encodedURI, params, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  },
+
   getMyOffers: () => {
     const encodedURI = window.encodeURI(`${endpoint}/carpool/my-offers`);
     return axios.get(encodedURI)
@@ -69,5 +78,21 @@ module.exports = {
         'Content-Type': 'application/json'
       }
     })
+  },
+
+  cancelOffer: (id) => {
+    const encodedURI = window.encodeURI(`${endpoint}/carpool/offer/${id}/cancel`);
+    return axios.post(encodedURI, {}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  },
+
+  getNeed: () => {
+    const encodedURI = window.encodeURI(`${endpoint}/carpool/my-need`);
+    return axios.get(encodedURI).then(function (response) {
+      return response.data;
+    });
   }
 }

@@ -14,26 +14,26 @@ class CarpoolNeed extends Model
         return $this->belongsTo(\App\Models\User::class);
     }
 
-    public function locationFrom()
+    public function fromLocation()
     {
         return $this->belongsTo(\App\Models\Location::class, 'location_id_from');
     }
 
-    public function locationPoll()
+    public function pollLocation()
     {
         return $this->belongsTo(\App\Models\Location::class, 'location_id_poll');
     }
 
     public function scopeFromStateIs($query, string $state)
     {
-        $query->whereHas('locationFrom.locationState', function ($q) use ($state) {
+        $query->whereHas('fromLocation.locationState', function ($q) use ($state) {
             $q->where('name', '=', $state);
         });
     }
 
     public function scopePollStateIs($query, string $state)
     {
-        $query->whereHas('locationPoll.locationState', function ($q) use ($state) {
+        $query->whereHas('pollLocation.locationState', function ($q) use ($state) {
             $q->where('name', '=', $state);
         });
     }

@@ -269,7 +269,7 @@ export default class OfferCarpool extends Component {
                   <Row>
                     <Col md={4} mdOffset={7} xsOffset={4} xs={4}>
                       <Button
-                        bsStyle={'info'}
+                        bsStyle={'success'}
                         onClick={(e)=>this.setShowModal(true)}
                         type='submit'>
                         Submit carpool offer

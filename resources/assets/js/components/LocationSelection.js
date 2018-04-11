@@ -13,10 +13,16 @@ export default class LocationSelection extends Component {
       selectedLocation: null,
       selectedState: null
     }
-
     this.handleStateSelect = this.handleStateSelect.bind(this)
     this.handleLocationSelect = this.handleLocationSelect.bind(this)
 
+  }
+  componentWillUpdate(props) {
+    if (props.initialLocation && !this.state.selectedLocation) {
+      this.handleStateSelect(props.initialLocation.location_state, () => {
+        this.handleLocationSelect(props.initialLocation)
+      })
+    }
   }
 
   componentDidMount() {
@@ -36,7 +42,7 @@ export default class LocationSelection extends Component {
     })
   }
 
-  handleStateSelect(selectedState) {
+  handleStateSelect(selectedState, callback) {
     this.setState({
       selectedState,
       selectedLocation: null
@@ -47,7 +53,7 @@ export default class LocationSelection extends Component {
         this.setState({
           stateLocations
         })
-      })
+      }).then(callback)
     })
   }
 

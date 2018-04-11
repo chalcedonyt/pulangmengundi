@@ -11,13 +11,14 @@ export default class NeedCarpool extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      startLocation: null,
+      fromLocation: null,
       pollLocation: null,
       gender: null,
       showConfirmModal: false,
-      information: ''
+      information: '',
+      existingId: null
     }
-    this.startLocationChanged = this.startLocationChanged.bind(this)
+    this.fromLocationChanged = this.fromLocationChanged.bind(this)
     this.pollLocationChanged = this.pollLocationChanged.bind(this)
     this.handleGenderChange = this.handleGenderChange.bind(this)
     this.handleInformationChange = this.handleInformationChange.bind(this)
@@ -25,9 +26,24 @@ export default class NeedCarpool extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  startLocationChanged(startLocation) {
+  componentWillMount() {
+    api.getNeed()
+    .then((need) => {
+      if (need) {
+        this.setState({
+          pollLocation: need.pollLocation,
+          fromLocation: need.fromLocation,
+          gender: need.gender,
+          information: need.information || '',
+          existingId: need.id
+        })
+      }
+    })
+  }
+
+  fromLocationChanged(fromLocation) {
     this.setState({
-      startLocation
+      fromLocation
     })
   }
 
@@ -43,9 +59,9 @@ export default class NeedCarpool extends Component {
     })
   }
 
-  handleInformationChange(information) {
+  handleInformationChange(e) {
     this.setState({
-      information
+      information: e.target.value
     })
   }
 
@@ -63,24 +79,28 @@ export default class NeedCarpool extends Component {
 
   handleSubmit() {
     const params = {
-      fromLocationId: this.state.startLocation.id,
+      fromLocationId: this.state.fromLocation.id,
       pollLocationId: this.state.pollLocation.id,
       gender: this.state.gender,
-      information: this.state.information
+      information: this.state.information,
     }
-    api.submitCarpoolNeed(params)
-    .then(() => {
-      location.href='/carpool/my-need'
-    })
+    if (!this.state.existingId) {
+      api.submitCarpoolNeed(params)
+      .then(() => {
+        location.href='/carpool/my-need'
+      })
+    } else {
+      api.updateCarpoolNeed(this.state.existingId, params)
+      .then(() => {
+        location.href='/carpool/my-need'
+      })
+    }
   }
 
   toggleModalShow(bool) {
     this.setState({
       showConfirmModal: bool
     })
-  }
-  getValidationState() {
-    return this.state.pollLocation && this.state.startLocation && this.state.gender
   }
 
   render() {
@@ -99,7 +119,7 @@ export default class NeedCarpool extends Component {
                           I&apos;m currently in:
                         </Panel.Heading>
                         <Panel.Body>
-                          <LocationSelection onChange={this.startLocationChanged}/>
+                          <LocationSelection onChange={this.fromLocationChanged} initialLocation={this.state.fromLocation} />
                         </Panel.Body>
                       </Panel>
                     </Col>
@@ -109,7 +129,7 @@ export default class NeedCarpool extends Component {
                           I&apos;m voting in:
                         </Panel.Heading>
                         <Panel.Body>
-                          <LocationSelection onChange={this.pollLocationChanged}/>
+                          <LocationSelection onChange={this.pollLocationChanged} initialLocation={this.state.pollLocation}/>
                         </Panel.Body>
                       </Panel>
                     </Col>
@@ -154,11 +174,17 @@ export default class NeedCarpool extends Component {
                     </Col>
                   </Row>
                 </Panel.Body>
-                {this.getValidationState() &&
+                {this.state.pollLocation && this.state.fromLocation && this.state.gender &&
                   <Panel.Footer>
                     <Row>
                       <Col mdOffset={10} md={2} xsOffset={4} xs={4}>
-                        <Button bsStyle='success' onClick={(e) => this.toggleModalShow(true)}>Save carpool request</Button>
+                        <Button bsStyle='success' onClick={(e) => this.toggleModalShow(true)}>
+                        {this.state.existingId
+                        ? 'Update carpool request'
+                        : 'Save carpool request'
+                        }
+
+                        </Button>
                       </Col>
                     </Row>
                   </Panel.Footer>
@@ -169,7 +195,7 @@ export default class NeedCarpool extends Component {
         </div>
         <NeedCarpoolConfirmModal
           show={this.state.showConfirmModal}
-          startLocation={this.state.startLocation}
+          fromLocation={this.state.fromLocation}
           pollLocation={this.state.pollLocation}
           gender={this.state.gender}
           onOK={this.handleSubmit}
