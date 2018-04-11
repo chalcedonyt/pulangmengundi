@@ -49,8 +49,7 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover",
-            "@php artisan cache:clear",
-            "npm install && npm run production"
+            "@php artisan cache:clear"
         ]
     },
     "config": {
