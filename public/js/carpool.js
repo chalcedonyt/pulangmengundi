@@ -27360,6 +27360,7 @@ var ContactModal = function (_Component) {
   _createClass(ContactModal, [{
     key: 'render',
     value: function render() {
+      var fbId = this.props.user.fb_id;
       return _react2.default.createElement(
         _reactBootstrap.Modal,
         { show: this.props.show, onHide: this.props.onCancel },
@@ -27385,11 +27386,15 @@ var ContactModal = function (_Component) {
             _reactBootstrap.Alert,
             { bsStyle: 'info' },
             _react2.default.createElement(
-              'p',
+              'div',
               null,
-              'This is ',
-              this.props.user.name,
-              '\'s information:',
+              _react2.default.createElement(
+                'p',
+                null,
+                'This is ',
+                this.props.user.name,
+                '\'s information:'
+              ),
               _react2.default.createElement(
                 'ul',
                 null,
@@ -27398,7 +27403,7 @@ var ContactModal = function (_Component) {
                   null,
                   _react2.default.createElement(
                     'a',
-                    { href: 'https://facebook.com/' + this.props.user.fb_id },
+                    { target: '_blank', href: 'https://facebook.com/' + fbId },
                     'Facebook account'
                   )
                 ),

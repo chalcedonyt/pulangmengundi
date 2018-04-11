@@ -9,6 +9,7 @@ export default class ContactModal extends Component {
   }
 
   render() {
+    const fbId = this.props.user.fb_id
     return (
       <Modal show={this.props.show} onHide={this.props.onCancel}>
       <Modal.Header closeButton>
@@ -17,15 +18,17 @@ export default class ContactModal extends Component {
       <Modal.Body>
         <h4>What to do now</h4>
         <Alert bsStyle='info'>
-          <p>
-            This is {this.props.user.name}&apos;s information:
+          <div>
+            <p>
+              This is {this.props.user.name}&apos;s information:
+            </p>
             <ul>
-              <li><a href={`https://facebook.com/${this.props.user.fb_id}`}>Facebook account</a></li>
+              <li><a target='_blank' href={`https://facebook.com/${fbId}`}>Facebook account</a></li>
               <li>
 
               </li>
             </ul>
-          </p>
+          </div>
         </Alert>
         <Panel>
           <Panel.Body>
