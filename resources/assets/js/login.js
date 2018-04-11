@@ -21,7 +21,7 @@ ReactDOM.render(
             <Panel.Body>
               <Alert bsStyle='default'>
                 <p className='lead'>
-                <strong>carpool.pulangmengundi.com</strong> needs your social media login to determine you are a real person. <strong>This helps prevent fraud and helps keep our users safe.</strong>
+                <strong>carpool.pulangmengundi.com</strong> needs your social media login to determine that you are a real person. <strong>This helps prevent fraud and helps keep our users safe.</strong>
                 </p>
                 <br /><br />
                 <p className='lead'>
