@@ -17,7 +17,6 @@ class CreateExchangeTable extends Migration
             $table->increments('id');
             $table->integer('location_from_id');
             $table->integer('location_to_id');
-            $table->morphs('exchangeable');
             $table->timestamps();
         });
     }
