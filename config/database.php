@@ -44,11 +44,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', getenv('CLEARDB_DATABASE_URL') ? $url['host']: '127.0.0.1'),
+            'host' => env('DB_HOST', $url['host']),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', getenv('CLEARDB_DATABASE_URL') ? $database: 'forge'),
-            'username' => env('DB_USERNAME', getenv('CLEARDB_DATABASE_URL') ? $url['user']: 'forge'),
-            'password' => env('DB_PASSWORD', getenv('CLEARDB_DATABASE_URL') ? $url['pass']: ''),
+            'database' => env('DB_DATABASE', $database),
+            'username' => env('DB_USERNAME', $url['user']),
+            'password' => env('DB_PASSWORD', $url['pass']),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
