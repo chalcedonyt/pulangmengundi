@@ -17,7 +17,7 @@ class CreateLocationTable extends Migration
             $table->increments('id');
             $table->string('state');
             $table->string('name');
-            $table->string('parliament_code');
+            $table->string('dun_code');
             $table->index('state');
         });
     }

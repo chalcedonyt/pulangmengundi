@@ -19,11 +19,12 @@ class CreateOfferCarpoolTable extends Migration
             $table->integer('location_id_from');
             $table->integer('location_id_to');
             $table->string('gender_preference')->nullable();
-            $table->integer('carpool_qty');
             $table->datetime('leave_at');
+            $table->tinyInteger('hidden')->default(0);
             $table->text('information')->nullable();
             $table->timestamps();
 
+            $table->softDeletes();
             $table->index('user_id');
             $table->index('location_id_from');
             $table->index('location_id_to');

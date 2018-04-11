@@ -17,7 +17,6 @@ export default class OfferCarpool extends Component {
       startLocation: null,
       pollLocation: null,
       preferredGender: null,
-      carpoolQty: 2,
       information: '',
       willCarpoolFromPolls: true,
       willCarpoolToPolls: true,
@@ -28,7 +27,6 @@ export default class OfferCarpool extends Component {
     }
     this.startLocationChanged = this.startLocationChanged.bind(this)
     this.pollLocationChanged = this.pollLocationChanged.bind(this)
-    this.handleCarpoolQtyChange = this.handleCarpoolQtyChange.bind(this)
     this.handleGenderChange = this.handleGenderChange.bind(this)
     this.handleInformationChange = this.handleInformationChange.bind(this)
     this.handleCarpoolFromPollsDateChange = this.handleCarpoolFromPollsDateChange.bind(this)
@@ -50,12 +48,6 @@ export default class OfferCarpool extends Component {
   pollLocationChanged(pollLocation) {
     this.setState({
       pollLocation
-    })
-  }
-
-  handleCarpoolQtyChange(e) {
-    this.setState({
-      carpoolQty: e.target.value
     })
   }
 
@@ -134,7 +126,6 @@ export default class OfferCarpool extends Component {
     var apis = []
     if (this.state.willCarpoolToPolls) {
       const params = {
-        carpoolQty: this.state.carpoolQty,
         preferredGender: this.state.preferredGender,
         fromLocationId: this.state.startLocation.id,
         toLocationId: this.state.pollLocation.id,
@@ -145,7 +136,6 @@ export default class OfferCarpool extends Component {
 
     if (this.state.willCarpoolFromPolls) {
       const params = {
-        carpoolQty: this.state.carpoolQty,
         preferredGender: this.state.preferredGender,
         fromLocationId: this.state.startLocation.id,
         toLocationId: this.state.pollLocation.id,
@@ -165,15 +155,12 @@ export default class OfferCarpool extends Component {
   render() {
     return (
       <div>
-
         <Panel>
           <Panel.Heading componentClass='h4'>Offer to carpool</Panel.Heading>
           <Panel.Body>
-            <div className='container'>
-              <Alert bsStyle="info">
-                Pick where you are leaving from and where you are going to, then check and fill in the timings for at least <strong>one</strong> direction you want to carpool for.
-              </Alert>
-            </div>
+            <Alert bsStyle="info">
+              Pick where you are leaving from and where you are going to, then check and fill in the timings for at least <strong>one</strong> direction you want to carpool for.
+            </Alert>
             <Row>
               <Col md={4}>
                 <Panel>
@@ -193,16 +180,9 @@ export default class OfferCarpool extends Component {
               </Col>
               <Col md={4}>
                 <Panel>
-                  <Panel.Heading>I can carpool with</Panel.Heading>
+                  <Panel.Heading>I prefer to carpool with</Panel.Heading>
                   <Panel.Body>
                     <Row>
-                      <Col md={4} xs={4}>
-                        <FormControl
-                          style={{width:'50px'}}
-                          onChange={this.handleCarpoolQtyChange}
-                          type='number'
-                          value={this.state.carpoolQty} /> people.
-                      </Col>
                       <Col md={8} xs={4}>
                         <div>
                         <input

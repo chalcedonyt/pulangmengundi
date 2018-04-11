@@ -48,5 +48,22 @@ module.exports = {
     .then(function (response) {
       return response.data;
     });
+  },
+
+  hideOffer: (id) => {
+    const encodedURI = window.encodeURI(`${endpoint}/carpool/offer/${id}/hide`);
+    return axios.post(encodedURI, {}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  },
+  unhideOffer: (id) => {
+    const encodedURI = window.encodeURI(`${endpoint}/carpool/offer/${id}/unhide`);
+    return axios.post(encodedURI, {}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   }
 }

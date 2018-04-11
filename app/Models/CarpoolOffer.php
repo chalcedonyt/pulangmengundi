@@ -4,8 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class CarpoolOffer extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'offer_carpool';
     protected $guarded = [];
 
