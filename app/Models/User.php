@@ -15,11 +15,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password'
     ];
     protected $visible = [
         'name',
         'avatar_url',
+        'fb_id'
     ];
 
     public function need()
