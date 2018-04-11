@@ -5,6 +5,7 @@ import api from '../utils/api'
 import {Button, Col, Grid, Panel, Row} from 'react-bootstrap'
 import HideOfferModal from './HideOfferModal'
 import UnhideOfferModal from './UnhideOfferModal'
+import moment from 'moment'
 
 export default class CarpoolOffer extends Component {
   constructor(props) {
@@ -47,30 +48,46 @@ export default class CarpoolOffer extends Component {
     return (
       <Panel>
         <Panel.Body>
-          <img src={this.state.offer.user.avatar_url} />
-          {this.state.offer.user.name}
-          <div>
-            <strong>Leaving from:</strong>
-            <p>
-              {this.state.offer.location_from.name}, {this.state.offer.location_from.state}
-            </p>
-            <strong>To:</strong>
-            <p>
-            {this.state.offer.location_to.name}, {this.state.offer.location_to.state}
-            </p>
-            <strong>Time:</strong>
-            <p>{this.state.offer.leave_at}</p>
-            {this.state.offer.gender_preference &&
-            <div>
-              <strong>Gender preference:</strong>
-              <p>{this.state.offer.gender_preference}</p>
-            </div>}
-            {this.state.offer.information &&
+          <Row>
+            <Col md={4}>
+              <Row>
+                <Col md={6} mdOffset={3}>
+                  <img src={this.state.offer.user.avatar_url} />
+                </Col>
+              </Row>
+              <Row>
+                <Col md={8} mdOffset={2}>
+                  <p>
+                    <strong>{this.state.offer.user.name}</strong>
+                  </p>
+                </Col>
+              </Row>
+            </Col>
+            <Col md={8}>
               <div>
-                <strong>Additional information:</strong>
-                <p>{this.state.offer.information}</p>
-              </div>}
-          </div>
+                <strong>Leaving from:</strong>
+                <p>
+                  {this.state.offer.location_from.name}, {this.state.offer.location_from.state}
+                </p>
+                <strong>To:</strong>
+                <p>
+                {this.state.offer.location_to.name}, {this.state.offer.location_to.state}
+                </p>
+                <strong>Time:</strong>
+                <p>{this.state.offer.leave_at_formatted}</p>
+                {this.state.offer.gender_preference &&
+                <div>
+                  <strong>Gender preference:</strong>
+                  <p>{this.state.offer.gender_preference}</p>
+                </div>}
+                {this.state.offer.information &&
+                  <div>
+                    <strong>Additional information:</strong>
+                    <p>{this.state.offer.information}</p>
+                  </div>}
+              </div>
+            </Col>
+          </Row>
         </Panel.Body>
         <Panel.Footer>
           {this.state.isOwner &&

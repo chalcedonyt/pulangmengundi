@@ -14,24 +14,43 @@
 Route::get('/', function () {
     return view('home');
 });
-Route::get('login', 'Auth\LoginController@redirectToProvider')->name('login');
+Route::get('login', function() {
+    return view('login');
+})->name('login');
+Route::get('google/login', 'Auth\LoginController@redirectToProvider');
 Route::get('google/callback', 'Auth\LoginController@handleProviderCallback');
 
+Route::get('facebook/login', 'Auth\LoginController@redirectToFbProvider');
+Route::get('facebook/callback', 'Auth\LoginController@handleFbProviderCallback');
+
+Route::get('/logout', function() {
+   \Auth::logout();
+   return redirect('/carpool');
+});
+
 Route::get('carpool', function() {
-    return view('carpool');
+    $user = \Auth::user() ? \Auth::user()->toArray() : null;
+    return view('carpool')->with(['user' => $user]);
 });
 Route::middleware('auth')->group(function() {
     Route::get('carpool/need', function() {
-        return view('carpool');
+        $user = \Auth::user()->toArray();
+        return view('carpool')->with(['user' => $user]);
     });
     Route::get('carpool/offer', function() {
-       return view('carpool');
+        if (\Auth::user()->offers->count()) {
+            return redirect('carpool/my-offers');
+        }
+        $user = \Auth::user()->toArray();
+        return view('carpool')->with(['user' => $user]);
     });
     Route::get('carpool/my-offers', function() {
-       return view('carpool');
+        $user = \Auth::user()->toArray();
+        return view('carpool')->with(['user' => $user]);
     });
     Route::get('carpool/my-need', function() {
-       return view('carpool');
+        $user = \Auth::user()->toArray();
+        return view('carpool')->with(['user' => $user]);
     });
 });
 Route::middleware('auth')->prefix('api')->group(function() {

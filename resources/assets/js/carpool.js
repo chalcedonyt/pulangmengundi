@@ -13,7 +13,7 @@ import MyOffers from './components/MyOffers'
 import Carpool from './components/Carpool'
 import MyCarpoolNeed from './components/MyCarpoolNeed'
 import {Route, BrowserRouter, Switch} from 'react-router-dom'
-import {Navbar, Nav, NavItem} from 'react-bootstrap'
+import {Image, Navbar, Nav, NavItem} from 'react-bootstrap'
 
 ReactDOM.render(
     <BrowserRouter>
@@ -21,13 +21,28 @@ ReactDOM.render(
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
+              {window.user && <img width='40' src={window.user.avatar_url} /> }
+
               #PulangMengundi
             </Navbar.Brand>
           </Navbar.Header>
-          <Nav>
-            <NavItem eventKey={1} href='/carpool'>Carpooling</NavItem>
-            <NavItem eventKey={2}>Subsidies</NavItem>
-          </Nav>
+          <Navbar.Collapse>
+            <Nav>
+              <NavItem eventKey={1} href='/carpool'>Carpooling</NavItem>
+              <NavItem eventKey={2}>Subsidies</NavItem>
+            </Nav>
+            {window.user &&
+            <Nav pullRight>
+              <NavItem eventKey={4} href='/profile'>
+                Profile
+              </NavItem>
+              <NavItem eventKey={5} href='/logout'>
+                Logout
+              </NavItem>
+              <NavItem></NavItem>
+            </Nav>
+            }
+          </Navbar.Collapse>
         </Navbar>
         <Switch>
           <Route exact path='/carpool' component={Carpool} />

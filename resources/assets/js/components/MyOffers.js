@@ -35,6 +35,9 @@ export default class MyOffers extends Component {
         <h1>Your carpool offers</h1>
         <Alert bsStyle="info">
           <p>
+            Here are the carpool offers you have made.
+          </p>
+          <p>
             <strong>Hide</strong> a carpool offer if you want to stop accepting requests.
           </p>
           <p>

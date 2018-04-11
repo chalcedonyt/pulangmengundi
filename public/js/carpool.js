@@ -1838,7 +1838,7 @@ webpackJsonp([1],[
             try {
                 oldLocale = globalLocale._abbr;
                 var aliasedRequire = require;
-                __webpack_require__(505)("./" + name);
+                __webpack_require__(506)("./" + name);
                 getSetGlobalLocale(oldLocale);
             } catch (e) {}
         }
@@ -4510,7 +4510,7 @@ webpackJsonp([1],[
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(504)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(505)(module)))
 
 /***/ }),
 /* 2 */,
@@ -4543,7 +4543,7 @@ webpackJsonp([1],[
 
 
 var axios = __webpack_require__(71);
-var QueryString = __webpack_require__(354);
+var QueryString = __webpack_require__(355);
 var endpoint = '/api';
 
 module.exports = {
@@ -4772,7 +4772,7 @@ var _api2 = _interopRequireDefault(_api);
 
 var _reactBootstrap = __webpack_require__(16);
 
-var _reactDatepicker = __webpack_require__(502);
+var _reactDatepicker = __webpack_require__(503);
 
 var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
 
@@ -4780,7 +4780,7 @@ var _moment = __webpack_require__(1);
 
 var _moment2 = _interopRequireDefault(_moment);
 
-__webpack_require__(513);
+__webpack_require__(514);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -16829,9 +16829,289 @@ var LocationSelection = function (_Component) {
 exports.default = LocationSelection;
 
 /***/ }),
-/* 284 */,
+/* 284 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(10);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _api = __webpack_require__(25);
+
+var _api2 = _interopRequireDefault(_api);
+
+var _reactBootstrap = __webpack_require__(16);
+
+var _HideOfferModal = __webpack_require__(520);
+
+var _HideOfferModal2 = _interopRequireDefault(_HideOfferModal);
+
+var _UnhideOfferModal = __webpack_require__(521);
+
+var _UnhideOfferModal2 = _interopRequireDefault(_UnhideOfferModal);
+
+var _moment = __webpack_require__(1);
+
+var _moment2 = _interopRequireDefault(_moment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var CarpoolOffer = function (_Component) {
+  _inherits(CarpoolOffer, _Component);
+
+  function CarpoolOffer(props) {
+    _classCallCheck(this, CarpoolOffer);
+
+    var _this = _possibleConstructorReturn(this, (CarpoolOffer.__proto__ || Object.getPrototypeOf(CarpoolOffer)).call(this, props));
+
+    _this.state = {
+      offer: props.offer,
+      isOwner: props.isOwner || false,
+      //the modal to hide the offer
+      showHideModal: false,
+      showUnhideModal: false
+    };
+    _this.handleHideOffer = _this.handleHideOffer.bind(_this);
+    _this.handleUnhideOffer = _this.handleUnhideOffer.bind(_this);
+    _this.setHideModal = _this.setHideModal.bind(_this);
+    return _this;
+  }
+
+  _createClass(CarpoolOffer, [{
+    key: 'handleHideOffer',
+    value: function handleHideOffer() {
+      var _this2 = this;
+
+      _api2.default.hideOffer(this.state.offer.id).then(function () {
+        return _this2.props.onChange();
+      });
+    }
+  }, {
+    key: 'handleUnhideOffer',
+    value: function handleUnhideOffer() {
+      var _this3 = this;
+
+      _api2.default.unhideOffer(this.state.offer.id).then(function () {
+        return _this3.props.onChange();
+      });
+    }
+  }, {
+    key: 'setHideModal',
+    value: function setHideModal(showHideModal) {
+      this.setState({
+        showHideModal: showHideModal
+      });
+    }
+  }, {
+    key: 'setUnhideModal',
+    value: function setUnhideModal(showUnhideModal) {
+      this.setState({
+        showUnhideModal: showUnhideModal
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this4 = this;
+
+      return _react2.default.createElement(
+        _reactBootstrap.Panel,
+        null,
+        _react2.default.createElement(
+          _reactBootstrap.Panel.Body,
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.Row,
+            null,
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { md: 4 },
+              _react2.default.createElement(
+                _reactBootstrap.Row,
+                null,
+                _react2.default.createElement(
+                  _reactBootstrap.Col,
+                  { md: 6, mdOffset: 3 },
+                  _react2.default.createElement('img', { src: this.state.offer.user.avatar_url })
+                )
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Row,
+                null,
+                _react2.default.createElement(
+                  _reactBootstrap.Col,
+                  { md: 8, mdOffset: 2 },
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    _react2.default.createElement(
+                      'strong',
+                      null,
+                      this.state.offer.user.name
+                    )
+                  )
+                )
+              )
+            ),
+            _react2.default.createElement(
+              _reactBootstrap.Col,
+              { md: 8 },
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Leaving from:'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  this.state.offer.location_from.name,
+                  ', ',
+                  this.state.offer.location_from.state
+                ),
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'To:'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  this.state.offer.location_to.name,
+                  ', ',
+                  this.state.offer.location_to.state
+                ),
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'Time:'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  this.state.offer.leave_at_formatted
+                ),
+                this.state.offer.gender_preference && _react2.default.createElement(
+                  'div',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Gender preference:'
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    this.state.offer.gender_preference
+                  )
+                ),
+                this.state.offer.information && _react2.default.createElement(
+                  'div',
+                  null,
+                  _react2.default.createElement(
+                    'strong',
+                    null,
+                    'Additional information:'
+                  ),
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    this.state.offer.information
+                  )
+                )
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          _reactBootstrap.Panel.Footer,
+          null,
+          this.state.isOwner && _react2.default.createElement(
+            'div',
+            null,
+            this.state.offer.hidden == 0 && _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                _reactBootstrap.Button,
+                { bsStyle: 'info', onClick: function onClick(e) {
+                    return _this4.setHideModal(true);
+                  } },
+                'Hide Offer'
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Button,
+                { bsStyle: 'danger' },
+                'Cancel Offer'
+              )
+            ),
+            this.state.offer.hidden == 1 && _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'strong',
+                  null,
+                  'This offer is hidden'
+                )
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Button,
+                { bsStyle: 'success', onClick: function onClick(e) {
+                    return _this4.setUnhideModal(true);
+                  } },
+                'Show Offer Again'
+              )
+            )
+          ),
+          !this.state.isOwner && _react2.default.createElement(
+            _reactBootstrap.Button,
+            { bsStyle: 'success' },
+            'Contact'
+          ),
+          _react2.default.createElement(_HideOfferModal2.default, { show: this.state.showHideModal, onOK: this.handleHideOffer, onCancel: function onCancel(e) {
+              return _this4.setHideModal(false);
+            } }),
+          _react2.default.createElement(_UnhideOfferModal2.default, { show: this.state.showUnhideModal, onOK: this.handleUnhideOffer, onCancel: function onCancel(e) {
+              return _this4.setUnhideModal(false);
+            } })
+        )
+      );
+    }
+  }]);
+
+  return CarpoolOffer;
+}(_react.Component);
+
+exports.default = CarpoolOffer;
+
+/***/ }),
 /* 285 */,
-/* 286 */
+/* 286 */,
+/* 287 */
 /***/ (function(module, exports) {
 
 /*
@@ -16913,7 +17193,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 287 */
+/* 288 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -16959,7 +17239,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(288);
+var	fixUrls = __webpack_require__(289);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -17272,7 +17552,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 288 */
+/* 289 */
 /***/ (function(module, exports) {
 
 
@@ -17367,7 +17647,6 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 289 */,
 /* 290 */,
 /* 291 */,
 /* 292 */,
@@ -17410,14 +17689,15 @@ module.exports = function (css) {
 /* 329 */,
 /* 330 */,
 /* 331 */,
-/* 332 */
+/* 332 */,
+/* 333 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(333);
+module.exports = __webpack_require__(334);
 
 
 /***/ }),
-/* 333 */
+/* 334 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17431,15 +17711,15 @@ var _reactDom = __webpack_require__(10);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _OfferCarpool = __webpack_require__(334);
+var _OfferCarpool = __webpack_require__(335);
 
 var _OfferCarpool2 = _interopRequireDefault(_OfferCarpool);
 
-var _NeedCarpool = __webpack_require__(516);
+var _NeedCarpool = __webpack_require__(517);
 
 var _NeedCarpool2 = _interopRequireDefault(_NeedCarpool);
 
-var _MyOffers = __webpack_require__(518);
+var _MyOffers = __webpack_require__(519);
 
 var _MyOffers2 = _interopRequireDefault(_MyOffers);
 
@@ -17481,21 +17761,41 @@ _reactDom2.default.render(_react2.default.createElement(
         _react2.default.createElement(
           _reactBootstrap.Navbar.Brand,
           null,
+          window.user && _react2.default.createElement('img', { width: '40', src: window.user.avatar_url }),
           '#PulangMengundi'
         )
       ),
       _react2.default.createElement(
-        _reactBootstrap.Nav,
+        _reactBootstrap.Navbar.Collapse,
         null,
         _react2.default.createElement(
-          _reactBootstrap.NavItem,
-          { eventKey: 1, href: '/carpool' },
-          'Carpooling'
+          _reactBootstrap.Nav,
+          null,
+          _react2.default.createElement(
+            _reactBootstrap.NavItem,
+            { eventKey: 1, href: '/carpool' },
+            'Carpooling'
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.NavItem,
+            { eventKey: 2 },
+            'Subsidies'
+          )
         ),
-        _react2.default.createElement(
-          _reactBootstrap.NavItem,
-          { eventKey: 2 },
-          'Subsidies'
+        window.user && _react2.default.createElement(
+          _reactBootstrap.Nav,
+          { pullRight: true },
+          _react2.default.createElement(
+            _reactBootstrap.NavItem,
+            { eventKey: 4, href: '/profile' },
+            'Profile'
+          ),
+          _react2.default.createElement(
+            _reactBootstrap.NavItem,
+            { eventKey: 5, href: '/logout' },
+            'Logout'
+          ),
+          _react2.default.createElement(_reactBootstrap.NavItem, null)
         )
       )
     ),
@@ -17512,7 +17812,7 @@ _reactDom2.default.render(_react2.default.createElement(
 ), document.getElementById('carpool'));
 
 /***/ }),
-/* 334 */
+/* 335 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -17546,7 +17846,7 @@ var _LocationSelection = __webpack_require__(283);
 
 var _LocationSelection2 = _interopRequireDefault(_LocationSelection);
 
-var _OfferCarpoolModal = __webpack_require__(515);
+var _OfferCarpoolModal = __webpack_require__(516);
 
 var _OfferCarpoolModal2 = _interopRequireDefault(_OfferCarpoolModal);
 
@@ -18007,7 +18307,6 @@ var OfferCarpool = function (_Component) {
 exports.default = OfferCarpool;
 
 /***/ }),
-/* 335 */,
 /* 336 */,
 /* 337 */,
 /* 338 */,
@@ -18026,12 +18325,13 @@ exports.default = OfferCarpool;
 /* 351 */,
 /* 352 */,
 /* 353 */,
-/* 354 */
+/* 354 */,
+/* 355 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var strictUriEncode = __webpack_require__(355);
+var strictUriEncode = __webpack_require__(356);
 var objectAssign = __webpack_require__(48);
 
 function encoderForArrayFormat(opts) {
@@ -18238,7 +18538,7 @@ exports.stringify = function (obj, opts) {
 
 
 /***/ }),
-/* 355 */
+/* 356 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18251,7 +18551,6 @@ module.exports = function (str) {
 
 
 /***/ }),
-/* 356 */,
 /* 357 */,
 /* 358 */,
 /* 359 */,
@@ -18397,7 +18696,8 @@ module.exports = function (str) {
 /* 499 */,
 /* 500 */,
 /* 501 */,
-/* 502 */
+/* 502 */,
+/* 503 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18408,10 +18708,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_classnames___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_classnames__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_onclickoutside__ = __webpack_require__(503);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_onclickoutside__ = __webpack_require__(504);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_popper__ = __webpack_require__(506);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_popper__ = __webpack_require__(507);
 
 
 
@@ -21432,7 +21732,7 @@ DatePicker.propTypes = {
 
 
 /***/ }),
-/* 503 */
+/* 504 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21791,7 +22091,7 @@ function onClickOutsideHOC(WrappedComponent, config) {
 
 
 /***/ }),
-/* 504 */
+/* 505 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -21819,7 +22119,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 505 */
+/* 506 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -22084,21 +22384,21 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 505;
+webpackContext.id = 506;
 
 /***/ }),
-/* 506 */
+/* 507 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Manager__ = __webpack_require__(507);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Manager__ = __webpack_require__(508);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__Manager__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Target__ = __webpack_require__(508);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Target__ = __webpack_require__(509);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_1__Target__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Popper__ = __webpack_require__(509);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Popper__ = __webpack_require__(510);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_2__Popper__["a"]; });
 /* unused harmony reexport placements */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Arrow__ = __webpack_require__(512);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Arrow__ = __webpack_require__(513);
 /* unused harmony reexport Arrow */
 
 
@@ -22106,7 +22406,7 @@ webpackContext.id = 505;
 
 
 /***/ }),
-/* 507 */
+/* 508 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22192,7 +22492,7 @@ Manager.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (Manager);
 
 /***/ }),
-/* 508 */
+/* 509 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22252,7 +22552,7 @@ Target.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Target);
 
 /***/ }),
-/* 509 */
+/* 510 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22261,7 +22561,7 @@ Target.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_popper_js__ = __webpack_require__(510);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_popper_js__ = __webpack_require__(511);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -22509,7 +22809,7 @@ Popper.defaultProps = {
 /* harmony default export */ __webpack_exports__["a"] = (Popper);
 
 /***/ }),
-/* 510 */
+/* 511 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25025,10 +25325,10 @@ Popper.Defaults = Defaults;
 /* harmony default export */ __webpack_exports__["a"] = (Popper);
 //# sourceMappingURL=popper.js.map
 
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(511)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(512)))
 
 /***/ }),
-/* 511 */
+/* 512 */
 /***/ (function(module, exports) {
 
 var g;
@@ -25055,7 +25355,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 512 */
+/* 513 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25121,13 +25421,13 @@ Arrow.propTypes = {
 /* unused harmony default export */ var _unused_webpack_default_export = (Arrow);
 
 /***/ }),
-/* 513 */
+/* 514 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(514);
+var content = __webpack_require__(515);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -25135,7 +25435,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(287)(content, options);
+var update = __webpack_require__(288)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -25152,10 +25452,10 @@ if(false) {
 }
 
 /***/ }),
-/* 514 */
+/* 515 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(286)(false);
+exports = module.exports = __webpack_require__(287)(false);
 // imports
 
 
@@ -25166,7 +25466,7 @@ exports.push([module.i, ".react-datepicker-popper[data-placement^=\"bottom\"] .r
 
 
 /***/ }),
-/* 515 */
+/* 516 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25297,7 +25597,7 @@ var OfferCarpoolModal = function (_Component) {
 exports.default = OfferCarpoolModal;
 
 /***/ }),
-/* 516 */
+/* 517 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25331,7 +25631,7 @@ var _LocationSelection = __webpack_require__(283);
 
 var _LocationSelection2 = _interopRequireDefault(_LocationSelection);
 
-var _NeedCarpoolConfirmModal = __webpack_require__(517);
+var _NeedCarpoolConfirmModal = __webpack_require__(518);
 
 var _NeedCarpoolConfirmModal2 = _interopRequireDefault(_NeedCarpoolConfirmModal);
 
@@ -25611,7 +25911,7 @@ var NeedCarpool = function (_Component) {
 exports.default = NeedCarpool;
 
 /***/ }),
-/* 517 */
+/* 518 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25740,7 +26040,7 @@ var NeedCarpoolConfirmModal = function (_Component) {
 exports.default = NeedCarpoolConfirmModal;
 
 /***/ }),
-/* 518 */
+/* 519 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25766,7 +26066,7 @@ var _api2 = _interopRequireDefault(_api);
 
 var _reactBootstrap = __webpack_require__(16);
 
-var _CarpoolOffer = __webpack_require__(519);
+var _CarpoolOffer = __webpack_require__(284);
 
 var _CarpoolOffer2 = _interopRequireDefault(_CarpoolOffer);
 
@@ -25830,6 +26130,11 @@ var MyOffers = function (_Component) {
           _react2.default.createElement(
             'p',
             null,
+            'Here are the carpool offers you have made.'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
             _react2.default.createElement(
               'strong',
               null,
@@ -25869,246 +26174,6 @@ var MyOffers = function (_Component) {
 }(_react.Component);
 
 exports.default = MyOffers;
-
-/***/ }),
-/* 519 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(10);
-
-var _reactDom2 = _interopRequireDefault(_reactDom);
-
-var _api = __webpack_require__(25);
-
-var _api2 = _interopRequireDefault(_api);
-
-var _reactBootstrap = __webpack_require__(16);
-
-var _HideOfferModal = __webpack_require__(520);
-
-var _HideOfferModal2 = _interopRequireDefault(_HideOfferModal);
-
-var _UnhideOfferModal = __webpack_require__(521);
-
-var _UnhideOfferModal2 = _interopRequireDefault(_UnhideOfferModal);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var CarpoolOffer = function (_Component) {
-  _inherits(CarpoolOffer, _Component);
-
-  function CarpoolOffer(props) {
-    _classCallCheck(this, CarpoolOffer);
-
-    var _this = _possibleConstructorReturn(this, (CarpoolOffer.__proto__ || Object.getPrototypeOf(CarpoolOffer)).call(this, props));
-
-    _this.state = {
-      offer: props.offer,
-      isOwner: props.isOwner || false,
-      //the modal to hide the offer
-      showHideModal: false,
-      showUnhideModal: false
-    };
-    _this.handleHideOffer = _this.handleHideOffer.bind(_this);
-    _this.handleUnhideOffer = _this.handleUnhideOffer.bind(_this);
-    _this.setHideModal = _this.setHideModal.bind(_this);
-    return _this;
-  }
-
-  _createClass(CarpoolOffer, [{
-    key: 'handleHideOffer',
-    value: function handleHideOffer() {
-      var _this2 = this;
-
-      _api2.default.hideOffer(this.state.offer.id).then(function () {
-        return _this2.props.onChange();
-      });
-    }
-  }, {
-    key: 'handleUnhideOffer',
-    value: function handleUnhideOffer() {
-      var _this3 = this;
-
-      _api2.default.unhideOffer(this.state.offer.id).then(function () {
-        return _this3.props.onChange();
-      });
-    }
-  }, {
-    key: 'setHideModal',
-    value: function setHideModal(showHideModal) {
-      this.setState({
-        showHideModal: showHideModal
-      });
-    }
-  }, {
-    key: 'setUnhideModal',
-    value: function setUnhideModal(showUnhideModal) {
-      this.setState({
-        showUnhideModal: showUnhideModal
-      });
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      var _this4 = this;
-
-      return _react2.default.createElement(
-        _reactBootstrap.Panel,
-        null,
-        _react2.default.createElement(
-          _reactBootstrap.Panel.Body,
-          null,
-          _react2.default.createElement('img', { src: this.state.offer.user.avatar_url }),
-          this.state.offer.user.name,
-          _react2.default.createElement(
-            'div',
-            null,
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Leaving from:'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.offer.location_from.name,
-              ', ',
-              this.state.offer.location_from.state
-            ),
-            _react2.default.createElement(
-              'strong',
-              null,
-              'To:'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.offer.location_to.name,
-              ', ',
-              this.state.offer.location_to.state
-            ),
-            _react2.default.createElement(
-              'strong',
-              null,
-              'Time:'
-            ),
-            _react2.default.createElement(
-              'p',
-              null,
-              this.state.offer.leave_at
-            ),
-            this.state.offer.gender_preference && _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'strong',
-                null,
-                'Gender preference:'
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                this.state.offer.gender_preference
-              )
-            ),
-            this.state.offer.information && _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'strong',
-                null,
-                'Additional information:'
-              ),
-              _react2.default.createElement(
-                'p',
-                null,
-                this.state.offer.information
-              )
-            )
-          )
-        ),
-        _react2.default.createElement(
-          _reactBootstrap.Panel.Footer,
-          null,
-          this.state.isOwner && _react2.default.createElement(
-            'div',
-            null,
-            this.state.offer.hidden == 0 && _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                { bsStyle: 'info', onClick: function onClick(e) {
-                    return _this4.setHideModal(true);
-                  } },
-                'Hide Offer'
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                { bsStyle: 'danger' },
-                'Cancel Offer'
-              )
-            ),
-            this.state.offer.hidden == 1 && _react2.default.createElement(
-              'div',
-              null,
-              _react2.default.createElement(
-                'p',
-                null,
-                _react2.default.createElement(
-                  'strong',
-                  null,
-                  'This offer is hidden'
-                )
-              ),
-              _react2.default.createElement(
-                _reactBootstrap.Button,
-                { bsStyle: 'success', onClick: function onClick(e) {
-                    return _this4.setUnhideModal(true);
-                  } },
-                'Show Offer Again'
-              )
-            )
-          ),
-          !this.state.isOwner && _react2.default.createElement(
-            _reactBootstrap.Button,
-            { bsStyle: 'success' },
-            'Contact'
-          ),
-          _react2.default.createElement(_HideOfferModal2.default, { show: this.state.showHideModal, onOK: this.handleHideOffer, onCancel: function onCancel(e) {
-              return _this4.setHideModal(false);
-            } }),
-          _react2.default.createElement(_UnhideOfferModal2.default, { show: this.state.showUnhideModal, onOK: this.handleUnhideOffer, onCancel: function onCancel(e) {
-              return _this4.setUnhideModal(false);
-            } })
-        )
-      );
-    }
-  }]);
-
-  return CarpoolOffer;
-}(_react.Component);
-
-exports.default = CarpoolOffer;
 
 /***/ }),
 /* 520 */
@@ -26412,7 +26477,7 @@ var _api2 = _interopRequireDefault(_api);
 
 var _reactBootstrap = __webpack_require__(16);
 
-var _CarpoolOffer = __webpack_require__(519);
+var _CarpoolOffer = __webpack_require__(284);
 
 var _CarpoolOffer2 = _interopRequireDefault(_CarpoolOffer);
 
@@ -26495,4 +26560,4 @@ var MyCarpoolNeedMyCarpoolNeed = function (_Component) {
 exports.default = MyCarpoolNeedMyCarpoolNeed;
 
 /***/ })
-],[332]);
+],[333]);

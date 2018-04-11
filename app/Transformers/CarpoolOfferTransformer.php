@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Transformers;
+
+use League\Fractal\TransformerAbstract;
+
+class CarpoolOfferTransformer extends TransformerAbstract
+{
+    protected $defaultIncludes = ['user'];
+
+    /**
+     * A Fractal transformer.
+     *
+     * @return array
+     */
+    public function transform($offer)
+    {
+        $data = $offer->toArray();
+        $data['leave_at_formatted'] = \Carbon\Carbon::parse($offer->leave_at)->format('D jS M Y, g:ia');
+        return $data;
+    }
+
+    public function includeUser($offer)
+    {
+        return $this->item($offer->user, new UserTransformer);
+    }
+}

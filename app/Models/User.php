@@ -17,18 +17,18 @@ class User extends Authenticatable
     protected $fillable = [
         'name', 'email', 'password',
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
+    protected $visible = [
+        'name',
+        'avatar_url',
     ];
 
     public function need()
     {
         return $this->hasOne(\App\Models\CarpoolNeed::class);
+    }
+
+    public function offers()
+    {
+        return $this->hasMany(\App\Models\CarpoolOffer::class);
     }
 }

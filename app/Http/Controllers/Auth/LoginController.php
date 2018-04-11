@@ -20,6 +20,10 @@ class LoginController extends Controller
     {
         return Socialite::driver('google')->redirect();
     }
+    public function redirectToFbProvider()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
 
     /**
      * Obtain the user information from GitHub.
@@ -29,10 +33,9 @@ class LoginController extends Controller
     public function handleProviderCallback(Request $request)
     {
         $google_user = Socialite::driver('google')->user();
-
-        $user = User::firstOrNew(['email' => $google_user->getEmail()]);
-
+        $user = User::firstOrNew(['google_id' => $google_user->getId()]);
         if ($user) {
+            $user->google_id = $google_user->getId();
             $user->name = $google_user->getName();
             $user->social_token_added_at = Carbon::now();
             $user->social_token_expires_at = Carbon::now()->addSeconds($google_user->expiresIn-1);

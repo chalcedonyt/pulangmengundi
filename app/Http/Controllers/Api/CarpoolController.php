@@ -22,7 +22,8 @@ class CarpoolController extends Controller
            'user_id' => \Auth::user()->getKey()
         ]);
 
-        return response()->json($cp->toArray());
+        $data = fractal()->item($cp, new \App\Transformers\CarpoolOfferTransformer)->toArray();
+        return response()->json($data);
     }
 
     public function need(Request $request)
@@ -98,9 +99,8 @@ class CarpoolController extends Controller
         ->where('user_id', '=', \Auth::user()->getKey())
         ->get();
 
-        return response()->json([
-            'offers' => $offers->toArray()
-        ]);
+        $data = fractal()->collection($offers, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
+        return response()->json($data);
     }
 
     public function hide(Request $request, \App\Models\CarpoolOffer $offer)
