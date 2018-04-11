@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
 import {Button, Col, Grid, Panel, Row} from 'react-bootstrap'
+import CarpoolOffer from './CarpoolOffer'
 
-export default class CarpoolMatches extends Component {
+export default class CarpoolOffers extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -27,23 +28,10 @@ export default class CarpoolMatches extends Component {
   render() {
     return (
       <Grid fluid>
-        <Row>
+        <Row className='show-grid'>
           {this.state.matches && this.state.matches.map((match, i) => (
-            <Col md={4} key={i}>
-              <Panel>
-                <Panel.Body>
-                  <img src={match.user.avatar_url} />
-                  {match.user.name}
-                  <p>
-                    Leaving from: {match.location_from.name}, {match.location_from.state}<br />
-                    To: {match.location_to.name}, {match.location_to.state}<br />
-                    Time: {match.leave_at}
-                  </p>
-                </Panel.Body>
-                <Panel.Footer>
-                  <Button bsStyle='success'>Contact</Button>
-                </Panel.Footer>
-              </Panel>
+            <Col md={4} xs={6} key={i}>
+              <CarpoolOffer offer={match} />
             </Col>
           ))}
         </Row>

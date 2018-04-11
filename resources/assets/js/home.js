@@ -7,14 +7,13 @@
 window.__BASE_API_URL = '/api';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Selector from './components/Selector'
 import {Route, BrowserRouter, Switch} from 'react-router-dom'
 
 ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
-          <Route path='/' component={Selector} />
+          {/* <Route path='/' component={Selector} /> */}
         </Switch>
       </div>
     </BrowserRouter>

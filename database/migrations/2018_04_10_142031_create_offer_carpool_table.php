@@ -21,6 +21,7 @@ class CreateOfferCarpoolTable extends Migration
             $table->string('gender_preference')->nullable();
             $table->integer('carpool_qty');
             $table->datetime('leave_at');
+            $table->text('information')->nullable();
             $table->timestamps();
 
             $table->index('user_id');

@@ -40,5 +40,13 @@ module.exports = {
         'Content-Type': 'application/json'
       }
     })
+  },
+
+  getMyOffers: () => {
+    const encodedURI = window.encodeURI(`${endpoint}/carpool/my-offers`);
+    return axios.get(encodedURI)
+    .then(function (response) {
+      return response.data;
+    });
   }
 }

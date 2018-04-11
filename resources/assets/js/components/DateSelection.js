@@ -4,9 +4,9 @@ import ReactDOM from 'react-dom';
 import api from '../utils/api'
 import {DropdownButton, MenuItem, Panel} from 'react-bootstrap'
 
-import DatePicker from 'react-datepicker';
+import DatePicker from 'react-datepicker'
 import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default class DateSelection extends Component {
   constructor(props) {
@@ -14,11 +14,12 @@ export default class DateSelection extends Component {
     this.state = {
       startDate: props.date
     }
-    console.log("Date is %O", props)
     this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(date) {
+    console.log("Date is %O", date)
+    this.props.onChange(date)
     this.setState({
       startDate: date
     })
@@ -29,6 +30,7 @@ export default class DateSelection extends Component {
       <DatePicker
         timeFormat="HH:mm"
         dateFormat="LLL"
+        timeIntervals={60}
         selected={this.state.startDate}
         minDate={moment('20180501', 'YYYYMMDD')}
         maxDate={moment('20180521', 'YYYYMMDD')}

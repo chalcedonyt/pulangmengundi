@@ -45,7 +45,7 @@ class LoginController extends Controller
             //assign a cookie that is less than the google expiry for now
             \Auth::login($user, $remember = true);
 
-            $redirect = '/';
+            $redirect = '/carpool';
 
             if ($request->session()->has('redirect')) {
                 $redirect = $request->session()->get('redirect');

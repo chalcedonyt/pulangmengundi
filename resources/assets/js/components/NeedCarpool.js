@@ -5,7 +5,7 @@ import api from '../utils/api'
 import {Button, Checkbox, Col, DropdownButton, FormControl, MenuItem, Radio, Row, Panel} from 'react-bootstrap'
 import DateSelection from './DateSelection'
 import LocationSelection from './LocationSelection'
-import CarpoolMatches from './CarpoolMatches'
+import CarpoolOffers from './CarpoolOffers'
 
 export default class NeedCarpool extends Component {
   constructor(props) {
@@ -152,7 +152,7 @@ export default class NeedCarpool extends Component {
         {this.state.startLocation && this.state.endLocation && this.state.gender &&
           <div className="container">
             <h1>Results</h1>
-            <CarpoolMatches
+            <CarpoolOffers
               gender={this.state.gender}
               startLocation={this.state.startLocation}
               endLocation={this.state.endLocation}

@@ -14,6 +14,7 @@ class CarpoolController extends Controller
     public function offer (Request $request)
     {
         $cp = CarpoolOffer::create([
+           'information' => $request->input('information'),
            'gender_preference' => $request->input('preferredGender'),
            'location_id_from' => $request->input('fromLocationId'),
            'location_id_to' => $request->input('toLocationId'),
@@ -51,6 +52,17 @@ class CarpoolController extends Controller
         return response()->json([
             'matches' => $matches->toArray(),
             'partial_matches' => $partial_matches->toArray()
+        ]);
+    }
+
+    public function myOffers (Request $request)
+    {
+        $offers = CarpoolOffer::with('user', 'locationFrom.locationState', 'locationTo.locationState')
+        ->where('user_id', '=', \Auth::user()->getKey())
+        ->get();
+
+        return response()->json([
+            'offers' => $offers->toArray()
         ]);
     }
 }
