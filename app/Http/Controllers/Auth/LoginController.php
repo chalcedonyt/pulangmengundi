@@ -39,7 +39,7 @@ class LoginController extends Controller
             $user->name = $google_user->getName();
             $user->social_token_added_at = Carbon::now();
             $user->social_token_expires_at = Carbon::now()->addSeconds($google_user->expiresIn-1);
-            $user->social_token = $google_user->token;
+            $user->social_token = '';
             $user->avatar_url = $google_user->avatar;
 
             if (!$user->exists())
@@ -67,7 +67,7 @@ class LoginController extends Controller
             $user->name = $facebook_user->getName();
             $user->social_token_added_at = Carbon::now();
             $user->social_token_expires_at = Carbon::now()->addSeconds($facebook_user->expiresIn-1);
-            $user->social_token = $facebook_user->token;
+            $user->social_token = '';
             $user->avatar_url = $facebook_user->avatar;
 
             if (!$user->exists())

@@ -94,5 +94,22 @@ module.exports = {
     return axios.get(encodedURI).then(function (response) {
       return response.data;
     });
-  }
+  },
+
+  getAllOffers: (params) => {
+    const queryString = QueryString.stringify(params)
+    const encodedURI = `${endpoint}/carpool/offers?${queryString}`
+    return axios.get(encodedURI).then(function (response) {
+      return response.data;
+    });
+  },
+
+  getAllNeeds: (params) => {
+    const queryString = QueryString.stringify(params)
+    const encodedURI = `${endpoint}/carpool/needs?${queryString}`
+    return axios.get(encodedURI).then(function (response) {
+      return response.data;
+    });
+  },
+
 }

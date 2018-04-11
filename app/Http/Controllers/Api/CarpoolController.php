@@ -161,4 +161,36 @@ class CarpoolController extends Controller
             'success' => 1
         ]);
     }
+
+
+    public function offers(Request $request) {
+        $query = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState');
+        if (!empty($request->input('state_from')) && !empty($request->input('state_to'))) {
+            $state_from = $request->input('state_from');
+            $state_to = $request->input('state_to');
+            $query->toStateIs($state_to)->fromStateIs($state_from);
+        }
+        $offers = $query->orderBy('created_at', 'desc')
+        ->limit(20)
+        ->get();
+        $data = fractal()->collection($offers, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
+        return response()->json($data);
+    }
+
+    public function needs(Request $request) {
+        $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState');
+        if (!empty($request->input('state_from')) && !empty($request->input('state_to'))) {
+            $state_from = $request->input('state_from');
+            $state_to = $request->input('state_to');
+            $query->pollStateIs($state_to)->fromStateIs($state_from);
+        }
+
+        $needs = $query
+        ->orderBy('created_at', 'desc')
+        ->limit(20)
+        ->get();
+
+        $data = fractal()->collection($needs, new \App\Transformers\CarpoolNeedTransformer, 'needs')->toArray();
+        return response()->json($data);
+    }
 }

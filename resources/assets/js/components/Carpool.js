@@ -1,9 +1,78 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import {Button, Col, Jumbotron, Row, Panel} from 'react-bootstrap'
+import api from '../utils/api'
+import {Alert, Button, Col, Grid, Jumbotron, Row, Panel} from 'react-bootstrap'
+import CarpoolOffer from './CarpoolOffer'
+import CarpoolNeed from './CarpoolNeed'
+import StateSelection from './StateSelection'
 
 export default class Carpool extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      offers: [],
+      needs: [],
+      selectedStateFrom: null,
+      selectedStateTo: null
+    }
+    this.handleStateFromChange = this.handleStateFromChange.bind(this)
+    this.handleStateToChange = this.handleStateToChange.bind(this)
+  }
+
+  componentDidMount() {
+    this.getOffers();
+    this.getNeeds();
+  }
+
+  getOffers() {
+    const params = {
+      state_from: this.state.selectedStateFrom,
+      state_to: this.state.selectedStateTo,
+    }
+    api.getAllOffers(params)
+    .then(({offers}) => {
+      this.setState({
+        offers
+      })
+    })
+  }
+
+  getNeeds() {
+    const params = {
+      state_from: this.state.selectedStateFrom,
+      state_to: this.state.selectedStateTo,
+    }
+    api.getAllNeeds(params)
+    .then(({needs}) => {
+      this.setState({
+        needs
+      })
+    })
+  }
+
+  handleStateFromChange(state) {
+    this.setState({
+      selectedStateFrom: state ? state.name : null
+    }, () => {
+      if (this.state.selectedStateFrom && this.state.selectedStateTo) {
+        this.getNeeds()
+        this.getOffers()
+      }
+    })
+  }
+
+  handleStateToChange(state) {
+    this.setState({
+      selectedStateTo: state ? state.name : null
+    }, () => {
+      if (this.state.selectedStateFrom && this.state.selectedStateTo) {
+        this.getNeeds()
+        this.getOffers()
+      }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -11,14 +80,78 @@ export default class Carpool extends Component {
           <h1>Carpooling</h1>
           <p>Find someone to carpool to and from your hometown here.</p>
           <Row>
-            <Col md={5} xs={5}>
+            <Col md={5} xs={12}>
               <Button bsSize='large' bsStyle='primary' href='/carpool/offer'>I want to offer a carpool</Button>
             </Col>
-            <Col md={5} xs={5} xsOffset={1} mdOffset={1}>
+            <Col md={5} xs={12} mdOffset={1}>
               <Button bsSize='large' bsStyle='info' href='/carpool/need'>I am looking for a carpool</Button>
             </Col>
           </Row>
         </Jumbotron>
+        <div className='container'>
+          <Grid>
+            <Row>
+              <Col md={4} mdOffset={1}>
+                <Panel>
+                  <Panel.Heading>
+                    Choose where you are starting from
+                  </Panel.Heading>
+                  <Panel.Body>
+                    <StateSelection
+                      title={'State:'}
+                      onChange={this.handleStateFromChange}
+                    />
+                  </Panel.Body>
+                </Panel>
+              </Col>
+              <Col md={4}>
+                <Panel>
+                  <Panel.Heading>
+                    Choose where you are going to
+                  </Panel.Heading>
+                  <Panel.Body>
+                    <StateSelection
+                      title={'State:'}
+                      onChange={this.handleStateToChange}
+                    />
+                  </Panel.Body>
+                </Panel>
+              </Col>
+            </Row>
+          </Grid>
+        </div>
+        <Grid>
+          <Col md={6}>
+            <Panel>
+              <Panel.Heading>
+                People offering carpools
+              </Panel.Heading>
+              <Panel.Body>
+                {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
+                  <CarpoolOffer offer={offer} key={i} />
+                ))}
+                {this.state.offers && this.state.offers.length == 0 && (
+                  <Alert bsStyle='info'>No results fount</Alert>
+                )}
+              </Panel.Body>
+            </Panel>
+          </Col>
+          <Col md={6}>
+            <Panel>
+              <Panel.Heading>
+                People looking for carpools
+              </Panel.Heading>
+              <Panel.Body>
+                {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need, i) => (
+                  <CarpoolNeed need={need} key={i} />
+                ))}
+                {this.state.needs && this.state.needs.length == 0 && (
+                  <Alert bsStyle='info'>No results found</Alert>
+                )}
+              </Panel.Body>
+            </Panel>
+          </Col>
+        </Grid>
       </div>
     )
   }
