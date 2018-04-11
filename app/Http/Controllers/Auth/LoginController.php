@@ -61,15 +61,14 @@ class LoginController extends Controller
     public function handleFbProviderCallback(Request $request)
     {
         $facebook_user = Socialite::driver('facebook')->user();
-        dd($facebook_user);
-        $user = User::firstOrNew(['google_id' => $google_user->getId()]);
+        $user = User::firstOrNew(['fb_id' => $facebook_user->getId()]);
         if ($user) {
-            $user->google_id = $google_user->getId();
-            $user->name = $google_user->getName();
+            $user->fb_id = $facebook_user->getId();
+            $user->name = $facebook_user->getName();
             $user->social_token_added_at = Carbon::now();
-            $user->social_token_expires_at = Carbon::now()->addSeconds($google_user->expiresIn-1);
-            $user->social_token = $google_user->token;
-            $user->avatar_url = $google_user->avatar;
+            $user->social_token_expires_at = Carbon::now()->addSeconds($facebook_user->expiresIn-1);
+            $user->social_token = $facebook_user->token;
+            $user->avatar_url = $facebook_user->avatar;
 
             if (!$user->exists())
                 $user->password = '';
