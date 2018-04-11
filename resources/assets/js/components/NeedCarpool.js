@@ -5,26 +5,24 @@ import api from '../utils/api'
 import {Button, Checkbox, Col, DropdownButton, FormControl, MenuItem, Radio, Row, Panel} from 'react-bootstrap'
 import DateSelection from './DateSelection'
 import LocationSelection from './LocationSelection'
-import CarpoolOffers from './CarpoolOffers'
+import NeedCarpoolConfirmModal from './NeedCarpoolConfirmModal'
 
 export default class NeedCarpool extends Component {
   constructor(props) {
     super(props)
     this.state = {
       startLocation: null,
-      endLocation: null,
+      pollLocation: null,
       gender: null,
-      carpoolQty: 2,
-
-      willCarpoolFromPolls: true,
-      willCarpoolToPolls: true,
-      carpoolFromPollsDateTime: null,
-      carpoolToPollsDateTime: null
+      showConfirmModal: false,
+      information: ''
     }
     this.startLocationChanged = this.startLocationChanged.bind(this)
-    this.endLocationChanged = this.endLocationChanged.bind(this)
-    this.handleCarpoolQtyChange = this.handleCarpoolQtyChange.bind(this)
+    this.pollLocationChanged = this.pollLocationChanged.bind(this)
     this.handleGenderChange = this.handleGenderChange.bind(this)
+    this.handleInformationChange = this.handleInformationChange.bind(this)
+    this.toggleModalShow = this.toggleModalShow.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   startLocationChanged(startLocation) {
@@ -33,21 +31,21 @@ export default class NeedCarpool extends Component {
     })
   }
 
-  endLocationChanged(endLocation) {
+  pollLocationChanged(pollLocation) {
     this.setState({
-      endLocation
-    })
-  }
-
-  handleCarpoolQtyChange(e) {
-    this.setState({
-      carpoolQty: e.target.value
+      pollLocation
     })
   }
 
   handleGenderChange(gender) {
     this.setState({
       gender
+    })
+  }
+
+  handleInformationChange(information) {
+    this.setState({
+      information
     })
   }
 
@@ -63,20 +61,26 @@ export default class NeedCarpool extends Component {
     })
   }
 
-  handleCarpoolFromPollsDateChange(date) {
-    this.setState({
-      carpoolFromPollsDateTime: date
+  handleSubmit() {
+    const params = {
+      fromLocationId: this.state.startLocation.id,
+      pollLocationId: this.state.pollLocation.id,
+      gender: this.state.gender,
+      information: this.state.information
+    }
+    api.submitCarpoolNeed(params)
+    .then(() => {
+      location.href='/carpool/my-need'
     })
   }
 
-  handleCarpoolToPollsDateChange(date) {
+  toggleModalShow(bool) {
     this.setState({
-      carpoolToPollsDateTime: date
+      showConfirmModal: bool
     })
   }
-
   getValidationState() {
-    return this.state.endLocation && this.state.startLocation
+    return this.state.pollLocation && this.state.startLocation && this.state.gender
   }
 
   render() {
@@ -105,7 +109,7 @@ export default class NeedCarpool extends Component {
                           I&apos;m voting in:
                         </Panel.Heading>
                         <Panel.Body>
-                          <LocationSelection onChange={this.endLocationChanged}/>
+                          <LocationSelection onChange={this.pollLocationChanged}/>
                         </Panel.Body>
                       </Panel>
                     </Col>
@@ -134,13 +138,27 @@ export default class NeedCarpool extends Component {
                         </Panel.Body>
                       </Panel>
                     </Col>
+                    <Col md={4}>
+                      <Panel>
+                        <Panel.Heading>
+                        More information
+                        </Panel.Heading>
+                        <Panel.Body>
+                        <FormControl
+                          componentClass='textarea'
+                          placeholder='Leave more details here'
+                          value={this.state.information}
+                          onChange={this.handleInformationChange} />
+                        </Panel.Body>
+                      </Panel>
+                    </Col>
                   </Row>
                 </Panel.Body>
                 {this.getValidationState() &&
                   <Panel.Footer>
                     <Row>
-                      <Col mdOffset={10} md={2}>
-                        <Button bsStyle='success'>Save carpool request</Button>
+                      <Col mdOffset={10} md={2} xsOffset={4} xs={4}>
+                        <Button bsStyle='success' onClick={(e) => this.toggleModalShow(true)}>Save carpool request</Button>
                       </Col>
                     </Row>
                   </Panel.Footer>
@@ -149,16 +167,14 @@ export default class NeedCarpool extends Component {
             </Col>
           </Row>
         </div>
-        {this.state.startLocation && this.state.endLocation && this.state.gender &&
-          <div className="container">
-            <h1>Results</h1>
-            <CarpoolOffers
-              gender={this.state.gender}
-              startLocation={this.state.startLocation}
-              endLocation={this.state.endLocation}
-            />
-          </div>
-        }
+        <NeedCarpoolConfirmModal
+          show={this.state.showConfirmModal}
+          startLocation={this.state.startLocation}
+          pollLocation={this.state.pollLocation}
+          gender={this.state.gender}
+          onOK={this.handleSubmit}
+          onCancel={(e) => this.toggleModalShow(false)}
+        />
       </div>
     )
   }

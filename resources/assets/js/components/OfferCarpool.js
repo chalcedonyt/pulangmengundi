@@ -137,8 +137,8 @@ export default class OfferCarpool extends Component {
     if (this.state.willCarpoolFromPolls) {
       const params = {
         preferredGender: this.state.preferredGender,
-        fromLocationId: this.state.startLocation.id,
-        toLocationId: this.state.pollLocation.id,
+        toLocationId: this.state.startLocation.id,
+        fromLocationId: this.state.pollLocation.id,
         datetime: this.state.carpoolFromPollsDateTime,
         information: this.state.information
       }

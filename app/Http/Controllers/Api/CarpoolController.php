@@ -25,15 +25,31 @@ class CarpoolController extends Controller
         return response()->json($cp->toArray());
     }
 
-    public function match(Request $request)
+    public function need(Request $request)
     {
-        $location_start = Location::find($request->input('startLocationId'));
-        $location_end = Location::find($request->input('endLocationId'));
+        $cp = CarpoolNeed::create([
+           'information' => $request->input('information'),
+           'gender' => $request->input('gender'),
+           'location_id_from' => $request->input('fromLocationId'),
+           'location_id_poll' => $request->input('pollLocationId'),
+           'user_id' => \Auth::user()->getKey()
+        ]);
+
+        return response()->json($cp->toArray());
+    }
+
+    public function matches(Request $request)
+    {
+        $user = \Auth::user();
+        if (!$user->need) {
+            return response('You have no requests', 404);
+        }
+
+        $need = $user->need;
         $gender = $request->input('gender');
-
-        $matches = CarpoolOffer::with('user')
-        ->where('location_id_from', '=', $location_start->getKey())
-        ->where('location_id_to', '=', $location_end->getKey())
+        $matches_from = CarpoolOffer::with('user')
+        ->where('location_id_from', '=', $need->locationFrom->getKey())
+        ->where('location_id_to', '=', $need->locationPoll->getKey())
         ->where('hidden', '=', 0)
         ->where(function ($q) use ($gender) {
             $q->whereNull('gender_preference')
@@ -41,18 +57,38 @@ class CarpoolController extends Controller
         })
         ->get();
 
-        $partial_matches = CarpoolOffer::with('user', 'locationFrom.locationState', 'locationTo.locationState')
-        ->fromStateIs($location_start->state)
-        ->toStateIs($location_end->state)
+        $matches_to = CarpoolOffer::with('user')
+        ->where('location_id_to', '=', $need->locationFrom->getKey())
+        ->where('location_id_from', '=', $need->locationPoll->getKey())
+        ->where('hidden', '=', 0)
+        ->where(function ($q) use ($gender) {
+            $q->whereNull('gender_preference')
+            ->orWhere('gender_preference', '=', $gender);
+        })
+        ->get();
+
+        $partial_matches_from = CarpoolOffer::with('user', 'locationFrom.locationState', 'locationTo.locationState')
+        ->fromStateIs($need->locationFrom->state)
+        ->toStateIs($need->locationPoll->state)
         ->where(function ($q) use ($gender) {
             $q->whereNull('gender_preference')
             ->orWhere('gender_preference', '=', $gender);
         })
         ->where('hidden', '=', 0)
         ->get();
+
+        $partial_matches_to = CarpoolOffer::with('user', 'locationFrom.locationState', 'locationTo.locationState')
+        ->toStateIs($need->locationFrom->state)
+        ->fromStateIs($need->locationPoll->state)
+        ->where(function ($q) use ($gender) {
+            $q->whereNull('gender_preference')
+            ->orWhere('gender_preference', '=', $gender);
+        })
+        ->where('hidden', '=', 0)
+        ->get();
+
         return response()->json([
-            'matches' => $matches->toArray(),
-            'partial_matches' => $partial_matches->toArray()
+            'offers' => $matches_from->concat($matches_to)->concat($partial_matches_from)->concat($partial_matches_to)->toArray()
         ]);
     }
 

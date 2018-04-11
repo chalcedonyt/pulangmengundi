@@ -11,6 +11,7 @@ import OfferCarpool from './components/OfferCarpool'
 import NeedCarpool from './components/NeedCarpool'
 import MyOffers from './components/MyOffers'
 import Carpool from './components/Carpool'
+import MyCarpoolNeed from './components/MyCarpoolNeed'
 import {Route, BrowserRouter, Switch} from 'react-router-dom'
 import {Navbar, Nav, NavItem} from 'react-bootstrap'
 
@@ -33,6 +34,7 @@ ReactDOM.render(
           <Route exact path='/carpool/offer' component={OfferCarpool} />
           <Route exact path='/carpool/my-offers' component={MyOffers} />
           <Route exact path='/carpool/need' component={NeedCarpool} />
+          <Route exact path='/carpool/my-need' component={MyCarpoolNeed} />
         </Switch>
       </div>
     </BrowserRouter>

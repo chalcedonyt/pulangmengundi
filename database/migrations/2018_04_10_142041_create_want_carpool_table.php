@@ -13,10 +13,18 @@ class CreateWantCarpoolTable extends Migration
      */
     public function up()
     {
-        Schema::create('want_carpool', function (Blueprint $table) {
+        Schema::create('need_carpool', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('location_id_from');
+            $table->integer('location_id_poll');
             $table->string('gender');
+            $table->text('information')->nullable();
             $table->timestamps();
+
+            $table->index('user_id');
+            $table->index('location_id_from');
+            $table->index('location_id_poll');
         });
     }
 
@@ -27,6 +35,6 @@ class CreateWantCarpoolTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('want_carpool');
+        Schema::dropIfExists('need_carpool');
     }
 }

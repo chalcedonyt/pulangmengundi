@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function() {
     Route::get('carpool/my-offers', function() {
        return view('carpool');
     });
+    Route::get('carpool/my-need', function() {
+       return view('carpool');
+    });
 });
 Route::middleware('auth')->prefix('api')->group(function() {
     Route::get('/states', ['uses' => 'Api\\LocationController@states']);
@@ -41,5 +44,5 @@ Route::middleware('auth')->prefix('api')->group(function() {
     Route::post('/carpool/need', ['uses' => 'Api\\CarpoolController@need']);
 
     Route::get('/carpool/my-offers', ['uses' => 'Api\\CarpoolController@myOffers']);
-    Route::get('/carpool/match', ['uses' => 'Api\\CarpoolController@match']);
+    Route::get('/carpool/matches', ['uses' => 'Api\\CarpoolController@matches']);
 });

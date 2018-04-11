@@ -19,14 +19,8 @@ module.exports = {
     });
   },
 
-  getLocationMatches: (startLocationId, endLocationId, gender) => {
-    const params = {
-      startLocationId,
-      endLocationId,
-      gender
-    }
-    const queryString = QueryString.stringify(params)
-    const encodedURI = window.encodeURI(`${endpoint}/carpool/match?${queryString}`);
+  getLocationMatches: () => {
+    const encodedURI = window.encodeURI(`${endpoint}/carpool/matches`);
     return axios.get(encodedURI)
     .then(function (response) {
       return response.data;
@@ -35,6 +29,15 @@ module.exports = {
 
   submitCarpoolOffer: (params) => {
     const encodedURI = window.encodeURI(`${endpoint}/carpool/offer`);
+    return axios.post(encodedURI, params, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  },
+
+  submitCarpoolNeed: (params) => {
+    const encodedURI = window.encodeURI(`${endpoint}/carpool/need`);
     return axios.post(encodedURI, params, {
       headers: {
         'Content-Type': 'application/json'
@@ -58,6 +61,7 @@ module.exports = {
       }
     })
   },
+
   unhideOffer: (id) => {
     const encodedURI = window.encodeURI(`${endpoint}/carpool/offer/${id}/unhide`);
     return axios.post(encodedURI, {}, {
