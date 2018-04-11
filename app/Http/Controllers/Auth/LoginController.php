@@ -33,9 +33,10 @@ class LoginController extends Controller
     public function handleProviderCallback(Request $request)
     {
         $google_user = Socialite::driver('google')->user();
-        $user = User::firstOrNew(['google_id' => $google_user->getId()]);
+        $user = User::firstOrNew(['email' => $google_user->getEmail()]);
         if ($user) {
             $user->google_id = $google_user->getId();
+            $user->email = $google_user->getEmail();
             $user->name = $google_user->getName();
             $user->social_token_added_at = Carbon::now();
             $user->social_token_expires_at = Carbon::now()->addSeconds($google_user->expiresIn-1);
@@ -61,10 +62,11 @@ class LoginController extends Controller
     public function handleFbProviderCallback(Request $request)
     {
         $facebook_user = Socialite::driver('facebook')->user();
-        $user = User::firstOrNew(['fb_id' => $facebook_user->getId()]);
+        $user = User::firstOrNew(['email' => $facebook_user->getEmail()]);
         if ($user) {
             $user->fb_id = $facebook_user->getId();
             $user->name = $facebook_user->getName();
+            $user->email = $facebook_user->getEmail();
             $user->social_token_added_at = Carbon::now();
             $user->social_token_expires_at = Carbon::now()->addSeconds($facebook_user->expiresIn-1);
             $user->social_token = '';

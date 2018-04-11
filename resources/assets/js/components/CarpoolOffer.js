@@ -121,7 +121,7 @@ export default class CarpoolOffer extends Component {
           </div>
           }
           {!this.state.isOwner &&
-          <Button bsStyle='success'>Contact</Button>
+          <Button bsStyle='success' onClick={(e) => this.props.onContact(this.state.offer.user)}>Contact</Button>
           }
           <HideOfferModal show={this.state.showHideModal} onOK={this.handleHideOffer} onCancel={(e) => this.setHideModal(false)} />
           <UnhideOfferModal show={this.state.showUnhideModal} onOK={this.handleUnhideOffer} onCancel={(e) => this.setUnhideModal(false)} />

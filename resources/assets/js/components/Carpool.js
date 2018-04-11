@@ -5,6 +5,7 @@ import api from '../utils/api'
 import {Alert, Button, Col, Grid, Jumbotron, Row, Panel} from 'react-bootstrap'
 import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
+import ContactModal from './ContactModal'
 import StateSelection from './StateSelection'
 
 export default class Carpool extends Component {
@@ -14,10 +15,13 @@ export default class Carpool extends Component {
       offers: [],
       needs: [],
       selectedStateFrom: null,
-      selectedStateTo: null
+      selectedStateTo: null,
+      showContactModal: false,
+      selectedUser: true
     }
     this.handleStateFromChange = this.handleStateFromChange.bind(this)
     this.handleStateToChange = this.handleStateToChange.bind(this)
+    this.handleContactUser = this.handleContactUser.bind(this)
   }
 
   componentDidMount() {
@@ -70,6 +74,13 @@ export default class Carpool extends Component {
         this.getNeeds()
         this.getOffers()
       }
+    })
+  }
+
+  handleContactUser(user) {
+    this.setState({
+      selectedUser: user,
+      showContactModal: true
     })
   }
 
@@ -128,7 +139,7 @@ export default class Carpool extends Component {
               </Panel.Heading>
               <Panel.Body>
                 {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
-                  <CarpoolOffer offer={offer} key={i} />
+                  <CarpoolOffer offer={offer} key={i} onContact={this.handleContactUser}/>
                 ))}
                 {this.state.offers && this.state.offers.length == 0 && (
                   <Alert bsStyle='info'>No results fount</Alert>
@@ -143,7 +154,7 @@ export default class Carpool extends Component {
               </Panel.Heading>
               <Panel.Body>
                 {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need, i) => (
-                  <CarpoolNeed need={need} key={i} />
+                  <CarpoolNeed need={need} key={i} onContact={this.handleContactUser}/>
                 ))}
                 {this.state.needs && this.state.needs.length == 0 && (
                   <Alert bsStyle='info'>No results found</Alert>
@@ -152,6 +163,7 @@ export default class Carpool extends Component {
             </Panel>
           </Col>
         </Grid>
+        <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false})} />
       </div>
     )
   }
