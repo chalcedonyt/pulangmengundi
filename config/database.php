@@ -1,8 +1,4 @@
 <?php
-if (getenv('CLEARDB_DATABASE_URL')) {
-    $url = parse_url(env("CLEARDB_DATABASE_URL"));
-    $database = substr($url["path"], 1);
-}
 return [
 
     /*
@@ -44,11 +40,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', $url['host']),
+            'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', $database),
-            'username' => env('DB_USERNAME', $url['user']),
-            'password' => env('DB_PASSWORD', $url['pass']),
+            'database' => env('DB_DATABASE', 'mydb'),
+            'username' => env('DB_USERNAME', 'user'),
+            'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
