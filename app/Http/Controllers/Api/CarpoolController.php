@@ -198,7 +198,13 @@ class CarpoolController extends Controller
         if (!empty($request->input('state_from')) && !empty($request->input('state_to'))) {
             $state_from = $request->input('state_from');
             $state_to = $request->input('state_to');
-            $query->pollStateIs($state_to)->fromStateIs($state_from);
+            $query->where(function ($q) use ($state_from, $state_to) {
+                $q->where(function ($q) use ($state_from, $state_to) {
+                    $q->pollStateIs($state_to)->fromStateIs($state_from);
+                })->orWhere(function ($q) use ($state_from, $state_to) {
+                    $q->pollStateIs($state_from)->fromStateIs($state_to);
+                });
+            });
         }
 
         $needs = $query
