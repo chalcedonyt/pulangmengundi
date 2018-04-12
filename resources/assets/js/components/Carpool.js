@@ -102,22 +102,24 @@ export default class Carpool extends Component {
     return (
       <div>
         <Jumbotron>
-          <h1>Carpooling</h1>
+          <h3>#PulangMengundi Carpooling</h3>
           <p>Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!</p>
-          <Row>
-            <Col md={5} xsHidden={true}>
-              <Button bsSize='large' bsStyle='default' href='/offer'>(Driver) I want to offer a carpool</Button>
-            </Col>
-            <Col md={5} mdOffset={1} xsHidden={true}>
-              <Button bsSize='large' bsStyle='default' href='/need'>(Passenger) I am looking for a carpool</Button>
-            </Col>
-            <Col lgHidden={true} mdHidden={true} smHidden={true} xs={8}>
-              <Button bsStyle='default' href='/offer'>(Driver)<br />I want to offer a carpool</Button>
-              <br />
-              <br />
-              <Button bsStyle='default' href='/need'>(Passenger)<br />I am looking for a carpool</Button>
-            </Col>
-          </Row>
+          <Grid fluid>
+            <Row>
+              <Col md={5} xsHidden={true}>
+                <Button bsSize='large' bsStyle='default' href='/offer'>(Driver) I want to offer a carpool</Button>
+              </Col>
+              <Col md={5} mdOffset={1} xsHidden={true}>
+                <Button bsSize='large' bsStyle='default' href='/need'>(Passenger) I am looking for a carpool</Button>
+              </Col>
+              <Col lgHidden={true} mdHidden={true} smHidden={true} xs={12}>
+                <Button bsStyle='default' href='/offer'>(Driver)<br />I want to offer a carpool</Button>
+                <br />
+                <br />
+                <Button bsStyle='default' href='/need'>(Passenger)<br />I am looking for a carpool</Button>
+              </Col>
+            </Row>
+          </Grid>
         </Jumbotron>
         <Grid fluid>
           <Row>

@@ -11,9 +11,9 @@ import {GoogleLoginButton, FacebookLoginButton} from 'react-social-login-buttons
 import {Alert, Grid, Col, Row, Panel} from 'react-bootstrap'
 
 ReactDOM.render(
-    <Grid>
+    <Grid fluid>
       <Row>
-        <Col md={6} mdOffset={3} xs={8} xsOffset={2}>
+        <Col md={6} mdOffset={3} xs={12}>
           <Panel>
             <Panel.Heading>
               Login to <strong>carpool.pulangmengundi.com</strong>
@@ -21,7 +21,7 @@ ReactDOM.render(
             <Panel.Body>
               <Alert bsStyle='info'>
                 <p className='lead'>
-                <strong>carpool.pulangmengundi.com</strong> needs your social media login to determine that you are a real person. <strong>This helps prevent fraud and helps keep our users safe.</strong>
+                We need your social media login to determine that you are a real person. <strong>This helps prevent fraud and helps keep our users safe.</strong>
                 </p>
                 <br /><br />
                 <p className='lead'>
