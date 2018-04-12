@@ -131,7 +131,7 @@ export default class OfferCarpool extends Component {
   }
 
   getValidationState() {
-    console.log("State is %O", this.state)
+    // console.log("State is %O", this.state)
     const valid = this.state.pollLocation && this.state.startLocation &&
     ( this.state.willCarpoolFromPolls ? this.state.carpoolFromPollsDateTime !== null : true )
     && ( this.state.willCarpoolToPolls ? this.state.carpoolToPollsDateTime !== null : true )
@@ -172,7 +172,7 @@ export default class OfferCarpool extends Component {
 
     axios.all(apis)
     .then(axios.spread((...results) => {
-      console.log(results)
+      // console.log(results)
       window.location='/my-offers'
     }))
   }

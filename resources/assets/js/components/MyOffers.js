@@ -22,7 +22,7 @@ export default class MyOffers extends Component {
   load() {
     api.getMyOffers()
     .then(({offers}) => {
-      console.log(offers)
+      // console.log(offers)
       this.setState({
         offers
       })

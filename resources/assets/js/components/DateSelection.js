@@ -18,7 +18,7 @@ export default class DateSelection extends Component {
   }
 
   handleChange(date) {
-    console.log("Date is %O", date)
+    // console.log("Date is %O", date)
     this.props.onChange(date)
     this.setState({
       startDate: date

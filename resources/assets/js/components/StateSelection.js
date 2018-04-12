@@ -14,7 +14,7 @@ export default class StateSelection extends Component {
     this.handleStateSelect = this.handleStateSelect.bind(this)
   }
   componentWillUpdate(nextProps) {
-    console.log(nextProps)
+    // console.log(nextProps)
     if (nextProps.selectedState != this.state.selectedState && nextProps.selectedState == null && this.state.selectedState !== null) {
       this.setState({
         selectedState: nextProps.selectedState
