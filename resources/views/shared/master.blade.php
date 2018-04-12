@@ -18,6 +18,16 @@
         </div>
         <script src="{{mix('js/manifest.js')}}"></script>
         <script src="{{mix('js/vendor.js')}}"></script>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117450354-1"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-117450354-1');
+        </script>
+
         @yield('scripts')
     </body>
 </html>

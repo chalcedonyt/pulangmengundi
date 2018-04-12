@@ -22,6 +22,7 @@ export default class Carpool extends Component {
     this.handleStateFromChange = this.handleStateFromChange.bind(this)
     this.handleStateToChange = this.handleStateToChange.bind(this)
     this.handleContactUser = this.handleContactUser.bind(this)
+    this.resetSearch = this.resetSearch.bind(this)
   }
 
   componentDidMount() {
@@ -88,6 +89,15 @@ export default class Carpool extends Component {
     })
   }
 
+  resetSearch() {
+    this.setState({
+      selectedStateFrom: null,
+      selectedStateTo: null,
+    }, () => {
+      this.getOffers()
+      this.getNeeds()
+    })
+  }
   render() {
     return (
       <div>
@@ -114,6 +124,7 @@ export default class Carpool extends Component {
                   <Panel.Body>
                     <StateSelection
                       title={'State:'}
+                      selectedState={this.state.selectedStateFrom}
                       onChange={this.handleStateFromChange}
                     />
                   </Panel.Body>
@@ -127,8 +138,12 @@ export default class Carpool extends Component {
                   <Panel.Body>
                     <StateSelection
                       title={'State:'}
+                      selectedState={this.state.selectedStateTo}
                       onChange={this.handleStateToChange}
                     />
+                    {this.state.selectedStateFrom && this.state.selectedStateTo &&
+                      <Button bsStyle='link' onClick={this.resetSearch}>Clear</Button>
+                    }
                   </Panel.Body>
                 </Panel>
               </Col>
