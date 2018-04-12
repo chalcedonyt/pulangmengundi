@@ -13,7 +13,7 @@ class CarpoolController extends Controller
 {
     public function offer(Request $request)
     {
-        $cp = CarpoolOffer::create([
+        $cp = CarpoolOffer::firstOrCreate([
            'information' => $request->input('information'),
            'gender_preference' => $request->input('preferredGender'),
            'location_id_from' => $request->input('fromLocationId'),
@@ -32,7 +32,7 @@ class CarpoolController extends Controller
 
     public function need(Request $request)
     {
-        $cp = CarpoolNeed::create([
+        $cp = CarpoolNeed::firstOrCreate([
            'information' => $request->input('information'),
            'gender' => $request->input('gender'),
            'location_id_from' => $request->input('fromLocationId'),
