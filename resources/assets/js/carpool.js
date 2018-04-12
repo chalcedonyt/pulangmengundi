@@ -13,7 +13,7 @@ import MyOffers from './components/MyOffers'
 import Carpool from './components/Carpool'
 import MyCarpoolNeed from './components/MyCarpoolNeed'
 import {Route, BrowserRouter, Switch} from 'react-router-dom'
-import {Col, Image, Navbar, Nav, NavItem} from 'react-bootstrap'
+import {Col, Glyphicon, Image, Navbar, Nav, NavItem} from 'react-bootstrap'
 
 ReactDOM.render(
     <BrowserRouter>
@@ -24,14 +24,21 @@ ReactDOM.render(
               <Col xsHidden>
                 {window.user && <img width='40' src={window.user.avatar_url} /> }
               </Col>
+              <a href="https://www.pulangmengundi.com">
+                <Glyphicon style={{border: '1px solid black', padding: '1px'}} glyph='remove' />&nbsp;
+                <strong>PULANGMENGUNDI</strong>
+              </a>
               <Navbar.Toggle />
-              <strong>#PULANGMENGUNDI</strong>
             </Navbar.Brand>
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
               <NavItem eventKey={1} href='/'>Carpooling</NavItem>
               <NavItem eventKey={2} href='https://subsidy.pulangmengundi.com'>Subsidies</NavItem>
+            </Nav>
+            <Nav pullRight>
+              <NavItem eventKey={3} href='https://www.pulangmengundi.com/guidelines.html'>Guidelines</NavItem>
+              <NavItem eventKey={4} href='https://www.pulangmengundi.com/about.html'>About</NavItem>
             </Nav>
             {window.user &&
             <Nav pullRight>
