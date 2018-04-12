@@ -63,10 +63,10 @@ export default class CarpoolOffer extends Component {
       <Panel>
         <Panel.Heading>
           <Row>
-            <Col md={3}>
+            <Col md={3} xs={3}>
               <img width={40} src={this.state.offer.user.avatar_url} />
             </Col>
-            <Col md={8} mdOffset={1}>
+            <Col md={8} mdOffset={1} xs={8} xsOffset={1}>
               <h4>{this.state.offer.user.name}</h4>
             </Col>
           </Row>
