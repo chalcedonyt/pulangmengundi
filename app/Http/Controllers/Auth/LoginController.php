@@ -44,8 +44,9 @@ class LoginController extends Controller
 
         if (!$user->exists()) {
             $user->password = '';
-            $user->uuid = str_random(40);
         }
+        if (empty($user->uuid))
+            $user->uuid = str_random(40);
         $user->save();
         //assign a cookie that is less than the google expiry for now
         \Auth::login($user, $remember = true);
@@ -73,8 +74,9 @@ class LoginController extends Controller
 
         if (!$user->exists()) {
             $user->password = '';
-            $user->uuid = str_random(40);
         }
+        if (empty($user->uuid))
+            $user->uuid = str_random(40);
         $user->save();
         //assign a cookie that is less than the google expiry for now
         \Auth::login($user, $remember = true);
