@@ -218,7 +218,7 @@ export default class NeedCarpool extends Component {
                     </Col>
                   </Row>
                 </Panel.Body>
-                {this.state.pollLocation && this.state.fromLocation && this.state.gender &&
+                {this.state.pollLocation && this.state.fromLocation && this.state.gender && (this.state.allowEmail || this.state.allowFb) &&
                   <Panel.Footer>
                     <Row>
                       <Col mdOffset={9} md={3} xsOffset={1} xs={4}>
