@@ -36,10 +36,6 @@ ReactDOM.render(
               <NavItem eventKey={1} href='/'>Carpooling</NavItem>
               <NavItem eventKey={2} href='https://subsidy.pulangmengundi.com'>Subsidies</NavItem>
             </Nav>
-            <Nav pullRight>
-              <NavItem eventKey={3} target="_blank" href='https://www.pulangmengundi.com/guidelines.html'>Guidelines</NavItem>
-              <NavItem eventKey={4} target="_blank" href='https://www.pulangmengundi.com/about.html'>About</NavItem>
-            </Nav>
             {window.user &&
             <Nav pullRight>
               <NavItem eventKey={5} href='/logout'>
@@ -48,6 +44,10 @@ ReactDOM.render(
               <NavItem></NavItem>
             </Nav>
             }
+            <Nav pullRight>
+              <NavItem eventKey={3} target="_blank" href='https://www.pulangmengundi.com/guidelines.html'>Guidelines</NavItem>
+              <NavItem eventKey={4} target="_blank" href='https://www.pulangmengundi.com/about.html'>About</NavItem>
+            </Nav>
           </Navbar.Collapse>
         </Navbar>
         <Switch>
