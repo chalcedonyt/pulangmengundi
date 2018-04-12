@@ -22,7 +22,7 @@ class UserController extends Controller
         if (!$user) {
             return response('Not found', 404);
         }
-        \App\Models\InfoRequest::createOrNew([
+        \App\Models\InfoRequest::firstOrCreate([
             'user_id' => \Auth::user()->getKey(),
             'requested_user_id' => $user->getKey()
         ]);
