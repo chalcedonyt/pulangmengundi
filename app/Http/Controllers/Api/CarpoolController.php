@@ -184,7 +184,9 @@ class CarpoolController extends Controller
             $state_to = $request->input('state_to');
             $query->toStateIs($state_to)->fromStateIs($state_from);
         }
+
         $offers = $query->orderBy('created_at', 'desc')
+        ->where('hidden', '=', 0)
         ->limit(20)
         ->get();
         $data = fractal()->collection($offers, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
@@ -200,6 +202,7 @@ class CarpoolController extends Controller
         }
 
         $needs = $query
+        ->where('hidden', '=', 0)
         ->orderBy('created_at', 'desc')
         ->limit(20)
         ->get();
