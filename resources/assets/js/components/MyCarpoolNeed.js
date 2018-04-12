@@ -78,7 +78,9 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
                   </Grid>
                 </Panel.Body>
               </Panel>
-              <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false})} />
+              {this.state.showContactModal
+              && <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false})} />
+              }
             </Col>
           </Row>
         </div>

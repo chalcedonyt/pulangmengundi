@@ -182,7 +182,9 @@ export default class Carpool extends Component {
             </Panel>
           </Col>
         </Grid>
-        <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false, selectedUser: {}})} />
+        {this.state.showContactModal &&
+          <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false, selectedUser: {}})} />
+        }
       </div>
     )
   }
