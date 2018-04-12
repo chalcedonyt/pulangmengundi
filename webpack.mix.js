@@ -17,10 +17,12 @@ mix
 .react('resources/assets/js/login.js', 'public/js')
 .extract([
   'axios',
+  'moment',
   'react',
   'react-bootstrap',
   'react-dom',
   'react-router-dom',
+  'lodash'
 ])
 .less('resources/assets/less/app.less', 'public/css');
 
