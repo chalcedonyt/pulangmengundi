@@ -105,7 +105,7 @@ export default class Carpool extends Component {
           <Row>
             <Col md={2} mdOffset={0} smOffset={4} sm={4} xs={12} xsOffset={2}>
               <div>
-                <Image style={{marginTop: '20px'}} src="/img/car.png" responsive />;
+                <Image style={{marginTop: '20px'}} src="/img/car.png" responsive />
               </div>
             </Col>
             <Col md={9} xs={12}>
