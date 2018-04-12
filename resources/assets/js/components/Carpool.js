@@ -105,82 +105,88 @@ export default class Carpool extends Component {
           <h1>Carpooling</h1>
           <p>Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!</p>
           <Row>
-            <Col md={5} xs={12}>
+            <Col md={5} xsHidden={true}>
               <Button bsSize='large' bsStyle='default' href='/offer'>(Driver) I want to offer a carpool</Button>
             </Col>
-            <Col md={5} xs={12} mdOffset={1}>
+            <Col md={5} mdOffset={1} xsHidden={true}>
               <Button bsSize='large' bsStyle='default' href='/need'>(Passenger) I am looking for a carpool</Button>
+            </Col>
+            <Col lgHidden={true} mdHidden={true} smHidden={true} xs={8}>
+              <Button bsStyle='default' href='/offer'>(Driver)<br />I want to offer a carpool</Button>
+              <br />
+              <br />
+              <Button bsStyle='default' href='/need'>(Passenger)<br />I am looking for a carpool</Button>
             </Col>
           </Row>
         </Jumbotron>
-        <div className='container'>
-          <Grid>
-            <Row>
-              <Col md={4} mdOffset={1}>
-                <Panel>
-                  <Panel.Heading>
-                    Choose where you are starting from
-                  </Panel.Heading>
-                  <Panel.Body>
-                    <StateSelection
-                      title={'State:'}
-                      selectedState={this.state.selectedStateFrom}
-                      onChange={this.handleStateFromChange}
-                    />
-                  </Panel.Body>
-                </Panel>
-              </Col>
-              <Col md={4}>
-                <Panel>
-                  <Panel.Heading>
-                    Choose where you are going to
-                  </Panel.Heading>
-                  <Panel.Body>
-                    <StateSelection
-                      title={'State:'}
-                      selectedState={this.state.selectedStateTo}
-                      onChange={this.handleStateToChange}
-                    />
-                    {this.state.selectedStateFrom && this.state.selectedStateTo &&
-                      <Button bsStyle='link' onClick={this.resetSearch}>Clear</Button>
-                    }
-                  </Panel.Body>
-                </Panel>
-              </Col>
-            </Row>
-          </Grid>
-        </div>
-        <Grid>
-          <Col md={6}>
-            <Panel bsStyle='primary'>
-              <Panel.Heading>
-                <h3>People offering carpools</h3>
-              </Panel.Heading>
-              <Panel.Body>
-                {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
-                  <CarpoolOffer offer={offer} key={i} onContact={this.handleContactUser}/>
-                ))}
-                {this.state.offers && this.state.offers.length == 0 && (
-                  <Alert bsStyle='info'>No results found</Alert>
-                )}
-              </Panel.Body>
-            </Panel>
-          </Col>
-          <Col md={6}>
-            <Panel bsStyle='primary'>
-              <Panel.Heading bsStyle='primary'>
-                <h3>People looking for carpools</h3>
-              </Panel.Heading>
-              <Panel.Body>
-                {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need, i) => (
-                  <CarpoolNeed need={need} key={i} onContact={this.handleContactUser}/>
-                ))}
-                {this.state.needs && this.state.needs.length == 0 && (
-                  <Alert bsStyle='info'>No results found</Alert>
-                )}
-              </Panel.Body>
-            </Panel>
-          </Col>
+        <Grid fluid>
+          <Row>
+            <Col md={4} mdOffset={1}>
+              <Panel>
+                <Panel.Heading>
+                  Choose where you are starting from
+                </Panel.Heading>
+                <Panel.Body>
+                  <StateSelection
+                    title={'State:'}
+                    selectedState={this.state.selectedStateFrom}
+                    onChange={this.handleStateFromChange}
+                  />
+                </Panel.Body>
+              </Panel>
+            </Col>
+            <Col md={4}>
+              <Panel>
+                <Panel.Heading>
+                  Choose where you are going to
+                </Panel.Heading>
+                <Panel.Body>
+                  <StateSelection
+                    title={'State:'}
+                    selectedState={this.state.selectedStateTo}
+                    onChange={this.handleStateToChange}
+                  />
+                  {this.state.selectedStateFrom && this.state.selectedStateTo &&
+                    <Button bsStyle='link' onClick={this.resetSearch}>Clear</Button>
+                  }
+                </Panel.Body>
+              </Panel>
+            </Col>
+          </Row>
+        </Grid>
+        <Grid fluid>
+          <Row>
+            <Col md={6}>
+              <Panel bsStyle='primary'>
+                <Panel.Heading>
+                  <h3>People offering carpools</h3>
+                </Panel.Heading>
+                <Panel.Body>
+                  {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
+                    <CarpoolOffer offer={offer} key={i} onContact={this.handleContactUser}/>
+                  ))}
+                  {this.state.offers && this.state.offers.length == 0 && (
+                    <Alert bsStyle='info'>No results found</Alert>
+                  )}
+                </Panel.Body>
+              </Panel>
+            </Col>
+            <Col md={6}>
+              <Panel bsStyle='primary'>
+                <Panel.Heading bsStyle='primary'>
+                  <h3>People looking for carpools</h3>
+                </Panel.Heading>
+                <Panel.Body>
+                  {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need, i) => (
+                    <CarpoolNeed need={need} key={i} onContact={this.handleContactUser}/>
+                  ))}
+                  {this.state.needs && this.state.needs.length == 0 && (
+                    <Alert bsStyle='info'>No results found</Alert>
+                  )}
+                </Panel.Body>
+              </Panel>
+            </Col>
+          </Row>
         </Grid>
         {this.state.showContactModal &&
           <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false, selectedUser: {}})} />

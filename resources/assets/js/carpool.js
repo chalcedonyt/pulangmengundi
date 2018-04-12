@@ -13,7 +13,7 @@ import MyOffers from './components/MyOffers'
 import Carpool from './components/Carpool'
 import MyCarpoolNeed from './components/MyCarpoolNeed'
 import {Route, BrowserRouter, Switch} from 'react-router-dom'
-import {Image, Navbar, Nav, NavItem} from 'react-bootstrap'
+import {Col, Image, Navbar, Nav, NavItem} from 'react-bootstrap'
 
 ReactDOM.render(
     <BrowserRouter>
@@ -21,7 +21,10 @@ ReactDOM.render(
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              {window.user && <img width='40' src={window.user.avatar_url} /> }
+              <Col xsHidden>
+                {window.user && <img width='40' src={window.user.avatar_url} /> }
+              </Col>
+              <Navbar.Toggle />
               <strong>#PULANGMENGUNDI</strong>
             </Navbar.Brand>
           </Navbar.Header>

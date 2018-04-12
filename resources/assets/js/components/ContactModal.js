@@ -93,7 +93,7 @@ export default class ContactModal extends Component {
           <Panel.Body>
             <Row>
               <Col md={6} mdOffset={3}>
-                <Button href={this.state.facebook} target="_blank">Profile (Opens in new window)</Button>
+                <Button href={this.state.facebook} target="_blank">Profile (Opens new window)</Button>
               </Col>
             </Row>
             <br />

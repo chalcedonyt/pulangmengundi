@@ -221,7 +221,7 @@ export default class NeedCarpool extends Component {
                 {this.state.pollLocation && this.state.fromLocation && this.state.gender &&
                   <Panel.Footer>
                     <Row>
-                      <Col mdOffset={9} md={3} xsOffset={4} xs={4}>
+                      <Col mdOffset={9} md={3} xsOffset={1} xs={4}>
                         <Button bsStyle='success' onClick={(e) => this.toggleModalShow(true)}>
                         {this.state.existingId
                         ? 'Update carpool request'
