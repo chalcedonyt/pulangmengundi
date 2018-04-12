@@ -170,7 +170,7 @@ export default class Carpool extends Component {
             <Col md={6}>
               <Panel bsStyle='primary'>
                 <Panel.Heading>
-                  <h3>People offering carpools</h3>
+                  <h3>Drivers offering carpools</h3>
                 </Panel.Heading>
                 <Panel.Body>
                   {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
@@ -185,7 +185,7 @@ export default class Carpool extends Component {
             <Col md={6}>
               <Panel bsStyle='primary'>
                 <Panel.Heading bsStyle='primary'>
-                  <h3>People looking for carpools</h3>
+                  <h3>Passengers looking for carpools</h3>
                 </Panel.Heading>
                 <Panel.Body>
                   {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need, i) => (

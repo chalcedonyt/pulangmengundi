@@ -1,9 +1,9 @@
 {
-    "/js/vendor.js": "/js/vendor.js?id=05f357a2caae2a9795b0",
-    "/js/carpool.js": "/js/carpool.js?id=f4c3124b4a0a62749fbd",
-    "/js/login.js": "/js/login.js?id=8fcf1ce26365240fd25d",
-    "/undefined.js": "/undefined.js?id=3125702f283870c1457d",
-    "/css/app.css": "/css/app.css?id=e8940233415e3f69c498",
-    "/js/home.js": "/js/home.js?id=4416141c06d68b27ae76",
-    "/js/manifest.js": "/js/manifest.js?id=de6a7ca8bbfd0beefe4e"
+    "/js/vendor.js": "/js/vendor.js",
+    "/js/carpool.js": "/js/carpool.js",
+    "/js/login.js": "/js/login.js",
+    "/undefined.js": "/undefined.js",
+    "/css/app.css": "/css/app.css",
+    "/js/home.js": "/js/home.js",
+    "/js/manifest.js": "/js/manifest.js"
 }
