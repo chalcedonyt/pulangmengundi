@@ -19,16 +19,8 @@ module.exports = {
     });
   },
 
-  getLocationMatches: () => {
-    const encodedURI = window.encodeURI(`${endpoint}/carpool/matches`);
-    return axios.get(encodedURI)
-    .then(function (response) {
-      return response.data;
-    });
-  },
-
   submitCarpoolOffer: (params) => {
-    const encodedURI = window.encodeURI(`${endpoint}/carpool/offer`);
+    const encodedURI = window.encodeURI(`${endpoint}/offer`);
     return axios.post(encodedURI, params, {
       headers: {
         'Content-Type': 'application/json'
@@ -37,7 +29,7 @@ module.exports = {
   },
 
   submitCarpoolNeed: (params) => {
-    const encodedURI = window.encodeURI(`${endpoint}/carpool/need`);
+    const encodedURI = window.encodeURI(`${endpoint}/need`);
     return axios.post(encodedURI, params, {
       headers: {
         'Content-Type': 'application/json'
@@ -46,7 +38,7 @@ module.exports = {
   },
 
   updateCarpoolNeed: (id, params) => {
-    const encodedURI = window.encodeURI(`${endpoint}/carpool/need/${id}`);
+    const encodedURI = window.encodeURI(`${endpoint}/need/${id}`);
     return axios.put(encodedURI, params, {
       headers: {
         'Content-Type': 'application/json'
@@ -55,7 +47,7 @@ module.exports = {
   },
 
   getMyOffers: () => {
-    const encodedURI = window.encodeURI(`${endpoint}/carpool/my-offers`);
+    const encodedURI = window.encodeURI(`${endpoint}/my-offers`);
     return axios.get(encodedURI)
     .then(function (response) {
       return response.data;
@@ -63,7 +55,7 @@ module.exports = {
   },
 
   hideOffer: (id) => {
-    const encodedURI = window.encodeURI(`${endpoint}/carpool/offer/${id}/hide`);
+    const encodedURI = window.encodeURI(`${endpoint}/offer/${id}/hide`);
     return axios.post(encodedURI, {}, {
       headers: {
         'Content-Type': 'application/json'
@@ -72,7 +64,7 @@ module.exports = {
   },
 
   unhideOffer: (id) => {
-    const encodedURI = window.encodeURI(`${endpoint}/carpool/offer/${id}/unhide`);
+    const encodedURI = window.encodeURI(`${endpoint}/offer/${id}/unhide`);
     return axios.post(encodedURI, {}, {
       headers: {
         'Content-Type': 'application/json'
@@ -81,7 +73,7 @@ module.exports = {
   },
 
   cancelOffer: (id) => {
-    const encodedURI = window.encodeURI(`${endpoint}/carpool/offer/${id}/cancel`);
+    const encodedURI = window.encodeURI(`${endpoint}/offer/${id}/cancel`);
     return axios.post(encodedURI, {}, {
       headers: {
         'Content-Type': 'application/json'
@@ -90,7 +82,7 @@ module.exports = {
   },
 
   getNeed: () => {
-    const encodedURI = window.encodeURI(`${endpoint}/carpool/my-need`);
+    const encodedURI = window.encodeURI(`${endpoint}/my-need`);
     return axios.get(encodedURI).then(function (response) {
       return response.data;
     });
@@ -98,7 +90,7 @@ module.exports = {
 
   getAllOffers: (params) => {
     const queryString = QueryString.stringify(params)
-    const encodedURI = `${endpoint}/carpool/offers?${queryString}`
+    const encodedURI = `${endpoint}/offers?${queryString}`
     return axios.get(encodedURI).then(function (response) {
       return response.data;
     });
@@ -106,10 +98,17 @@ module.exports = {
 
   getAllNeeds: (params) => {
     const queryString = QueryString.stringify(params)
-    const encodedURI = `${endpoint}/carpool/needs?${queryString}`
+    const encodedURI = `${endpoint}/needs?${queryString}`
     return axios.get(encodedURI).then(function (response) {
       return response.data;
     });
   },
+
+  getUser: (uuid) => {
+    const encodedURI = `${endpoint}/user/${uuid}`
+    return axios.get(encodedURI).then(function (response) {
+      return response.data;
+    });
+  }
 
 }

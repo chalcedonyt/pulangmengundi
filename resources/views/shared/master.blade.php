@@ -7,6 +7,7 @@
         <title>#PulangMengundi - @yield('title')</title>
         <!-- Optional theme -->
         <link rel="stylesheet" href="{{mix('css/app.css')}}">
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <body>
         <div class="container">

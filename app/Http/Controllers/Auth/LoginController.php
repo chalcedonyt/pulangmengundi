@@ -43,13 +43,15 @@ class LoginController extends Controller
             $user->social_token = '';
             $user->avatar_url = $google_user->avatar;
 
-            if (!$user->exists())
+            if (!$user->exists()) {
                 $user->password = '';
+                $user->uuid = str_random(40);
+            }
             $user->save();
             //assign a cookie that is less than the google expiry for now
             \Auth::login($user, $remember = true);
 
-            $redirect = '/carpool';
+            $redirect = '/';
 
             if ($request->session()->has('redirect')) {
                 $redirect = $request->session()->get('redirect');
@@ -72,13 +74,15 @@ class LoginController extends Controller
             $user->social_token = '';
             $user->avatar_url = $facebook_user->avatar;
 
-            if (!$user->exists())
+            if (!$user->exists()) {
                 $user->password = '';
+                $user->uuid = str_random(40);
+            }
             $user->save();
             //assign a cookie that is less than the google expiry for now
             \Auth::login($user, $remember = true);
 
-            $redirect = '/carpool';
+            $redirect = '/';
 
             if ($request->session()->has('redirect')) {
                 $redirect = $request->session()->get('redirect');

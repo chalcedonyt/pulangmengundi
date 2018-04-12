@@ -14,7 +14,10 @@ class CarpoolNeedTransformer extends TransformerAbstract
      */
     public function transform($need)
     {
-        return $need->toArray();
+        $data = $need->toArray();
+        unset($data['from_location']);
+        unset($data['poll_location']);
+        return $data;
     }
 
     public function includeUser($need)

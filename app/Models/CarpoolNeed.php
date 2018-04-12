@@ -8,6 +8,7 @@ class CarpoolNeed extends Model
 {
     protected $table = 'need_carpool';
     protected $guarded = [];
+    protected $hidden = ['poll_location', 'from_location'];
 
     public function user()
     {

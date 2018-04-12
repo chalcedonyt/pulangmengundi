@@ -1,1 +1,50 @@
-webpackJsonp([4],{1:function(e,t,l){e.exports=l("hjul")},hjul:function(e,t,l){"use strict";var n=a(l("GiK3")),u=a(l("O27J")),r=l("F8kA");function a(e){return e&&e.__esModule?e:{default:e}}window.__BASE_API_URL="/api",u.default.render(n.default.createElement(r.BrowserRouter,null,n.default.createElement("div",null,n.default.createElement(r.Switch,null))),document.getElementById("home"))}},[1]);
+webpackJsonp([4],{
+
+/***/ 292:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(293);
+
+
+/***/ }),
+
+/***/ 293:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(10);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouterDom = __webpack_require__(65);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Next, we will create a fresh React component instance and attach it to
+ * the page. Then, you may begin adding components to this application
+ * or customize the JavaScript scaffolding to fit your unique needs.
+ */
+
+window.__BASE_API_URL = '/api';
+
+
+_reactDom2.default.render(_react2.default.createElement(
+  _reactRouterDom.BrowserRouter,
+  null,
+  _react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(_reactRouterDom.Switch, null)
+  )
+), document.getElementById('home'));
+
+/***/ })
+
+},[292]);

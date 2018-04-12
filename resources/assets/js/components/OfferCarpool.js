@@ -148,7 +148,7 @@ export default class OfferCarpool extends Component {
     axios.all(apis)
     .then(axios.spread((...results) => {
       console.log(results)
-      window.location='/carpool/my-offers'
+      window.location='/my-offers'
     }))
   }
 

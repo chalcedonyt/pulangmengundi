@@ -1,15 +1,30 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+import api from '../utils/api'
+
 import {Alert, Modal, Row, Panel, Col, Button} from 'react-bootstrap'
+import ReCAPTCHA from "react-google-recaptcha"
 
 export default class ContactModal extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      facebook: null
+    }
+    this.handleCaptchaSuccess = this.handleCaptchaSuccess.bind(this)
+  }
+
+  handleCaptchaSuccess() {
+    api.getUser(this.props.user.uuid)
+    .then(({facebook}) => {
+      this.setState({
+        facebook
+      })
+    })
   }
 
   render() {
-    const fbId = this.props.user.fb_id
     return (
       <Modal show={this.props.show} onHide={this.props.onCancel}>
       <Modal.Header closeButton>
@@ -18,17 +33,24 @@ export default class ContactModal extends Component {
       <Modal.Body>
         <h4>What to do now</h4>
         <Alert bsStyle='info'>
-          <div>
+          <form>
             <p>
-              This is {this.props.user.name}&apos;s information:
+              Click here to show {this.props.user.name}&apos;s Facebook profile:
             </p>
-            <ul>
-              <li><a target='_blank' href={`https://facebook.com/${fbId}`}>Facebook account</a></li>
-              <li>
-
-              </li>
-            </ul>
-          </div>
+            <ReCAPTCHA
+              ref="recaptcha"
+              sitekey="6LcJuFIUAAAAAPro54ESMzsWQDPTp8iljIBhzJqr"
+              onChange={this.handleCaptchaSuccess}
+            />
+            {this.state.facebook &&
+            <Panel>
+              <Panel.Heading>{this.props.user.name}&apos;s Facebook profile link:</Panel.Heading>
+              <Panel.Body>
+                <a href={this.state.facebook} target="_blank">Profile link</a>
+              </Panel.Body>
+            </Panel>
+            }
+          </form>
         </Alert>
         <Panel>
           <Panel.Body>

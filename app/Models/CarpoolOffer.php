@@ -12,6 +12,7 @@ class CarpoolOffer extends Model
 
     protected $table = 'offer_carpool';
     protected $guarded = [];
+    protected $hidden = ['to_location', 'from_location'];
 
     public function user()
     {

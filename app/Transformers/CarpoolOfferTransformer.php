@@ -17,6 +17,8 @@ class CarpoolOfferTransformer extends TransformerAbstract
     {
         $data = $offer->toArray();
         $data['leave_at_formatted'] = \Carbon\Carbon::parse($offer->leave_at)->format('D jS M Y, g:ia');
+        unset($data['from_location']);
+        unset($data['to_location']);
         return $data;
     }
 

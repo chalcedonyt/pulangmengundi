@@ -92,10 +92,10 @@ export default class Carpool extends Component {
           <p>Find someone to carpool to and from your hometown here.</p>
           <Row>
             <Col md={5} xs={12}>
-              <Button bsSize='large' bsStyle='primary' href='/carpool/offer'>I want to offer a carpool</Button>
+              <Button bsSize='large' bsStyle='primary' href='/offer'>I want to offer a carpool</Button>
             </Col>
             <Col md={5} xs={12} mdOffset={1}>
-              <Button bsSize='large' bsStyle='info' href='/carpool/need'>I am looking for a carpool</Button>
+              <Button bsSize='large' bsStyle='info' href='/need'>I am looking for a carpool</Button>
             </Col>
           </Row>
         </Jumbotron>

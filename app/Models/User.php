@@ -20,7 +20,7 @@ class User extends Authenticatable
     protected $visible = [
         'name',
         'avatar_url',
-        'fb_id'
+        'uuid'
     ];
 
     public function need()

@@ -87,12 +87,12 @@ export default class NeedCarpool extends Component {
     if (!this.state.existingId) {
       api.submitCarpoolNeed(params)
       .then(() => {
-        location.href='/carpool/my-need'
+        location.href='/my-need'
       })
     } else {
       api.updateCarpoolNeed(this.state.existingId, params)
       .then(() => {
-        location.href='/carpool/my-need'
+        location.href='/my-need'
       })
     }
   }

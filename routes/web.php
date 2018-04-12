@@ -25,40 +25,40 @@ Route::get('facebook/callback', 'Auth\LoginController@handleFbProviderCallback')
 
 Route::get('/logout', function() {
    \Auth::logout();
-   return redirect('/carpool');
+   return redirect('/');
 });
 
-Route::get('carpool', function() {
+Route::get('/', function() {
     $user = \Auth::user() ? \Auth::user()->toArray() : null;
     return view('carpool')->with(['user' => $user]);
 });
 Route::prefix('api')->group(function() {
     Route::get('/states', ['uses' => 'Api\\LocationController@states']);
     Route::get('/locations', ['uses' => 'Api\\LocationController@locations']);
-    Route::get('/carpool/offers', ['uses' => 'Api\\CarpoolController@offers']);
-    Route::get('/carpool/needs', ['uses' => 'Api\\CarpoolController@needs']);
+    Route::get('/offers', ['uses' => 'Api\\CarpoolController@offers']);
+    Route::get('/needs', ['uses' => 'Api\\CarpoolController@needs']);
 });
 
 Route::middleware('auth')->group(function() {
-    Route::get('carpool/need', function() {
+    Route::get('need', function() {
         $user = \Auth::user()->toArray();
         return view('carpool')->with(['user' => $user]);
     });
-    Route::get('carpool/offer', function() {
+    Route::get('offer', function() {
         if (\Auth::user()->offers->count()) {
-            return redirect('carpool/my-offers');
+            return redirect('my-offers');
         }
         $user = \Auth::user()->toArray();
         return view('carpool')->with(['user' => $user]);
     });
-    Route::get('carpool/my-offers', function() {
+    Route::get('my-offers', function() {
         if (!\Auth::user()->offers->count()) {
-            return redirect('carpool/offer');
+            return redirect('offer');
         }
         $user = \Auth::user()->toArray();
         return view('carpool')->with(['user' => $user]);
     });
-    Route::get('carpool/my-need', function() {
+    Route::get('my-need', function() {
         if (!\Auth::user()->need) {
             return redirect('carpool/need');
         }
@@ -69,15 +69,17 @@ Route::middleware('auth')->group(function() {
 });
 Route::middleware('auth')->prefix('api')->group(function() {
 
-    Route::post('/carpool/offer/{offer}/hide', ['uses' => 'Api\\CarpoolController@hide']);
-    Route::post('/carpool/offer/{offer}/unhide', ['uses' => 'Api\\CarpoolController@unhide']);
-    Route::post('/carpool/offer/{offer}/cancel', ['uses' => 'Api\\CarpoolController@cancel']);
-    Route::post('/carpool/offer', ['uses' => 'Api\\CarpoolController@offer']);
+    Route::post('/offer/{offer}/hide', ['uses' => 'Api\\CarpoolController@hide']);
+    Route::post('/offer/{offer}/unhide', ['uses' => 'Api\\CarpoolController@unhide']);
+    Route::post('/offer/{offer}/cancel', ['uses' => 'Api\\CarpoolContropller@cancel']);
+    Route::post('/offer', ['uses' => 'Api\\CarpoolController@offer']);
 
-    Route::post('/carpool/need', ['uses' => 'Api\\CarpoolController@need']);
-    Route::put('/carpool/need/{need}', ['uses' => 'Api\\CarpoolController@updateNeed']);
+    Route::post('/need', ['uses' => 'Api\\CarpoolController@need']);
+    Route::put('/need/{need}', ['uses' => 'Api\\CarpoolController@updateNeed']);
 
-    Route::get('/carpool/my-offers', ['uses' => 'Api\\CarpoolController@myOffers']);
-    Route::get('/carpool/my-need', ['uses' => 'Api\\CarpoolController@myNeed']);
-    Route::get('/carpool/matches', ['uses' => 'Api\\CarpoolController@matches']);
+    Route::get('/my-offers', ['uses' => 'Api\\CarpoolController@myOffers']);
+    Route::get('/my-need', ['uses' => 'Api\\CarpoolController@myNeed']);
+    Route::get('/matches', ['uses' => 'Api\\CarpoolController@matches']);
+
+    Route::get('/user/{uuid}', ['uses' => 'Api\\UserController@show']);
 });

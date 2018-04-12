@@ -42,7 +42,7 @@ export default class CarpoolNeed extends Component {
         </Panel.Body>
         {this.props.isOwner &&
         <Panel.Footer>
-          <Button bsStyle='info' href='/carpool/need'>Edit</Button>
+          <Button bsStyle='info' href='/need'>Edit</Button>
         </Panel.Footer>
         }
         {!this.props.isOwner &&

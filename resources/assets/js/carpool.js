@@ -22,8 +22,7 @@ ReactDOM.render(
           <Navbar.Header>
             <Navbar.Brand>
               {window.user && <img width='40' src={window.user.avatar_url} /> }
-
-              #PulangMengundi
+              <strong>#PULANGMENGUNDI</strong>
             </Navbar.Brand>
           </Navbar.Header>
           <Navbar.Collapse>
@@ -45,11 +44,11 @@ ReactDOM.render(
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Route exact path='/carpool' component={Carpool} />
-          <Route exact path='/carpool/offer' component={OfferCarpool} />
-          <Route exact path='/carpool/my-offers' component={MyOffers} />
-          <Route exact path='/carpool/need' component={NeedCarpool} />
-          <Route exact path='/carpool/my-need' component={MyCarpoolNeed} />
+          <Route exact path='/' component={Carpool} />
+          <Route exact path='/offer' component={OfferCarpool} />
+          <Route exact path='/my-offers' component={MyOffers} />
+          <Route exact path='/need' component={NeedCarpool} />
+          <Route exact path='/my-need' component={MyCarpoolNeed} />
         </Switch>
       </div>
     </BrowserRouter>
