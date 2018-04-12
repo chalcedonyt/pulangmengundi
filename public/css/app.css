@@ -6539,3 +6539,8 @@ button.close {
 .navbar-brand > img {
   padding: 2px 7px;
 }
+.modal-img {
+  width: 90%;
+  min-width: 100px;
+  max-width: 400px;
+}

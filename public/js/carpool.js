@@ -17619,7 +17619,7 @@ var ContactModal = function (_Component) {
                     null,
                     '1. Send a Friend request.'
                   ),
-                  _react2.default.createElement('img', { src: '/img/FB1.jpg', width: '400' }),
+                  _react2.default.createElement('img', { className: 'modal-img', src: '/img/FB1.jpg' }),
                   _react2.default.createElement('br', null),
                   _react2.default.createElement('br', null),
                   _react2.default.createElement(
@@ -17627,8 +17627,8 @@ var ContactModal = function (_Component) {
                     null,
                     '2. Send them a Facebook Message introducing yourself.'
                   ),
-                  _react2.default.createElement('img', { src: '/img/FB2.jpg', width: '400' }),
-                  _react2.default.createElement('img', { src: '/img/FB3.jpg', width: '400' }),
+                  _react2.default.createElement('img', { className: 'modal-img', src: '/img/FB2.jpg' }),
+                  _react2.default.createElement('img', { className: 'modal-img', src: '/img/FB3.jpg' }),
                   _react2.default.createElement('br', null),
                   _react2.default.createElement('br', null),
                   _react2.default.createElement(
@@ -17636,7 +17636,7 @@ var ContactModal = function (_Component) {
                     null,
                     'They should see a notification in Facebook messenger with your introduction.'
                   ),
-                  _react2.default.createElement('img', { src: '/img/FB4.jpg', width: '400' })
+                  _react2.default.createElement('img', { className: 'modal-img', src: '/img/FB4.jpg' })
                 )
               )
             )
@@ -27423,7 +27423,7 @@ var Carpool = function (_Component) {
           _react2.default.createElement(
             'p',
             null,
-            'Find someone to carpool to and from your hometown here.'
+            'Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!'
           ),
           _react2.default.createElement(
             _reactBootstrap.Row,
@@ -27434,7 +27434,7 @@ var Carpool = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Button,
                 { bsSize: 'large', bsStyle: 'default', href: '/offer' },
-                'I want to offer a carpool'
+                '(Driver) I want to offer a carpool'
               )
             ),
             _react2.default.createElement(
@@ -27443,7 +27443,7 @@ var Carpool = function (_Component) {
               _react2.default.createElement(
                 _reactBootstrap.Button,
                 { bsSize: 'large', bsStyle: 'default', href: '/need' },
-                'I am looking for a carpool'
+                '(Passenger) I am looking for a carpool'
               )
             )
           )
@@ -27572,7 +27572,7 @@ var Carpool = function (_Component) {
           )
         ),
         _react2.default.createElement(_ContactModal2.default, { show: this.state.showContactModal, user: this.state.selectedUser, onCancel: function onCancel(e) {
-            return _this7.setState({ showContactModal: false });
+            return _this7.setState({ showContactModal: false, selectedUser: {} });
           } })
       );
     }

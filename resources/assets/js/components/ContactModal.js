@@ -104,18 +104,18 @@ export default class ContactModal extends Component {
                   Because Facebook blocks new Messages by default, try the following methods:
                 </p>
                 <h4>1. Send a Friend request.</h4>
-                <img src='/img/FB1.jpg' width='400' />
+                <img className='modal-img' src='/img/FB1.jpg' />
                 <br/>
                 <br/>
                 <h4>2. Send them a Facebook Message introducing yourself.</h4>
-                <img src='/img/FB2.jpg' width='400' />
-                <img src='/img/FB3.jpg' width='400' />
+                <img className='modal-img' src='/img/FB2.jpg' />
+                <img className='modal-img' src='/img/FB3.jpg' />
                 <br/>
                 <br/>
                 <h4>
                   They should see a notification in Facebook messenger with your introduction.
                 </h4>
-                <img src='/img/FB4.jpg' width='400' />
+                <img className='modal-img' src='/img/FB4.jpg' />
               </Panel.Body>
             </Panel>
           </Panel.Body>

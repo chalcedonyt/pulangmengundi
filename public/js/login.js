@@ -99,7 +99,7 @@ _reactDom2.default.render(_react2.default.createElement(
           null,
           _react2.default.createElement(
             _reactBootstrap.Alert,
-            { bsStyle: 'default' },
+            { bsStyle: 'info' },
             _react2.default.createElement(
               'p',
               { className: 'lead' },

@@ -103,13 +103,13 @@ export default class Carpool extends Component {
       <div>
         <Jumbotron>
           <h1>Carpooling</h1>
-          <p>Find someone to carpool to and from your hometown here.</p>
+          <p>Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!</p>
           <Row>
             <Col md={5} xs={12}>
-              <Button bsSize='large' bsStyle='default' href='/offer'>I want to offer a carpool</Button>
+              <Button bsSize='large' bsStyle='default' href='/offer'>(Driver) I want to offer a carpool</Button>
             </Col>
             <Col md={5} xs={12} mdOffset={1}>
-              <Button bsSize='large' bsStyle='default' href='/need'>I am looking for a carpool</Button>
+              <Button bsSize='large' bsStyle='default' href='/need'>(Passenger) I am looking for a carpool</Button>
             </Col>
           </Row>
         </Jumbotron>
@@ -182,7 +182,7 @@ export default class Carpool extends Component {
             </Panel>
           </Col>
         </Grid>
-        <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false})} />
+        <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false, selectedUser: {}})} />
       </div>
     )
   }

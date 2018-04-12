@@ -55,7 +55,7 @@ class CarpoolController extends Controller
         }
 
         $need = $user->need;
-        $gender = $request->input('gender');
+        $gender = $need->gender;
         $matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->where('location_id_from', '=', $need->fromLocation->getKey())
         ->where('location_id_to', '=', $need->pollLocation->getKey())

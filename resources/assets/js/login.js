@@ -19,7 +19,7 @@ ReactDOM.render(
               Login to <strong>carpool.pulangmengundi.com</strong>
             </Panel.Heading>
             <Panel.Body>
-              <Alert bsStyle='default'>
+              <Alert bsStyle='info'>
                 <p className='lead'>
                 <strong>carpool.pulangmengundi.com</strong> needs your social media login to determine that you are a real person. <strong>This helps prevent fraud and helps keep our users safe.</strong>
                 </p>
@@ -29,6 +29,7 @@ ReactDOM.render(
                 </p>
               </Alert>
               <FacebookLoginButton  onClick={(e) => { window.location = '/facebook/login'}} />
+              {/* <GoogleLoginButton  onClick={(e) => { window.location = '/google/login'}} /> */}
             </Panel.Body>
           </Panel>
         </Col>
