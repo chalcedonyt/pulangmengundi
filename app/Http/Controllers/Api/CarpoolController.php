@@ -202,7 +202,7 @@ class CarpoolController extends Controller
         }
 
         $needs = $query
-        ->where('hidden', '=', 0)
+        // ->where('hidden', '=', 0)
         ->orderBy('created_at', 'desc')
         ->limit(20)
         ->get();
