@@ -30,6 +30,6 @@ class CreateInfoRequestTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('info_request');
+        Schema::dropIfExists('info_requests');
     }
 }
