@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import {Button, Col, Grid, Panel, Row} from 'react-bootstrap'
+import {Button, Col, Grid, Image, Panel, Row} from 'react-bootstrap'
 
 export default class CarpoolNeed extends Component {
 
@@ -11,10 +11,10 @@ export default class CarpoolNeed extends Component {
         <Panel.Heading>
         {this.props.need &&
           <Row>
-            <Col md={3} xs={3}>
-              <img width={40} src={this.props.need.user.avatar_url} />
+            <Col md={1} sm={1} xs={2}>
+              <Image  className='listing-img' responsive src={this.props.need.user.avatar_url} />
             </Col>
-            <Col md={7} mdOffset={1} xs={7} xsOffset={1}>
+            <Col md={10} mdOffset={1} smOffset={1} sm={10} xs={9} xsOffset={1}>
               <h4>{this.props.need.user.name}</h4>
             </Col>
           </Row>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
-import {Alert, Button, Col, Grid, Panel, Row} from 'react-bootstrap'
+import {Alert, Button, Col, Grid, Image, Panel, Row} from 'react-bootstrap'
 import HideOfferModal from './HideOfferModal'
 import UnhideOfferModal from './UnhideOfferModal'
 import CancelOfferModal from './CancelOfferModal'
@@ -63,10 +63,10 @@ export default class CarpoolOffer extends Component {
       <Panel>
         <Panel.Heading>
           <Row>
-            <Col md={3} xs={3}>
-              <img width={40} src={this.state.offer.user.avatar_url} />
+            <Col md={1} sm={1} xs={2}>
+              <Image  className='listing-img' responsive src={this.state.offer.user.avatar_url} />
             </Col>
-            <Col md={8} mdOffset={1} xs={8} xsOffset={1}>
+            <Col md={10} mdOffset={1} smOffset={1} sm={10} xs={9} xsOffset={1}>
               <h4>{this.state.offer.user.name}</h4>
             </Col>
           </Row>
