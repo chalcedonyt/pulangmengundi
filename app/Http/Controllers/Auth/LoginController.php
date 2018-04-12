@@ -18,11 +18,11 @@ class LoginController extends Controller
      */
     public function redirectToProvider()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
     public function redirectToFbProvider()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->stateless()->redirect();
     }
 
     /**
@@ -32,7 +32,7 @@ class LoginController extends Controller
      */
     public function handleProviderCallback(Request $request)
     {
-        $google_user = Socialite::driver('google')->user();
+        $google_user = Socialite::driver('google')->stateless()->user();
         $user = User::firstOrNew(['email' => $google_user->getEmail()]);
         $user->google_id = $google_user->getId();
         $user->email = $google_user->getEmail();
@@ -62,7 +62,7 @@ class LoginController extends Controller
 
     public function handleFbProviderCallback(Request $request)
     {
-        $facebook_user = Socialite::driver('facebook')->user();
+        $facebook_user = Socialite::driver('facebook')->stateless()->user();
         $user = User::firstOrNew(['email' => $facebook_user->getEmail()]);
         $user->fb_id = $facebook_user->getId();
         $user->name = $facebook_user->getName();
