@@ -92,10 +92,10 @@ export default class Carpool extends Component {
           <p>Find someone to carpool to and from your hometown here.</p>
           <Row>
             <Col md={5} xs={12}>
-              <Button bsSize='large' bsStyle='primary' href='/offer'>I want to offer a carpool</Button>
+              <Button bsSize='large' bsStyle='default' href='/offer'>I want to offer a carpool</Button>
             </Col>
             <Col md={5} xs={12} mdOffset={1}>
-              <Button bsSize='large' bsStyle='info' href='/need'>I am looking for a carpool</Button>
+              <Button bsSize='large' bsStyle='default' href='/need'>I am looking for a carpool</Button>
             </Col>
           </Row>
         </Jumbotron>
@@ -133,24 +133,24 @@ export default class Carpool extends Component {
         </div>
         <Grid>
           <Col md={6}>
-            <Panel>
+            <Panel bsStyle='primary'>
               <Panel.Heading>
-                People offering carpools
+                <h3>People offering carpools</h3>
               </Panel.Heading>
               <Panel.Body>
                 {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
                   <CarpoolOffer offer={offer} key={i} onContact={this.handleContactUser}/>
                 ))}
                 {this.state.offers && this.state.offers.length == 0 && (
-                  <Alert bsStyle='info'>No results fount</Alert>
+                  <Alert bsStyle='info'>No results found</Alert>
                 )}
               </Panel.Body>
             </Panel>
           </Col>
           <Col md={6}>
-            <Panel>
-              <Panel.Heading>
-                People looking for carpools
+            <Panel bsStyle='primary'>
+              <Panel.Heading bsStyle='primary'>
+                <h3>People looking for carpools</h3>
               </Panel.Heading>
               <Panel.Body>
                 {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need, i) => (

@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\CarpoolOffer::class);
     }
+
+    public function requests()
+    {
+        return $this->hasMany(\App\Models\InfoRequest::class);
+    }
 }

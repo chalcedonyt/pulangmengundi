@@ -27,8 +27,8 @@ ReactDOM.render(
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav>
-              <NavItem eventKey={1} href='/carpool'>Carpooling</NavItem>
-              <NavItem eventKey={2}>Subsidies</NavItem>
+              <NavItem eventKey={1} href='/'>Carpooling</NavItem>
+              <NavItem eventKey={2} href='https://subsidy.pulangmengundi.com'>Subsidies</NavItem>
             </Nav>
             {window.user &&
             <Nav pullRight>

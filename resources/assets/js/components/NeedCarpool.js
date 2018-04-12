@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
-import {Button, Checkbox, Col, DropdownButton, FormControl, MenuItem, Radio, Row, Panel} from 'react-bootstrap'
+import {Alert, Button, Checkbox, Col, DropdownButton, FormControl, MenuItem, Radio, Row, Panel} from 'react-bootstrap'
 import DateSelection from './DateSelection'
 import LocationSelection from './LocationSelection'
 import NeedCarpoolConfirmModal from './NeedCarpoolConfirmModal'
@@ -108,6 +108,10 @@ export default class NeedCarpool extends Component {
       <div>
         <div className="container">
           <h1>Look for a carpool</h1>
+          <Alert bsStyle='info'>
+            <p>Fill in where you are from, where you are going to vote in, and gender, then submit your offer to the database.</p>
+            <p>You will then be able to search for drivers going the same way as you.</p>
+          </Alert>
           <Row>
             <Col md={12} xs={12}>
               <Panel>
@@ -158,6 +162,8 @@ export default class NeedCarpool extends Component {
                         </Panel.Body>
                       </Panel>
                     </Col>
+                  </Row>
+                  <Row>
                     <Col md={4}>
                       <Panel>
                         <Panel.Heading>
@@ -177,7 +183,7 @@ export default class NeedCarpool extends Component {
                 {this.state.pollLocation && this.state.fromLocation && this.state.gender &&
                   <Panel.Footer>
                     <Row>
-                      <Col mdOffset={10} md={2} xsOffset={4} xs={4}>
+                      <Col mdOffset={9} md={3} xsOffset={4} xs={4}>
                         <Button bsStyle='success' onClick={(e) => this.toggleModalShow(true)}>
                         {this.state.existingId
                         ? 'Update carpool request'

@@ -10,6 +10,7 @@ export default class ContactModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      email: null,
       facebook: null
     }
     this.handleCaptchaSuccess = this.handleCaptchaSuccess.bind(this)
@@ -17,8 +18,9 @@ export default class ContactModal extends Component {
 
   handleCaptchaSuccess() {
     api.getUser(this.props.user.uuid)
-    .then(({facebook}) => {
+    .then(({facebook, email}) => {
       this.setState({
+        email,
         facebook
       })
     })
@@ -42,14 +44,27 @@ export default class ContactModal extends Component {
               sitekey="6LcJuFIUAAAAAPro54ESMzsWQDPTp8iljIBhzJqr"
               onChange={this.handleCaptchaSuccess}
             />
+            {this.state.email &&
+            <Panel>
+              <Panel.Heading>{this.props.user.name}&apos;s email address:</Panel.Heading>
+              <Panel.Body>
+                <Button target="_blank">{this.state.email}</Button>
+              </Panel.Body>
+            </Panel>
+            }
             {this.state.facebook &&
             <Panel>
               <Panel.Heading>{this.props.user.name}&apos;s Facebook profile link:</Panel.Heading>
               <Panel.Body>
-                <a href={this.state.facebook} target="_blank">Profile link</a>
+                <Button href={this.state.facebook} target="_blank">Profile (Opens in new window)</Button>
+                <h3>How do I contact someone on Facebook?</h3>
+                <p>
+
+                </p>
               </Panel.Body>
             </Panel>
             }
+
           </form>
         </Alert>
         <Panel>
