@@ -25,7 +25,7 @@ ReactDOM.render(
                 </p>
                 <br /><br />
                 <p className='lead'>
-                  The link to your social media account will be <strong>shared with</strong> potential carpoolers / donors so that <strong>they are empowered</strong> to verify who you are (and hopefully determine that you will be a good roadtrip companion/voter!)
+                  You may choose to share the link to your social media account with potential carpoolers / donors so that <strong>they are empowered</strong> to verify who you are (and hopefully determine that you will be a good roadtrip companion/voter!)
                 </p>
               </Alert>
               <FacebookLoginButton  onClick={(e) => { window.location = '/facebook/login'}} />
