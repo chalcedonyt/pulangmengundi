@@ -21,6 +21,10 @@ class CarpoolController extends Controller
            'leave_at' => \Carbon\Carbon::parse($request->input('datetime')),
            'user_id' => \Auth::user()->getKey()
         ]);
+        $user = \Auth::user();
+        $user->allow_email = (int)$request->input('allowEmail');
+        $user->allow_fb = (int)$request->input('allowFb');
+        $user->save();
 
         $data = fractal()->item($cp, new \App\Transformers\CarpoolOfferTransformer)->toArray();
         return response()->json($data);
@@ -35,6 +39,10 @@ class CarpoolController extends Controller
            'location_id_poll' => $request->input('pollLocationId'),
            'user_id' => \Auth::user()->getKey()
         ]);
+        $user = \Auth::user();
+        $user->allow_email = (int)$request->input('allowEmail');
+        $user->allow_fb = (int)$request->input('allowFb');
+        $user->save();
 
         return response()->json($cp->toArray());
     }
@@ -48,7 +56,7 @@ class CarpoolController extends Controller
 
         $need = $user->need;
         $gender = $request->input('gender');
-        $matches_from = CarpoolOffer::with('user')
+        $matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->where('location_id_from', '=', $need->fromLocation->getKey())
         ->where('location_id_to', '=', $need->pollLocation->getKey())
         ->where('hidden', '=', 0)
@@ -58,7 +66,7 @@ class CarpoolController extends Controller
         })
         ->get();
 
-        $matches_to = CarpoolOffer::with('user')
+        $matches_to = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->where('location_id_to', '=', $need->fromLocation->getKey())
         ->where('location_id_from', '=', $need->pollLocation->getKey())
         ->where('hidden', '=', 0)
@@ -68,7 +76,7 @@ class CarpoolController extends Controller
         })
         ->get();
 
-        $partial_matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'locationTo.locationState')
+        $partial_matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->fromStateIs($need->fromLocation->state)
         ->toStateIs($need->pollLocation->state)
         ->where(function ($q) use ($gender) {
@@ -88,9 +96,9 @@ class CarpoolController extends Controller
         ->where('hidden', '=', 0)
         ->get();
 
-        return response()->json([
-            'offers' => $matches_from->concat($matches_to)->concat($partial_matches_from)->concat($partial_matches_to)->toArray()
-        ]);
+        $matches = $matches_from->concat($matches_to)->concat($partial_matches_from)->concat($partial_matches_to);
+        $data = fractal()->collection($matches, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
+        return response()->json($data);
     }
 
     public function myOffers(Request $request)
@@ -123,6 +131,12 @@ class CarpoolController extends Controller
         $need->location_id_from = $request->input('fromLocationId');
         $need->location_id_poll = $request->input('pollLocationId');
         $need->save();
+
+        $user = \Auth::user();
+        $user->allow_email = (int)$request->input('allowEmail');
+        $user->allow_fb = (int)$request->input('allowFb');
+        $user->save();
+
         $data = fractal()->item($need, new \App\Transformers\CarpoolNeedTransformer)->toArray();
         return response()->json($data);
     }

@@ -61,47 +61,39 @@ export default class CarpoolOffer extends Component {
   render() {
     return (
       <Panel>
-        <Panel.Body>
+        <Panel.Heading>
           <Row>
-            <Col md={4}>
-              <Row>
-                <Col md={6} mdOffset={3}>
-                  <img src={this.state.offer.user.avatar_url} />
-                </Col>
-              </Row>
-              <Row>
-                <Col md={8} mdOffset={2}>
-                  <p>
-                    <strong>{this.state.offer.user.name}</strong>
-                  </p>
-                </Col>
-              </Row>
+            <Col md={3}>
+              <img width={40} src={this.state.offer.user.avatar_url} />
             </Col>
-            <Col md={8}>
-              <div>
-                <strong>Leaving from:</strong>
-                <p>
-                  {this.state.offer.fromLocation.name}, {this.state.offer.fromLocation.state}
-                </p>
-                <strong>To:</strong>
-                <p>
-                {this.state.offer.toLocation.name}, {this.state.offer.toLocation.state}
-                </p>
-                <strong>Time:</strong>
-                <p>{this.state.offer.leave_at_formatted}</p>
-                {this.state.offer.gender_preference &&
-                <div>
-                  <strong>Gender preference:</strong>
-                  <p>{this.state.offer.gender_preference}</p>
-                </div>}
-                {this.state.offer.information &&
-                  <div>
-                    <strong>Additional information:</strong>
-                    <p>{this.state.offer.information}</p>
-                  </div>}
-              </div>
+            <Col md={8} mdOffset={1}>
+              <h4>{this.state.offer.user.name}</h4>
             </Col>
           </Row>
+        </Panel.Heading>
+        <Panel.Body>
+          <div>
+            <strong>Leaving from:</strong>
+            <p>
+              {this.state.offer.fromLocation.name}, {this.state.offer.fromLocation.state}
+            </p>
+            <strong>To:</strong>
+            <p>
+            {this.state.offer.toLocation.name}, {this.state.offer.toLocation.state}
+            </p>
+            <strong>Time:</strong>
+            <p>{this.state.offer.leave_at_formatted}</p>
+            {this.state.offer.gender_preference &&
+            <div>
+              <strong>Gender preference:</strong>
+              <p>{this.state.offer.gender_preference}</p>
+            </div>}
+            {this.state.offer.information &&
+              <div>
+                <strong>Additional information:</strong>
+                <p>{this.state.offer.information}</p>
+              </div>}
+          </div>
         </Panel.Body>
         <Panel.Footer>
           {this.state.isOwner &&

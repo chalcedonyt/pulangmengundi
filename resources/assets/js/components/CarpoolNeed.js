@@ -8,36 +8,30 @@ export default class CarpoolNeed extends Component {
   render() {
     return (
       <Panel>
+        <Panel.Heading>
+        {this.props.need &&
+          <Row>
+            <Col md={3}>
+              <img width={40} src={this.props.need.user.avatar_url} />
+            </Col>
+            <Col md={7} mdOffset={1}>
+              <h4>{this.props.need.user.name}</h4>
+            </Col>
+          </Row>
+        }
+        </Panel.Heading>
         <Panel.Body>
           {this.props.need &&
-          <Row>
-          <Col md={4}>
-            <Row>
-              <Col md={6} mdOffset={3}>
-                <img src={this.props.need.user.avatar_url} />
-              </Col>
-            </Row>
-            <Row>
-              <Col md={8} mdOffset={2}>
-                <p>
-                  <strong>{this.props.need.user.name}</strong>
-                </p>
-              </Col>
-            </Row>
-          </Col>
-          <Col md={8}>
-            <div>
-              <strong>Travelling from:</strong>
-              <p>{this.props.need.fromLocation.name} ({this.props.need.fromLocation.state})</p>
-              <strong>Voting at:</strong>
-              <p>{this.props.need.pollLocation.name} ({this.props.need.pollLocation.state})</p>
-              <strong>Gender:</strong>
-              <p>{this.props.need.gender}</p>
-              <strong>Information:</strong>
-              <p>{this.props.need.information}</p>
-            </div>
-          </Col>
-        </Row>
+          <div>
+            <strong>Travelling from:</strong>
+            <p>{this.props.need.fromLocation.name} ({this.props.need.fromLocation.state})</p>
+            <strong>Voting at:</strong>
+            <p>{this.props.need.pollLocation.name} ({this.props.need.pollLocation.state})</p>
+            <strong>Gender:</strong>
+            <p>{this.props.need.gender}</p>
+            <strong>Information:</strong>
+            <p>{this.props.need.information}</p>
+          </div>
         }
         </Panel.Body>
         {this.props.isOwner &&
@@ -47,7 +41,7 @@ export default class CarpoolNeed extends Component {
         }
         {!this.props.isOwner &&
         <Panel.Footer>
-          <Button bsStyle='success'>Contact</Button>
+          <Button bsStyle='success' onClick={(e) => this.props.onContact(this.props.need.user)}>Contact</Button>
         </Panel.Footer>
         }
       </Panel>

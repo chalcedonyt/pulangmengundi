@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
-import {Button, Checkbox, Col, Grid, Row, Panel} from 'react-bootstrap'
+import {Alert, Button, Checkbox, Col, Grid, Row, Panel} from 'react-bootstrap'
 import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
+import ContactModal from './ContactModal'
 
 export default class MyCarpoolNeedMyCarpoolNeed extends Component {
   constructor(props) {
     super(props)
     this.state = {
       offers: null,
-      need: null
+      need: null,
+      showContactModal: false,
+      selectedUser: {},
     }
+    this.handleContactUser = this.handleContactUser.bind(this)
   }
 
   componentDidMount() {
@@ -31,6 +35,13 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
     })
   }
 
+  handleContactUser(user) {
+    this.setState({
+      selectedUser: user,
+      showContactModal: true
+    })
+  }
+
   render() {
     return (
       <div>
@@ -38,31 +49,36 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
           <Row>
             <Col md={4}>
               <h3>Your request</h3>
+              <Alert bsStyle='info'>
+                <h4>What should I do now?</h4>
+                <p>You may be contacted by drivers going the same way. If you enabled Facebook as a method of contact, do <strong>actively</strong> check your Friend requests and messages</p>
+              </Alert>
               <CarpoolNeed need={this.state.need} isOwner={true}/>
             </Col>
             <Col md={8}>
               <h3>Your matches</h3>
               <Panel>
                 <Panel.Body>
-                  <Grid fluid>
                   {this.state.offers && this.state.offers.length == 0 &&
-                  <div>
+                  <Alert bsStyle='info'>
                     <p>
                       There is no one matching your travel locations. Check back later!
                     </p>
                     <p>
                       We will try to match you with anyone travelling from the same states.
                     </p>
-                  </div>
+                  </Alert>
                   }
+                  <Grid fluid>
                   {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
-                    <Col key={i} md={3}>
-                      <CarpoolOffer offer={offer} />
+                    <Col key={i} md={6}>
+                      <CarpoolOffer onContact={this.handleContactUser} offer={offer} />
                     </Col>
                   ))}
                   </Grid>
                 </Panel.Body>
               </Panel>
+              <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false})} />
             </Col>
           </Row>
         </div>

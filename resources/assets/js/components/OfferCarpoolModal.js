@@ -20,9 +20,16 @@ export default class OfferCarpoolModal extends Component {
         <Row>
           {Array.isArray(this.props.offers) && this.props.offers.map((offer, i) => (
             <Col md={6} xs={6} key={i}>
-              <strong>From:</strong> {offer.startLocation.name} ({offer.startLocation.state})<br />
-              <strong>To:</strong> {offer.endLocation.name} ({offer.endLocation.state}) <br />
-              <strong>Time:</strong> {offer.datetime.format('MMMM Do YYYY, h:mma')}
+              <strong>From:</strong>
+              <p>
+                {offer.startLocation.name} ({offer.startLocation.state})
+              </p>
+              <strong>To:</strong>
+              <p>
+              {offer.endLocation.name} ({offer.endLocation.state})
+              </p>
+              <strong>Time:</strong>
+              <p>{offer.datetime.format('MMMM Do YYYY, h:mma')}</p>
             </Col>
           ))}
         </Row>

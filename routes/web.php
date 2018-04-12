@@ -41,6 +41,10 @@ Route::prefix('api')->group(function() {
 
 Route::middleware('auth')->group(function() {
     Route::get('need', function() {
+        $prev = str_replace(url('/'), '', url()->previous());
+        if (\Auth::user()->need && $prev != '/my-need') {
+            return redirect('/my-need');
+        }
         $user = \Auth::user()->toArray();
         return view('carpool')->with(['user' => $user]);
     });
@@ -60,7 +64,7 @@ Route::middleware('auth')->group(function() {
     });
     Route::get('my-need', function() {
         if (!\Auth::user()->need) {
-            return redirect('carpool/need');
+            return redirect('need');
         }
         $user = \Auth::user()->toArray();
         return view('carpool')->with(['user' => $user]);
@@ -71,7 +75,7 @@ Route::middleware('auth')->prefix('api')->group(function() {
 
     Route::post('/offer/{offer}/hide', ['uses' => 'Api\\CarpoolController@hide']);
     Route::post('/offer/{offer}/unhide', ['uses' => 'Api\\CarpoolController@unhide']);
-    Route::post('/offer/{offer}/cancel', ['uses' => 'Api\\CarpoolContropller@cancel']);
+    Route::post('/offer/{offer}/cancel', ['uses' => 'Api\\CarpoolController@cancel']);
     Route::post('/offer', ['uses' => 'Api\\CarpoolController@offer']);
 
     Route::post('/need', ['uses' => 'Api\\CarpoolController@need']);

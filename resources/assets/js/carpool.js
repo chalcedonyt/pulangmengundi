@@ -32,9 +32,6 @@ ReactDOM.render(
             </Nav>
             {window.user &&
             <Nav pullRight>
-              <NavItem eventKey={4} href='/profile'>
-                Profile
-              </NavItem>
               <NavItem eventKey={5} href='/logout'>
                 Logout
               </NavItem>

@@ -27,10 +27,14 @@ class UserController extends Controller
             'requested_user_id' => $user->getKey()
         ]);
 
-        $social_urls = [
-            'facebook' => 'https://facebook.com/'.$user->fb_id,
-            'email' => $user->email,
-        ];
+        $social_urls = [];
+        if ($user->allow_fb) {
+            $social_urls['facebook'] = 'https://facebook.com/'.$user->fb_id;
+        }
+
+        if ($user->allow_email) {
+            $social_urls['email'] = $user->email;
+        }
 
         return response()->json($social_urls);
     }

@@ -17,7 +17,7 @@ export default class Carpool extends Component {
       selectedStateFrom: null,
       selectedStateTo: null,
       showContactModal: false,
-      selectedUser: true
+      selectedUser: {}
     }
     this.handleStateFromChange = this.handleStateFromChange.bind(this)
     this.handleStateToChange = this.handleStateToChange.bind(this)
@@ -78,6 +78,10 @@ export default class Carpool extends Component {
   }
 
   handleContactUser(user) {
+    if (!window.user) {
+      location.href='/login'
+    }
+
     this.setState({
       selectedUser: user,
       showContactModal: true

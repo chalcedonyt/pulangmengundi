@@ -109,6 +109,14 @@ module.exports = {
     return axios.get(encodedURI).then(function (response) {
       return response.data;
     });
-  }
+  },
+
+  getLocationMatches: () => {
+    const encodedURI = window.encodeURI(`${endpoint}/matches`);
+    return axios.get(encodedURI)
+    .then(function (response) {
+      return response.data;
+    });
+  },
 
 }

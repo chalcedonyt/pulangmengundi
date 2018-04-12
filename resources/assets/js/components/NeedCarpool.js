@@ -16,7 +16,10 @@ export default class NeedCarpool extends Component {
       gender: null,
       showConfirmModal: false,
       information: '',
-      existingId: null
+      existingId: null,
+
+      allowEmail: true,
+      allowFb: true,
     }
     this.fromLocationChanged = this.fromLocationChanged.bind(this)
     this.pollLocationChanged = this.pollLocationChanged.bind(this)
@@ -24,6 +27,9 @@ export default class NeedCarpool extends Component {
     this.handleInformationChange = this.handleInformationChange.bind(this)
     this.toggleModalShow = this.toggleModalShow.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
+    this.toggleAllowEmail = this.toggleAllowEmail.bind(this)
+    this.toggleAllowFb = this.toggleAllowFb.bind(this)
   }
 
   componentWillMount() {
@@ -83,6 +89,8 @@ export default class NeedCarpool extends Component {
       pollLocationId: this.state.pollLocation.id,
       gender: this.state.gender,
       information: this.state.information,
+      allowEmail: this.state.allowEmail,
+      allowFb: this.state.allowFb,
     }
     if (!this.state.existingId) {
       api.submitCarpoolNeed(params)
@@ -97,6 +105,18 @@ export default class NeedCarpool extends Component {
     }
   }
 
+  toggleAllowEmail(){
+    this.setState({
+      allowEmail: !this.state.allowEmail
+    })
+  }
+
+  toggleAllowFb(){
+    this.setState({
+      allowFb: !this.state.allowFb
+    })
+  }
+
   toggleModalShow(bool) {
     this.setState({
       showConfirmModal: bool
@@ -107,7 +127,10 @@ export default class NeedCarpool extends Component {
     return (
       <div>
         <div className="container">
-          <h1>Look for a carpool</h1>
+          {this.state.existingId
+          ? <h1>Update your carpool request</h1>
+          : <h1>Look for a carpool</h1>
+          }
           <Alert bsStyle='info'>
             <p>Fill in where you are from, where you are going to vote in, and gender, then submit your offer to the database.</p>
             <p>You will then be able to search for drivers going the same way as you.</p>
@@ -175,6 +198,21 @@ export default class NeedCarpool extends Component {
                           placeholder='Leave more details here'
                           value={this.state.information}
                           onChange={this.handleInformationChange} />
+                        </Panel.Body>
+                      </Panel>
+                    </Col>
+                    <Col md={4}>
+                      <Panel>
+                        <Panel.Heading>
+                        Information to show
+                        </Panel.Heading>
+                        <Panel.Body>
+                          <Alert bsStyle='info'>
+                            <p>Choose at least one option. Your information will be shown to others after they pass a captcha check.</p>
+                            <p>If you choose to show your Facebook account, do be responsive to new FB message requests!</p>
+                          </Alert>
+                          <input type="checkbox" onChange={this.toggleAllowEmail} checked={this.state.allowEmail} />Show my email address<br />
+                          <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />Show the link to my Facebook account.
                         </Panel.Body>
                       </Panel>
                     </Col>
