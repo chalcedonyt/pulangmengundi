@@ -25,8 +25,8 @@ ReactDOM.render(
                 {window.user && <img width='40' src={window.user.avatar_url} /> }
               </Col>
               <a href="https://www.pulangmengundi.com">
-                <Glyphicon style={{border: '1px solid black', padding: '1px'}} glyph='remove' />&nbsp;
-                <strong>PULANGMENGUNDI</strong>
+                {/* <Glyphicon style={{border: '1px solid black', padding: '1px'}} glyph='remove' />&nbsp; */}
+                <strong>#PULANGMENGUNDI</strong>
               </a>
               <Navbar.Toggle />
             </Navbar.Brand>
@@ -37,8 +37,8 @@ ReactDOM.render(
               <NavItem eventKey={2} href='https://subsidy.pulangmengundi.com'>Subsidies</NavItem>
             </Nav>
             <Nav pullRight>
-              <NavItem eventKey={3} href='https://www.pulangmengundi.com/guidelines.html'>Guidelines</NavItem>
-              <NavItem eventKey={4} href='https://www.pulangmengundi.com/about.html'>About</NavItem>
+              <NavItem eventKey={3} target="_blank" href='https://www.pulangmengundi.com/guidelines.html'>Guidelines</NavItem>
+              <NavItem eventKey={4} target="_blank" href='https://www.pulangmengundi.com/about.html'>About</NavItem>
             </Nav>
             {window.user &&
             <Nav pullRight>

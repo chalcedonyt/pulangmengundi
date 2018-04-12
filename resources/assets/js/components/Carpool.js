@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
-import {Alert, Button, Col, Grid, Jumbotron, Row, Panel} from 'react-bootstrap'
+import {Alert, Button, Col, Grid, Image, Jumbotron, Row, Panel} from 'react-bootstrap'
 import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
 import ContactModal from './ContactModal'
@@ -102,24 +102,33 @@ export default class Carpool extends Component {
     return (
       <div>
         <Jumbotron>
-          <h3>#PulangMengundi Carpooling</h3>
-          <p>Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!</p>
-          <Grid fluid>
-            <Row>
-              <Col md={5} xsHidden={true}>
-                <Button bsSize='large' bsStyle='default' href='/offer'>(Driver) I want to offer a carpool</Button>
-              </Col>
-              <Col md={5} mdOffset={1} xsHidden={true}>
-                <Button bsSize='large' bsStyle='default' href='/need'>(Passenger) I am looking for a carpool</Button>
-              </Col>
-              <Col lgHidden={true} mdHidden={true} smHidden={true} xs={12}>
-                <Button bsStyle='default' href='/offer'>(Driver)<br />I want to offer a carpool</Button>
-                <br />
-                <br />
-                <Button bsStyle='default' href='/need'>(Passenger)<br />I am looking for a carpool</Button>
-              </Col>
-            </Row>
-          </Grid>
+          <Row>
+            <Col md={2} mdOffset={0} smOffset={4} sm={4} xs={12} xsOffset={2}>
+              <div>
+                <Image style={{marginTop: '20px'}} src="/img/car.png" responsive />;
+              </div>
+            </Col>
+            <Col md={9} xs={12}>
+              <h3>#PulangMengundi Carpooling</h3>
+              <p>Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!</p>
+              <Grid fluid>
+                <Row>
+                  <Col md={5} xsHidden={true}>
+                    <Button bsSize='large' bsStyle='default' href='/offer'>(Driver) I want to offer a carpool</Button>
+                  </Col>
+                  <Col md={5} mdOffset={1} xsHidden={true}>
+                    <Button bsSize='large' bsStyle='default' href='/need'>(Passenger) I am looking for a carpool</Button>
+                  </Col>
+                  <Col lgHidden={true} mdHidden={true} smHidden={true} xsOffset={1} xs={8}>
+                    <Button bsStyle='default' href='/offer'>(Driver)<br />I want to offer a carpool</Button>
+                    <br />
+                    <br />
+                    <Button bsStyle='default' href='/need'>(Passenger)<br />I am looking for a carpool</Button>
+                  </Col>
+                </Row>
+              </Grid>
+            </Col>
+          </Row>
         </Jumbotron>
         <Grid fluid>
           <Row>
