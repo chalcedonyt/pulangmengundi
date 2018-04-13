@@ -117,13 +117,13 @@ export default class Carpool extends Component {
                     <Button bsSize='large' bsStyle='default' href='/offer'>(Driver) I want to offer a carpool</Button>
                   </Col>
                   <Col md={5} mdOffset={1} xsHidden={true}>
-                    <Button bsSize='large' bsStyle='default' href='/need'>(Passenger) I am looking for a carpool</Button>
+                    <Button bsSize='large' bsStyle='default' href='/need'>(Rider) I am looking for a carpool</Button>
                   </Col>
                   <Col lgHidden={true} mdHidden={true} smHidden={true} xsOffset={1} xs={8}>
                     <Button bsStyle='default' href='/offer'>(Driver)<br />I want to offer a carpool</Button>
                     <br />
                     <br />
-                    <Button bsStyle='default' href='/need'>(Passenger)<br />I am looking for a carpool</Button>
+                    <Button bsStyle='default' href='/need'>(Rider)<br />I am looking for a carpool</Button>
                   </Col>
                 </Row>
               </Grid>
@@ -185,7 +185,7 @@ export default class Carpool extends Component {
             <Col md={6}>
               <Panel bsStyle='primary'>
                 <Panel.Heading bsStyle='primary'>
-                  <h3>Passengers looking for carpools</h3>
+                  <h3>Riders looking for carpools</h3>
                 </Panel.Heading>
                 <Panel.Body>
                   {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need, i) => (

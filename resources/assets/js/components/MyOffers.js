@@ -35,7 +35,7 @@ export default class MyOffers extends Component {
         <h1>Your carpool offers</h1>
         <Alert bsStyle="info">
           <h4>What should I do now?</h4>
-          <p>You may be contacted by passengers going the same way. If you enabled Facebook as a method of contact, do <strong>actively</strong> check your Friend requests and messages</p>
+          <p>You may be contacted by riders going the same way. If you enabled Facebook as a method of contact, do <strong>actively</strong> check your Friend requests and messages</p>
           <br />
           <br />
           <h4>I can&apos;t take any more messengers</h4>
@@ -46,7 +46,7 @@ export default class MyOffers extends Component {
           <br />
           <h4>I&apos;ve changed my mind</h4>
           <p>
-            <strong>Cancel</strong> a carpool offer if you want remove the offer completely. <strong>Let any passengers you have contacted know about this.</strong>
+            <strong>Cancel</strong> a carpool offer if you want remove the offer completely. <strong>Let any riders you have contacted know about this.</strong>
           </p>
         </Alert>
         <Row>
