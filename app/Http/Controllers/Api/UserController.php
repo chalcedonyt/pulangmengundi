@@ -22,10 +22,12 @@ class UserController extends Controller
         if (!$user) {
             return response('Not found', 404);
         }
-        \App\Models\InfoRequest::firstOrCreate([
-            'user_id' => \Auth::user()->getKey(),
-            'requested_user_id' => $user->getKey()
-        ]);
+        if ($user->getKey() != \Auth::user()->getKey()) {
+            \App\Models\InfoRequest::firstOrCreate([
+                'user_id' => \Auth::user()->getKey(),
+                'requested_user_id' => $user->getKey()
+            ]);
+        }
 
         $social_urls = [];
         if ($user->allow_fb) {
@@ -34,6 +36,9 @@ class UserController extends Controller
 
         if ($user->allow_email) {
             $social_urls['email'] = $user->email;
+        }
+        if (!empty($user->contact_number)) {
+            $social_urls['contact_number'] = $user->contact_number;
         }
 
         return response()->json($social_urls);

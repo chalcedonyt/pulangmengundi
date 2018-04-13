@@ -20,6 +20,7 @@ export default class NeedCarpool extends Component {
 
       allowEmail: true,
       allowFb: true,
+      contactNumber: ''
     }
     this.fromLocationChanged = this.fromLocationChanged.bind(this)
     this.pollLocationChanged = this.pollLocationChanged.bind(this)
@@ -27,6 +28,7 @@ export default class NeedCarpool extends Component {
     this.handleInformationChange = this.handleInformationChange.bind(this)
     this.toggleModalShow = this.toggleModalShow.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleContactNumberChange = this.handleContactNumberChange.bind(this)
 
     this.toggleAllowEmail = this.toggleAllowEmail.bind(this)
     this.toggleAllowFb = this.toggleAllowFb.bind(this)
@@ -41,7 +43,10 @@ export default class NeedCarpool extends Component {
           fromLocation: need.fromLocation,
           gender: need.gender,
           information: need.information || '',
-          existingId: need.id
+          existingId: need.id,
+          contactNumber: need.user.contact_number,
+          allowEmail: need.user.allow_email,
+          allowFb: need.user.allow_fb,
         })
       }
     })
@@ -83,6 +88,12 @@ export default class NeedCarpool extends Component {
     })
   }
 
+  handleContactNumberChange(e) {
+    this.setState({
+      contactNumber: e.target.value
+    })
+  }
+
   handleSubmit() {
     const params = {
       fromLocationId: this.state.fromLocation.id,
@@ -91,6 +102,7 @@ export default class NeedCarpool extends Component {
       information: this.state.information,
       allowEmail: this.state.allowEmail,
       allowFb: this.state.allowFb,
+      contactNumber: this.state.contactNumber
     }
     if (!this.state.existingId) {
       api.submitCarpoolNeed(params)
@@ -208,11 +220,12 @@ export default class NeedCarpool extends Component {
                         </Panel.Heading>
                         <Panel.Body>
                           <Alert bsStyle='info'>
-                            <p>Choose at least one option. Your information will be shown to others after they pass a captcha check.</p>
+                            <p>Choose at least one option below, and optionally your contact number. Your information will be shown to others after they pass a captcha check.</p>
                             <p>If you choose to show your Facebook account, do be responsive to new FB message requests!</p>
                           </Alert>
                           <input type="checkbox" onChange={this.toggleAllowEmail} checked={this.state.allowEmail} />Show my email address<br />
-                          <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />Show the link to my Facebook account.
+                          <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />Show the link to my Facebook account.<br />
+                          Show my contact number: <input type='text' size='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
                         </Panel.Body>
                       </Panel>
                     </Col>

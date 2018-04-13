@@ -24,9 +24,9 @@ export default class CarpoolNeed extends Component {
           {this.props.need &&
           <div>
             <strong>Travelling from:</strong>
-            <p>{this.props.need.fromLocation.name} ({this.props.need.fromLocation.state})</p>
+            <p>{this.props.need.fromLocation.name}, {this.props.need.fromLocation.state}</p>
             <strong>Voting at:</strong>
-            <p>{this.props.need.pollLocation.name} ({this.props.need.pollLocation.state})</p>
+            <p>{this.props.need.pollLocation.name}, {this.props.need.pollLocation.state}</p>
             <strong>Gender:</strong>
             <p>{this.props.need.gender}</p>
             <strong>Information:</strong>

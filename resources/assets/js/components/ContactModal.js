@@ -12,6 +12,7 @@ export default class ContactModal extends Component {
     this.state = {
       email: null,
       facebook: null,
+      contact_number: null,
       hasRequested: false
     }
     this.handleCaptchaSuccess = this.handleCaptchaSuccess.bind(this)
@@ -19,10 +20,11 @@ export default class ContactModal extends Component {
 
   handleCaptchaSuccess() {
     api.getUser(this.props.user.uuid)
-    .then(({facebook, email}) => {
+    .then(({facebook, email, contact_number}) => {
       this.setState({
         email,
         facebook,
+        contact_number,
         hasRequested: true
       })
     })
@@ -78,6 +80,20 @@ export default class ContactModal extends Component {
             <Row>
               <Col md={6} mdOffset={3}>
                 <Button target="_blank">{this.state.email}</Button>
+              </Col>
+            </Row>
+          </Panel.Body>
+        </Panel>
+        }
+        {this.state.contact_number &&
+        <Panel>
+          <Panel.Heading>
+            <h4>{this.props.user.name}&apos;s contact number:</h4>
+          </Panel.Heading>
+          <Panel.Body>
+            <Row>
+              <Col md={6} mdOffset={3}>
+                <Button target="_blank">{this.state.contact_number}</Button>
               </Col>
             </Row>
           </Panel.Body>

@@ -22,7 +22,7 @@ export default class OfferCarpool extends Component {
       willCarpoolToPolls: true,
       carpoolFromPollsDateTime: null,
       carpoolToPollsDateTime: null,
-
+      contactNumber: '',
       allowEmail: true,
       allowFb: true,
       showModal: false
@@ -33,6 +33,7 @@ export default class OfferCarpool extends Component {
     this.handleInformationChange = this.handleInformationChange.bind(this)
     this.handleCarpoolFromPollsDateChange = this.handleCarpoolFromPollsDateChange.bind(this)
     this.handleCarpoolToPollsDateChange = this.handleCarpoolToPollsDateChange.bind(this)
+    this.handleContactNumberChange = this.handleContactNumberChange.bind(this)
 
     this.handleWillCarpoolFromPollsChange = this.handleWillCarpoolFromPollsChange.bind(this)
     this.handleWillCarpoolToPollsChange = this.handleWillCarpoolToPollsChange.bind(this)
@@ -91,6 +92,12 @@ export default class OfferCarpool extends Component {
     })
   }
 
+  handleContactNumberChange(e) {
+    this.setState({
+      contactNumber: e.target.value
+    })
+  }
+
   toggleAllowFb() {
     this.setState({
       allowFb: !this.state.allowFb
@@ -107,6 +114,7 @@ export default class OfferCarpool extends Component {
     var offers = []
     if (this.state.willCarpoolToPolls && this.state.carpoolToPollsDateTime) {
       offers.push({
+        contactNumber: this.state.contactNumber,
         startLocation: this.state.startLocation,
         endLocation: this.state.pollLocation,
         datetime: this.state.carpoolToPollsDateTime,
@@ -117,6 +125,7 @@ export default class OfferCarpool extends Component {
 
     if (this.state.willCarpoolFromPolls && this.state.carpoolFromPollsDateTime) {
       offers.push({
+        contactNumber: this.state.contactNumber,
         startLocation: this.state.pollLocation,
         endLocation: this.state.startLocation,
         datetime: this.state.carpoolFromPollsDateTime,
@@ -147,6 +156,7 @@ export default class OfferCarpool extends Component {
     var apis = []
     if (this.state.willCarpoolToPolls) {
       const params = {
+        contactNumber: this.state.contactNumber,
         preferredGender: this.state.preferredGender,
         fromLocationId: this.state.startLocation.id,
         toLocationId: this.state.pollLocation.id,
@@ -299,11 +309,12 @@ export default class OfferCarpool extends Component {
                     </Panel.Heading>
                     <Panel.Body>
                       <Alert bsStyle='info'>
-                        <p>Choose at least one option. Your information will be shown to others after they pass a captcha check.</p>
+                        <p>Choose at least one option below, and optionally your contact number. Your information will be shown to others after they pass a captcha check.</p>
                         <p>If you choose to show your Facebook account, do be responsive to new FB message requests!</p>
                       </Alert>
                       <input type="checkbox" onChange={this.toggleAllowEmail} checked={this.state.allowEmail} />Show my email address<br />
-                      <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />Show the link to my Facebook account.
+                      <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />Show the link to my Facebook account.<br />
+                      Show my contact number: <input type='text' size='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
                     </Panel.Body>
                   </Panel>
                 </Col>

@@ -7,6 +7,7 @@ import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
 import ContactModal from './ContactModal'
 import StateSelection from './StateSelection'
+import Progress from './Progress'
 
 export default class Carpool extends Component {
   constructor(props) {
@@ -18,8 +19,9 @@ export default class Carpool extends Component {
       selectedStateTo: null,
       showContactModal: false,
       selectedUser: {},
-      needCount: 0,
-      offerCount: 0
+      needCount: null,
+      offerCount: null,
+      isLoading: false
     }
     this.handleStateFromChange = this.handleStateFromChange.bind(this)
     this.handleStateToChange = this.handleStateToChange.bind(this)
@@ -34,19 +36,24 @@ export default class Carpool extends Component {
   }
 
   doSearch() {
-    this.getOffers()
-    .then(({offers, meta}) => {
-      const offerCount = meta.count
-        this.getNeeds()
-        .then(({needs, meta}) => {
-          this.setState({
-            offers,
-            offerCount,
-            needs,
-            needCount: meta.count
+    this.setState({
+      isLoading: true
+    }, () => {
+      this.getOffers()
+      .then(({offers, meta}) => {
+        const offerCount = meta.count
+          this.getNeeds()
+          .then(({needs, meta}) => {
+            this.setState({
+              offers,
+              offerCount,
+              needs,
+              needCount: meta.count,
+              isLoading: false
+            })
           })
         })
-      })
+    })
 
   }
 
@@ -147,8 +154,8 @@ export default class Carpool extends Component {
                     <Alert bsStyle='info'>
                       <h4>Updates</h4>
                       <ul>
+                        <li>You can now choose to fill in your <strong>contact number</strong> to be shown to others. (Drivers may need to cancel and re-post for this to be reflected)</li>
                         <li>Fixed a bug with timezones</li>
-                        <li>You can now search by either to OR from locations, you don't need to enter both</li>
                       </ul>
                     </Alert>
                   </Col>
@@ -203,10 +210,17 @@ export default class Carpool extends Component {
                   <h3>{this.state.offerCount} Drivers offering carpools</h3>
                 </Panel.Heading>
                 <Panel.Body>
-                  {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer) => (
+                  {this.state.isLoading && <Progress />}
+                  {!this.state.isLoading
+                  && this.state.offers
+                  && this.state.offers.length > 0
+                  && this.state.offers.map((offer) => (
                     <CarpoolOffer offer={offer} key={offer.id} onContact={this.handleContactUser}/>
                   ))}
-                  {this.state.offers && this.state.offers.length == 0 && (
+                  {!this.state.isLoading
+                  && this.state.offers
+                  && this.state.offers.length == 0
+                  && (
                     <Alert bsStyle='info'>No results found</Alert>
                   )}
                 </Panel.Body>
@@ -218,10 +232,17 @@ export default class Carpool extends Component {
                   <h3>{this.state.needCount} Riders looking for carpools</h3>
                 </Panel.Heading>
                 <Panel.Body>
-                  {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need) => (
+                  {this.state.isLoading && <Progress />}
+                  {!this.state.isLoading
+                  && this.state.needs
+                  && this.state.needs.length > 0
+                  && this.state.needs.map((need) => (
                     <CarpoolNeed need={need} key={need.id} onContact={this.handleContactUser}/>
                   ))}
-                  {this.state.needs && this.state.needs.length == 0 && (
+                  {!this.state.isLoading
+                  && this.state.needs
+                  && this.state.needs.length == 0
+                  && (
                     <Alert bsStyle='info'>No results found</Alert>
                   )}
                 </Panel.Body>
@@ -232,6 +253,7 @@ export default class Carpool extends Component {
         {this.state.showContactModal &&
           <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false, selectedUser: {}})} />
         }
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
       </div>
     )
   }

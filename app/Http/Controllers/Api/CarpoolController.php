@@ -22,6 +22,7 @@ class CarpoolController extends Controller
            'user_id' => \Auth::user()->getKey()
         ]);
         $user = \Auth::user();
+        $user->contact_number = (string)$request->input('contactNumber');
         $user->allow_email = (int)$request->input('allowEmail');
         $user->allow_fb = (int)$request->input('allowFb');
         $user->save();
@@ -40,6 +41,7 @@ class CarpoolController extends Controller
            'user_id' => \Auth::user()->getKey()
         ]);
         $user = \Auth::user();
+        $user->contact_number = (string)$request->input('contactNumber');
         $user->allow_email = (int)$request->input('allowEmail');
         $user->allow_fb = (int)$request->input('allowFb');
         $user->save();
@@ -118,6 +120,9 @@ class CarpoolController extends Controller
         ->first();
 
         $data = fractal()->item($need, new \App\Transformers\CarpoolNeedTransformer)->toArray();
+        $data['user']['contact_number'] = \Auth::user()->contact_number;
+        $data['user']['allow_email'] = \Auth::user()->allow_email;
+        $data['user']['allow_fb'] = \Auth::user()->allow_fb;
         return response()->json($data);
     }
 
@@ -135,6 +140,7 @@ class CarpoolController extends Controller
         $user = \Auth::user();
         $user->allow_email = (int)$request->input('allowEmail');
         $user->allow_fb = (int)$request->input('allowFb');
+        $user->contact_number = (string)$request->input('contactNumber');
         $user->save();
 
         $data = fractal()->item($need, new \App\Transformers\CarpoolNeedTransformer)->toArray();
