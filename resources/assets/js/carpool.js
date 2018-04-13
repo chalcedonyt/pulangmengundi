@@ -18,17 +18,17 @@ import {Col, Glyphicon, Image, Navbar, Nav, NavItem} from 'react-bootstrap'
 ReactDOM.render(
     <BrowserRouter>
       <div>
-        <Navbar>
+        <Navbar fluid>
           <Navbar.Header>
             <Navbar.Brand>
+              <Navbar.Toggle />
               <Col xsHidden>
-                {window.user && <img width='40' src={window.user.avatar_url} /> }
+                {window.user && <Image responsive src={window.user.avatar_url} /> }
               </Col>
               <a href="https://www.pulangmengundi.com">
                 {/* <Glyphicon style={{border: '1px solid black', padding: '1px'}} glyph='remove' />&nbsp; */}
                 <strong>#PULANGMENGUNDI</strong>
               </a>
-              <Navbar.Toggle />
             </Navbar.Brand>
           </Navbar.Header>
           <Navbar.Collapse>

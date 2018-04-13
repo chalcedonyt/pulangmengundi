@@ -29,7 +29,7 @@ ReactDOM.render(
                 </p>
               </Alert>
               <FacebookLoginButton  onClick={(e) => { window.location = '/facebook/login'}} />
-              {/* <GoogleLoginButton  onClick={(e) => { window.location = '/google/login'}} /> */}
+              <GoogleLoginButton  onClick={(e) => { window.location = '/google/login'}} />
             </Panel.Body>
           </Panel>
         </Col>
