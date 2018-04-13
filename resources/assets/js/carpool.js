@@ -45,7 +45,7 @@ ReactDOM.render(
             </Nav>
             }
             <Nav pullRight>
-              <NavItem eventKey={3} target="_blank" href='https://www.pulangmengundi.com/guidelines.html'>Guidelines</NavItem>
+              <NavItem eventKey={3} target="_blank" href='https://www.pulangmengundi.com/guidelines.html'>Guidelines &amp; FAQ</NavItem>
               <NavItem eventKey={4} target="_blank" href='https://www.pulangmengundi.com/about.html'>About</NavItem>
             </Nav>
           </Navbar.Collapse>
