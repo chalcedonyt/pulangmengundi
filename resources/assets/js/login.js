@@ -24,6 +24,8 @@ ReactDOM.render(
                 We need your social media login to determine that you are a real person. <strong>This helps prevent fraud and helps keep our users safe.</strong>
                 </p>
                 <br /><br />
+                <p className='lead'>We will also send you email updates should a suitable driver/rider be found for you.</p>
+                <br /><br />
                 <p className='lead'>
                   You may choose to share the link to your social media account with potential carpoolers / donors so that <strong>they are empowered</strong> to verify who you are (and hopefully determine that you will be a good roadtrip companion/voter!)
                 </p>
