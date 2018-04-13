@@ -51,9 +51,6 @@ return [
             'prefix' => '',
             'strict' => true,
             'engine' => null,
-            'options' => array(
-                \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET time_zone = \'+08:00\''
-            )
         ],
         'testing' => [
             'driver'    => 'mysql',
