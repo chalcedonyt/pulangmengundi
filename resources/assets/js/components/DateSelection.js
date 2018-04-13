@@ -28,7 +28,6 @@ export default class DateSelection extends Component {
   render() {
     return (
       <DatePicker
-        utcOffset='+8'
         timeFormat="HH:mm"
         dateFormat="LLL"
         timeIntervals={60}

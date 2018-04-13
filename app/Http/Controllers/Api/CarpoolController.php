@@ -18,7 +18,7 @@ class CarpoolController extends Controller
            'gender_preference' => $request->input('preferredGender'),
            'location_id_from' => $request->input('fromLocationId'),
            'location_id_to' => $request->input('toLocationId'),
-           'leave_at' => \Carbon\Carbon::parse($request->input('datetime')),
+           'leave_at' => \Carbon\Carbon::parse($request->input('datetime'))->addHours(8),
            'user_id' => \Auth::user()->getKey()
         ]);
         $user = \Auth::user();
