@@ -17,17 +17,37 @@ export default class Carpool extends Component {
       selectedStateFrom: null,
       selectedStateTo: null,
       showContactModal: false,
-      selectedUser: {}
+      selectedUser: {},
+      needCount: 0,
+      offerCount: 0
     }
     this.handleStateFromChange = this.handleStateFromChange.bind(this)
     this.handleStateToChange = this.handleStateToChange.bind(this)
     this.handleContactUser = this.handleContactUser.bind(this)
-    this.resetSearch = this.resetSearch.bind(this)
+    this.resetSelectedStateFrom = this.resetSelectedStateFrom.bind(this)
+    this.resetSelectedStateTo = this.resetSelectedStateTo.bind(this)
+    this.doSearch = this.doSearch.bind(this)
   }
 
   componentDidMount() {
-    this.getOffers();
-    this.getNeeds();
+    this.doSearch()
+  }
+
+  doSearch() {
+    this.getOffers()
+    .then(({offers, meta}) => {
+      const offerCount = meta.count
+        this.getNeeds()
+        .then(({needs, meta}) => {
+          this.setState({
+            offers,
+            offerCount,
+            needs,
+            needCount: meta.count
+          })
+        })
+      })
+
   }
 
   getOffers() {
@@ -35,12 +55,7 @@ export default class Carpool extends Component {
       state_from: this.state.selectedStateFrom,
       state_to: this.state.selectedStateTo,
     }
-    api.getAllOffers(params)
-    .then(({offers}) => {
-      this.setState({
-        offers
-      })
-    })
+    return api.getAllOffers(params).then((response) => response.data)
   }
 
   getNeeds() {
@@ -48,21 +63,15 @@ export default class Carpool extends Component {
       state_from: this.state.selectedStateFrom,
       state_to: this.state.selectedStateTo,
     }
-    api.getAllNeeds(params)
-    .then(({needs}) => {
-      this.setState({
-        needs
-      })
-    })
+    return api.getAllNeeds(params).then((response) => response.data)
   }
 
   handleStateFromChange(state) {
     this.setState({
       selectedStateFrom: state ? state.name : null
     }, () => {
-      if (this.state.selectedStateFrom && this.state.selectedStateTo) {
-        this.getNeeds()
-        this.getOffers()
+      if (this.state.selectedStateFrom || this.state.selectedStateTo) {
+        this.doSearch()
       }
     })
   }
@@ -71,9 +80,8 @@ export default class Carpool extends Component {
     this.setState({
       selectedStateTo: state ? state.name : null
     }, () => {
-      if (this.state.selectedStateFrom && this.state.selectedStateTo) {
-        this.getNeeds()
-        this.getOffers()
+      if (this.state.selectedStateFrom || this.state.selectedStateTo) {
+        this.doSearch()
       }
     })
   }
@@ -89,15 +97,22 @@ export default class Carpool extends Component {
     })
   }
 
-  resetSearch() {
+  resetSelectedStateFrom() {
     this.setState({
       selectedStateFrom: null,
-      selectedStateTo: null,
     }, () => {
-      this.getOffers()
-      this.getNeeds()
+      this.doSearch()
     })
   }
+
+  resetSelectedStateTo() {
+    this.setState({
+      selectedStateTo: null,
+    }, () => {
+      this.doSearch()
+    })
+  }
+
   render() {
     return (
       <div>
@@ -126,6 +141,18 @@ export default class Carpool extends Component {
                     <Button bsStyle='default' href='/need'>(Rider)<br />I am looking for a carpool</Button>
                   </Col>
                 </Row>
+                <Row>
+                  <Col>
+                    <br />
+                    <Alert bsStyle='info'>
+                      <h4>Updates</h4>
+                      <ul>
+                        <li>Fixed a bug with timezones</li>
+                        <li>You can now search by either to OR from locations, you don't need to enter both</li>
+                      </ul>
+                    </Alert>
+                  </Col>
+                </Row>
               </Grid>
             </Col>
           </Row>
@@ -143,6 +170,9 @@ export default class Carpool extends Component {
                     selectedState={this.state.selectedStateFrom}
                     onChange={this.handleStateFromChange}
                   />
+                  {this.state.selectedStateFrom &&
+                    <Button bsStyle='link' onClick={this.resetSelectedStateFrom}>Clear</Button>
+                  }
                 </Panel.Body>
               </Panel>
             </Col>
@@ -157,8 +187,8 @@ export default class Carpool extends Component {
                     selectedState={this.state.selectedStateTo}
                     onChange={this.handleStateToChange}
                   />
-                  {this.state.selectedStateFrom && this.state.selectedStateTo &&
-                    <Button bsStyle='link' onClick={this.resetSearch}>Clear</Button>
+                  {this.state.selectedStateTo &&
+                    <Button bsStyle='link' onClick={this.resetSelectedStateTo}>Clear</Button>
                   }
                 </Panel.Body>
               </Panel>
@@ -170,11 +200,11 @@ export default class Carpool extends Component {
             <Col md={6}>
               <Panel bsStyle='primary'>
                 <Panel.Heading>
-                  <h3>Drivers offering carpools</h3>
+                  <h3>{this.state.offerCount} Drivers offering carpools</h3>
                 </Panel.Heading>
                 <Panel.Body>
-                  {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
-                    <CarpoolOffer offer={offer} key={i} onContact={this.handleContactUser}/>
+                  {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer) => (
+                    <CarpoolOffer offer={offer} key={offer.id} onContact={this.handleContactUser}/>
                   ))}
                   {this.state.offers && this.state.offers.length == 0 && (
                     <Alert bsStyle='info'>No results found</Alert>
@@ -185,11 +215,11 @@ export default class Carpool extends Component {
             <Col md={6}>
               <Panel bsStyle='primary'>
                 <Panel.Heading bsStyle='primary'>
-                  <h3>Riders looking for carpools</h3>
+                  <h3>{this.state.needCount} Riders looking for carpools</h3>
                 </Panel.Heading>
                 <Panel.Body>
-                  {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need, i) => (
-                    <CarpoolNeed need={need} key={i} onContact={this.handleContactUser}/>
+                  {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need) => (
+                    <CarpoolNeed need={need} key={need.id} onContact={this.handleContactUser}/>
                   ))}
                   {this.state.needs && this.state.needs.length == 0 && (
                     <Alert bsStyle='info'>No results found</Alert>

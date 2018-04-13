@@ -91,17 +91,13 @@ module.exports = {
   getAllOffers: (params) => {
     const queryString = QueryString.stringify(params)
     const encodedURI = `${endpoint}/offers?${queryString}`
-    return axios.get(encodedURI).then(function (response) {
-      return response.data;
-    });
+    return axios.get(encodedURI)
   },
 
   getAllNeeds: (params) => {
     const queryString = QueryString.stringify(params)
     const encodedURI = `${endpoint}/needs?${queryString}`
-    return axios.get(encodedURI).then(function (response) {
-      return response.data;
-    });
+    return axios.get(encodedURI)
   },
 
   getUser: (uuid) => {

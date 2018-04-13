@@ -179,41 +179,74 @@ class CarpoolController extends Controller
 
     public function offers(Request $request) {
         $query = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState');
-        if (!empty($request->input('state_from')) && !empty($request->input('state_to'))) {
+        if (!empty($request->input('state_from')) || !empty($request->input('state_to'))) {
             $state_from = $request->input('state_from');
             $state_to = $request->input('state_to');
-            $query->toStateIs($state_to)->fromStateIs($state_from);
+            if ($state_to && $state_from) {
+                $query->toStateIs($state_to)->fromStateIs($state_from);
+            } else {
+                $state = $state_from ?: $state_to;
+                $query->where(function ($q) use ($state) {
+                    $q->where(function ($q) use ($state) {
+                        $q->toStateIs($state);
+                    })->orWhere(function ($q) use ($state) {
+                        $q->fromStateIs($state);
+                    });
+                });
+            }
         }
 
+        $total = $query->count();
         $offers = $query->orderBy('created_at', 'desc')
         ->where('hidden', '=', 0)
         ->limit(20)
         ->get();
+
+
         $data = fractal()->collection($offers, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
+        $data['meta'] = [
+            'count' => $total
+        ];
         return response()->json($data);
     }
 
     public function needs(Request $request) {
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState');
-        if (!empty($request->input('state_from')) && !empty($request->input('state_to'))) {
+        if (!empty($request->input('state_from')) || !empty($request->input('state_to'))) {
             $state_from = $request->input('state_from');
             $state_to = $request->input('state_to');
-            $query->where(function ($q) use ($state_from, $state_to) {
-                $q->where(function ($q) use ($state_from, $state_to) {
-                    $q->pollStateIs($state_to)->fromStateIs($state_from);
-                })->orWhere(function ($q) use ($state_from, $state_to) {
-                    $q->pollStateIs($state_from)->fromStateIs($state_to);
+            if ($state_from && $state_to) {
+                $query->where(function ($q) use ($state_from, $state_to) {
+                    $q->where(function ($q) use ($state_from, $state_to) {
+                        $q->pollStateIs($state_to)->fromStateIs($state_from);
+                    })->orWhere(function ($q) use ($state_from, $state_to) {
+                        $q->pollStateIs($state_from)->fromStateIs($state_to);
+                    });
                 });
-            });
+            } else {
+                $state = $state_from ?: $state_to;
+                $query->where(function ($q) use ($state) {
+                    $q->where(function ($q) use ($state) {
+                        $q->pollStateIs($state);
+                    })->orWhere(function ($q) use ($state) {
+                        $q->fromStateIs($state);
+                    });
+                });
+            }
         }
 
+        $total = $query->count();
         $needs = $query
         // ->where('hidden', '=', 0)
         ->orderBy('created_at', 'desc')
         ->limit(20)
         ->get();
 
+
         $data = fractal()->collection($needs, new \App\Transformers\CarpoolNeedTransformer, 'needs')->toArray();
+        $data['meta'] = [
+            'count' => $total
+        ];
         return response()->json($data);
     }
 }
