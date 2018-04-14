@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class MatchGateway
 {
     /**
-     *
+     * Matches an offer to needs
      * @param CarpoolOffer $offer
      * @param \Datetime $max_time
      * @return Collection<CarpoolNeed>
@@ -20,7 +20,8 @@ class MatchGateway
         }
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
         ->where('location_id_from', '=', $offer->fromLocation->getKey())
-        ->where('location_id_poll', '=', $offer->toLocation->getKey());
+        ->where('location_id_poll', '=', $offer->toLocation->getKey())
+        ->where('fulfilled', '=', '0');
         if ($offer->gender_preference) {
             $query->whereHas('user', function ($q) use ($offer) {
                 $q->where('gender', '=', $offer->gender_preference);
@@ -32,7 +33,8 @@ class MatchGateway
 
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
         ->where('location_id_poll', '=', $offer->fromLocation->getKey())
-        ->where('location_id_from', '=', $offer->toLocation->getKey());
+        ->where('location_id_from', '=', $offer->toLocation->getKey())
+        ->where('fulfilled', '=', '0');
         // ->where('hidden', '=', 0)
         if ($offer->gender_preference) {
             $query->whereHas('user', function ($q) use ($offer) {
@@ -44,7 +46,8 @@ class MatchGateway
 
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
         ->fromStateIs($offer->fromLocation->state)
-        ->pollStateIs($offer->toLocation->state);
+        ->pollStateIs($offer->toLocation->state)
+        ->where('fulfilled', '=', '0');
         if ($offer->gender_preference) {
             $query->whereHas('user', function ($q) use ($offer) {
                 $q->where('gender', '=', $offer->gender_preference);
@@ -56,7 +59,8 @@ class MatchGateway
 
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
         ->pollStateIs($offer->fromLocation->state)
-        ->fromStateIs($offer->toLocation->state);
+        ->fromStateIs($offer->toLocation->state)
+        ->where('fulfilled', '=', '0');
         if ($offer->gender_preference) {
             $query->whereHas('user', function ($q) use ($offer) {
                 $q->where('gender', '=', $offer->gender_preference);
@@ -71,12 +75,15 @@ class MatchGateway
     }
 
     /**
-     *
+     * Matches a need to offers
      * @param CarpoolNeed $need
      * @param \Datetime $max_time
      * @return Collection<CarpoolOffer>
      */
-    public function matchNeed($need, \Datetime $max_time) {
+    public function matchNeed($need, \Datetime $max_time = null) {
+        if (is_null($max_time)) {
+            $max_time = Carbon::now()->format('Y-m-d H:i:s');
+        }
         $matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->where('location_id_from', '=', $need->fromLocation->getKey())
         ->where('location_id_to', '=', $need->pollLocation->getKey())

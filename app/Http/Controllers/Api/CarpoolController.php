@@ -83,48 +83,12 @@ class CarpoolController extends Controller
         }
 
         $need = $user->need;
-        $gender = $need->gender;
-        $matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
-        ->where('location_id_from', '=', $need->fromLocation->getKey())
-        ->where('location_id_to', '=', $need->pollLocation->getKey())
-        ->where('hidden', '=', 0)
-        ->where(function ($q) use ($gender) {
-            $q->whereNull('gender_preference')
-            ->orWhere('gender_preference', '=', $gender);
-        })
-        ->get();
 
-        $matches_to = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
-        ->where('location_id_to', '=', $need->fromLocation->getKey())
-        ->where('location_id_from', '=', $need->pollLocation->getKey())
-        ->where('hidden', '=', 0)
-        ->where(function ($q) use ($gender) {
-            $q->whereNull('gender_preference')
-            ->orWhere('gender_preference', '=', $gender);
-        })
-        ->get();
-
-        $partial_matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
-        ->fromStateIs($need->fromLocation->state)
-        ->toStateIs($need->pollLocation->state)
-        ->where(function ($q) use ($gender) {
-            $q->whereNull('gender_preference')
-            ->orWhere('gender_preference', '=', $gender);
-        })
-        ->where('hidden', '=', 0)
-        ->get();
-
-        $partial_matches_to = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
-        ->toStateIs($need->fromLocation->state)
-        ->fromStateIs($need->pollLocation->state)
-        ->where(function ($q) use ($gender) {
-            $q->whereNull('gender_preference')
-            ->orWhere('gender_preference', '=', $gender);
-        })
-        ->where('hidden', '=', 0)
-        ->get();
-
-        $matches = $matches_from->concat($matches_to)->concat($partial_matches_from)->concat($partial_matches_to);
+        $matcher = new \App\Gateways\MatchGateway();
+        $matches = $matcher->matchNeed($need);
+        $matches = $matches->unique(function ($need) {
+           return $need->id;
+        });
         $data = fractal()->collection($matches, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
         return response()->json($data);
     }
@@ -232,7 +196,7 @@ class CarpoolController extends Controller
         $total = $query->count();
         $offers = $query->orderBy('created_at', 'desc')
         ->where('hidden', '=', 0)
-        ->limit(20)
+        ->limit(15)
         ->get();
 
 
@@ -272,7 +236,7 @@ class CarpoolController extends Controller
         $needs = $query
         // ->where('hidden', '=', 0)
         ->orderBy('created_at', 'desc')
-        ->limit(20)
+        ->limit(15)
         ->get();
 
 
