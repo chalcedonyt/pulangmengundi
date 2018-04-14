@@ -358,7 +358,7 @@
 
                       <div class="">
                         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 5px;"><![endif]-->
-                        <div style="line-height:120%;color:#0D0D0D;font-family:Verdana; padding-right: 60px; padding-left: 60px; padding-top: 50px; padding-bottom: 5px;">
+                        <div style="line-height:120%;color:#0D0D0D;font-family:Verdana; padding-right: 50px; padding-left: 50px; padding-top: 50px; padding-bottom: 5px;">
                           <div style="font-size:12px;line-height:14px;color:#0D0D0D;font-family:Verdana;text-align:left;">
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
                               <span style="line-height: 26px; font-size: 22px;"><strong><span style="line-height: 26px; font-size: 22px;">{{$user->name}},</span></strong>
@@ -445,7 +445,7 @@
                       <div class="">
                         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 10px;"><![endif]-->
                         <div style="line-height:150%;color:#4e91f0;font-family:Verdana; padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 10px;">
-                          <div style="font-size:12px;line-height:18px;text-align:center;font-family:Montserrat, 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;color:#4e91f0;">
+                          <div style="font-size:12px;line-height:18px;text-align:center;font-family:Verdana;color:#4e91f0;">
                             <p style="margin: 0;font-size: 12px;line-height: 18px;text-align: center"><span style="color: rgb(0, 51, 102); font-size: 12px; line-height: 18px;"><strong><span style="font-size: 20px; line-height: 30px;">
                               Here are some riders that may be going your way:</span></strong>
                               </span>
@@ -458,7 +458,7 @@
                       @foreach ($matchedNeeds as $need)
                       <div class="">
                         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 30px;"><![endif]-->
-                        <div style="line-height:150%;color:#0D0D0D;font-family:Verdana; padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 30px;">
+                        <div style="line-height:150%;color:#0D0D0D;font-family:Verdana; padding-right: 20px; padding-left: 20px; padding-top: 20px; padding-bottom: 30px;">
                           <div style="font-size:12px;line-height:18px;color:#0D0D0D;font-family:Verdana;text-align:left;">
                             <p style="margin: 0;font-size: 14px;line-height: 21px;text-align: center">
                               <em>
@@ -509,7 +509,7 @@
                       <div class="">
                         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 10px;"><![endif]-->
                         <div style="line-height:150%;color:#4e91f0;font-family:Verdana; padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 10px;">
-                          <div style="font-size:12px;line-height:18px;text-align:center;font-family:Montserrat, 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, sans-serif;color:#4e91f0;">
+                          <div style="font-size:12px;line-height:18px;text-align:center;font-family:Verdana;color:#4e91f0;">
                             <p style="margin: 0;font-size: 12px;line-height: 18px;text-align: center"><span style="color: rgb(0, 51, 102); font-size: 12px; line-height: 18px;"><strong><span style="font-size: 20px; line-height: 30px;">
                               Here are some drivers that may be going your way:</span></strong>
                               </span>
@@ -522,7 +522,7 @@
                       @foreach ($matchedOffers as $offer)
                       <div class="">
                         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 30px;"><![endif]-->
-                        <div style="line-height:150%;color:#0D0D0D;font-family:Verdana; padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 30px;">
+                        <div style="line-height:150%;color:#0D0D0D;font-family:Verdana; padding-right: 20px; padding-left: 20px; padding-top: 20px; padding-bottom: 30px;">
                           <div style="font-size:12px;line-height:18px;color:#0D0D0D;font-family:Verdana;text-align:left;">
                             <p style="margin: 0;font-size: 14px;line-height: 21px;text-align: center">
                               <em>
@@ -579,7 +579,7 @@
                             <div align="center" class="button-container center " style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;">
                               <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:46pt; v-text-anchor:middle; width:130pt;" arcsize="7%" strokecolor="#000" fillcolor="#000"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:Verdana; font-size:16px;"><![endif]-->
                               <div style="color: #ffffff; background-color: #000; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; max-width: 174px; width: 144px;width: auto; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; font-family: Verdana; text-align: center; mso-border-alt: none;">
-                                <a href="https://carpool.pulangmengundi.com/offer">
+                                <a href="https://carpool.pulangmengundi.com/offer" style="color:white!important">
                                   <span style="font-size:16px;line-height:32px;">DRIVER PAGE</span>
                                 </a>
                               </div>
@@ -590,7 +590,7 @@
                             <div align="center" class="button-container center " style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;">
                               <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:46pt; v-text-anchor:middle; width:130pt;" arcsize="7%" strokecolor="#000" fillcolor="#000"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:Verdana; font-size:16px;"><![endif]-->
                               <div style="color: #ffffff; background-color: #000; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; max-width: 174px; width: 144px;width: auto; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; font-family: Verdana; text-align: center; mso-border-alt: none;">
-                                  <a href="https://carpool.pulangmengundi.com/need">
+                                  <a href="https://carpool.pulangmengundi.com/need" style="color:white!important">
                                     <span style="font-size:16px;line-height:32px;">RIDER PAGE</span>
                                   </a>
                               </div>
