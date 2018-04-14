@@ -12,7 +12,7 @@ export default class CloseNeedModal extends Component {
     return (
       <Modal show={this.props.show} onHide={this.props.onCancel}>
       <Modal.Header closeButton>
-        <Modal.Title>Please tell us why you are closing your carpool offer</Modal.Title>
+        <Modal.Title>Please tell us why you are closing your carpool request</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Grid fluid>
