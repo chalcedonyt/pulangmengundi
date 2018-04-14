@@ -366,13 +366,30 @@
                               <br>
                               <br>
                               <span style="line-height: 26px; font-size: 22px;">
-                                 Thank you for using <br />carpool.pulangmengundi.com!
+                              @if ($matchedNeeds)
+                                 We&apos;ve found potential drivers for you!
+                              @else
+                                We&apos;ve found potential riders for you!
+                              @endif
                               </span>
                             </p>
                             <br>
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                              You are receiving this email because we have found potential riders or drivers for you.
+                              <strong>PENTING:</strong> Jika anda telah berjaya dipadankan melalui platform kami,
+                              <strong>sila</strong> pergi ke <a href="https://carpool.pulangmengundi.com/offer">halaman pemandu</a>
+                              atau <a href="https://carpool.pulangmengundi.com/need">halaman penunggang</a> anda.
                             </p><br>
+                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                              Kemudian, anda boleh memilih untuk menutup permintaan/tawaran carpool anda.
+                              <strong>Tolong nyatakan</strong> jika anda telah menerima padanan yang sesuai melalui platform kami.
+                              Ini akan membantu memperbaiki platform kami.
+                            <br>
+                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                                Keselamatan anda penting bagi kami. Sila ambil baca dan ambil berat atas segala <a href="https://www.pulangmengundi.com/guidelines.html#carpoolguide">garis panduan</a> yang diberikan. Selamat berkongsi kereta! #CarpoolGE14
+                            </p><br>
+                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                                Untuk sebarang pertanyaan atau maklumbalas, cari kami di <a href="https://facebook.com/pulangmengundi">Facebook</a>, atau e-mel pulang.undi@gmail.com.
+                            </p><br /><br />
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
                               <strong>IMPORTANT:</strong> If you have already been connected successfully through our platform,
                               <strong>please</strong> go to <a href="https://carpool.pulangmengundi.com/offer">your driver page</a>
@@ -387,7 +404,7 @@
                               Happy carpooling! #CarpoolGE14
                             </p><br>
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                              For any questions, look for us on <a href="https://facebook.com/pulangmengundi">Facebook</a>, or email us at pulang.undi@gmail.com.
+                              For any questions or feedback, look for us on <a href="https://facebook.com/pulangmengundi">Facebook</a>, or email us at pulang.undi@gmail.com.
                             </p>
                           </div>
                         </div>
