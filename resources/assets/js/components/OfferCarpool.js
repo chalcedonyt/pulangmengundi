@@ -315,7 +315,7 @@ export default class OfferCarpool extends Component {
                       </Alert>
                       <input type="checkbox" onChange={this.toggleAllowEmail} checked={this.state.allowEmail} />Show my email address<br />
                       <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />Show the link to my Facebook account.<br />
-                      Show my contact number: <input type='text' size='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
+                      Show my contact number: <input type='text' size='20' maxLength='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
                     </Panel.Body>
                   </Panel>
                 </Col>
