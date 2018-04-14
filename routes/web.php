@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('home');
 });
-Route::get('login', function() {
+Route::get('login', function(Request $request) {
     return view('login');
 })->name('login');
 Route::get('google/login', 'Auth\LoginController@redirectToProvider');
@@ -70,6 +70,26 @@ Route::middleware('auth')->group(function() {
         return view('carpool')->with(['user' => $user]);
     });
 
+
+});
+Route::get('/email-preview/user/{id}', function ($id) {
+    $user = \App\Models\User::find($id);
+    $matched_offers = collect([]);
+    if ($user->need) {
+        $matched_offers = (new \App\Gateways\MatchGateway)->matchNeed($user->need);
+    }
+
+    $matched_needs = collect([]);
+    if ($user->offers) {
+        foreach ($user->offers as $offer) {
+            $needs = (new \App\Gateways\MatchGateway)->matchOffer($offer);
+            if ($needs->count()) {
+                $matched_needs = $matched_needs->concat($needs);
+            }
+        }
+    }
+    $email = new \App\Mail\DailyMatchEmail($user, $matched_offers, $matched_needs);
+    return $email;
 });
 Route::middleware('auth')->prefix('api')->group(function() {
 

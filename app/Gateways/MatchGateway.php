@@ -11,12 +11,12 @@ class MatchGateway
     /**
      * Matches an offer to needs
      * @param CarpoolOffer $offer
-     * @param \Datetime $max_time
+     * @param \Datetime $min_time
      * @return Collection<CarpoolNeed>
      */
-    public function matchOffer(CarpoolOffer $offer, \Datetime $max_time = null) {
-        if (is_null($max_time)) {
-            $max_time = Carbon::now()->format('Y-m-d H:i:s');
+    public function matchOffer(CarpoolOffer $offer, \Datetime $min_time = null) {
+        if (is_null($min_time)) {
+            $min_time = '2018-01-01 00:00:00';
         }
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
         ->where('location_id_from', '=', $offer->fromLocation->getKey())
@@ -27,7 +27,7 @@ class MatchGateway
                 $q->where('gender', '=', $offer->gender_preference);
             });
         }
-        $matches_from = $query->where('updated_at', '<=', $max_time)
+        $matches_from = $query->where('updated_at', '>=', $min_time)
         ->get();
 
 
@@ -41,7 +41,7 @@ class MatchGateway
                 $q->where('gender', '=', $offer->gender_preference);
             });
         }
-        $matches_to = $query->where('updated_at', '<=', $max_time)
+        $matches_to = $query->where('updated_at', '>=', $min_time)
         ->get();
 
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
@@ -53,7 +53,7 @@ class MatchGateway
                 $q->where('gender', '=', $offer->gender_preference);
             });
         }
-        $partial_matches_from = $query->where('updated_at', '<=', $max_time)
+        $partial_matches_from = $query->where('updated_at', '>=', $min_time)
         // ->where('hidden', '=', 0)
         ->get();
 
@@ -66,7 +66,7 @@ class MatchGateway
                 $q->where('gender', '=', $offer->gender_preference);
             });
         }
-        $partial_matches_to = $query->where('updated_at', '<=', $max_time)
+        $partial_matches_to = $query->where('updated_at', '>=', $min_time)
         // ->where('hidden', '=', 0)
         ->get();
 
@@ -77,12 +77,12 @@ class MatchGateway
     /**
      * Matches a need to offers
      * @param CarpoolNeed $need
-     * @param \Datetime $max_time
+     * @param \Datetime $min_time
      * @return Collection<CarpoolOffer>
      */
-    public function matchNeed($need, \Datetime $max_time = null) {
-        if (is_null($max_time)) {
-            $max_time = Carbon::now()->format('Y-m-d H:i:s');
+    public function matchNeed($need, \Datetime $min_time = null) {
+        if (is_null($min_time)) {
+            $min_time = '2018-01-01 00:00:00';
         }
         $matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->where('location_id_from', '=', $need->fromLocation->getKey())
