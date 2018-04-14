@@ -15,7 +15,7 @@
         <meta property="og:image" content="https://www.pulangmengundi.com/uploads/1/1/9/0/119033783/editor/128-128-8849499f9a253a6add1768da935298e5-instagram.png?1523550819" />
         <meta property="og:url" content="https://carpool.pulangmengundi.com/" />
 
-        <meta name="description" content="Connecting Malaysians to offer or receive help through carpool or cash subsidies." />
+        <meta name="description" content="Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!" />
         <meta name="keywords" content="GE14, pulangmengundi" />
         <title>#PulangMengundi #CarpoolGE14 - @yield('title')</title>
         <!-- Optional theme -->
