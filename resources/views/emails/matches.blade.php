@@ -542,7 +542,7 @@
                               <strong>Travelling to:</strong><br>
                               {{$offer->toLocation->name}} ({{$offer->toLocation->locationState->name}})<br /><br />
                               <strong>Travelling date:</strong><br />
-                              {{$offer->leave_at_formatted}}<br /><br />
+                              {{\Carbon\Carbon::parse($offer->leave_at)->format('D jS M Y, g:ia')}}<br /><br />
                               @if (!empty($offer->information))
                               <strong>Information</strong><br />
                               {{$offer->information}}<br /><br />
