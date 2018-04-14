@@ -54,8 +54,25 @@ module.exports = {
     });
   },
 
-  hideOffer: (id) => {
-    const encodedURI = window.encodeURI(`${endpoint}/offer/${id}/hide`);
+  cancelNeed: (id) => {
+    const encodedURI = window.encodeURI(`${endpoint}/need/${id}/cancel`);
+    return axios.post(encodedURI, {}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  },
+  needSuccess: (id) => {
+    const encodedURI = window.encodeURI(`${endpoint}/need/${id}/success`);
+    return axios.post(encodedURI, {}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  },
+
+  offerSuccess: (id) => {
+    const encodedURI = window.encodeURI(`${endpoint}/offer/${id}/success`);
     return axios.post(encodedURI, {}, {
       headers: {
         'Content-Type': 'application/json'
@@ -114,5 +131,13 @@ module.exports = {
       return response.data;
     });
   },
+
+  getOfferMatches: () => {
+    const encodedURI = window.encodeURI(`${endpoint}/match-my-offers`);
+    return axios.get(encodedURI)
+    .then(function (response) {
+      return response.data;
+    });
+  }
 
 }

@@ -154,8 +154,8 @@ export default class Carpool extends Component {
                     <Alert bsStyle='info'>
                       <h4>Updates</h4>
                       <ul>
+                        <li>You can now mark your listing as fulfilled, or cancel it. Please do so as it helps improve our system.</li>
                         <li>You can now choose to fill in your <strong>contact number</strong> to be shown to others. (Drivers may need to cancel and re-post for this to be reflected)</li>
-                        <li>Fixed a bug with timezones</li>
                       </ul>
                     </Alert>
                   </Col>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {Modal, Grid, Row, Col, Button} from 'react-bootstrap'
 
-export default class HideOfferModal extends Component {
+export default class CloseNeedModal extends Component {
   constructor(props) {
     super(props)
   }
@@ -17,11 +17,11 @@ export default class HideOfferModal extends Component {
       <Modal.Body>
         <Grid fluid>
           <Row>
-            <Col md={6}>
-              <Button bsStyle='success' onClick={this.props.onOfferSuccess}>I have matched <br />with other carpoolers!</Button>
+            <Col md={6} sm={6}>
+              <Button bsStyle='success' onClick={this.props.onNeedSuccess}>I have matched <br />with other carpoolers!</Button>
             </Col>
-            <Col md={6}>
-              <Button bsStyle='warning' onClick={this.props.onOfferCancel}>I have changed my mind/<br/>will re-create listing</Button>
+            <Col md={6} sm={6}>
+              <Button bsStyle='warning' onClick={this.props.onNeedCancel}>I have changed my mind/<br/>will re-create listing</Button>
             </Col>
           </Row>
         </Grid>

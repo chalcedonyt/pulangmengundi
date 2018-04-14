@@ -2,8 +2,23 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import {Button, Col, Grid, Image, Panel, Row} from 'react-bootstrap'
+import CloseNeedModal from './CloseNeedModal'
 
 export default class CarpoolNeed extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      showCloseModal: false
+    }
+    this.setCloseModal = this.setCloseModal.bind(this)
+  }
+
+  setCloseModal(showCloseModal) {
+    this.setState({
+      showCloseModal
+    })
+  }
 
   render() {
     return (
@@ -14,7 +29,7 @@ export default class CarpoolNeed extends Component {
             <Col md={1} sm={1} xs={2}>
               <Image  className='listing-img' responsive src={this.props.need.user.avatar_url} />
             </Col>
-            <Col md={10} mdOffset={1} smOffset={1} sm={10} xs={9} xsOffset={1}>
+            <Col md={9} mdOffset={1} smOffset={1} sm={9} xs={9} xsOffset={1}>
               <h4>{this.props.need.user.name}</h4>
             </Col>
           </Row>
@@ -34,9 +49,15 @@ export default class CarpoolNeed extends Component {
           </div>
         }
         </Panel.Body>
-        {this.props.isOwner &&
+        {this.props.isOwner && this.props.need && !this.props.need.fulfilled &&
         <Panel.Footer>
           <Button bsStyle='info' href='/need'>Edit</Button>
+          <Button bsStyle='success' onClick={(e)=> this.setCloseModal(true)}>Close/Cancel</Button>
+        </Panel.Footer>
+        }
+        {this.props.isOwner && this.props.need && this.props.need.fulfilled &&
+        <Panel.Footer>
+          <Button bsStyle='success'>Request fulfilled! :)</Button>
         </Panel.Footer>
         }
         {!this.props.isOwner &&
@@ -44,6 +65,7 @@ export default class CarpoolNeed extends Component {
           <Button bsStyle='success' onClick={(e) => this.props.onContact(this.props.need.user)}>Contact</Button>
         </Panel.Footer>
         }
+        <CloseNeedModal show={this.state.showCloseModal} onNeedCancel={this.props.onNeedCancel} onNeedSuccess={this.props.onNeedSuccess} onCancel={(e) => this.setCloseModal(false)} />
       </Panel>
     )
   }

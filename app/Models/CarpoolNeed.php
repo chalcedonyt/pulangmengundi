@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CarpoolNeed extends Model
 {
+    use SoftDeletes;
+
     protected $table = 'need_carpool';
     protected $guarded = [];
     protected $hidden = ['poll_location', 'from_location'];

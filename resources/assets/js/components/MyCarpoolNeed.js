@@ -17,6 +17,8 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
       selectedUser: {},
     }
     this.handleContactUser = this.handleContactUser.bind(this)
+    this.handleNeedSuccess = this.handleNeedSuccess.bind(this)
+    this.handleCancelNeed = this.handleCancelNeed.bind(this)
   }
 
   componentDidMount() {
@@ -42,6 +44,16 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
     })
   }
 
+  handleNeedSuccess() {
+    api.needSuccess(this.state.need.id)
+    .then(() => {window.location.reload()} )
+  }
+
+  handleCancelNeed() {
+    api.cancelNeed(this.state.need.id)
+    .then(() => {window.location.reload()} )
+  }
+
   render() {
     return (
       <div>
@@ -52,8 +64,10 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
               <Alert bsStyle='info'>
                 <h4>What should I do now?</h4>
                 <p>You may be contacted by drivers going the same way. If you enabled Facebook as a method of contact, do <strong>actively</strong> check your Friend requests and messages</p>
+                <p>We may send you emails periodically to tell you of new matches.</p>
+                <p>Check out the <strong><a href='/'>main page</a></strong> as well to search for drivers.</p>
               </Alert>
-              <CarpoolNeed need={this.state.need} isOwner={true}/>
+              <CarpoolNeed onNeedSuccess={this.handleNeedSuccess} onNeedCancel={this.handleCancelNeed} need={this.state.need} isOwner={true}/>
             </Col>
             <Col md={8}>
               <h3>Your matches</h3>

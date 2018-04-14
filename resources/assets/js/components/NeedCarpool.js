@@ -206,6 +206,7 @@ export default class NeedCarpool extends Component {
                         </Panel.Heading>
                         <Panel.Body>
                         <FormControl
+                          rows={8}
                           componentClass='textarea'
                           placeholder='Leave more details here'
                           value={this.state.information}

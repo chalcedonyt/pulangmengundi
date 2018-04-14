@@ -5,7 +5,6 @@ import api from '../utils/api'
 import {Alert, Button, Col, Grid, Image, Panel, Row} from 'react-bootstrap'
 import HideOfferModal from './HideOfferModal'
 import UnhideOfferModal from './UnhideOfferModal'
-import CancelOfferModal from './CancelOfferModal'
 import moment from 'moment'
 
 export default class CarpoolOffer extends Component {
@@ -18,15 +17,15 @@ export default class CarpoolOffer extends Component {
       showHideModal: false,
       showUnhideModal: false
     }
-    this.handleHideOffer = this.handleHideOffer.bind(this)
+    this.handleOfferSuccess = this.handleOfferSuccess.bind(this)
     this.handleUnhideOffer = this.handleUnhideOffer.bind(this)
     this.handleCancelOffer = this.handleCancelOffer.bind(this)
     this.setHideModal = this.setHideModal.bind(this)
     this.setCancelModal = this.setCancelModal.bind(this)
   }
 
-  handleHideOffer() {
-    api.hideOffer(this.state.offer.id)
+  handleOfferSuccess() {
+    api.offerSuccess(this.state.offer.id)
     .then(() => this.props.onChange())
   }
 
@@ -66,7 +65,7 @@ export default class CarpoolOffer extends Component {
             <Col md={1} sm={1} xs={2}>
               <Image  className='listing-img' responsive src={this.state.offer.user.avatar_url} />
             </Col>
-            <Col md={10} mdOffset={1} smOffset={1} sm={10} xs={9} xsOffset={1}>
+            <Col md={9} mdOffset={1} smOffset={1} sm={910} xs={9} xsOffset={1}>
               <h4>{this.state.offer.user.name}</h4>
             </Col>
           </Row>
@@ -100,13 +99,12 @@ export default class CarpoolOffer extends Component {
           <div>
             {this.state.offer.hidden == 0 &&
               <div>
-                <Button bsStyle='info' onClick={(e) => this.setHideModal(true)}>Hide Offer</Button>
-                <Button bsStyle='danger' onClick={(e) => this.setCancelModal(true)}>Cancel Offer</Button>
+                <Button bsStyle='info' onClick={(e) => this.setHideModal(true)}>Close Offer</Button>
               </div>
             }
             {this.state.offer.hidden == 1 &&
             <div>
-              <p><strong>This offer is hidden</strong></p>
+              <p><strong>This offer was fulfilled</strong></p>
               <Button bsStyle='success' onClick={(e) => this.setUnhideModal(true)}>Show Offer Again</Button>
             </div>
             }
@@ -115,9 +113,13 @@ export default class CarpoolOffer extends Component {
           {!this.state.isOwner &&
           <Button bsStyle='success' onClick={(e) => this.props.onContact(this.state.offer.user)}>Contact</Button>
           }
-          <HideOfferModal show={this.state.showHideModal} onOK={this.handleHideOffer} onCancel={(e) => this.setHideModal(false)} />
+          <HideOfferModal
+            show={this.state.showHideModal}
+            onOfferSuccess={this.handleOfferSuccess}
+            onOfferCancel={this.handleCancelOffer}
+            onCancel={(e) => this.setHideModal(false)}
+          />
           <UnhideOfferModal show={this.state.showUnhideModal} onOK={this.handleUnhideOffer} onCancel={(e) => this.setUnhideModal(false)} />
-          <CancelOfferModal show={this.state.showCancelModal} onOK={this.handleCancelOffer} onCancel={(e) => this.setCancelModal(false)} />
         </Panel.Footer>
       </Panel>
     )

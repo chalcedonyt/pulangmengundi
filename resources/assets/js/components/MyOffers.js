@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
-import {Alert, Row, Col} from 'react-bootstrap'
+import {Alert, Grid, Row, Col, Panel} from 'react-bootstrap'
 import CarpoolOffer from './CarpoolOffer'
+import CarpoolNeed from './CarpoolNeed'
+import ContactModal from './ContactModal'
 
 export default class MyOffers extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      offers: []
+      offers: [],
+      showContactModal: false,
+      needs: []
     }
 
     this.load = this.load.bind(this)
+    this.handleContactUser = this.handleContactUser.bind(this)
   }
 
   componentDidMount() {
@@ -25,7 +30,21 @@ export default class MyOffers extends Component {
       // console.log(offers)
       this.setState({
         offers
+      }, () => {
+        api.getOfferMatches()
+        .then(({needs}) => {
+          this.setState({
+            needs
+          })
+        })
       })
+    })
+  }
+
+  handleContactUser(user) {
+    this.setState({
+      selectedUser: user,
+      showContactModal: true
     })
   }
 
@@ -36,18 +55,7 @@ export default class MyOffers extends Component {
         <Alert bsStyle="info">
           <h4>What should I do now?</h4>
           <p>You may be contacted by riders going the same way. If you enabled Facebook as a method of contact, do <strong>actively</strong> check your Friend requests and messages</p>
-          <br />
-          <br />
-          <h4>I can&apos;t take any more messengers</h4>
-          <p>
-            <strong>Hide</strong> a carpool offer if you want to stop accepting requests.
-          </p>
-          <br />
-          <br />
-          <h4>I&apos;ve changed my mind</h4>
-          <p>
-            <strong>Cancel</strong> a carpool offer if you want remove the offer completely. <strong>Let any riders you have contacted know about this.</strong>
-          </p>
+          <p>If you have an open offer, we may send you emails periodically to tell you of new matches.</p>
         </Alert>
         <Row>
         {this.state.offers.map((offer, i) => (
@@ -56,6 +64,36 @@ export default class MyOffers extends Component {
           </Col>
         ))}
         </Row>
+        <Panel>
+          <Panel.Heading>
+            <h3>Your matches</h3>
+          </Panel.Heading>
+          <Panel.Body>
+            <Alert bsStyle='info'>
+              <p>Carpool requests from riders that match you are shown here. You can also check the <strong><a href='/'>main page</a></strong> to search for riders.</p>
+            </Alert>
+            {this.state.needs && this.state.needs.length == 0 &&
+            <Alert bsStyle='info'>
+              <p>
+                There is no one matching your travel locations. Check back later!
+              </p>
+              <p>
+                We will try to match you with anyone travelling from the same states.
+              </p>
+            </Alert>
+            }
+            <Grid fluid>
+            {this.state.needs && this.state.needs.length > 0 && this.state.needs.map((need, i) => (
+              <Col key={i} md={6}>
+                <CarpoolNeed onContact={this.handleContactUser} need={need} />
+              </Col>
+            ))}
+            </Grid>
+          </Panel.Body>
+        </Panel>
+        {this.state.showContactModal
+        && <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false})} />
+        }
       </div>
     )
   }

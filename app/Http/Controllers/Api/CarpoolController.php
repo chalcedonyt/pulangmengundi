@@ -49,6 +49,32 @@ class CarpoolController extends Controller
         return response()->json($cp->toArray());
     }
 
+    public function matchMyOffers(Request $request)
+    {
+        $user = \Auth::user();
+        if (!$user->offers->count()) {
+            return response('You have no offers', 404);
+        }
+        $matches = collect([]);
+        $matcher = new \App\Gateways\MatchGateway();
+        foreach ($user->offers as $offer) {
+            $offer_matches = $matcher->matchOffer($offer);
+            if ($offer_matches->count()) {
+                $matches = $matches->concat($offer_matches);
+            }
+        }
+        $matches = $matches->unique(function ($offer) {
+           return $offer->id;
+        });
+        $data = fractal()->collection($matches, new \App\Transformers\CarpoolNeedTransformer, 'needs')->toArray();
+        return response()->json($data);
+    }
+    /**
+     * Match needs
+     *
+     * @param Request $request
+     * @return void
+     */
     public function matches(Request $request)
     {
         $user = \Auth::user();
@@ -147,12 +173,13 @@ class CarpoolController extends Controller
         return response()->json($data);
     }
 
-    public function hide(Request $request, \App\Models\CarpoolOffer $offer)
+    public function success(Request $request, \App\Models\CarpoolOffer $offer)
     {
         if (\Auth::user()->getKey() !== $offer->user_id)
             return response("You can't do this", 403);
 
         $offer->hidden = 1;
+        $offer->fulfilled = 1;
         $offer->save();
         return response()->json([
             'success' => 1
@@ -254,5 +281,28 @@ class CarpoolController extends Controller
             'count' => $total
         ];
         return response()->json($data);
+    }
+
+    public function needSuccess(Request $request, \App\Models\CarpoolNeed $need)
+    {
+        if (\Auth::user()->getKey() !== $need->user_id)
+            return response("You can't do this", 403);
+
+        $need->fulfilled = 1;
+        $need->save();
+        return response()->json([
+            'success' => 1
+        ]);
+    }
+
+    public function needCancel(Request $request, \App\Models\CarpoolNeed $need)
+    {
+        if (\Auth::user()->getKey() !== $need->user_id)
+            return response("You can't do this", 403);
+
+        $need->delete();
+        return response()->json([
+            'success' => 1
+        ]);
     }
 }

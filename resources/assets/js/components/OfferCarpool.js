@@ -297,6 +297,7 @@ export default class OfferCarpool extends Component {
                     <Panel.Body>
                       <FormControl
                         componentClass='textarea'
+                        rows={8}
                         placeholder='Leave more details here'
                         value={this.state.information}
                         onChange={this.handleInformationChange} />

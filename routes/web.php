@@ -73,17 +73,20 @@ Route::middleware('auth')->group(function() {
 });
 Route::middleware('auth')->prefix('api')->group(function() {
 
-    Route::post('/offer/{offer}/hide', ['uses' => 'Api\\CarpoolController@hide']);
+    Route::post('/offer/{offer}/success', ['uses' => 'Api\\CarpoolController@success']);
     Route::post('/offer/{offer}/unhide', ['uses' => 'Api\\CarpoolController@unhide']);
     Route::post('/offer/{offer}/cancel', ['uses' => 'Api\\CarpoolController@cancel']);
     Route::post('/offer', ['uses' => 'Api\\CarpoolController@offer']);
 
     Route::post('/need', ['uses' => 'Api\\CarpoolController@need']);
     Route::put('/need/{need}', ['uses' => 'Api\\CarpoolController@updateNeed']);
+    Route::post('/need/{need}/success', ['uses' => 'Api\\CarpoolController@needSuccess']);
+    Route::post('/need/{need}/cancel', ['uses' => 'Api\\CarpoolController@needCancel']);
 
     Route::get('/my-offers', ['uses' => 'Api\\CarpoolController@myOffers']);
     Route::get('/my-need', ['uses' => 'Api\\CarpoolController@myNeed']);
     Route::get('/matches', ['uses' => 'Api\\CarpoolController@matches']);
+    Route::get('/match-my-offers', ['uses' => 'Api\\CarpoolController@matchMyOffers']);
 
     Route::get('/user/{uuid}', ['uses' => 'Api\\UserController@show']);
 });
