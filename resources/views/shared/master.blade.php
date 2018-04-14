@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta property="og:site_name" content="#PULANGMENGUNDI #CarpoolGE14 - Carpool" />
         <meta property="og:title" content="Malaysians helping Malaysians to vote" />
-        <meta property="og:description" content="Connecting Malaysians to offer or receive help through carpool or cash subsidies." />
+        <meta property="og:description" content="Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!" />
         <meta property="og:image" content="https://www.pulangmengundi.com/uploads/1/1/9/0/119033783/editor/pulang-logo-v3_1.png?1523502575" />
         <meta property="og:image" content="https://www.pulangmengundi.com/uploads/1/1/9/0/119033783/editor/noun-210781-cc.png?1523510835" />
         <meta property="og:image" content="https://www.pulangmengundi.com/uploads/1/1/9/0/119033783/editor/noun-1256129-cc.png?1523510667" />
