@@ -55,7 +55,7 @@ export default class CarpoolNeed extends Component {
           <Button bsStyle='success' onClick={(e)=> this.setCloseModal(true)}>Close/Cancel</Button>
         </Panel.Footer>
         }
-        {this.props.isOwner && this.props.need && this.props.need.fulfilled &&
+        {this.props.isOwner && this.props.need && this.props.need.fulfilled == 1 &&
         <Panel.Footer>
           <Button bsStyle='success'>Request fulfilled! :)</Button>
         </Panel.Footer>
