@@ -51,7 +51,7 @@ export default class ContactModal extends Component {
               <p>
                 <FormattedMessage
                   id="contact.click-to-show-text"
-                  defaultMessage={`Click here to show contact information of {name}:`}
+                  defaultMessage={`Click here to show contact information for {name}:`}
                   values={{
                     name: <strong>{this.props.user.name}</strong>
                   }}

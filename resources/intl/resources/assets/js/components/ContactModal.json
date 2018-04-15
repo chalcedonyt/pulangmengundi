@@ -5,7 +5,7 @@
   },
   {
     "id": "contact.click-to-show-text",
-    "defaultMessage": "Click here to show contact information of {name}:"
+    "defaultMessage": "Click here to show contact information for {name}:"
   },
   {
     "id": "contact.prevent-abuse",
