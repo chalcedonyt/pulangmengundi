@@ -19,6 +19,8 @@
 	"home.btn-search-to": "Ke manakah akan anda pergi?",
 	"home.driver-counter": "Pemandu mahu berkongsi kenderaan",
 	"home.rider-counter": "Penumpang ingin berkongsi",
+	"home.header-update": "Terbaru",
+	"home.changelog": "<ul><li>Ahad 5PM: #PulangMengundi sekarang ada dalam Bahasa Melayu!</li><li>Ahad 10PM: Semua pemandu dan penumpang akan kami e-mel jika sebarang padanan berlaku.</li><li>Sabtu 5PM: Anda sekarang boleh menandakan posting anda sebagai dipenuhi. Anda juga boleh membatalkannya. Sila buat yang berpatutan kerana ianya akan memperbaiki pengalaman semua pengguna.</li></ul>",
 	"match.no-results": "Tiada keputusan",
 	"request.travel-from-header": "Berlepas dari",
 	"request.voting-at-header": "Mengundi di",
