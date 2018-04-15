@@ -1,0 +1,34 @@
+[
+  {
+    "id": "offer.dialog-header-confirm",
+    "defaultMessage": "Confirm carpool offer"
+  },
+  {
+    "id": "offer.dialog-header-submit-question",
+    "defaultMessage": "Submit carpool offer?"
+  },
+  {
+    "id": "offer.info-warning",
+    "defaultMessage": "Your name, location and times will be shown to users who match your district or state."
+  },
+  {
+    "id": "request.header-i-from",
+    "defaultMessage": "I am currently in"
+  },
+  {
+    "id": "request.header-i-going",
+    "defaultMessage": "I am voting in"
+  },
+  {
+    "id": "offer.dialog-leave-generic",
+    "defaultMessage": "I'll leave at"
+  },
+  {
+    "id": "btn-ok",
+    "defaultMessage": "OK"
+  },
+  {
+    "id": "btn-cancel",
+    "defaultMessage": "Cancel"
+  }
+]

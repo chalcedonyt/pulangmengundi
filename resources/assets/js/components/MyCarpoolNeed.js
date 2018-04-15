@@ -6,6 +6,7 @@ import {Alert, Button, Checkbox, Col, Grid, Row, Panel} from 'react-bootstrap'
 import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
 import ContactModal from './ContactModal'
+import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 
 export default class MyCarpoolNeedMyCarpoolNeed extends Component {
   constructor(props) {
@@ -60,26 +61,62 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
         <div className="container">
           <Row>
             <Col md={4}>
-              <h3>Your request</h3>
+              <h3>
+                <FormattedMessage
+                  id="request.header-your-request"
+                  defaultMessage={`Your request`}
+                />
+              </h3>
               <Alert bsStyle='info'>
-                <h4>What should I do now?</h4>
-                <p>You may be contacted by drivers going the same way. If you enabled Facebook as a method of contact, do <strong>actively</strong> check your Friend requests and messages</p>
-                <p>We may send you emails periodically to tell you of new matches.</p>
-                <p>Check out the <strong><a href='/'>main page</a></strong> as well to search for drivers.</p>
+                <h4>
+                  <FormattedMessage
+                    id="request.header-do-what"
+                    defaultMessage={`What should I do now?`}
+                  />
+                </h4>
+                <p>
+                  <FormattedHTMLMessage
+                    id="request.do-what-1"
+                    defaultMessage={`You may be contacted by drivers going the same way. If you enabled Facebook as a method of contact, do <strong>actively</strong> check your Friend requests and messages`}
+                  />
+                </p>
+                <p>
+                  <FormattedMessage
+                    id="request.do-what-2"
+                    defaultMessage={`We may send you emails periodically to tell you of new matches.`}
+                  />
+                </p>
+                <p>
+                  <FormattedHTMLMessage
+                    id="request.do-what-3"
+                    defaultMessage={`Check out the <strong><a href='/'>main page</a></strong> as well to search for drivers.`}
+                  />
+                </p>
               </Alert>
               <CarpoolNeed onNeedSuccess={this.handleNeedSuccess} onNeedCancel={this.handleCancelNeed} need={this.state.need} isOwner={true}/>
             </Col>
             <Col md={8}>
-              <h3>Your matches</h3>
+              <h3>
+                <FormattedMessage
+                  id="request.header-matches"
+                  defaultMessage={`Your matches`}
+                />
+              </h3>
               <Panel>
                 <Panel.Body>
                   {this.state.offers && this.state.offers.length == 0 &&
                   <Alert bsStyle='info'>
                     <p>
-                      There is no one matching your travel locations. Check back later!
+                      <FormattedMessage
+                        id="request.no-match"
+                        defaultMessage={`There is no one matching your travel locations. Check back later!`}
+                      />
                     </p>
                     <p>
-                      We will try to match you with anyone travelling from the same states.
+                      <FormattedMessage
+                        id="request.we-try"
+                        defaultMessage={`We will try to match you with anyone travelling from the same states.`}
+                      />
                     </p>
                   </Alert>
                   }

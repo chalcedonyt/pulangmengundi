@@ -1,0 +1,30 @@
+[
+  {
+    "id": "request.travel-from-header",
+    "defaultMessage": "Travelling from"
+  },
+  {
+    "id": "request.voting-at-header",
+    "defaultMessage": "Voting at"
+  },
+  {
+    "id": "request.gender-header",
+    "defaultMessage": "Gender"
+  },
+  {
+    "id": "btn-edit",
+    "defaultMessage": "Edit"
+  },
+  {
+    "id": "request.btn-close-cancel",
+    "defaultMessage": "Close/Cancel"
+  },
+  {
+    "id": "request.fulfilled",
+    "defaultMessage": "Request fulfilled! :)"
+  },
+  {
+    "id": "btn-contact",
+    "defaultMessage": "Contact"
+  }
+]

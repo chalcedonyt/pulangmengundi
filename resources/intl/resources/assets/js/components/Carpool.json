@@ -1,0 +1,46 @@
+[
+  {
+    "id": "home.jumbotron",
+    "defaultMessage": "Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!"
+  },
+  {
+    "id": "home.driver-btn",
+    "defaultMessage": "(Driver) I want to offer a carpool"
+  },
+  {
+    "id": "home.rider-btn",
+    "defaultMessage": "(Rider) I am looking for a carpool"
+  },
+  {
+    "id": "home.driver-btn-small",
+    "defaultMessage": "(Driver)<br /> I want to offer a carpool"
+  },
+  {
+    "id": "home.rider-btn-small",
+    "defaultMessage": "(Rider)<br /> I am looking for a carpool"
+  },
+  {
+    "id": "home.btn-search-from",
+    "defaultMessage": "Choose where you are starting from"
+  },
+  {
+    "id": "home.btn-search-clear",
+    "defaultMessage": "Clear"
+  },
+  {
+    "id": "home.btn-search-to",
+    "defaultMessage": "Choose where you are going to"
+  },
+  {
+    "id": "home.driver-counter",
+    "defaultMessage": "Drivers offering carpools"
+  },
+  {
+    "id": "match.no-results",
+    "defaultMessage": "No results found"
+  },
+  {
+    "id": "home.rider-counter",
+    "defaultMessage": "Riders looking for carpools"
+  }
+]

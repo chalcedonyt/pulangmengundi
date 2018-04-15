@@ -5,6 +5,7 @@ import api from '../utils/api'
 import {Alert, Button, Col, Grid, Image, Panel, Row} from 'react-bootstrap'
 import HideOfferModal from './HideOfferModal'
 import UnhideOfferModal from './UnhideOfferModal'
+import {FormattedMessage} from 'react-intl'
 import moment from 'moment'
 
 export default class CarpoolOffer extends Component {
@@ -72,24 +73,49 @@ export default class CarpoolOffer extends Component {
         </Panel.Heading>
         <Panel.Body>
           <div>
-            <strong>Leaving from:</strong>
+            <strong>
+              <FormattedMessage
+                id="request.travel-from-header"
+                defaultMessage={`Travelling from`}
+              />:
+            </strong>
             <p>
               {this.state.offer.fromLocation.name}, {this.state.offer.fromLocation.state}
             </p>
-            <strong>To:</strong>
+            <strong>
+              <FormattedMessage
+                id="request.travel-to-header"
+                defaultMessage={`Travelling to`}
+              />:
+            </strong>
             <p>
             {this.state.offer.toLocation.name}, {this.state.offer.toLocation.state}
             </p>
-            <strong>Time:</strong>
+            <strong>
+              <FormattedMessage
+                id="request.travelling-time"
+                defaultMessage={`Time`}
+              />:
+            </strong>
             <p>{this.state.offer.leave_at_formatted}</p>
             {this.state.offer.gender_preference &&
             <div>
-              <strong>Gender preference:</strong>
+              <strong>
+                <FormattedMessage
+                  id="request.gender-pref"
+                  defaultMessage={`Gender preference`}
+                />:
+              </strong>
               <p>{this.state.offer.gender_preference}</p>
             </div>}
             {this.state.offer.information &&
               <div>
-                <strong>Additional information:</strong>
+                <strong>
+                  <FormattedMessage
+                    id="request.additional-info"
+                    defaultMessage={`Additional information`}
+                  />:
+                </strong>
                 <p>{this.state.offer.information}</p>
               </div>}
           </div>
@@ -99,19 +125,40 @@ export default class CarpoolOffer extends Component {
           <div>
             {this.state.offer.hidden == 0 &&
               <div>
-                <Button bsStyle='info' onClick={(e) => this.setHideModal(true)}>Close Offer</Button>
+                <Button bsStyle='info' onClick={(e) => this.setHideModal(true)}>
+                  <FormattedMessage
+                    id="btn-close-offer"
+                    defaultMessage={`Close offer`}
+                  />
+                </Button>
               </div>
             }
             {this.state.offer.hidden == 1 &&
             <div>
-              <p><strong>This offer was fulfilled</strong></p>
-              <Button bsStyle='success' onClick={(e) => this.setUnhideModal(true)}>Show Offer Again</Button>
+              <p>
+                <strong>
+                  <FormattedMessage
+                    id="request.request-fulfilled"
+                    defaultMessage={`This offer was fulfilled!`}
+                  />
+                </strong></p>
+              <Button bsStyle='success' onClick={(e) => this.setUnhideModal(true)}>
+                <FormattedMessage
+                  id="request.show-again"
+                  defaultMessage={`Show offer again`}
+                />
+              </Button>
             </div>
             }
           </div>
           }
           {!this.state.isOwner &&
-          <Button bsStyle='success' onClick={(e) => this.props.onContact(this.state.offer.user)}>Contact</Button>
+          <Button bsStyle='success' onClick={(e) => this.props.onContact(this.state.offer.user)}>
+            <FormattedMessage
+              id="btn-contact"
+              defaultMessage={`Contact`}
+            />
+          </Button>
           }
           <HideOfferModal
             show={this.state.showHideModal}

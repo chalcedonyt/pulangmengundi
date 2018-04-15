@@ -6,6 +6,7 @@ import {Alert, Button, Checkbox, Col, DropdownButton, FormControl, FormGroup, Me
 import DateSelection from './DateSelection'
 import LocationSelection from './LocationSelection'
 import OfferCarpoolModal from './OfferCarpoolModal'
+import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 
 import moment from 'moment'
 import axios from 'axios'
@@ -192,15 +193,30 @@ export default class OfferCarpool extends Component {
     return (
       <div>
         <Panel bsStyle='primary'>
-          <Panel.Heading><h3>Offer to carpool</h3></Panel.Heading>
+          <Panel.Heading>
+            <h3>
+              <FormattedMessage
+                id="offer.header-create"
+                defaultMessage={`Offer to create a carpool`}
+              />
+            </h3>
+          </Panel.Heading>
           <Panel.Body>
             <Alert bsStyle="info">
-              Pick where you are leaving from and where you are going to, then check and fill in the timings for at least <strong>one</strong> direction you want to carpool for.
+              <FormattedHTMLMessage
+                id="offer.create-info"
+                defaultMessage={`Pick where you are leaving from and where you are going to, then check and fill in the timings for at least <strong>one</strong> direction you want to carpool for.`}
+              />
             </Alert>
             <Row>
               <Col md={4}>
                 <Panel>
-                  <Panel.Heading>I&apos;m currently in:</Panel.Heading>
+                  <Panel.Heading>
+                    <FormattedMessage
+                      id="request.header-i-from"
+                      defaultMessage={`I am currently in`}
+                    />:
+                  </Panel.Heading>
                   <Panel.Body>
                     <LocationSelection onChange={this.startLocationChanged}/>
                   </Panel.Body>
@@ -208,7 +224,12 @@ export default class OfferCarpool extends Component {
               </Col>
               <Col md={4}>
                 <Panel>
-                  <Panel.Heading>I&apos;m voting in:</Panel.Heading>
+                  <Panel.Heading>
+                    <FormattedMessage
+                      id="request.header-i-going"
+                      defaultMessage={`I am voting in`}
+                    />:
+                  </Panel.Heading>
                   <Panel.Body>
                     <LocationSelection onChange={this.pollLocationChanged}/>
                   </Panel.Body>
@@ -216,7 +237,12 @@ export default class OfferCarpool extends Component {
               </Col>
               <Col md={4}>
                 <Panel>
-                  <Panel.Heading>I prefer to carpool with</Panel.Heading>
+                  <Panel.Heading>
+                    <FormattedMessage
+                      id="offer.header-gender-prev"
+                      defaultMessage={`I prefer to carpool with`}
+                    />:
+                  </Panel.Heading>
                   <Panel.Body>
                     <Row>
                       <Col md={8} xs={4}>
@@ -227,21 +253,36 @@ export default class OfferCarpool extends Component {
                           value=''
                           onChange={(e) => this.handleGenderChange(null)}
                           checked={this.state.preferredGender == null}
-                          /> Any gender<br />
+                          />
+                          <FormattedMessage
+                            id="offer.gender-pref-any"
+                            defaultMessage={`Any gender`}
+                          />
+                          <br />
                         <input
                           type='radio'
                           name='gender'
                           value='male'
                           onChange={(e) => this.handleGenderChange('male')}
                           checked={this.state.preferredGender == 'male'}
-                          />Male<br />
+                          />
+                          <FormattedMessage
+                            id="offer.gender-pref-male"
+                            defaultMessage={`Male`}
+                          />
+                          <br />
                         <input
                           type='radio'
                           name='gender'
                           value='female'
                           onChange={(e) => this.handleGenderChange('female')}
                           checked={this.state.preferredGender == 'female'}
-                          />Female<br />
+                          />
+                          <FormattedMessage
+                            id="offer.gender-pref-female"
+                            defaultMessage={`Female`}
+                          />
+                          <br />
                       </div>
                       </Col>
                     </Row>
@@ -260,11 +301,22 @@ export default class OfferCarpool extends Component {
                         type="checkbox"
                         onChange={this.handleWillCarpoolToPollsChange}
                         checked={this.state.willCarpoolToPolls}
-                      />&nbsp; I'm offering a carpool TO the polls
+                      />&nbsp;
+                      <FormattedMessage
+                        id="offer.checkbox-carpool-to"
+                        defaultMessage={`I am offering a carpool TO the polls`}
+                      />
                     </Panel.Heading>
                     <Panel.Body>
                       <div>
-                        I'll leave <strong>{this.state.startLocation.name}</strong> for <strong>{this.state.pollLocation.name}</strong> at:
+                        <FormattedMessage
+                          id="offer.info-from-time"
+                          defaultMessage={`I'll leave {from} for {to} at:`}
+                          values={{
+                            from: <strong>{this.state.startLocation.name}</strong>,
+                            to: <strong>{this.state.pollLocation.name}</strong>
+                          }}
+                        />
                         <DateSelection date={this.carpoolToPollsDateTime} onChange={this.handleCarpoolToPollsDateChange} />
                       </div>
                     </Panel.Body>
@@ -277,11 +329,22 @@ export default class OfferCarpool extends Component {
                         type="checkbox"
                         onChange={this.handleWillCarpoolFromPollsChange}
                         checked={this.state.willCarpoolFromPolls}
-                      />&nbsp; I'm offering a carpool back AFTER the polls
+                      />&nbsp;
+                      <FormattedMessage
+                        id="offer.checkbox-carpool-back"
+                        defaultMessage={`I am offering a carpool BACK after the polls`}
+                      />
                     </Panel.Heading>
                     <Panel.Body>
                       <div>
-                        I'll leave <strong>{this.state.pollLocation.name}</strong> for <strong>{this.state.startLocation.name}</strong> at:
+                        <FormattedMessage
+                          id="offer.info-come-back-time"
+                          defaultMessage={`I'll leave {from} for {to} at:`}
+                          values={{
+                            from: <strong>{this.state.pollLocation.name}</strong>,
+                            to: <strong>{this.state.startLocation.name}</strong>
+                          }}
+                        />
                         <DateSelection date={this.carpoolFromPollsDateTime} onChange={this.handleCarpoolFromPollsDateChange} />
                       </div>
                     </Panel.Body>
@@ -292,7 +355,10 @@ export default class OfferCarpool extends Component {
                 <Col md={6}>
                   <Panel>
                     <Panel.Heading>
-                    Additional information
+                      <FormattedMessage
+                        id="request.create-header-more-info"
+                        defaultMessage={`More information`}
+                      />
                     </Panel.Heading>
                     <Panel.Body>
                       <FormControl
@@ -307,16 +373,42 @@ export default class OfferCarpool extends Component {
                 <Col md={4}>
                   <Panel>
                     <Panel.Heading>
-                    Information to show
+                      <FormattedMessage
+                        id="request.create-header-what-to-show"
+                        defaultMessage={`What info to show potential matches`}
+                      />
                     </Panel.Heading>
                     <Panel.Body>
                       <Alert bsStyle='info'>
-                        <p>Choose at least one option below, and optionally your contact number. Your information will be shown to others after they pass a captcha check.</p>
-                        <p>If you choose to show your Facebook account, do be responsive to new FB message requests!</p>
+                        <p>
+                          <FormattedMessage
+                            id="request.info-choose-what-to-show"
+                            defaultMessage={`Choose at least one option below, and optionally your contact number. Your information will be shown to others after they pass a captcha check.`}
+                          />
+                        </p>
+                        <p>
+                          <FormattedMessage
+                            id="request.info-choose-what-to-show-fb"
+                            defaultMessage={`If you choose to show your Facebook account, do be responsive to new FB message requests!`}
+                          />
+                        </p>
                       </Alert>
-                      <input type="checkbox" onChange={this.toggleAllowEmail} checked={this.state.allowEmail} />Show my email address<br />
-                      <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />Show the link to my Facebook account.<br />
-                      Show my contact number: <input type='text' size='20' maxLength='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
+                      <input type="checkbox" onChange={this.toggleAllowEmail} checked={this.state.allowEmail} />
+                      <FormattedMessage
+                        id="request.checkbox-show-email"
+                        defaultMessage={`Show my email address.`}
+                      /><br />
+                      <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />
+                      <FormattedMessage
+                        id="request.checkbox-show-fb"
+                        defaultMessage={`Show the link to my Facebook account.`}
+                      />
+                      <br />
+                      <FormattedMessage
+                        id="request.checkbox-show-contact"
+                        defaultMessage={`Show my contact number:`}
+                      />
+                      <input type='text' size='20' maxLength='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
                     </Panel.Body>
                   </Panel>
                 </Col>
@@ -329,7 +421,10 @@ export default class OfferCarpool extends Component {
                       bsStyle={'success'}
                       onClick={(e)=>this.setShowModal(true)}
                       type='submit'>
-                      Submit carpool offer
+                      <FormattedMessage
+                        id="offer.btn-submit"
+                        defaultMessage={`Submit carpool offer`}
+                      />
                     </Button>
                   </FormGroup>
                 </Col>

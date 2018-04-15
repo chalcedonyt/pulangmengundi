@@ -1,0 +1,70 @@
+[
+  {
+    "id": "contact.after-open-dialog-header",
+    "defaultMessage": "What to do now"
+  },
+  {
+    "id": "contact.click-to-show-text",
+    "defaultMessage": "Click here to show {name} contact information:"
+  },
+  {
+    "id": "contact.prevent-abuse",
+    "defaultMessage": "To prevent abuse, you will be blocked if you request too many profiles."
+  },
+  {
+    "id": "contact.after-show-1",
+    "defaultMessage": "Get in touch and arrange your trip! Some safety precautions below:"
+  },
+  {
+    "id": "contact.after-show-2",
+    "defaultMessage": "Exchange contact details (e.g. phone numbers)"
+  },
+  {
+    "id": "contact.after-show-3",
+    "defaultMessage": "Ensure the other users are real people (e.g. in a video call)"
+  },
+  {
+    "id": "contact.after-show-4",
+    "defaultMessage": "Share the details of your trip and the details of the other ride-sharers with your friends and family"
+  },
+  {
+    "id": "contact.header-email-address",
+    "defaultMessage": "{name} email address"
+  },
+  {
+    "id": "contact.header-contact",
+    "defaultMessage": "{name} contact number"
+  },
+  {
+    "id": "contact.header-fb-profile",
+    "defaultMessage": "{name} Facebook profile link"
+  },
+  {
+    "id": "contact.btn-open-fb-profile",
+    "defaultMessage": "Profile (Opens new window)"
+  },
+  {
+    "id": "contact.header-how-to-contact",
+    "defaultMessage": "How do I contact someone on Facebook?"
+  },
+  {
+    "id": "contact.fb-blocks-msgs",
+    "defaultMessage": "Because Facebook blocks new Messages by default, try the following methods:"
+  },
+  {
+    "id": "contact.fb-step-1",
+    "defaultMessage": "1. Send a Friend request."
+  },
+  {
+    "id": "contact.fb-step-2",
+    "defaultMessage": "2. Send them a Facebook Message introducing yourself."
+  },
+  {
+    "id": "contact.fb-step-3",
+    "defaultMessage": "They should see a notification in Facebook messenger with your introduction."
+  },
+  {
+    "id": "contact.btn-close",
+    "defaultMessage": "Close"
+  }
+]

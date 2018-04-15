@@ -1,0 +1,22 @@
+[
+  {
+    "id": "nav-carpool",
+    "defaultMessage": "Carpooling"
+  },
+  {
+    "id": "nav-subsidy",
+    "defaultMessage": "Subsidies"
+  },
+  {
+    "id": "nav-logout",
+    "defaultMessage": "Logout"
+  },
+  {
+    "id": "nav-faq",
+    "defaultMessage": "Guidelines and FAQ"
+  },
+  {
+    "id": "nav-about",
+    "defaultMessage": "About"
+  }
+]

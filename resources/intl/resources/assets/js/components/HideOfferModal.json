@@ -1,0 +1,18 @@
+[
+  {
+    "id": "offer.header-close-why",
+    "defaultMessage": "Please tell us why you are closing your carpool offer"
+  },
+  {
+    "id": "offer.btn-close-success",
+    "defaultMessage": "I have matched <br />with other carpoolers!"
+  },
+  {
+    "id": "offer.btn-cancel-delete",
+    "defaultMessage": "I have changed my mind/<br/>will re-create listing"
+  },
+  {
+    "id": "btn-cancel",
+    "defaultMessage": "Cancel"
+  }
+]

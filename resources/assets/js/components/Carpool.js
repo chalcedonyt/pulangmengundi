@@ -8,6 +8,8 @@ import CarpoolNeed from './CarpoolNeed'
 import ContactModal from './ContactModal'
 import StateSelection from './StateSelection'
 import Progress from './Progress'
+import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
+
 
 export default class Carpool extends Component {
   constructor(props) {
@@ -132,20 +134,45 @@ export default class Carpool extends Component {
             </Col>
             <Col md={9} xs={12}>
               <h3>#PulangMengundi #CarpoolGE14</h3>
-              <p>Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!</p>
+              <p>
+                <FormattedMessage
+                  id="home.jumbotron"
+                  defaultMessage={`Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!`}
+                />
+              </p>
               <Grid fluid>
                 <Row>
                   <Col md={5} xsHidden={true}>
-                    <Button bsSize='large' bsStyle='default' href='/offer'>(Driver) I want to offer a carpool</Button>
+                    <Button bsSize='large' bsStyle='default' href='/offer'>
+                      <FormattedMessage
+                        id="home.driver-btn"
+                        defaultMessage={`(Driver) I want to offer a carpool`}
+                      />
+                    </Button>
                   </Col>
                   <Col md={5} mdOffset={1} xsHidden={true}>
-                    <Button bsSize='large' bsStyle='default' href='/need'>(Rider) I am looking for a carpool</Button>
+                    <Button bsSize='large' bsStyle='default' href='/need'>
+                      <FormattedMessage
+                        id="home.rider-btn"
+                        defaultMessage={`(Rider) I am looking for a carpool`}
+                      />
+                    </Button>
                   </Col>
                   <Col lgHidden={true} mdHidden={true} smHidden={true} xsOffset={1} xs={8}>
-                    <Button bsStyle='default' href='/offer'>(Driver)<br />I want to offer a carpool</Button>
+                    <Button bsStyle='default' href='/offer'>
+                      <FormattedHTMLMessage
+                        id="home.driver-btn-small"
+                        defaultMessage={`(Driver)<br /> I want to offer a carpool`}
+                      />
+                    </Button>
                     <br />
                     <br />
-                    <Button bsStyle='default' href='/need'>(Rider)<br />I am looking for a carpool</Button>
+                    <Button bsStyle='default' href='/need'>
+                      <FormattedHTMLMessage
+                        id="home.rider-btn-small"
+                        defaultMessage={`(Rider)<br /> I am looking for a carpool`}
+                      />
+                    </Button>
                   </Col>
                 </Row>
                 <Row>
@@ -170,7 +197,10 @@ export default class Carpool extends Component {
             <Col md={4} mdOffset={1}>
               <Panel>
                 <Panel.Heading>
-                  Choose where you are starting from
+                  <FormattedMessage
+                    id="home.btn-search-from"
+                    defaultMessage={`Choose where you are starting from`}
+                  />
                 </Panel.Heading>
                 <Panel.Body>
                   <StateSelection
@@ -179,7 +209,12 @@ export default class Carpool extends Component {
                     onChange={this.handleStateFromChange}
                   />
                   {this.state.selectedStateFrom &&
-                    <Button bsStyle='link' onClick={this.resetSelectedStateFrom}>Clear</Button>
+                    <Button bsStyle='link' onClick={this.resetSelectedStateFrom}>
+                      <FormattedMessage
+                        id="home.btn-search-clear"
+                        defaultMessage={`Clear`}
+                      />
+                    </Button>
                   }
                 </Panel.Body>
               </Panel>
@@ -187,7 +222,10 @@ export default class Carpool extends Component {
             <Col md={4}>
               <Panel>
                 <Panel.Heading>
-                  Choose where you are going to
+                  <FormattedMessage
+                    id="home.btn-search-to"
+                    defaultMessage={`Choose where you are going to`}
+                  />
                 </Panel.Heading>
                 <Panel.Body>
                   <StateSelection
@@ -196,7 +234,12 @@ export default class Carpool extends Component {
                     onChange={this.handleStateToChange}
                   />
                   {this.state.selectedStateTo &&
-                    <Button bsStyle='link' onClick={this.resetSelectedStateTo}>Clear</Button>
+                    <Button bsStyle='link' onClick={this.resetSelectedStateTo}>
+                      <FormattedMessage
+                        id="home.btn-search-clear"
+                        defaultMessage={`Clear`}
+                      />
+                    </Button>
                   }
                 </Panel.Body>
               </Panel>
@@ -208,7 +251,12 @@ export default class Carpool extends Component {
             <Col md={6}>
               <Panel bsStyle='primary'>
                 <Panel.Heading>
-                  <h3>{this.state.offerCount} Drivers offering carpools</h3>
+                  <h3>{this.state.offerCount}&nbsp;
+                    <FormattedMessage
+                      id="home.driver-counter"
+                      defaultMessage={`Drivers offering carpools`}
+                    />
+                  </h3>
                 </Panel.Heading>
                 <Panel.Body>
                   {this.state.isLoading && <Progress />}
@@ -222,7 +270,12 @@ export default class Carpool extends Component {
                   && this.state.offers
                   && this.state.offers.length == 0
                   && (
-                    <Alert bsStyle='info'>No results found</Alert>
+                    <Alert bsStyle='info'>
+                      <FormattedMessage
+                        id="match.no-results"
+                        defaultMessage={`No results found`}
+                      />
+                    </Alert>
                   )}
                 </Panel.Body>
               </Panel>
@@ -230,7 +283,12 @@ export default class Carpool extends Component {
             <Col md={6}>
               <Panel bsStyle='primary'>
                 <Panel.Heading bsStyle='primary'>
-                  <h3>{this.state.needCount} Riders looking for carpools</h3>
+                  <h3>{this.state.needCount}&nbsp;
+                    <FormattedMessage
+                      id="home.rider-counter"
+                      defaultMessage={`Riders looking for carpools`}
+                    />
+                  </h3>
                 </Panel.Heading>
                 <Panel.Body>
                   {this.state.isLoading && <Progress />}
@@ -244,7 +302,12 @@ export default class Carpool extends Component {
                   && this.state.needs
                   && this.state.needs.length == 0
                   && (
-                    <Alert bsStyle='info'>No results found</Alert>
+                    <Alert bsStyle='info'>
+                      <FormattedMessage
+                        id="match.no-results"
+                        defaultMessage={`No results found`}
+                      />
+                    </Alert>
                   )}
                 </Panel.Body>
               </Panel>

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "offer.header-your-offers",
+    "defaultMessage": "Your carpool offers"
+  },
+  {
+    "id": "offer.header-do-what",
+    "defaultMessage": "What should I do now?"
+  },
+  {
+    "id": "offer.do-what-1",
+    "defaultMessage": "You may be contacted by riders going the same way. If you enabled Facebook as a method of contact, do <strong>actively</strong> check your Friend requests and messages"
+  },
+  {
+    "id": "offer.do-what-2",
+    "defaultMessage": "If you have an open offer, we may send you emails periodically to tell you of new matches."
+  },
+  {
+    "id": "offer.header-matches",
+    "defaultMessage": "Your matches"
+  },
+  {
+    "id": "offer.your-matches-info",
+    "defaultMessage": "Carpool requests from riders that match you are shown here. You can also check the <strong><a href='/'>main page</a></strong> to search for riders."
+  },
+  {
+    "id": "offer.no-match-1",
+    "defaultMessage": "There is no one matching your travel locations. Check back later!"
+  },
+  {
+    "id": "offer.no-match-2",
+    "defaultMessage": "We will try to match you with anyone travelling from the same states."
+  }
+]

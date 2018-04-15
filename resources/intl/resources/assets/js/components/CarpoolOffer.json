@@ -1,0 +1,38 @@
+[
+  {
+    "id": "request.travel-from-header",
+    "defaultMessage": "Travelling from"
+  },
+  {
+    "id": "request.travel-to-header",
+    "defaultMessage": "Travelling to"
+  },
+  {
+    "id": "request.travelling-time",
+    "defaultMessage": "Time"
+  },
+  {
+    "id": "request.gender-pref",
+    "defaultMessage": "Gender preference"
+  },
+  {
+    "id": "request.additional-info",
+    "defaultMessage": "Additional information"
+  },
+  {
+    "id": "btn-close-offer",
+    "defaultMessage": "Close offer"
+  },
+  {
+    "id": "request.request-fulfilled",
+    "defaultMessage": "This offer was fulfilled!"
+  },
+  {
+    "id": "request.show-again",
+    "defaultMessage": "Show offer again"
+  },
+  {
+    "id": "btn-contact",
+    "defaultMessage": "Contact"
+  }
+]

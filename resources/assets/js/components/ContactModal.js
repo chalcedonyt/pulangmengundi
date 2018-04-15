@@ -5,6 +5,7 @@ import api from '../utils/api'
 
 import {Alert, Modal, Row, Panel, Col, Button} from 'react-bootstrap'
 import ReCAPTCHA from "react-google-recaptcha"
+import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 
 export default class ContactModal extends Component {
   constructor(props) {
@@ -37,16 +38,30 @@ export default class ContactModal extends Component {
           <Modal.Title>Contact {this.props.user.name}</Modal.Title>
         </Modal.Header>
       <Modal.Body>
-        <h4>What to do now</h4>
+        <h4>
+          <FormattedMessage
+            id="contact.after-open-dialog-header"
+            defaultMessage={`What to do now`}
+          />
+        </h4>
         {!this.state.hasRequested &&
         <Alert bsStyle='info'>
           <form>
             <div>
               <p>
-                Click here to show <strong>{this.props.user.name}&apos;s</strong> contact information:
+                <FormattedMessage
+                  id="contact.click-to-show-text"
+                  defaultMessage={`Click here to show {name} contact information:`}
+                  values={{
+                    name: <strong>{this.props.user.name}&apos;s</strong>
+                  }}
+                />
               </p>
               <Alert bsStyle='danger'>
-              To prevent abuse, you will be blocked if you request too many profiles.
+                <FormattedMessage
+                  id="contact.prevent-abuse"
+                  defaultMessage={`To prevent abuse, you will be blocked if you request too many profiles.`}
+                />
               </Alert>
             </div>
             <ReCAPTCHA
@@ -61,12 +76,30 @@ export default class ContactModal extends Component {
         <Panel bsStyle='success'>
           <Panel.Body>
             <p>
-              Get in touch and arrange your trip! Some safety precautions below:
+              <FormattedMessage
+                id="contact.after-show-1"
+                defaultMessage={`Get in touch and arrange your trip! Some safety precautions below:`}
+              />
             </p>
             <ul>
-              <li>Exchange contact details (e.g. phone numbers)</li>
-              <li>Ensure the other users are real people (e.g. in a video call)</li>
-              <li>Share the details of your trip and the details of the other ride-sharers with your friends and family</li>
+              <li>
+                <FormattedMessage
+                  id="contact.after-show-2"
+                  defaultMessage={`Exchange contact details (e.g. phone numbers)`}
+                />
+              </li>
+              <li>
+                <FormattedMessage
+                  id="contact.after-show-3"
+                  defaultMessage={`Ensure the other users are real people (e.g. in a video call)`}
+                />
+              </li>
+              <li>
+                <FormattedMessage
+                  id="contact.after-show-4"
+                  defaultMessage={`Share the details of your trip and the details of the other ride-sharers with your friends and family`}
+                />
+              </li>
             </ul>
           </Panel.Body>
         </Panel>
@@ -74,7 +107,15 @@ export default class ContactModal extends Component {
         {this.state.email &&
         <Panel>
           <Panel.Heading>
-            <h4>{this.props.user.name}&apos;s email address:</h4>
+            <h4>
+              <FormattedMessage
+                id="contact.header-email-address"
+                defaultMessage={`{name} email address`}
+                values={{
+                  name: <span>{this.props.user.name}&apos;s</span>
+                }}
+              />:
+            </h4>
           </Panel.Heading>
           <Panel.Body>
             <Row>
@@ -88,7 +129,15 @@ export default class ContactModal extends Component {
         {this.state.contact_number &&
         <Panel>
           <Panel.Heading>
-            <h4>{this.props.user.name}&apos;s contact number:</h4>
+            <h4>
+              <FormattedMessage
+                id="contact.header-contact"
+                defaultMessage={`{name} contact number`}
+                values={{
+                  name: <span>{this.props.user.name}&apos;s</span>
+                }}
+              />:
+            </h4>
           </Panel.Heading>
           <Panel.Body>
             <Row>
@@ -103,33 +152,65 @@ export default class ContactModal extends Component {
         <Panel>
           <Panel.Heading>
             <h4>
-              {this.props.user.name}&apos;s Facebook profile link:
+              <FormattedMessage
+                id="contact.header-fb-profile"
+                defaultMessage={`{name} Facebook profile link`}
+                values={{
+                  name: <span>{this.props.user.name}&apos;s</span>
+                }}
+              />:
             </h4>
           </Panel.Heading>
           <Panel.Body>
             <Row>
               <Col md={6} mdOffset={3}>
-                <Button href={this.state.facebook} target="_blank">Profile (Opens new window)</Button>
+                <Button href={this.state.facebook} target="_blank">
+                  <FormattedMessage
+                    id="contact.btn-open-fb-profile"
+                    defaultMessage={`Profile (Opens new window)`}
+                  />
+                </Button>
               </Col>
             </Row>
             <br />
             <Panel>
               <Panel.Body>
-                <h4>How do I contact someone on Facebook?</h4>
+                <h4>
+                  <FormattedMessage
+                  id="contact.header-how-to-contact"
+                  defaultMessage={`How do I contact someone on Facebook?`}
+                  />
+                </h4>
                 <p>
-                  Because Facebook blocks new Messages by default, try the following methods:
+                  <FormattedMessage
+                  id="contact.fb-blocks-msgs"
+                  defaultMessage={`Because Facebook blocks new Messages by default, try the following methods:`}
+                  />
                 </p>
-                <h4>1. Send a Friend request.</h4>
+                <h4>
+                  <FormattedMessage
+                    id="contact.fb-step-1"
+                    defaultMessage={`1. Send a Friend request.`}
+                  />
+                </h4>
                 <img className='modal-img' src='/img/FB1.jpg' />
                 <br/>
                 <br/>
-                <h4>2. Send them a Facebook Message introducing yourself.</h4>
+                <h4>
+                  <FormattedMessage
+                    id="contact.fb-step-2"
+                    defaultMessage={`2. Send them a Facebook Message introducing yourself.`}
+                  />
+                </h4>
                 <img className='modal-img' src='/img/FB2.jpg' />
                 <img className='modal-img' src='/img/FB3.jpg' />
                 <br/>
                 <br/>
                 <h4>
-                  They should see a notification in Facebook messenger with your introduction.
+                  <FormattedMessage
+                    id="contact.fb-step-3"
+                    defaultMessage={`They should see a notification in Facebook messenger with your introduction.`}
+                  />
                 </h4>
                 <img className='modal-img' src='/img/FB4.jpg' />
               </Panel.Body>
@@ -139,7 +220,12 @@ export default class ContactModal extends Component {
         }
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={this.props.onCancel}>Close</Button>
+        <Button onClick={this.props.onCancel}>
+          <FormattedMessage
+            id="contact.btn-close"
+            defaultMessage={`Close`}
+          />
+        </Button>
       </Modal.Footer>
     </Modal>
     )

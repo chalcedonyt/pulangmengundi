@@ -1,0 +1,74 @@
+[
+  {
+    "id": "request.header-update",
+    "defaultMessage": "Update your carpool request"
+  },
+  {
+    "id": "request.header-create",
+    "defaultMessage": "Look for a carpool"
+  },
+  {
+    "id": "request.create-info-1",
+    "defaultMessage": "Fill in where you are from, where you are going to vote in, and gender, then submit your offer to the database."
+  },
+  {
+    "id": "request.create-info-2",
+    "defaultMessage": "You will then be able to search for drivers going the same way as you."
+  },
+  {
+    "id": "request.header-i-from",
+    "defaultMessage": "I am currently in"
+  },
+  {
+    "id": "request.header-i-going",
+    "defaultMessage": "I am voting in"
+  },
+  {
+    "id": "request.header-my-gender",
+    "defaultMessage": "My gender is"
+  },
+  {
+    "id": "request.gender-value-male",
+    "defaultMessage": "Male"
+  },
+  {
+    "id": "request.gender-value-female",
+    "defaultMessage": "Female"
+  },
+  {
+    "id": "request.create-header-more-info",
+    "defaultMessage": "More information"
+  },
+  {
+    "id": "request.create-header-what-to-show",
+    "defaultMessage": "What info to show potential matches"
+  },
+  {
+    "id": "request.info-choose-what-to-show",
+    "defaultMessage": "Choose at least one option below, and optionally your contact number. Your information will be shown to others after they pass a captcha check."
+  },
+  {
+    "id": "request.info-choose-what-to-show-fb",
+    "defaultMessage": "If you choose to show your Facebook account, do be responsive to new FB message requests!"
+  },
+  {
+    "id": "request.checkbox-show-email",
+    "defaultMessage": "Show my email address."
+  },
+  {
+    "id": "request.checkbox-show-fb",
+    "defaultMessage": "Show the link to my Facebook account."
+  },
+  {
+    "id": "request.checkbox-show-contact",
+    "defaultMessage": "Show my contact number:"
+  },
+  {
+    "id": "request.btn-update",
+    "defaultMessage": "Update carpool request"
+  },
+  {
+    "id": "request.btn-save",
+    "defaultMessage": "Save carpool request"
+  }
+]

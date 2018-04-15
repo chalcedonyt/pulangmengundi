@@ -6,6 +6,7 @@ import {Alert, Button, Checkbox, Col, DropdownButton, FormControl, MenuItem, Rad
 import DateSelection from './DateSelection'
 import LocationSelection from './LocationSelection'
 import NeedCarpoolConfirmModal from './NeedCarpoolConfirmModal'
+import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 
 export default class NeedCarpool extends Component {
   constructor(props) {
@@ -140,12 +141,32 @@ export default class NeedCarpool extends Component {
       <div>
         <div className="container">
           {this.state.existingId
-          ? <h1>Update your carpool request</h1>
-          : <h1>Look for a carpool</h1>
+          ? <h1>
+              <FormattedMessage
+                id="request.header-update"
+                defaultMessage={`Update your carpool request`}
+              />
+            </h1>
+          : <h1>
+              <FormattedMessage
+                id="request.header-create"
+                defaultMessage={`Look for a carpool`}
+              />
+            </h1>
           }
           <Alert bsStyle='info'>
-            <p>Fill in where you are from, where you are going to vote in, and gender, then submit your offer to the database.</p>
-            <p>You will then be able to search for drivers going the same way as you.</p>
+            <p>
+              <FormattedMessage
+                id="request.create-info-1"
+                defaultMessage={`Fill in where you are from, where you are going to vote in, and gender, then submit your offer to the database.`}
+              />
+            </p>
+            <p>
+              <FormattedMessage
+                id="request.create-info-2"
+                defaultMessage={`You will then be able to search for drivers going the same way as you.`}
+              />
+            </p>
           </Alert>
           <Row>
             <Col md={12} xs={12}>
@@ -155,7 +176,10 @@ export default class NeedCarpool extends Component {
                     <Col md={4}>
                       <Panel>
                         <Panel.Heading>
-                          I&apos;m currently in:
+                          <FormattedMessage
+                            id="request.header-i-from"
+                            defaultMessage={`I am currently in`}
+                          />:
                         </Panel.Heading>
                         <Panel.Body>
                           <LocationSelection onChange={this.fromLocationChanged} initialLocation={this.state.fromLocation} />
@@ -165,7 +189,10 @@ export default class NeedCarpool extends Component {
                     <Col md={4}>
                       <Panel>
                         <Panel.Heading>
-                          I&apos;m voting in:
+                          <FormattedMessage
+                            id="request.header-i-going"
+                            defaultMessage={`I am voting in`}
+                          />:
                         </Panel.Heading>
                         <Panel.Body>
                           <LocationSelection onChange={this.pollLocationChanged} initialLocation={this.state.pollLocation}/>
@@ -175,7 +202,10 @@ export default class NeedCarpool extends Component {
                     <Col md={4}>
                       <Panel>
                         <Panel.Heading>
-                        My gender is
+                          <FormattedMessage
+                            id="request.header-my-gender"
+                            defaultMessage={`My gender is`}
+                          />
                         </Panel.Heading>
                         <Panel.Body>
                           <div>
@@ -185,14 +215,24 @@ export default class NeedCarpool extends Component {
                               value='male'
                               onChange={(e) => this.handleGenderChange('male')}
                               checked={this.state.gender == 'male'}
-                              />Male<br />
+                              />
+                              <FormattedMessage
+                                id="request.gender-value-male"
+                                defaultMessage={`Male`}
+                              />
+                              <br />
                             <input
                               type='radio'
                               name='gender'
                               value='female'
                               onChange={(e) => this.handleGenderChange('female')}
                               checked={this.state.gender == 'female'}
-                              />Female<br />
+                              />
+                            <FormattedMessage
+                              id="request.gender-value-female"
+                              defaultMessage={`Female`}
+                            />
+                            <br />
                           </div>
                         </Panel.Body>
                       </Panel>
@@ -202,7 +242,10 @@ export default class NeedCarpool extends Component {
                     <Col md={4}>
                       <Panel>
                         <Panel.Heading>
-                        More information
+                          <FormattedMessage
+                            id="request.create-header-more-info"
+                            defaultMessage={`More information`}
+                          />
                         </Panel.Heading>
                         <Panel.Body>
                         <FormControl
@@ -217,16 +260,42 @@ export default class NeedCarpool extends Component {
                     <Col md={4}>
                       <Panel>
                         <Panel.Heading>
-                        Information to show
+                          <FormattedMessage
+                            id="request.create-header-what-to-show"
+                            defaultMessage={`What info to show potential matches`}
+                          />
                         </Panel.Heading>
                         <Panel.Body>
                           <Alert bsStyle='info'>
-                            <p>Choose at least one option below, and optionally your contact number. Your information will be shown to others after they pass a captcha check.</p>
-                            <p>If you choose to show your Facebook account, do be responsive to new FB message requests!</p>
+                            <p>
+                              <FormattedMessage
+                                id="request.info-choose-what-to-show"
+                                defaultMessage={`Choose at least one option below, and optionally your contact number. Your information will be shown to others after they pass a captcha check.`}
+                              />
+                            </p>
+                            <p>
+                              <FormattedMessage
+                                id="request.info-choose-what-to-show-fb"
+                                defaultMessage={`If you choose to show your Facebook account, do be responsive to new FB message requests!`}
+                              />
+                            </p>
                           </Alert>
-                          <input type="checkbox" onChange={this.toggleAllowEmail} checked={this.state.allowEmail} />Show my email address<br />
-                          <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />Show the link to my Facebook account.<br />
-                          Show my contact number: <input type='text' size='20' maxLength='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
+                          <input type="checkbox" onChange={this.toggleAllowEmail} checked={this.state.allowEmail} />
+                          <FormattedMessage
+                            id="request.checkbox-show-email"
+                            defaultMessage={`Show my email address.`}
+                          /><br />
+                          <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />
+                          <FormattedMessage
+                            id="request.checkbox-show-fb"
+                            defaultMessage={`Show the link to my Facebook account.`}
+                          />
+                          <br />
+                          <FormattedMessage
+                            id="request.checkbox-show-contact"
+                            defaultMessage={`Show my contact number:`}
+                          />
+                          <input type='text' size='20' maxLength='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
                         </Panel.Body>
                       </Panel>
                     </Col>
@@ -238,10 +307,15 @@ export default class NeedCarpool extends Component {
                       <Col mdOffset={9} md={3} xsOffset={1} xs={4}>
                         <Button bsStyle='success' onClick={(e) => this.toggleModalShow(true)}>
                         {this.state.existingId
-                        ? 'Update carpool request'
-                        : 'Save carpool request'
+                        ? <FormattedMessage
+                            id="request.btn-update"
+                            defaultMessage={`Update carpool request`}
+                          />
+                        : <FormattedMessage
+                            id="request.btn-save"
+                            defaultMessage={`Save carpool request`}
+                          />
                         }
-
                         </Button>
                       </Col>
                     </Row>

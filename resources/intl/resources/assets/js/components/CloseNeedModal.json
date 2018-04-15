@@ -1,0 +1,18 @@
+[
+  {
+    "id": "request.close-title",
+    "defaultMessage": "Please tell us why you are closing your carpool request"
+  },
+  {
+    "id": "request.btn-i-have-matched",
+    "defaultMessage": "I have matched <br />with other carpoolers!"
+  },
+  {
+    "id": "request.btn-i-dowan",
+    "defaultMessage": "I have changed my mind/<br/>will re-create listing"
+  },
+  {
+    "id": "btn-cancel",
+    "defaultMessage": "Cancel"
+  }
+]

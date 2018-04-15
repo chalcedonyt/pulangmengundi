@@ -1,0 +1,82 @@
+[
+  {
+    "id": "offer.header-create",
+    "defaultMessage": "Offer to create a carpool"
+  },
+  {
+    "id": "offer.create-info",
+    "defaultMessage": "Pick where you are leaving from and where you are going to, then check and fill in the timings for at least <strong>one</strong> direction you want to carpool for."
+  },
+  {
+    "id": "request.header-i-from",
+    "defaultMessage": "I am currently in"
+  },
+  {
+    "id": "request.header-i-going",
+    "defaultMessage": "I am voting in"
+  },
+  {
+    "id": "offer.header-gender-prev",
+    "defaultMessage": "I prefer to carpool with"
+  },
+  {
+    "id": "offer.gender-pref-any",
+    "defaultMessage": "Any gender"
+  },
+  {
+    "id": "offer.gender-pref-male",
+    "defaultMessage": "Male"
+  },
+  {
+    "id": "offer.gender-pref-female",
+    "defaultMessage": "Female"
+  },
+  {
+    "id": "offer.checkbox-carpool-to",
+    "defaultMessage": "I am offering a carpool TO the polls"
+  },
+  {
+    "id": "offer.info-from-time",
+    "defaultMessage": "I'll leave {from} for {to} at:"
+  },
+  {
+    "id": "offer.checkbox-carpool-back",
+    "defaultMessage": "I am offering a carpool BACK after the polls"
+  },
+  {
+    "id": "offer.info-come-back-time",
+    "defaultMessage": "I'll leave {from} for {to} at:"
+  },
+  {
+    "id": "request.create-header-more-info",
+    "defaultMessage": "More information"
+  },
+  {
+    "id": "request.create-header-what-to-show",
+    "defaultMessage": "What info to show potential matches"
+  },
+  {
+    "id": "request.info-choose-what-to-show",
+    "defaultMessage": "Choose at least one option below, and optionally your contact number. Your information will be shown to others after they pass a captcha check."
+  },
+  {
+    "id": "request.info-choose-what-to-show-fb",
+    "defaultMessage": "If you choose to show your Facebook account, do be responsive to new FB message requests!"
+  },
+  {
+    "id": "request.checkbox-show-email",
+    "defaultMessage": "Show my email address."
+  },
+  {
+    "id": "request.checkbox-show-fb",
+    "defaultMessage": "Show the link to my Facebook account."
+  },
+  {
+    "id": "request.checkbox-show-contact",
+    "defaultMessage": "Show my contact number:"
+  },
+  {
+    "id": "offer.btn-submit",
+    "defaultMessage": "Submit carpool offer"
+  }
+]

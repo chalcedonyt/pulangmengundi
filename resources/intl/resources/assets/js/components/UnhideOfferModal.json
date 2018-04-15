@@ -1,0 +1,18 @@
+[
+  {
+    "id": "offer.dialog-hide-question",
+    "defaultMessage": "Hide your carpool offer?"
+  },
+  {
+    "id": "offer.warning-undo-hidden-public",
+    "defaultMessage": "This will make your carpool offer public again."
+  },
+  {
+    "id": "btn-ok",
+    "defaultMessage": "OK"
+  },
+  {
+    "id": "btn-cancel",
+    "defaultMessage": "Cancel"
+  }
+]

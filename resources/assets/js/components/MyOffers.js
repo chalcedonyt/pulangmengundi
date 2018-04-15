@@ -6,6 +6,7 @@ import {Alert, Grid, Row, Col, Panel} from 'react-bootstrap'
 import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
 import ContactModal from './ContactModal'
+import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 
 export default class MyOffers extends Component {
   constructor(props) {
@@ -51,11 +52,31 @@ export default class MyOffers extends Component {
   render() {
     return (
       <div>
-        <h1>Your carpool offers</h1>
+        <h1>
+          <FormattedMessage
+            id="offer.header-your-offers"
+            defaultMessage={`Your carpool offers`}
+          />
+        </h1>
         <Alert bsStyle="info">
-          <h4>What should I do now?</h4>
-          <p>You may be contacted by riders going the same way. If you enabled Facebook as a method of contact, do <strong>actively</strong> check your Friend requests and messages</p>
-          <p>If you have an open offer, we may send you emails periodically to tell you of new matches.</p>
+          <h4>
+            <FormattedMessage
+              id="offer.header-do-what"
+              defaultMessage={`What should I do now?`}
+            />
+          </h4>
+          <p>
+            <FormattedHTMLMessage
+              id="offer.do-what-1"
+              defaultMessage={`You may be contacted by riders going the same way. If you enabled Facebook as a method of contact, do <strong>actively</strong> check your Friend requests and messages`}
+            />
+          </p>
+          <p>
+            <FormattedMessage
+              id="offer.do-what-2"
+              defaultMessage={`If you have an open offer, we may send you emails periodically to tell you of new matches.`}
+            />
+          </p>
         </Alert>
         <Row>
         {this.state.offers.map((offer, i) => (
@@ -66,19 +87,35 @@ export default class MyOffers extends Component {
         </Row>
         <Panel>
           <Panel.Heading>
-            <h3>Your matches</h3>
+            <h3>
+              <FormattedMessage
+                id="offer.header-matches"
+                defaultMessage={`Your matches`}
+              />
+            </h3>
           </Panel.Heading>
           <Panel.Body>
             <Alert bsStyle='info'>
-              <p>Carpool requests from riders that match you are shown here. You can also check the <strong><a href='/'>main page</a></strong> to search for riders.</p>
+              <p>
+                <FormattedHTMLMessage
+                  id="offer.your-matches-info"
+                  defaultMessage={`Carpool requests from riders that match you are shown here. You can also check the <strong><a href='/'>main page</a></strong> to search for riders.`}
+                />
+              </p>
             </Alert>
             {this.state.needs && this.state.needs.length == 0 &&
             <Alert bsStyle='info'>
               <p>
-                There is no one matching your travel locations. Check back later!
+                <FormattedMessage
+                  id="offer.no-match-1"
+                  defaultMessage={`There is no one matching your travel locations. Check back later!`}
+                />
               </p>
               <p>
-                We will try to match you with anyone travelling from the same states.
+                <FormattedMessage
+                  id="offer.no-match-2"
+                  defaultMessage={`We will try to match you with anyone travelling from the same states.`}
+                />
               </p>
             </Alert>
             }

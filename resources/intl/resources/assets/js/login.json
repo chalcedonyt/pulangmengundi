@@ -1,0 +1,22 @@
+[
+  {
+    "id": "login.login-to-site",
+    "defaultMessage": "Login to"
+  },
+  {
+    "id": "login.login-1",
+    "defaultMessage": "We need your social media login to determine that you are a real person."
+  },
+  {
+    "id": "login.login-2",
+    "defaultMessage": "This helps prevent fraud and helps keep our users safe."
+  },
+  {
+    "id": "login.login-3",
+    "defaultMessage": "We will also send you email updates should a suitable driver/rider be found for you."
+  },
+  {
+    "id": "login.login-4",
+    "defaultMessage": "You may choose to share the link to your social media account with potential carpoolers / donors so that <strong>they are empowered</strong> to verify who you are (and hopefully determine that you will be a good roadtrip companion/voter!)"
+  }
+]
