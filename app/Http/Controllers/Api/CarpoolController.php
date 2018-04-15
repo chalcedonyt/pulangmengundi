@@ -195,7 +195,6 @@ class CarpoolController extends Controller
             $limit = 100;
         }
 
-        if ($reuqest->input('state_from'))
         $total = $query->count();
         $offers = $query->orderBy('created_at', 'desc')
         ->where('hidden', '=', 0)
@@ -239,7 +238,7 @@ class CarpoolController extends Controller
 
         $total = $query->count();
         $needs = $query
-        // ->where('fulfilled', '=', 0)
+        ->where('fulfilled', '=', 0)
         ->orderBy('created_at', 'desc')
         ->limit($limit)
         ->get();
