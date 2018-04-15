@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
-import {Alert, Button, Col, Grid, Image, Jumbotron, Row, Panel} from 'react-bootstrap'
+import {Alert, Button, Col, Grid, Glyphicon, Image, Jumbotron, Row, Panel, PanelGroup} from 'react-bootstrap'
 import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
 import ContactModal from './ContactModal'
 import StateSelection from './StateSelection'
 import Progress from './Progress'
 import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
+import { isMobile, MobileView, BrowserView } from "react-device-detect";
 
 
 export default class Carpool extends Component {
@@ -23,7 +24,9 @@ export default class Carpool extends Component {
       selectedUser: {},
       needCount: null,
       offerCount: null,
-      isLoading: false
+      isLoading: false,
+      showingRiders: false,
+      showingDrivers: false,
     }
     this.handleStateFromChange = this.handleStateFromChange.bind(this)
     this.handleStateToChange = this.handleStateToChange.bind(this)
@@ -31,6 +34,8 @@ export default class Carpool extends Component {
     this.resetSelectedStateFrom = this.resetSelectedStateFrom.bind(this)
     this.resetSelectedStateTo = this.resetSelectedStateTo.bind(this)
     this.doSearch = this.doSearch.bind(this)
+    this.toggleShowingRiders = this.toggleShowingRiders.bind(this)
+    this.toggleShowingDrivers = this.toggleShowingDrivers.bind(this)
   }
 
   componentDidMount() {
@@ -131,6 +136,19 @@ export default class Carpool extends Component {
       selectedStateTo: null,
     }, () => {
       this.doSearch()
+    })
+  }
+
+  toggleShowingDrivers() {
+    console.log("!")
+    this.setState({
+      showingDrivers: !this.state.showingDrivers
+    })
+  }
+
+  toggleShowingRiders() {
+    this.setState({
+      showingRiders: !this.state.showingRiders
     })
   }
 
@@ -270,68 +288,162 @@ export default class Carpool extends Component {
         <Grid fluid>
           <Row>
             <Col md={6}>
-              <Panel bsStyle='primary'>
-                <Panel.Heading>
-                  <h3>{this.state.offerCount}&nbsp;
-                    <FormattedMessage
-                      id="home.driver-counter"
-                      defaultMessage={`Drivers offering carpools`}
-                    />
-                  </h3>
-                </Panel.Heading>
-                <Panel.Body>
-                  {this.state.isLoading && <Progress />}
-                  {!this.state.isLoading
-                  && this.state.offers
-                  && this.state.offers.length > 0
-                  && this.state.offers.map((offer) => (
-                    <CarpoolOffer offer={offer} key={offer.id} onContact={this.handleContactUser}/>
-                  ))}
-                  {!this.state.isLoading
-                  && this.state.offers
-                  && this.state.offers.length == 0
-                  && (
-                    <Alert bsStyle='info'>
-                      <FormattedMessage
-                        id="match.no-results"
-                        defaultMessage={`No results found`}
-                      />
-                    </Alert>
-                  )}
-                </Panel.Body>
-              </Panel>
+              <PanelGroup id='drivers' accordion={isMobile}>
+                <Panel eventKey={1} bsStyle='primary'>
+                  <Panel.Heading>
+                    <Panel.Title toggle>
+                      <Row>
+                        <Col md={12} xs={10} sm={10}>
+                          <h3>
+                            {this.state.offerCount}&nbsp;
+                            <FormattedMessage
+                              id="home.driver-counter"
+                              defaultMessage={`Drivers offering carpools`}
+                            />&nbsp;&nbsp;
+                          </h3>
+                        </Col>
+                        <Col xs={2} sm={2} className='toggle-chevron-column'>
+                          {isMobile && this.state.showingDrivers &&
+                          <Button>
+                            <Glyphicon glyph='chevron-up' />
+                          </Button>
+                          }
+                          {isMobile && !this.state.showingDrivers &&
+                            <Button>
+                              <Glyphicon glyph='chevron-down' />
+                            </Button>
+                          }
+                        </Col>
+                      </Row>
+                    </Panel.Title>
+                  </Panel.Heading>
+                  <MobileView device={isMobile}>
+                    <Panel.Collapse onExit={this.toggleShowingDrivers} onEnter={this.toggleShowingDrivers}>
+                      <Panel.Body>
+                        {this.state.isLoading && <Progress />}
+                        {!this.state.isLoading
+                        && this.state.offers
+                        && this.state.offers.length > 0
+                        && this.state.offers.map((offer) => (
+                          <CarpoolOffer offer={offer} key={offer.id} onContact={this.handleContactUser}/>
+                        ))}
+                        {!this.state.isLoading
+                        && this.state.offers
+                        && this.state.offers.length == 0
+                        && (
+                          <Alert bsStyle='info'>
+                            <FormattedMessage
+                              id="match.no-results"
+                              defaultMessage={`No results found`}
+                            />
+                          </Alert>
+                        )}
+                      </Panel.Body>
+                    </Panel.Collapse>
+                  </MobileView>
+                  <BrowserView device={!isMobile}>
+                    <Panel.Body>
+                      {this.state.isLoading && <Progress />}
+                      {!this.state.isLoading
+                      && this.state.offers
+                      && this.state.offers.length > 0
+                      && this.state.offers.map((offer) => (
+                        <CarpoolOffer offer={offer} key={offer.id} onContact={this.handleContactUser}/>
+                      ))}
+                      {!this.state.isLoading
+                      && this.state.offers
+                      && this.state.offers.length == 0
+                      && (
+                        <Alert bsStyle='info'>
+                          <FormattedMessage
+                            id="match.no-results"
+                            defaultMessage={`No results found`}
+                          />
+                        </Alert>
+                      )}
+                    </Panel.Body>
+                  </BrowserView>
+                </Panel>
+              </PanelGroup>
             </Col>
             <Col md={6}>
-              <Panel bsStyle='primary'>
-                <Panel.Heading bsStyle='primary'>
-                  <h3>{this.state.needCount}&nbsp;
-                    <FormattedMessage
-                      id="home.rider-counter"
-                      defaultMessage={`Riders looking for carpools`}
-                    />
-                  </h3>
-                </Panel.Heading>
-                <Panel.Body>
-                  {this.state.isLoading && <Progress />}
-                  {!this.state.isLoading
-                  && this.state.needs
-                  && this.state.needs.length > 0
-                  && this.state.needs.map((need) => (
-                    <CarpoolNeed need={need} key={need.id} onContact={this.handleContactUser}/>
-                  ))}
-                  {!this.state.isLoading
-                  && this.state.needs
-                  && this.state.needs.length == 0
-                  && (
-                    <Alert bsStyle='info'>
-                      <FormattedMessage
-                        id="match.no-results"
-                        defaultMessage={`No results found`}
-                      />
-                    </Alert>
-                  )}
-                </Panel.Body>
-              </Panel>
+              <PanelGroup id='riders' accordion={isMobile} onToggle={this.toggleShowingRiders}>
+                <Panel eventKey={2} bsStyle='primary'>
+                  <Panel.Heading bsStyle='primary'>
+                    <Panel.Title toggle>
+                      <Row>
+                        <Col md={12} xs={10} sm={10}>
+                          <h3>
+                            {this.state.needCount}&nbsp;
+                            <FormattedMessage
+                              id="home.rider-counter"
+                              defaultMessage={`Riders looking for carpools`}
+                            />
+                          </h3>
+                        </Col>
+                        <Col xs={2} sm={2} className='toggle-chevron-column'>
+                          {isMobile && this.state.showingRiders &&
+                          <Button>
+                            <Glyphicon glyph='chevron-up' />
+                          </Button>
+                          }
+                          {isMobile && !this.state.showingRiders &&
+                            <Button>
+                              <Glyphicon glyph='chevron-down' />
+                            </Button>
+                          }
+                        </Col>
+                      </Row>
+                    </Panel.Title>
+                  </Panel.Heading>
+                  <MobileView device={isMobile}>
+                    <Panel.Collapse onExit={this.toggleShowingRiders} onEnter={this.toggleShowingRiders}>
+                      <Panel.Body>
+                        {this.state.isLoading && <Progress />}
+                        {!this.state.isLoading
+                        && this.state.needs
+                        && this.state.needs.length > 0
+                        && this.state.needs.map((need) => (
+                          <CarpoolNeed need={need} key={need.id} onContact={this.handleContactUser}/>
+                        ))}
+                        {!this.state.isLoading
+                        && this.state.needs
+                        && this.state.needs.length == 0
+                        && (
+                          <Alert bsStyle='info'>
+                            <FormattedMessage
+                              id="match.no-results"
+                              defaultMessage={`No results found`}
+                            />
+                          </Alert>
+                        )}
+                      </Panel.Body>
+                    </Panel.Collapse>
+                  </MobileView>
+                  <BrowserView device={!isMobile}>
+                    <Panel.Body>
+                      {this.state.isLoading && <Progress />}
+                      {!this.state.isLoading
+                      && this.state.needs
+                      && this.state.needs.length > 0
+                      && this.state.needs.map((need) => (
+                        <CarpoolNeed need={need} key={need.id} onContact={this.handleContactUser}/>
+                      ))}
+                      {!this.state.isLoading
+                      && this.state.needs
+                      && this.state.needs.length == 0
+                      && (
+                        <Alert bsStyle='info'>
+                          <FormattedMessage
+                            id="match.no-results"
+                            defaultMessage={`No results found`}
+                          />
+                        </Alert>
+                      )}
+                    </Panel.Body>
+                  </BrowserView>
+                </Panel>
+              </PanelGroup>
             </Col>
           </Row>
         </Grid>
