@@ -16,6 +16,7 @@ class DailyMatchEmail extends Mailable
     public $matchedOffers;
     public $matchedNeeds;
     public $user;
+    public $subject = '';
 
     /**
      * Create a new message instance.
@@ -27,6 +28,11 @@ class DailyMatchEmail extends Mailable
         $this->user = $user;
         $this->matchedOffers = $matched_offers;
         $this->matchedNeeds = $matched_needs;
+        if ($matched_needs->count() || $matched_offers->count()) {
+            $this->subject = $matched_needs->count()
+            ? sprintf('We have found %d potential rider(s) for you', $matched_needs->count())
+            : sprintf('We have found %d potential driver(s) for you', $matched_offers->count());
+        }
     }
 
     /**

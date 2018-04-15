@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Gateways\MatchGateway;
+use App\Mail\DailyMatchEmail;
+use App\Models\EmailsSent;
 
 class SendEmailUpdatesCommand extends Command
 {
@@ -38,6 +40,12 @@ class SendEmailUpdatesCommand extends Command
      */
     public function handle()
     {
+        $match_stats = [
+            'users' => 0,
+            'matched_drivers' => 0,
+            'matched_riders' => 0,
+            'msgs' => []
+        ];
         \App\Models\User::with(
             'need',
             'need.user',
@@ -48,7 +56,7 @@ class SendEmailUpdatesCommand extends Command
             'offers.fromLocation.locationState',
             'offers.toLocation.locationState'
         )
-        ->orderBy('id')->chunk(50, function ($users) {
+        ->orderBy('id')->chunk(50, function ($users) use (&$match_stats) {
             foreach ($users as $user) {
                 $matched_offers = collect([]);
                 if ($user->need) {
@@ -65,9 +73,27 @@ class SendEmailUpdatesCommand extends Command
                     }
                 }
                 if ($matched_needs->count() || $matched_offers->count()) {
-                    $job = new SendEmailMatchUpdateJob($user, $matched_offers, $matched_needs);
+                    $msg = sprintf('Found %d drivers, %d offers for user %d %s',
+                        $matched_needs->count(),
+                        $matched_offers->count(),
+                        $user->getKey(),
+                        $user->name
+                    );
+                    $this->info($msg);
+                    $match_stats['msgs'][]=$msg;
+                    $match_stats['users']++;
+                    $mail = new DailyMatchEmail($user, $matched_offers, $matched_needs);
+                    \Mail::to($user->email)
+                    ->send($mail);
                 }
             }
         });
+        $msg = sprintf('Email batch run on %s found %d potential user matches', date('r'), $match_stats['users']);
+        $this->info($msg);
+        $es = new EmailsSent;
+        $es->sent_at = date('Y-m-d H:i:s');
+        $es->emails_sent = $match_stats['users'];
+        $es->message = implode("\n", $match_stats['msgs']);
+        $es->save();
     }
 }
