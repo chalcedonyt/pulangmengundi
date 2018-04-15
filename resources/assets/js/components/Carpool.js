@@ -38,6 +38,16 @@ export default class Carpool extends Component {
   }
 
   doSearch() {
+    var eventLabelProps = []
+    if (this.state.selectedStateFrom)
+      eventLabelProps.push(`from:${this.state.selectedStateFrom}`)
+    if (this.state.selectedStateTo)
+      eventLabelProps.push(`to:${this.state.selectedStateTo}`)
+
+    gtag('event', 'homepageSearch', {
+      'event_category': 'search',
+      'event_label': eventLabelProps.join(',')
+    });
     this.setState({
       isLoading: true
     }, () => {
