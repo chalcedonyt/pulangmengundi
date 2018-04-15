@@ -35,7 +35,7 @@ ReactDOM.render(
                 <Col xsHidden>
                   {window.user && <Image style={{maxWidth: '40px'}} responsive src={window.user.avatar_url} /> }
                 </Col>
-                <a href="https://www.pulangmengundi.com">
+                <a href="/">
                   {/* <Glyphicon style={{border: '1px solid black', padding: '1px'}} glyph='remove' />&nbsp; */}
                   <strong>#PULANGMENGUNDI</strong>
                 </a>
