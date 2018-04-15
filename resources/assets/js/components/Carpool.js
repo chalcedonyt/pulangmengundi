@@ -44,10 +44,12 @@ export default class Carpool extends Component {
     if (this.state.selectedStateTo)
       eventLabelProps.push(`to:${this.state.selectedStateTo}`)
 
-    gtag('event', 'homepageSearch', {
-      'event_category': 'search',
-      'event_label': eventLabelProps.join(',')
-    });
+    if (eventLabelProps.length) {
+      gtag('event', 'homepageSearch', {
+        'event_category': 'search',
+        'event_label': eventLabelProps.join(',')
+      });
+    }
     this.setState({
       isLoading: true
     }, () => {
