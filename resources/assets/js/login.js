@@ -10,9 +10,18 @@ import ReactDOM from 'react-dom';
 import {GoogleLoginButton, FacebookLoginButton} from 'react-social-login-buttons';
 import {Alert, Grid, Col, Row, Panel} from 'react-bootstrap'
 import {IntlProvider, FormattedMessage, FormattedHTMLMessage} from 'react-intl'
+import {addLocaleData} from 'react-intl';
+import locale_ms from 'react-intl/locale-data/ms';
+
+addLocaleData([...locale_ms]);
+import messages_bm from "./translations/bm.json";
+const messages = {
+  'ms': messages_bm
+}
+const language = window.locale || navigator.language.split(/[-_]/)[0];  // language without region code
 
 ReactDOM.render(
-  <IntlProvider locale='en'>
+  <IntlProvider locale={language} messages={messages[language]}>
     <Grid fluid>
       <Row>
         <Col md={6} mdOffset={3} xs={12}>

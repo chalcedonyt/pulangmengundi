@@ -17,6 +17,11 @@ class AppServiceProvider extends ServiceProvider
             $this->app['request']->server->set('HTTPS', true);
             \URL::forceScheme('https');
         }
+        \View::composer('*', function($view) {
+            $user = \Auth::user() ? \Auth::user()->toArray() : null;
+            $view->with('user', $user);
+            $view->with('locale', \LaravelLocalization::getCurrentLocale());
+        });
     }
 
     /**
@@ -26,6 +31,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
     }
 }

@@ -23,8 +23,7 @@ import messages_bm from "./translations/bm.json";
 const messages = {
   'ms': messages_bm
 }
-const language = navigator.language.split(/[-_]/)[0];  // language without region code
-
+const language = window.locale || navigator.language.split(/[-_]/)[0];  // language without region code
 ReactDOM.render(
     <BrowserRouter>
       <IntlProvider locale={language} messages={messages[language]}>
@@ -44,13 +43,19 @@ ReactDOM.render(
             </Navbar.Header>
             <Navbar.Collapse>
               <Nav>
-                <NavItem eventKey={1} href='/'>
+                <NavItem eventKey={1} href='/ms' active={language =='ms'}>
+                  BM
+                </NavItem>
+                <NavItem eventKey={2} href='/en' active={language =='en'}>
+                  ENG
+                </NavItem>
+                <NavItem eventKey={3} href='/'>
                   <FormattedMessage
                     id="nav-carpool"
                     defaultMessage={`Carpooling`}
                   />
                 </NavItem>
-                <NavItem eventKey={2} href='https://subsidy.pulangmengundi.com'>
+                <NavItem eventKey={4} href='https://subsidy.pulangmengundi.com'>
                   <FormattedMessage
                     id="nav-subsidy"
                     defaultMessage={`Subsidies`}
@@ -85,11 +90,11 @@ ReactDOM.render(
             </Navbar.Collapse>
           </Navbar>
           <Switch>
-            <Route exact path='/' component={Carpool} />
-            <Route exact path='/offer' component={OfferCarpool} />
-            <Route exact path='/my-offers' component={MyOffers} />
-            <Route exact path='/need' component={NeedCarpool} />
-            <Route exact path='/my-need' component={MyCarpoolNeed} />
+            <Route exact path='/:locale' component={Carpool} />
+            <Route exact path='/:locale/offer' component={OfferCarpool} />
+            <Route exact path='/:locale/my-offers' component={MyOffers} />
+            <Route exact path='/:locale/need' component={NeedCarpool} />
+            <Route exact path='/:locale/my-need' component={MyCarpoolNeed} />
           </Switch>
         </div>
       </IntlProvider>
