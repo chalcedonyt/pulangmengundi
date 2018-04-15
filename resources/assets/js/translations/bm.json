@@ -1,6 +1,6 @@
 {
 	"nav-carpool": "Kongsi Kereta (Carpool)",
-	"nav-subsidy": "Tajaan",
+	"nav-subsidy": "Subsidi",
 	"nav-logout": "Log keluar",
 	"nav-faq": "Garis panduan/FAQ",
 	"nav-about": "Tentang kami",
@@ -88,7 +88,7 @@
 	"contact.btn-close": "Tutup",
 	"offer.header-close-why": "Sila nyatakan kenapa anda memadamkan tawaran anda",
 	"offer.btn-close-success": "Saya berjaya dipadankan <br/>dengan pekongsi lain!",
-	"offer.btn-cancel-delete": "Saya menukar fikiran/<br/>Saya akan membuat penyenaraian baru",
+	"offer.btn-cancel-delete": "Saya menukar fikiran/<br/>Buat posting baru",
 	"offer.header-your-offers": "Perkongsian anda menawar",
 	"offer.header-do-what": "Apa perlu saya lakukan sekarang?",
 	"offer.do-what-1": "Anda mungkin dihubungi oleh bakal penumpang. Jika anda pilih untuk memaparkan akaun Facebook anda, sila jawab segala mesej dengan pantas!",
