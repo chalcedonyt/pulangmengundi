@@ -5,7 +5,7 @@
   },
   {
     "id": "contact.click-to-show-text",
-    "defaultMessage": "Click here to show {name} contact information:"
+    "defaultMessage": "Click here to show contact information of {name}:"
   },
   {
     "id": "contact.prevent-abuse",
@@ -29,15 +29,15 @@
   },
   {
     "id": "contact.header-email-address",
-    "defaultMessage": "{name} email address"
+    "defaultMessage": "Email address for {name}"
   },
   {
     "id": "contact.header-contact",
-    "defaultMessage": "{name} contact number"
+    "defaultMessage": "Contact number for {name}"
   },
   {
     "id": "contact.header-fb-profile",
-    "defaultMessage": "{name} Facebook profile link"
+    "defaultMessage": "Facebook profile link for {name}"
   },
   {
     "id": "contact.btn-open-fb-profile",

@@ -51,9 +51,9 @@ export default class ContactModal extends Component {
               <p>
                 <FormattedMessage
                   id="contact.click-to-show-text"
-                  defaultMessage={`Click here to show {name} contact information:`}
+                  defaultMessage={`Click here to show contact information of {name}:`}
                   values={{
-                    name: <strong>{this.props.user.name}&apos;s</strong>
+                    name: <strong>{this.props.user.name}</strong>
                   }}
                 />
               </p>
@@ -110,9 +110,9 @@ export default class ContactModal extends Component {
             <h4>
               <FormattedMessage
                 id="contact.header-email-address"
-                defaultMessage={`{name} email address`}
+                defaultMessage={`Email address for {name}`}
                 values={{
-                  name: <span>{this.props.user.name}&apos;s</span>
+                  name: <span>{this.props.user.name}</span>
                 }}
               />:
             </h4>
@@ -132,9 +132,9 @@ export default class ContactModal extends Component {
             <h4>
               <FormattedMessage
                 id="contact.header-contact"
-                defaultMessage={`{name} contact number`}
+                defaultMessage={`Contact number for {name}`}
                 values={{
-                  name: <span>{this.props.user.name}&apos;s</span>
+                  name: <span>{this.props.user.name}</span>
                 }}
               />:
             </h4>
@@ -154,9 +154,9 @@ export default class ContactModal extends Component {
             <h4>
               <FormattedMessage
                 id="contact.header-fb-profile"
-                defaultMessage={`{name} Facebook profile link`}
+                defaultMessage={`Facebook profile link for {name}`}
                 values={{
-                  name: <span>{this.props.user.name}&apos;s</span>
+                  name: <span>{this.props.user.name}</span>
                 }}
               />:
             </h4>
