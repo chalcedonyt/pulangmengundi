@@ -239,7 +239,7 @@ class CarpoolController extends Controller
 
         $total = $query->count();
         $needs = $query
-        ->where('fulfilled', '=', 0)
+        // ->where('fulfilled', '=', 0)
         ->orderBy('created_at', 'desc')
         ->limit($limit)
         ->get();
