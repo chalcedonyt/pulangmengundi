@@ -154,6 +154,7 @@ export default class Carpool extends Component {
                     <Alert bsStyle='info'>
                       <h4>Updates</h4>
                       <ul>
+                        <li>Sun 10am: We are starting to send emails to notify riders/drivers of potential matches.</li>
                         <li>Sat 5pm: You can now mark your listing as fulfilled, or cancel it. Please do so as it helps improve our system.</li>
                         <li>Sat 12am: You can now choose to fill in your <strong>contact number</strong> to be shown to others. (Drivers may need to cancel and re-post for this to be reflected)</li>
                       </ul>
