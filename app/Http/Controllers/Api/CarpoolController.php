@@ -176,6 +176,7 @@ class CarpoolController extends Controller
 
     public function offers(Request $request) {
         $query = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState');
+        $limit = 15;
         if (!empty($request->input('state_from')) || !empty($request->input('state_to'))) {
             $state_from = $request->input('state_from');
             $state_to = $request->input('state_to');
@@ -191,12 +192,14 @@ class CarpoolController extends Controller
                     });
                 });
             }
+            $limit = 100;
         }
 
+        if ($reuqest->input('state_from'))
         $total = $query->count();
         $offers = $query->orderBy('created_at', 'desc')
         ->where('hidden', '=', 0)
-        ->limit(15)
+        ->limit($limit)
         ->get();
 
 
@@ -208,6 +211,7 @@ class CarpoolController extends Controller
     }
 
     public function needs(Request $request) {
+        $limit = 15;
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState');
         if (!empty($request->input('state_from')) || !empty($request->input('state_to'))) {
             $state_from = $request->input('state_from');
@@ -230,13 +234,14 @@ class CarpoolController extends Controller
                     });
                 });
             }
+            $limit = 100;
         }
 
         $total = $query->count();
         $needs = $query
-        // ->where('hidden', '=', 0)
+        ->where('fulfilled', '=', 0)
         ->orderBy('created_at', 'desc')
-        ->limit(15)
+        ->limit($limit)
         ->get();
 
 
