@@ -76,6 +76,22 @@
     "defaultMessage": "Show my contact number:"
   },
   {
+    "id": "request.warning-select-from",
+    "defaultMessage": "Please select your start location"
+  },
+  {
+    "id": "request.warning-select-to",
+    "defaultMessage": "Please select your voting destination"
+  },
+  {
+    "id": "request.warning-select-contact-detail",
+    "defaultMessage": "You must show either your email address or Facebook account"
+  },
+  {
+    "id": "request.warning-fill-trip-detail",
+    "defaultMessage": "You must fill in details for at least one trip"
+  },
+  {
     "id": "offer.btn-submit",
     "defaultMessage": "Submit carpool offer"
   }

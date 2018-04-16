@@ -33,6 +33,7 @@ export default class NeedCarpool extends Component {
 
     this.toggleAllowEmail = this.toggleAllowEmail.bind(this)
     this.toggleAllowFb = this.toggleAllowFb.bind(this)
+    this.getValidationState = this.getValidationState.bind(this)
   }
 
   componentWillMount() {
@@ -134,6 +135,15 @@ export default class NeedCarpool extends Component {
     this.setState({
       showConfirmModal: bool
     })
+  }
+
+  getValidationState() {
+    return (this.state.pollLocation &&
+      this.state.fromLocation &&
+      this.state.gender &&
+      (this.state.allowEmail || this.state.allowFb))
+    ? 'success'
+    : 'warning'
   }
 
   render() {
@@ -299,9 +309,45 @@ export default class NeedCarpool extends Component {
                         </Panel.Body>
                       </Panel>
                     </Col>
+                    <Col md={4}>
+                      {this.getValidationState() !== 'success' &&
+                        <Alert bsStyle='danger'>
+                          <ul>
+                            {!this.state.fromLocation &&
+                              <li>
+                                <FormattedMessage
+                                  id="request.warning-select-from"
+                                  defaultMessage={`Please select your start location`}
+                                />
+                              </li>}
+                            {!this.state.pollLocation &&
+                              <li>
+                                <FormattedMessage
+                                  id="request.warning-select-to"
+                                  defaultMessage={`Please select your voting destination`}
+                                />
+                              </li>}
+                            {!this.state.gender &&
+                              <li>
+                                <FormattedMessage
+                                  id="request.warning-select-gender"
+                                  defaultMessage={`Please select your gender`}
+                                />
+                              </li>}
+                            {!this.state.allowEmail && !this.state.allowFb &&
+                              <li>
+                                <FormattedMessage
+                                  id="request.warning-select-contact-detail"
+                                  defaultMessage={`You must show either your email address or Facebook account`}
+                                />
+                              </li>}
+                          </ul>
+                        </Alert>
+                      }
+                    </Col>
                   </Row>
                 </Panel.Body>
-                {this.state.pollLocation && this.state.fromLocation && this.state.gender && (this.state.allowEmail || this.state.allowFb) &&
+                {this.getValidationState() == 'success' &&
                   <Panel.Footer>
                     <Row>
                       <Col mdOffset={9} md={3} xsOffset={1} xs={4}>

@@ -352,7 +352,7 @@ export default class OfferCarpool extends Component {
                 </Col>
               </Row>
               <Row>
-                <Col md={6}>
+                <Col md={4}>
                   <Panel>
                     <Panel.Heading>
                       <FormattedMessage
@@ -412,27 +412,71 @@ export default class OfferCarpool extends Component {
                     </Panel.Body>
                   </Panel>
                 </Col>
-              </Row>
-              {this.getValidationState() == 'success' &&
-              <Row>
-                <Col md={3} mdOffset={5} xs={6} xsOffset={3}>
-                  <FormGroup controlId='OfferForm' validationState={this.getValidationState()}>
-                    <Button
-                      bsStyle={'success'}
-                      onClick={(e)=>this.setShowModal(true)}
-                      type='submit'>
-                      <FormattedMessage
-                        id="offer.btn-submit"
-                        defaultMessage={`Submit carpool offer`}
-                      />
-                    </Button>
-                  </FormGroup>
+                <Col md={4}>
+                {this.getValidationState() !== 'success' &&
+                  <Alert bsStyle='danger'>
+                    <ul>
+                      {!this.state.startLocation &&
+                      <li>
+                        <FormattedMessage
+                          id="request.warning-select-from"
+                          defaultMessage={`Please select your start location`}
+                        />
+                      </li>}
+                      {!this.state.pollLocation &&
+                      <li>
+                        <FormattedMessage
+                          id="request.warning-select-to"
+                          defaultMessage={`Please select your voting destination`}
+                        />
+                      </li>}
+                      {!(this.state.allowEmail || this.state.allowFb) &&
+                      <li>
+                        <FormattedMessage
+                          id="request.warning-select-contact-detail"
+                          defaultMessage={`You must show either your email address or Facebook account`}
+                        />
+                      </li>}
+                      {!(
+                      ( this.state.willCarpoolFromPolls ? this.state.carpoolFromPollsDateTime !== null : true )
+                      && ( this.state.willCarpoolToPolls ? this.state.carpoolToPollsDateTime !== null : true )
+                      && ( this.state.willCarpoolFromPolls || this.state.willCarpoolToPolls )
+                      )
+                      &&
+                      <li>
+                        <FormattedMessage
+                          id="request.warning-fill-trip-detail"
+                          defaultMessage={`You must fill in details for at least one trip`}
+                        />
+                      </li>
+                    }
+                    </ul>
+                  </Alert>
+                }
                 </Col>
               </Row>
-            }
             </div>
             }
           </Panel.Body>
+          {this.getValidationState() == 'success' &&
+          <Panel.Footer>
+            <Row>
+              <Col md={3} mdOffset={5} xs={6} xsOffset={3}>
+                <FormGroup controlId='OfferForm' validationState={this.getValidationState()}>
+                  <Button
+                    bsStyle={'success'}
+                    onClick={(e)=>this.setShowModal(true)}
+                    type='submit'>
+                    <FormattedMessage
+                      id="offer.btn-submit"
+                      defaultMessage={`Submit carpool offer`}
+                    />
+                  </Button>
+                </FormGroup>
+              </Col>
+            </Row>
+          </Panel.Footer>
+            }
         </Panel>
         <OfferCarpoolModal
           offers={this.state.offers}

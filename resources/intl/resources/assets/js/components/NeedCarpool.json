@@ -64,6 +64,22 @@
     "defaultMessage": "Show my contact number:"
   },
   {
+    "id": "request.warning-select-from",
+    "defaultMessage": "Please select your start location"
+  },
+  {
+    "id": "request.warning-select-to",
+    "defaultMessage": "Please select your voting destination"
+  },
+  {
+    "id": "request.warning-select-gender",
+    "defaultMessage": "Please select your gender"
+  },
+  {
+    "id": "request.warning-select-contact-detail",
+    "defaultMessage": "You must show either your email address or Facebook account"
+  },
+  {
     "id": "request.btn-update",
     "defaultMessage": "Update carpool request"
   },
