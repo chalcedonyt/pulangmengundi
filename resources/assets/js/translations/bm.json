@@ -16,9 +16,9 @@
 	"home.rider-btn-small": "(Penumpang)<br />Saya ingin menumpang",
 	"home.header-update": "Terbaru",
 	"home.changelog": "<ul><li>Isnin 9AM: Anjuran dari Undirabu kini sedia ada!</li><li>Ahad 5PM: #PulangMengundi sekarang ada dalam Bahasa Melayu!</li><li>Ahad 10PM: Semua pemandu dan penumpang akan kami e-mel jika sebarang padanan berlaku.</li><li>Sabtu 5PM: Anda sekarang boleh menandakan posting anda sebagai dipenuhi. Anda juga boleh membatalkannya. Sila buat yang berpatutan bagi memperbaiki sistem kami!</li></ul>",
-	"home.btn-search-from": "Dari manakah perjalanan anda bermula?",
+	"home.btn-search-from": "Manakah perjalanan anda bermula?",
 	"home.btn-search-clear": "Kosongkan",
-	"home.btn-search-to": "Ke manakah akan anda pergi?",
+	"home.btn-search-to": "Manakah destinasi anda?",
 	"home.driver-counter": "Pemandu mahu berkongsi kenderaan",
 	"home.rider-counter": "Penumpang ingin berkongsi",
 	"match.no-results": "Tiada keputusan",
@@ -115,8 +115,8 @@
 	"offer.dialog-hide-question": "Sembunyikan tawaran?",
 	"offer.warning-undo-hidden-public": "Ini akan membuatkan tawaran anda dapat dilihat oleh semua pengguna.",
 	"btn-ok": "OK",
-	"home.undirabu-promo-header": "TERKINI: Undirabu akan menganjur bas PERCUMA ke lokasi yang ditentukan di sekitar Malaysia.",
+	"home.undirabu-promo-header": "TERKINI: Undirabu akan menaja bas PERCUMA ke lokasi tertentu.",
 	"home.undirabu-promo-cta": "Sila rujukan di {link}, atau lancarkan carian di bawah - kami akan memberitahu anda jika terdapat bas yang sesuai!",
-	"home.undirabu-promo-matched": "Laluan anda telah dipadankan dengan anjuran PERCUMA dari Undirabu!",
+	"home.undirabu-promo-matched": "Destinasi anda telah dipadankan dengan bas PERCUMA tajaan Undirabu!",
 	"pagination-more": "Berikutnya"
 }
