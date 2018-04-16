@@ -49,12 +49,6 @@ ReactDOM.render(
                 <NavItem eventKey={2} href='/en' active={language =='en'}>
                   ENG
                 </NavItem>
-                <NavItem eventKey={3} href='/'>
-                  <FormattedMessage
-                    id="nav-carpool"
-                    defaultMessage={`Carpooling`}
-                  />
-                </NavItem>
                 <NavItem eventKey={4} href='https://subsidy.pulangmengundi.com'>
                   <FormattedMessage
                     id="nav-subsidy"

@@ -1,9 +1,5 @@
 [
   {
-    "id": "nav-carpool",
-    "defaultMessage": "Carpooling"
-  },
-  {
     "id": "nav-subsidy",
     "defaultMessage": "Subsidies"
   },

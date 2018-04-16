@@ -27,6 +27,12 @@ export default class Carpool extends Component {
       isLoading: false,
       showingRiders: false,
       showingDrivers: false,
+      sponsorMatches: null,
+
+      driverOffset: 0,
+      driverLimit:15,
+      riderOffset: 0,
+      riderLimit: 15
     }
     this.handleStateFromChange = this.handleStateFromChange.bind(this)
     this.handleStateToChange = this.handleStateToChange.bind(this)
@@ -36,6 +42,9 @@ export default class Carpool extends Component {
     this.doSearch = this.doSearch.bind(this)
     this.toggleShowingRiders = this.toggleShowingRiders.bind(this)
     this.toggleShowingDrivers = this.toggleShowingDrivers.bind(this)
+
+    this.loadMoreDrivers = this.loadMoreDrivers.bind(this)
+    this.loadMoreRiders = this.loadMoreRiders.bind(this)
   }
 
   componentDidMount() {
@@ -63,7 +72,12 @@ export default class Carpool extends Component {
         const offerCount = meta.count
           this.getNeeds()
           .then(({needs, meta}) => {
+            const sponsorMatches = (Array.isArray(meta.sponsor_matches) && meta.sponsor_matches.length)
+            ? meta.sponsor_matches
+            : null
+
             this.setState({
+              sponsorMatches,
               offers,
               offerCount,
               needs,
@@ -140,7 +154,6 @@ export default class Carpool extends Component {
   }
 
   toggleShowingDrivers() {
-    console.log("!")
     this.setState({
       showingDrivers: !this.state.showingDrivers
     })
@@ -151,6 +164,45 @@ export default class Carpool extends Component {
       showingRiders: !this.state.showingRiders
     })
   }
+
+  loadMoreDrivers() {
+    this.setState({
+      driverOffset: this.state.driverOffset+= this.state.driverLimit,
+    }, () => {
+      const params = {
+        state_from: this.state.selectedStateFrom,
+        state_to: this.state.selectedStateTo,
+        offset: this.state.driverOffset
+      }
+      api.getAllOffers(params)
+      .then((response) => response.data)
+      .then(({offers}) => {
+        this.setState({
+          offers: this.state.offers.concat(offers),
+        })
+      })
+    })
+  }
+
+  loadMoreRiders() {
+    this.setState({
+      riderOffset: this.state.riderOffset+= this.state.riderLimit,
+    }, () => {
+      const params = {
+        state_from: this.state.selectedStateFrom,
+        state_to: this.state.selectedStateTo,
+        offset: this.state.riderOffset
+      }
+      api.getAllNeeds(params)
+      .then((response) => response.data)
+      .then(({needs}) => {
+        this.setState({
+          needs: this.state.needs.concat(needs)
+        })
+      })
+    })
+  }
+
 
   render() {
     return (
@@ -231,60 +283,110 @@ export default class Carpool extends Component {
             </Col>
           </Row>
         </Jumbotron>
-        <Grid fluid>
-          <Row>
-            <Col md={4} mdOffset={1}>
-              <Panel>
-                <Panel.Heading>
-                  <FormattedMessage
-                    id="home.btn-search-from"
-                    defaultMessage={`Choose where you are starting from`}
-                  />
-                </Panel.Heading>
-                <Panel.Body>
-                  <StateSelection
-                    title={'State:'}
-                    selectedState={this.state.selectedStateFrom}
-                    onChange={this.handleStateFromChange}
-                  />
-                  {this.state.selectedStateFrom &&
-                    <Button bsStyle='link' onClick={this.resetSelectedStateFrom}>
+        <Panel bsStyle='info'>
+          <Panel.Body>
+            <Grid fluid>
+              <Alert bsStyle='info'>
+                <Row>
+                  <Col md={1} mdOffset={0} xsOffset={4} xs={1} sm={1} smOffset={0}>
+                    <Image width='50' src='https://balik.undirabu.com/wp-content/uploads/2018/04/undirabu-logo-300x300.png' />
+                  </Col>
+                  <Col md={11} xs={12} sm={11}>
+                    <h5>
                       <FormattedMessage
-                        id="home.btn-search-clear"
-                        defaultMessage={`Clear`}
+                        id="home.undirabu-promo-header"
+                        defaultMessage={`New: Undirabu is sponsoring FREE buses to certain locations throughout Malaysia.`}
                       />
-                    </Button>
-                  }
-                </Panel.Body>
-              </Panel>
-            </Col>
-            <Col md={4}>
-              <Panel>
-                <Panel.Heading>
-                  <FormattedMessage
-                    id="home.btn-search-to"
-                    defaultMessage={`Choose where you are going to`}
-                  />
-                </Panel.Heading>
-                <Panel.Body>
-                  <StateSelection
-                    title={'State:'}
-                    selectedState={this.state.selectedStateTo}
-                    onChange={this.handleStateToChange}
-                  />
-                  {this.state.selectedStateTo &&
-                    <Button bsStyle='link' onClick={this.resetSelectedStateTo}>
+                    </h5>
+                    <p>
                       <FormattedMessage
-                        id="home.btn-search-clear"
-                        defaultMessage={`Clear`}
+                        id="home.undirabu-promo-cta"
+                        defaultMessage={`Check them out at {link}, or do a search to see if they have a bus matching your trip!`}
+                        values={{
+                          'link': <u>
+                            <a target='_blank' href='https://balik.undirabu.com/home?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_banner'>balik.undirabu.com</a>
+                          </u>
+                        }}
                       />
-                    </Button>
-                  }
-                </Panel.Body>
-              </Panel>
-            </Col>
-          </Row>
-        </Grid>
+                    </p>
+                  </Col>
+                </Row>
+              </Alert>
+              {this.state.sponsorMatches &&
+              <Alert bsStyle='success'>
+                <h4>
+                  <FormattedMessage
+                    id="home.undirabu-promo-matched"
+                    defaultMessage={`We have a match for your route from Undirabu!`}
+                  /> ({this.state.selectedStateFrom} - {this.state.selectedStateTo})</h4>
+                <ul>
+                  {this.state.sponsorMatches.map((match) => (
+                    <li>
+                      <a target='_blank' href={`${match.link}?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_search`}>{match.description}</a>
+                    </li>
+                  ))}
+                </ul>
+              </Alert>
+              }
+              <Row>
+                <Col md={4} mdOffset={2}>
+                  <Panel>
+                    <Panel.Heading>
+                      <h5>
+                        <FormattedMessage
+                          id="home.btn-search-from"
+                          defaultMessage={`Choose where you are starting from`}
+                        />
+                      </h5>
+                    </Panel.Heading>
+                    <Panel.Body>
+                      <StateSelection
+                        title={'State:'}
+                        selectedState={this.state.selectedStateFrom}
+                        onChange={this.handleStateFromChange}
+                      />
+                      {this.state.selectedStateFrom &&
+                        <Button bsStyle='link' onClick={this.resetSelectedStateFrom}>
+                          <FormattedMessage
+                            id="home.btn-search-clear"
+                            defaultMessage={`Clear`}
+                          />
+                        </Button>
+                      }
+                    </Panel.Body>
+                  </Panel>
+                </Col>
+                <Col md={4}>
+                  <Panel>
+                    <Panel.Heading>
+                      <h5>
+                        <FormattedMessage
+                          id="home.btn-search-to"
+                          defaultMessage={`Choose where you are going to`}
+                        />
+                      </h5>
+                    </Panel.Heading>
+                    <Panel.Body>
+                      <StateSelection
+                        title={'State:'}
+                        selectedState={this.state.selectedStateTo}
+                        onChange={this.handleStateToChange}
+                      />
+                      {this.state.selectedStateTo &&
+                        <Button bsStyle='link' onClick={this.resetSelectedStateTo}>
+                          <FormattedMessage
+                            id="home.btn-search-clear"
+                            defaultMessage={`Clear`}
+                          />
+                        </Button>
+                      }
+                    </Panel.Body>
+                  </Panel>
+                </Col>
+              </Row>
+            </Grid>
+          </Panel.Body>
+        </Panel>
         <Grid fluid>
           <Row>
             <Col md={6}>
@@ -338,6 +440,19 @@ export default class Carpool extends Component {
                             />
                           </Alert>
                         )}
+                        <br />
+                        <Row>
+                          <Col xsOffset={4} mdOffset={5} smOffset={5} xs={2} md={2} sm={2}>
+                          {this.state.offerCount > this.state.offers.length &&
+                            <Button onClick={this.loadMoreDrivers}>
+                              <FormattedMessage
+                                id='pagination-more'
+                                defaultMessage={`More`}
+                              />
+                            </Button>
+                          }
+                          </Col>
+                        </Row>
                       </Panel.Body>
                     </Panel.Collapse>
                   </MobileView>
@@ -361,6 +476,19 @@ export default class Carpool extends Component {
                           />
                         </Alert>
                       )}
+                      <br />
+                      <Row>
+                        <Col xsOffset={5} mdOffset={5} smOffset={5} xs={2} md={2} sm={2}>
+                        {this.state.offerCount > this.state.offers.length &&
+                          <Button onClick={this.loadMoreDrivers}>
+                            <FormattedMessage
+                              id='pagination-more'
+                              defaultMessage={`More`}
+                            />
+                          </Button>
+                        }
+                        </Col>
+                      </Row>
                     </Panel.Body>
                   </BrowserView>
                 </Panel>
@@ -417,6 +545,14 @@ export default class Carpool extends Component {
                             />
                           </Alert>
                         )}
+                        <br />
+                        <Row>
+                          <Col xsOffset={5} mdOffset={5} smOffset={5} xs={2} md={2} sm={2}>
+                          {this.state.needCount > this.state.needs.length &&
+                            <Button onClick={this.loadMoreRiders}>More</Button>
+                          }
+                          </Col>
+                        </Row>
                       </Panel.Body>
                     </Panel.Collapse>
                   </MobileView>
@@ -440,6 +576,14 @@ export default class Carpool extends Component {
                           />
                         </Alert>
                       )}
+                      <br />
+                      <Row>
+                        <Col xsOffset={5} mdOffset={5} smOffset={5} xs={2} md={2} sm={2}>
+                        {this.state.needCount > this.state.needs.length &&
+                          <Button onClick={this.loadMoreRiders}>More</Button>
+                        }
+                        </Col>
+                      </Row>
                     </Panel.Body>
                   </BrowserView>
                 </Panel>
