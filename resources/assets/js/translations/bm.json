@@ -14,8 +14,8 @@
 	"home.rider-btn": "(Penumpang) Saya mahu tumpang",
 	"home.driver-btn-small": "(Pemandu)<br />Tawarkan kenderaan",
 	"home.rider-btn-small": "(Penumpang)<br />Saya ingin menumpang",
-	"home.header-update": "Terbaru",
-	"home.changelog": "<ul><li>Isnin 9AM: Tajaan dari Undirabu kini sedia ada!</li><li>Ahad 5PM: #PulangMengundi sekarang ada dalam Bahasa Melayu!</li><li>Ahad 10PM: Semua pemandu dan penumpang akan kami e-mel jika sebarang padanan berlaku.</li><li>Sabtu 5PM: Anda sekarang boleh menandakan posting anda sebagai dipenuhi. Anda juga boleh membatalkannya. Sila buat yang berpatutan bagi memperbaiki sistem kami!</li></ul>",
+	"home.header-update": "Terkini",
+	"home.changelog": "<ul><li>Isnin 9AM: Tajaan dari Undirabu kini sedia ada!</li><li>Ahad 5PM: #PulangMengundi sekarang ada dalam Bahasa Melayu!</li><li>Ahad 10PM: Kami akan e-mel semua pemandu dan penumpang jika sebarang padanan berlaku.</li><li>Sabtu 5PM: Anda sekarang boleh menandakan posting anda sebagai dipenuhi. Anda juga boleh membatalkannya. Sila buat yang berpatutan bagi memperbaiki sistem kami!</li></ul>",
 	"home.btn-search-from": "Manakah perjalanan anda bermula?",
 	"home.btn-search-clear": "Kosongkan",
 	"home.btn-search-to": "Manakah destinasi anda?",
@@ -116,7 +116,11 @@
 	"offer.warning-undo-hidden-public": "Ini akan membuatkan tawaran anda dapat dilihat oleh semua pengguna.",
 	"btn-ok": "OK",
 	"home.undirabu-promo-header": "TERKINI: Undirabu akan menaja bas PERCUMA ke lokasi tertentu.",
-	"home.undirabu-promo-cta": "Sila rujukan di {link}, atau lancarkan carian di bawah - kami akan memberitahu anda jika terdapat bas yang sesuai!",
+	"home.undirabu-promo-cta": "Sila rujuk {link}, atau lancarkan carian di bawah - kami akan memberitahu anda jika terdapat bas yang sesuai!",
 	"home.undirabu-promo-matched": "Destinasi anda telah dipadankan dengan bas PERCUMA tajaan Undirabu!",
-	"pagination-more": "Berikutnya"
+	"pagination-more": "Berikutnya",
+	"sponsor.redirect-title": "Anda sedang dialihkan ke penaja {outgoing}",
+	"sponsor.redirect-warning-1": "Jika anda belum membuat listing di laman kami, <strong>sila lakukannya sekarang</strong>.",
+	"sponsor.redirect-warning-2": "Tiket yang ditaja akan melalui satu proses pengesahan yang mungkin akan memakan masa. Tiket juga terhad. Untuk meningkatkan peluang mendapatkan tiket, sila buat satu listing di sini sebelum melawat laman penaja.",
+	"btn-proceed-sponsor": "Teruskan ke laman penaja"
 }

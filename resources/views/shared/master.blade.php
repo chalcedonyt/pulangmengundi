@@ -42,8 +42,13 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-117450354-1');
+        var trackOutboundLink = function(url) {
+            gtag('event', 'outboundClick', {
+                'event_category': 'sponsor_link',
+                'event_label': url
+            });
+         }
         </script>
-
         @yield('scripts')
     </body>
 </html>

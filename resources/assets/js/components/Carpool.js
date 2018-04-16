@@ -6,6 +6,7 @@ import {Alert, Button, Col, Grid, Glyphicon, Image, Jumbotron, Row, Panel, Panel
 import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
 import ContactModal from './ContactModal'
+import OutgoingSponsorModal from './OutgoingSponsorModal'
 import StateSelection from './StateSelection'
 import Progress from './Progress'
 import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
@@ -20,7 +21,11 @@ export default class Carpool extends Component {
       needs: [],
       selectedStateFrom: null,
       selectedStateTo: null,
+
       showContactModal: false,
+      showOutgoingSponsorModal: false,
+      outgoingSponsorHref: '',
+
       selectedUser: {},
       needCount: null,
       offerCount: null,
@@ -32,7 +37,8 @@ export default class Carpool extends Component {
       driverOffset: 0,
       driverLimit:15,
       riderOffset: 0,
-      riderLimit: 15
+      riderLimit: 15,
+
     }
     this.handleStateFromChange = this.handleStateFromChange.bind(this)
     this.handleStateToChange = this.handleStateToChange.bind(this)
@@ -45,6 +51,8 @@ export default class Carpool extends Component {
 
     this.loadMoreDrivers = this.loadMoreDrivers.bind(this)
     this.loadMoreRiders = this.loadMoreRiders.bind(this)
+
+    this.toggleOutgoingSponsorModal = this.toggleOutgoingSponsorModal.bind(this)
   }
 
   componentDidMount() {
@@ -203,8 +211,23 @@ export default class Carpool extends Component {
     })
   }
 
+  toggleOutgoingSponsorModal(href) {
+    this.setState({
+      outgoingSponsorHref: href,
+      showOutgoingSponsorModal: !this.state.showOutgoingSponsorModal
+    })
+  }
+
+  trackOutgoingSponsor(href) {
+    gtag('event', 'OutgoingSponsorLink', {
+      event_category: 'UndiRabu',
+      event_label: href
+    })
+  }
+
 
   render() {
+    const balikUndiHref = `https://balik.undirabu.com/home?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_banner`
     return (
       <div>
         <Jumbotron>
@@ -305,11 +328,12 @@ export default class Carpool extends Component {
                         defaultMessage={`Check them out at {link}, or do a search to see if they have a bus matching your trip!`}
                         values={{
                           'link': <u>
-                            <a target='_blank' href='https://balik.undirabu.com/home?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_banner'>balik.undirabu.com</a>
+                            <a target='_blank' onClick={(e)=>this.trackOutgoingSponsor(balikUndiHref)} href={balikUndiHref}>balik.undirabu.com</a>
                           </u>
                         }}
                       />
                     </p>
+
                   </Col>
                 </Row>
               </Alert>
@@ -322,11 +346,23 @@ export default class Carpool extends Component {
                   /> ({this.state.selectedStateFrom} - {this.state.selectedStateTo})</h4>
                 <ul>
                   {this.state.sponsorMatches.map((match) => (
-                    <li>
-                      <a target='_blank' href={`${match.link}?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_search`}>{match.description}</a>
+                    <li key={match.link}>
+                      <u>
+                        <a href='javascript:;' onClick={(e)=> this.toggleOutgoingSponsorModal(`${match.link}?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_search`)}>
+                          <Glyphicon glyph='chevron-right' />&nbsp;
+                          {match.description}
+                        </a>
+                      </u>
                     </li>
                   ))}
                 </ul>
+                <OutgoingSponsorModal
+                  show={this.state.showOutgoingSponsorModal}
+                  outgoingSponsorHref={this.state.outgoingSponsorHref}
+                  outgoingSponsor={`balik.undirabu.com`}
+                  onProceed={(e)=>this.trackOutgoingSponsor(this.state.outgoingSponsorHref)}
+                  onCancel={(e)=>this.toggleOutgoingSponsorModal(null)}
+                />
               </Alert>
               }
               <Row>
