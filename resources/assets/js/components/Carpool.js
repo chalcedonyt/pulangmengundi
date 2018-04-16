@@ -52,7 +52,8 @@ export default class Carpool extends Component {
     this.loadMoreDrivers = this.loadMoreDrivers.bind(this)
     this.loadMoreRiders = this.loadMoreRiders.bind(this)
 
-    this.toggleOutgoingSponsorModal = this.toggleOutgoingSponsorModal.bind(this)
+    this.showOutgoingSponsorModal = this.showOutgoingSponsorModal.bind(this)
+    this.hideOutgoingSponsorModal = this.hideOutgoingSponsorModal.bind(this)
   }
 
   componentDidMount() {
@@ -211,10 +212,17 @@ export default class Carpool extends Component {
     })
   }
 
-  toggleOutgoingSponsorModal(href) {
+  showOutgoingSponsorModal(href) {
     this.setState({
       outgoingSponsorHref: href,
-      showOutgoingSponsorModal: !this.state.showOutgoingSponsorModal
+      showOutgoingSponsorModal: true
+    })
+  }
+
+  hideOutgoingSponsorModal() {
+    this.setState({
+      outgoingSponsorHref: '',
+      showOutgoingSponsorModal: false
     })
   }
 
@@ -328,7 +336,7 @@ export default class Carpool extends Component {
                         defaultMessage={`Check them out at {link}, or do a search to see if they have a bus matching your trip!`}
                         values={{
                           'link': <u>
-                            <a target='_blank' onClick={(e)=>this.trackOutgoingSponsor(balikUndiHref)} href={balikUndiHref}>balik.undirabu.com</a>
+                            <a href='javascript:;' onClick={(e)=>this.showOutgoingSponsorModal(balikUndiHref)}>balik.undirabu.com</a>
                           </u>
                         }}
                       />
@@ -348,7 +356,7 @@ export default class Carpool extends Component {
                   {this.state.sponsorMatches.map((match) => (
                     <li key={match.link}>
                       <u>
-                        <a href='javascript:;' onClick={(e)=> this.toggleOutgoingSponsorModal(`${match.link}?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_search`)}>
+                        <a href='javascript:;' onClick={(e)=> this.showOutgoingSponsorModal(`${match.link}?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_search`)}>
                           <Glyphicon glyph='chevron-right' />&nbsp;
                           {match.description}
                         </a>
@@ -356,15 +364,15 @@ export default class Carpool extends Component {
                     </li>
                   ))}
                 </ul>
-                <OutgoingSponsorModal
-                  show={this.state.showOutgoingSponsorModal}
-                  outgoingSponsorHref={this.state.outgoingSponsorHref}
-                  outgoingSponsor={`balik.undirabu.com`}
-                  onProceed={(e)=>this.trackOutgoingSponsor(this.state.outgoingSponsorHref)}
-                  onCancel={(e)=>this.toggleOutgoingSponsorModal(null)}
-                />
               </Alert>
               }
+              <OutgoingSponsorModal
+                show={this.state.showOutgoingSponsorModal}
+                outgoingSponsorHref={this.state.outgoingSponsorHref}
+                outgoingSponsor={`balik.undirabu.com`}
+                onProceed={(e)=>this.trackOutgoingSponsor(this.state.outgoingSponsorHref)}
+                onCancel={(e)=>this.hideOutgoingSponsorModal(null)}
+              />
               <Row>
                 <Col md={4} mdOffset={2}>
                   <Panel>
