@@ -580,8 +580,17 @@
                       </div>
                       @endforeach
                       @endif
+                      <br />
                       <!-- END LOOP FOR DRIVERS-->
-
+                      <div style="line-height:150%;color:#0D0D0D;font-family:Verdana; padding-right: 20px; padding-left: 20px; padding-top: 20px; padding-bottom: 30px;">
+                        <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                          As always, your safety is very important to us. Take note of the <a href="https://www.pulangmengundi.com/guidelines.html#carpoolguide">guidelines we have outlined</a> and stay safe.
+                          Happy carpooling! #CarpoolGE14
+                        </p><br>
+                        <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                          For any questions or feedback, look for us on <a href="https://facebook.com/pulangmengundi">Facebook</a>, or email us at pulang.undi@gmail.com.
+                        </p>
+                      </div>
                       <div class="">
                         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 25px; padding-bottom: 10px;"><![endif]-->
                         <div style="line-height:150%;color:#555555;font-family:Verdana; padding-right: 10px; padding-left: 10px; padding-top: 25px; padding-bottom: 10px;">
