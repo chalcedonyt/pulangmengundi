@@ -1,7 +1,7 @@
 [
   {
     "id": "sponsor.redirect-title",
-    "defaultMessage": "You are being redirected to our sponsor {outgoing}"
+    "defaultMessage": "You are being redirected to our strategic partner {outgoing}"
   },
   {
     "id": "sponsor.redirect-warning-1",

@@ -36,6 +36,7 @@
         <script>
             window.locale = '{{$locale}}';
         </script>
+        @if (env('APP_ENV')=='production'))
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117450354-1"></script>
         <script>
@@ -51,6 +52,11 @@
             });
          }
         </script>
+        @else
+        <script>
+            function gtag(){}
+        </script>
+        @endif
         @yield('scripts')
     </body>
 </html>

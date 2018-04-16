@@ -12,7 +12,7 @@ export default class OutgoingSponsorModal extends Component {
           <Modal.Title>
             <FormattedMessage
               id="sponsor.redirect-title"
-              defaultMessage={`You are being redirected to our sponsor {outgoing}`}
+              defaultMessage={`You are being redirected to our strategic partner {outgoing}`}
               values={{
                 outgoing: this.props.outgoingSponsor
               }}
@@ -20,7 +20,7 @@ export default class OutgoingSponsorModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Alert bsStyle='danger'>
+          <Alert bsStyle='warning'>
             <p>
               <FormattedHTMLMessage
                 id="sponsor.redirect-warning-1"

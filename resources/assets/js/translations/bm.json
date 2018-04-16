@@ -8,7 +8,8 @@
 	"login.login-1": "Kami memerlukan butiran media sosial anda bagi memastikan semua pengguna boleh dipercayai.",
 	"login.login-2": "Ini membantu kami membenteras penipuan dan menjaga keselamatan anda.",
 	"login.login-3": "Kami akan menghantar e-mel jika anda berjaya dipadankan dengan pekongsi lain.",
-	"login.login-4": "Anda boleh memilih untuk berkongsi butiran akaun media sosial anda dengan bakal pekongsi/penderma bagi <strong>membolehkan mereka</strong> memastikan anda seorang pengguna yang boleh dipercayai (dan kami harap, semua pekongsi akan menjadi rakan-rakan perjalanan yang baik!)",
+	"login.login-4": "Anda boleh memilih untuk berkongsi butiran akaun media sosial anda dengan bakal pekongsi, penderma, atau penaja bagi <strong>membolehkan mereka</strong> memastikan anda seorang pengguna yang boleh dipercayai (dan kami harap, semua pekongsi akan menjadi rakan-rakan perjalanan yang baik!)",
+	"login.login-means-agree": "Dengan menekan butang 'login' di bawah, anda bersetuju and menerima terma di atas",
 	"home.jumbotron": "Bersedia untuk #PulangMengundi? Kongsi kos perjalanan. Temui kawan baru. Gunakan perkhidmatan kami untuk dipadankan dengan pengundi-pengundi lain untuk #PulangMengundi!",
 	"home.driver-btn": "(Pemandu) Tawarkan kenderaan",
 	"home.rider-btn": "(Penumpang) Saya mahu tumpang",
@@ -119,8 +120,14 @@
 	"home.undirabu-promo-cta": "Sila rujuk {link}, atau lancarkan carian di bawah - kami akan memberitahu anda jika terdapat bas yang sesuai!",
 	"home.undirabu-promo-matched": "Destinasi anda telah dipadankan dengan bas PERCUMA tajaan Undirabu!",
 	"pagination-more": "Berikutnya",
-	"sponsor.redirect-title": "Anda sedang dialihkan ke penaja {outgoing}",
+	"sponsor.redirect-title": "Anda sedang dialihkan ke rakan kongi strategik {outgoing}",
 	"sponsor.redirect-warning-1": "Jika anda belum membuat listing di laman kami, <strong>sila lakukannya sekarang</strong>.",
 	"sponsor.redirect-warning-2": "Tiket yang ditaja akan melalui satu proses pengesahan yang mungkin akan memakan masa. Tiket juga terhad. Untuk meningkatkan peluang mendapatkan tiket, sila buat satu listing di sini sebelum melawat laman penaja.",
-	"btn-proceed-sponsor": "Teruskan ke laman penaja"
+	"btn-proceed-sponsor": "Teruskan ke laman rakan kongsi",
+	"tnc-0": "Terma",
+	"tnc-1": "Adalah penting yang anda memberikan kami kebenaran untuk memperoleh butiran peribadi anda.",
+	"tnc-2": "Anda perlu jelas tentang segala jenis data peribadi yang kami perolehi daripada anda. Data yang diberikan boleh berbentuk wajib ataupun sukarela.",
+	"tnc-3": "Buat waktu ini, kami hanya memperoleh data yang anda berikan kepada kami melalui platform yang sedia ada. Data ini mungkin dikongsi dengan Rakan-rakan Strategik kami untuk memudahkan perkongsian kenderaan dan/atau pemindahan dana untuk tujuan penajaaan.",
+	"tnc-4": "PulangMengundi.com akan mengambil langkah-langkah fizikal, teknikal dan organisasi untuk menjaga keselamatan maklumat-maklumat sulit yang anda kongsi bersama kami.",
+	"tnc-5": "Jika anda percaya data yang diperolehi kami tidak tepat, tidak lengkap, mengelirukan atau bukan yang terkini, sila hubungi kami untuk tindakan selanjutnya."
 }

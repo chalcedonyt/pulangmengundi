@@ -32,11 +32,13 @@ Route::group([
        return redirect('/');
     });
 
-    Route::get('/', function() {
-        return view('carpool');
+    Route::middleware('accept-terms')->group(function (){
+        Route::get('/', function() {
+            return view('carpool');
+        });
     });
 
-    Route::middleware('auth')->group(function() {
+    Route::middleware(['auth', 'accept-terms'])->group(function() {
         Route::get('/need', function() {
             $prev = str_replace(url('/'), '', url()->previous());
             if (\Auth::user()->need && $prev != '/my-need') {
