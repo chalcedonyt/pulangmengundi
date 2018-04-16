@@ -1,6 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-
 <head>
   <!--[if gte mso 9]><xml>
      <o:OfficeDocumentSettings>
@@ -354,63 +353,91 @@
                         <!--[if mso]></td></tr></table><![endif]-->
                       </div>
 
-
-
                       <div class="">
                         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 5px;"><![endif]-->
                         <div style="line-height:120%;color:#0D0D0D;font-family:Verdana; padding-right: 50px; padding-left: 50px; padding-top: 50px; padding-bottom: 5px;">
                           <div style="font-size:12px;line-height:14px;color:#0D0D0D;font-family:Verdana;text-align:left;">
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                              <span style="line-height: 26px; font-size: 22px;"><strong><span style="line-height: 26px; font-size: 22px;">{{$user->name}},</span></strong>
-                              </span>
+                              <strong><span style="line-height: 26px; font-size: 22px;">{{$user['name']}},</span></strong>
                               <br>
                               <br>
                               <span style="line-height: 26px; font-size: 22px;">
                               @if ($matchedNeeds)
-                                 We&apos;ve found potential drivers for you!
+                                 We&apos;ve found potential drivers/sponsors for you!
                               @else
                                 We&apos;ve found potential riders for you!
                               @endif
                               </span>
                             </p>
-                            <br>
+                            <br />
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                              <strong>PENTING:</strong> Jika anda telah berjaya dipadankan melalui platform kami,
-                              <strong>sila</strong> pergi ke <a href="https://carpool.pulangmengundi.com/offer">halaman pemandu</a>
-                              atau <a href="https://carpool.pulangmengundi.com/need">halaman penunggang</a> anda.
+                              <strong>VERY IMPORTANT:</strong> If you have already been connected successfully through our platform,
+                              <strong>please</strong> go to the links below to update your listing status.
                             </p><br>
-                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                              Kemudian, anda boleh memilih untuk menutup permintaan/tawaran carpool anda.
-                              <strong>Tolong nyatakan</strong> jika anda telah menerima padanan yang sesuai melalui platform kami.
-                              Ini akan membantu memperbaiki platform kami.
-                            <br>
-                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                                Keselamatan anda penting bagi kami. Sila ambil baca dan ambil berat atas segala <a href="https://www.pulangmengundi.com/guidelines.html#carpoolguide">garis panduan</a> yang diberikan. Selamat berkongsi kereta! #CarpoolGE14
-                            </p><br>
-                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                                Untuk sebarang pertanyaan atau maklumbalas, cari kami di <a href="https://facebook.com/pulangmengundi">Facebook</a>, atau e-mel pulang.undi@gmail.com.
-                            </p><br /><br />
-                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                              <strong>IMPORTANT:</strong> If you have already been connected successfully through our platform,
-                              <strong>please</strong> go to <a href="https://carpool.pulangmengundi.com/offer">your driver page</a>
-                              or <a href="https://carpool.pulangmengundi.com/need">your rider page</a>.
-                            </p><br>
-                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">You can then choose to close your listing,
-                              but <strong>please</strong> specify if you managed to find a match through us.
-                              This helps us <strong>greatly</strong> in improving our platform.</p>
-                            <br>
-                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                              As always, your safety is of paramount importance to us. Take note of the <a href="https://www.pulangmengundi.com/guidelines.html#carpoolguide">guidelines we have outlined</a> and stay safe.
-                              Happy carpooling! #CarpoolGE14
-                            </p><br>
-                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                              For any questions or feedback, look for us on <a href="https://facebook.com/pulangmengundi">Facebook</a>, or email us at pulang.undi@gmail.com.
+                            <table align="center" class="img-container center">
+                              <tr>
+                                <td width='50%'>
+                                  <div align="center" class="button-container center " style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;">
+                                    <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:46pt; v-text-anchor:middle; width:130pt;" arcsize="7%" strokecolor="#000" fillcolor="#000"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:Verdana; font-size:16px;"><![endif]-->
+                                    <div style="color: #ffffff; background-color: #000; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; max-width: 174px; width: 144px;width: auto; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; font-family: Verdana; text-align: center; mso-border-alt: none;">
+                                      <a href="https://carpool.pulangmengundi.com/offer?utm_campaign=matchUpdate&utm_medium=email" target="_blank" style="color:white!important">
+                                        <span style="font-size:16px;line-height:32px;">DRIVER PAGE</span>
+                                      </a>
+                                    </div>
+                                    <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
+                                  </div>
+                                </td>
+                                <td width='50%'>
+                                  <div align="center" class="button-container center " style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;">
+                                    <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:46pt; v-text-anchor:middle; width:130pt;" arcsize="7%" strokecolor="#000" fillcolor="#000"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:Verdana; font-size:16px;"><![endif]-->
+                                    <div style="color: #ffffff; background-color: #000; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; max-width: 174px; width: 144px;width: auto; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; font-family: Verdana; text-align: center; mso-border-alt: none;">
+                                        <a href="https://carpool.pulangmengundi.com/need?utm_campaign=matchUpdate&utm_medium=email" target="_blank" style="color:white!important">
+                                          <span style="font-size:16px;line-height:32px;">RIDER PAGE</span>
+                                        </a>
+                                    </div>
+                                    <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
+                                  </div>
+                                </td>
+                              </tr>
+                            </table>
+                            <br />
+                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">Close (not cancel) your listing <strong>if your request has been fulfilled</strong>.
+                              <strong>Please</strong>, <strong>please</strong> specify if you managed to find a match through us.
+                              We can then tell who still needs help and who is still offering help! We are working very hard to work with partners and sponsors to help all of you!
                             </p>
+                            <br /><br />
+                            <div align="center" class="img-container center  autowidth  " style="padding-right: 0px;  padding-left: 0px;">
+                              <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px;line-height:0px;"><td style="padding-right: 0px; padding-left: 0px;" align="center"><![endif]-->
+                              <img class="center" align="center" border="0" src="https://balik.undirabu.com/wp-content/uploads/2018/04/undirabu-logo-300x300.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;max-width: 80px"
+                                width="80">
+                              <!--[if mso]></td></tr></table><![endif]-->
+                            </div>
+                            <br />
+                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                              We are pleased to announce a <strong>strategic partnership</strong> with
+                              <a target="_blank" href="https://balik.undirabu.com/home?utm_campaign=carpool.pulangmengundi.com&utm_medium=email_link">balik.undirabu.com</a>,
+                              who are sponsoring FREE BUSES to specific locations. Check their site for details.
+                            </p>
+                            @if (count($matchedSponsors))
+                            <br /></br />
+                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                              <span style="line-height: 26px; font-size: 22px;">These routes from UndiRabu match yours:</span>
+                            </p>
+                            <ul>
+                              @foreach ($matchedSponsors as $match)
+                              <li>
+                                  <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                                    <a target="_blank" href="{!!$match->link!!}?utm_campaign=carpool.pulangmengundi.com&utm_medium=email_match">{{$match->description}}</a>
+                                  </p>
+                              </li>
+                              @endforeach
+                            </ul>
+                            @endif
                           </div>
                         </div>
                         <!--[if mso]></td></tr></table><![endif]-->
                       </div>
-
+                      <br /><br />
 
                       <div align="center" class="img-container center  autowidth  " style="padding-right: 0px;  padding-left: 0px;">
                         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px;line-height:0px;"><td style="padding-right: 0px; padding-left: 0px;" align="center"><![endif]-->
@@ -429,6 +456,7 @@
               </div>
             </div>
           </div>
+
           <div style="background-color:transparent;">
             <div style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #FFFFFF;" class="block-grid ">
               <div style="border-collapse: collapse;display: table;width: 100%;background-color:#FFFFFF;">
@@ -447,7 +475,7 @@
                         <div style="line-height:150%;color:#4e91f0;font-family:Verdana; padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 10px;">
                           <div style="font-size:12px;line-height:18px;text-align:center;font-family:Verdana;color:#4e91f0;">
                             <p style="margin: 0;font-size: 12px;line-height: 18px;text-align: center"><span style="color: rgb(0, 51, 102); font-size: 12px; line-height: 18px;"><strong><span style="font-size: 20px; line-height: 30px;">
-                              Here are some riders that may be going your way:</span></strong>
+                              Here are some riders who may be going your way:</span></strong>
                               </span>
                             </p>
                           </div>
@@ -479,7 +507,7 @@
                               <strong>Information</strong><br />
                               {{$need->information}}<br /><br />
                               @endif
-                              <a href='/'>Click here to contact {{$need->user->name}}</a>
+                              <a href='{!!$need->jwt_link!!}' target='_blank'>Click here to contact {{$need->user->name}}</a>
                           </div>
                         </div>
                         <!--[if mso]></td></tr></table><![endif]-->
@@ -502,7 +530,7 @@
                         <div style="line-height:150%;color:#4e91f0;font-family:Verdana; padding-right: 10px; padding-left: 10px; padding-top: 20px; padding-bottom: 10px;">
                           <div style="font-size:12px;line-height:18px;text-align:center;font-family:Verdana;color:#4e91f0;">
                             <p style="margin: 0;font-size: 12px;line-height: 18px;text-align: center"><span style="color: rgb(0, 51, 102); font-size: 12px; line-height: 18px;"><strong><span style="font-size: 20px; line-height: 30px;">
-                              Here are some drivers that may be going your way:</span></strong>
+                              Here are some drivers who may be going your way:</span></strong>
                               </span>
                             </p>
                           </div>
@@ -538,12 +566,11 @@
                               <strong>Information</strong><br />
                               {{$offer->information}}<br /><br />
                               @endif
-                              <a href='/'>Click here to contact {{$offer->user->name}}</a>
+                              <a href='{{$offer->jwt_link}}' target='_blank'>Click here to contact {{$offer->user->name}}</a>
                           </div>
                         </div>
                         <!--[if mso]></td></tr></table><![endif]-->
                       </div>
-
 
                       <div align="center" class="img-container center  autowidth  " style="padding-right: 0px;  padding-left: 0px;">
                         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px;line-height:0px;"><td style="padding-right: 0px; padding-left: 0px;" align="center"><![endif]-->
@@ -554,35 +581,6 @@
                       @endforeach
                       @endif
                       <!-- END LOOP FOR DRIVERS-->
-
-                      <table align="center" class="img-container center">
-                        <tr>
-                          <td width='50%'>
-                            <div align="center" class="button-container center " style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;">
-                              <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:46pt; v-text-anchor:middle; width:130pt;" arcsize="7%" strokecolor="#000" fillcolor="#000"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:Verdana; font-size:16px;"><![endif]-->
-                              <div style="color: #ffffff; background-color: #000; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; max-width: 174px; width: 144px;width: auto; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; font-family: Verdana; text-align: center; mso-border-alt: none;">
-                                <a href="https://carpool.pulangmengundi.com/offer" style="color:white!important">
-                                  <span style="font-size:16px;line-height:32px;">DRIVER PAGE</span>
-                                </a>
-                              </div>
-                              <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
-                            </div>
-                          </td>
-                          <td width='50%'>
-                            <div align="center" class="button-container center " style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;">
-                              <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top:25px; padding-bottom:10px;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:46pt; v-text-anchor:middle; width:130pt;" arcsize="7%" strokecolor="#000" fillcolor="#000"><w:anchorlock/><v:textbox inset="0,0,0,0"><center style="color:#ffffff; font-family:Verdana; font-size:16px;"><![endif]-->
-                              <div style="color: #ffffff; background-color: #000; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; max-width: 174px; width: 144px;width: auto; border-top: 0px solid transparent; border-right: 0px solid transparent; border-bottom: 0px solid transparent; border-left: 0px solid transparent; padding-top: 15px; padding-right: 15px; padding-bottom: 15px; padding-left: 15px; font-family: Verdana; text-align: center; mso-border-alt: none;">
-                                  <a href="https://carpool.pulangmengundi.com/need" style="color:white!important">
-                                    <span style="font-size:16px;line-height:32px;">RIDER PAGE</span>
-                                  </a>
-                              </div>
-                              <!--[if mso]></center></v:textbox></v:roundrect></td></tr></table><![endif]-->
-                            </div>
-                          </td>
-                        </tr>
-                      </table>
-
-
 
                       <div class="">
                         <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding-right: 10px; padding-left: 10px; padding-top: 25px; padding-bottom: 10px;"><![endif]-->

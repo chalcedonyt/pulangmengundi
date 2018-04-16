@@ -15,6 +15,7 @@ class DailyMatchEmail extends Mailable
 
     public $matchedOffers;
     public $matchedNeeds;
+    public $matchedSponsors;
     public $user;
     public $subject = '';
 
@@ -23,15 +24,17 @@ class DailyMatchEmail extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user, $matched_offers, $matched_needs)
+    public function __construct(User $user, $matched_offers, $matched_needs, $matched_sponsors)
     {
         $this->user = $user;
         $this->matchedOffers = $matched_offers;
         $this->matchedNeeds = $matched_needs;
-        if ($matched_needs->count() || $matched_offers->count()) {
+        $this->matchedSponsors = $matched_sponsors;
+        if ($matched_needs->count() || $matched_offers->count() || $matched_sponsors->count()) {
+            $sponsor_string = $matched_sponsors->count() ? 'and sponsors ' : '';
             $this->subject = $matched_needs->count()
-            ? sprintf('We have found %d potential rider(s) for you', $matched_needs->count())
-            : sprintf('We have found %d potential driver(s) for you', $matched_offers->count());
+            ? sprintf('We have found %d potential rider(s) %sfor you', $matched_needs->count(), $sponsor_string)
+            : sprintf('We have found %d potential driver(s) %sfor you', $matched_offers->count(), $sponsor_string);
         }
     }
 

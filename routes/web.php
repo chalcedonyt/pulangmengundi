@@ -78,21 +78,8 @@ Route::group([
 });
 Route::get('/email-preview/user/{id}', function ($id) {
     $user = \App\Models\User::find($id);
-    $matched_offers = collect([]);
-    if ($user->need) {
-        $matched_offers = (new \App\Gateways\MatchGateway)->matchNeed($user->need, \Carbon\Carbon::parse('2018-04-15 10:22:28'));
-    }
-
-    $matched_needs = collect([]);
-    if ($user->offers) {
-        foreach ($user->offers as $offer) {
-            $needs = (new \App\Gateways\MatchGateway)->matchOffer($offer, \Carbon\Carbon::parse('2018-04-15 10:22:28'));
-            if ($needs->count()) {
-                $matched_needs = $matched_needs->concat($needs);
-            }
-        }
-    }
-    $email = new \App\Mail\DailyMatchEmail($user, $matched_offers, $matched_needs);
+    $last_sent_at = \Carbon\Carbon::parse(\App\Models\EmailsSent::orderBy('id', 'desc')->first()->sent_at);
+    list($email, $output) = (new \App\Gateways\MatchGateway)->getEmailForUser($user, $last_sent_at);
     return $email;
 });
 
