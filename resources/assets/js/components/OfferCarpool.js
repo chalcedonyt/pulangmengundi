@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
 import {Alert, Button, Checkbox, Col, DropdownButton, FormControl, FormGroup, MenuItem, Radio, Row, Panel} from 'react-bootstrap'
-import DateSelection from './DateSelection'
-import LocationSelection from './LocationSelection'
+import DateSelection from './shared/DateSelection'
+import LocationSelection from './shared/LocationSelection'
 import OfferCarpoolModal from './OfferCarpoolModal'
 import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 

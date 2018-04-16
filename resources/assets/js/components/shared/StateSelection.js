@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import api from '../utils/api'
+import api from '../../utils/api'
 import {DropdownButton, MenuItem} from 'react-bootstrap'
 
 export default class StateSelection extends Component {

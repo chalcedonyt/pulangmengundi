@@ -7,7 +7,7 @@ import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
 import ContactModal from './ContactModal'
 import OutgoingSponsorModal from './OutgoingSponsorModal'
-import StateSelection from './StateSelection'
+import StateSelection from './shared/StateSelection'
 import Progress from './shared/Progress'
 import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 import { isMobile, MobileView, BrowserView } from "react-device-detect";

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import api from '../utils/api'
+import api from '../../utils/api'
 import {DropdownButton, MenuItem, Panel} from 'react-bootstrap'
 
 import DatePicker from 'react-datepicker'

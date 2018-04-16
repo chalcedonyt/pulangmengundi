@@ -1,0 +1,14 @@
+[
+  {
+    "id": "single.show-profile",
+    "defaultMessage": "Showing user profile"
+  },
+  {
+    "id": "btn-show-profile",
+    "defaultMessage": "Show contact for"
+  },
+  {
+    "id": "btn-back-to",
+    "defaultMessage": "Back to"
+  }
+]

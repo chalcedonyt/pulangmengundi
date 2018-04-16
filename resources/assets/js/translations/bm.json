@@ -65,10 +65,10 @@
 	"request.checkbox-show-contact": "Tunjukkan nombor saya:",
 	"request.btn-update": "Kemas kini permintaan",
 	"request.warning-select-from": "Sila pilih lokasi anda",
-	"request.warning-select-to": "Sila pilih destinasi mengundi anda",
+	"request.warning-select-to": "Sila pilih destinasi anda",
 	"request.warning-select-gender": "Sila nyatakan jantina anda",
-	"request.warning-select-contact-detail": "Anda mesti memilih salah satu daripada butiran Facebook atau e-mel untuk dipaparkan",
-	"request.warning-fill-trip-detail": "Sila isikan butiran untuk sekurang-kurangya satu hala untuk memandu",
+	"request.warning-select-contact-detail": "Anda mesti memaparkan alamat e-mel atau akaun Facebook anda",
+	"request.warning-fill-trip-detail": "Anda mesti mengisikan butiran anda untuk sekurang-kurangya satu arah",
 	"request.btn-save": "Simpan permintaan",
 	"request.dialog-header-confirm": "Sahkan permintaan",
 	"request.dialog-header-submit-question": "Hantar permintaan?",
@@ -77,6 +77,7 @@
 	"btn-contact": "Hubungi",
 	"btn-close-offer": "Padam tawaran",
 	"btn-cancel": "Batal",
+	"contact-header": "Hubungi",
 	"contact.after-open-dialog-header": "Apa yang perlu dilakukan?",
 	"contact.click-to-show-text": "Klik di sini untuk mendapatkan butiran {name}",
 	"contact.prevent-abuse": "Untuk menghalang sebarang salahguna, anda akan disekat jika mendapatkan terlampau banyak profil pengguna-pengguna lain.",
@@ -136,5 +137,8 @@
 	"tnc-2": "Anda perlu jelas tentang segala jenis data peribadi yang kami perolehi daripada anda. Data yang diberikan boleh berbentuk wajib ataupun sukarela.",
 	"tnc-3": "Buat waktu ini, kami hanya memperoleh data yang anda berikan kepada kami melalui platform yang sedia ada. Data ini mungkin dikongsi dengan Rakan-rakan Strategik kami untuk memudahkan perkongsian kenderaan dan/atau pemindahan dana untuk tujuan penajaaan.",
 	"tnc-4": "PulangMengundi.com akan mengambil langkah-langkah fizikal, teknikal dan organisasi untuk menjaga keselamatan maklumat-maklumat sulit yang anda kongsi bersama kami.",
-	"tnc-5": "Jika anda percaya data yang diperolehi kami tidak tepat, tidak lengkap, mengelirukan atau bukan yang terkini, sila hubungi kami untuk tindakan selanjutnya."
+	"tnc-5": "Jika anda percaya data yang diperolehi kami tidak tepat, tidak lengkap, mengelirukan atau bukan yang terkini, sila hubungi kami untuk tindakan selanjutnya.",
+	"single.show-profile": "Profile pengguna",
+	"btn-show-profile": "Hubungi",
+	"btn-back-to": "Balik ke"
 }

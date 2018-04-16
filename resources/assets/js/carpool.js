@@ -12,6 +12,7 @@ import NeedCarpool from './components/NeedCarpool'
 import MyOffers from './components/MyOffers'
 import Carpool from './components/Carpool'
 import MyCarpoolNeed from './components/MyCarpoolNeed'
+import SingleUser from './components/SingleUser'
 import {Route, BrowserRouter, Switch} from 'react-router-dom'
 import {Col, Glyphicon, Image, Navbar, Nav, NavItem} from 'react-bootstrap'
 import {IntlProvider, FormattedMessage} from 'react-intl'
@@ -89,6 +90,7 @@ ReactDOM.render(
             <Route exact path='/:locale/my-offers' component={MyOffers} />
             <Route exact path='/:locale/need' component={NeedCarpool} />
             <Route exact path='/:locale/my-need' component={MyCarpoolNeed} />
+            <Route exact path='/:locale/u/:token' component={SingleUser} />
           </Switch>
         </div>
       </IntlProvider>

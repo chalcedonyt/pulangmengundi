@@ -35,7 +35,11 @@ export default class ContactModal extends Component {
     return (
       <Modal show={this.props.show} onHide={this.props.onCancel}>
         <Modal.Header closeButton>
-          <Modal.Title>Contact {this.props.user.name}</Modal.Title>
+          <Modal.Title>
+            <FormattedMessage
+              id="contact-header"
+              defaultMessage={`Contact`}
+            /> {this.props.user.name}</Modal.Title>
         </Modal.Header>
       <Modal.Body>
         <h4>

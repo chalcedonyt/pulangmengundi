@@ -1,5 +1,9 @@
 [
   {
+    "id": "contact-header",
+    "defaultMessage": "Contact"
+  },
+  {
     "id": "contact.after-open-dialog-header",
     "defaultMessage": "What to do now"
   },

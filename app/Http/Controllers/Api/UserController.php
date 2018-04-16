@@ -44,4 +44,13 @@ class UserController extends Controller
         return response()->json($social_urls);
     }
 
+    public function showByToken(Request $request, string $jwt) {
+        $payload = \Firebase\JWT\JWT::decode($jwt, env('APP_KEY'), array('HS256'));
+        $subject = \App\Models\User::where('uuid', '=', $payload->uuid)->first();
+        if (!$subject) {
+            return response('Not found', 404);
+        }
+        $data = fractal()->item($subject, new \App\Transformers\UserTransformer)->toArray();
+        return response()->json($data);
+    }
 }

@@ -479,16 +479,7 @@
                               <strong>Information</strong><br />
                               {{$need->information}}<br /><br />
                               @endif
-                              <strong>Contact information</strong>:<br />
-                              @if ($need->user->allow_fb)
-                              <strong>Facebook:</strong> <a target='_blank' href='https://facebook.com/{{$need->user->fb_id}}'>Facebook Profile link</a><br />
-                              @endif
-                              @if ($need->user->allow_email)
-                              <strong>Email address:</strong> {{$need->user->email}}<br />
-                              @endif
-                              @if ($need->user->contact_number)
-                              <strong>Contact number:</strong> {{$need->user->contact_number}}<br />
-                              @endif
+                              <a href='/'>Click here to contact {{$need->user->name}}</a>
                           </div>
                         </div>
                         <!--[if mso]></td></tr></table><![endif]-->
@@ -547,16 +538,7 @@
                               <strong>Information</strong><br />
                               {{$offer->information}}<br /><br />
                               @endif
-                              <strong>Contact information</strong>:<br />
-                              @if ($offer->user->allow_fb)
-                              <strong>Facebook:</strong> <a target='_blank' href='https://facebook.com/{{$offer->user->fb_id}}'>Facebook Profile link</a><br />
-                              @endif
-                              @if ($offer->user->allow_email)
-                              <strong>Email address:</strong> {{$offer->user->email}}<br />
-                              @endif
-                              @if ($offer->user->contact_number)
-                              <strong>Contact number:</strong> {{$offer->user->contact_number}}<br />
-                              @endif
+                              <a href='/'>Click here to contact {{$offer->user->name}}</a>
                           </div>
                         </div>
                         <!--[if mso]></td></tr></table><![endif]-->

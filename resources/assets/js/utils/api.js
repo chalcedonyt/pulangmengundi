@@ -138,6 +138,13 @@ module.exports = {
     .then(function (response) {
       return response.data;
     });
-  }
+  },
 
+  getUserByToken: (token) => {
+    const encodedURI = window.encodeURI(`${endpoint}/u/${token}`);
+    return axios.get(encodedURI)
+    .then(function (response) {
+      return response.data;
+    });
+  }
 }

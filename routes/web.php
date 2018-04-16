@@ -37,6 +37,15 @@ Route::group([
             return view('carpool');
         });
     });
+    Route::get('/u/{jwt}', function($jwt) {
+        $payload = \Firebase\JWT\JWT::decode($jwt, env('APP_KEY'), array('HS256'));
+        $user = \App\Models\User::find($payload->sub);
+        if (!$user) {
+            return response('Unauthorized', 403);
+        }
+        \Auth::login($user, $remember = true);
+        return view('carpool');
+    });
 
     Route::middleware(['auth', 'accept-terms'])->group(function() {
         Route::get('/need', function() {
@@ -68,23 +77,23 @@ Route::group([
 
 });
 Route::get('/email-preview/user/{id}', function ($id) {
-    // $user = \App\Models\User::find($id);
-    // $matched_offers = collect([]);
-    // if ($user->need) {
-    //     $matched_offers = (new \App\Gateways\MatchGateway)->matchNeed($user->need);
-    // }
+    $user = \App\Models\User::find($id);
+    $matched_offers = collect([]);
+    if ($user->need) {
+        $matched_offers = (new \App\Gateways\MatchGateway)->matchNeed($user->need, \Carbon\Carbon::parse('2018-04-15 10:22:28'));
+    }
 
-    // $matched_needs = collect([]);
-    // if ($user->offers) {
-    //     foreach ($user->offers as $offer) {
-    //         $needs = (new \App\Gateways\MatchGateway)->matchOffer($offer);
-    //         if ($needs->count()) {
-    //             $matched_needs = $matched_needs->concat($needs);
-    //         }
-    //     }
-    // }
-    // $email = new \App\Mail\DailyMatchEmail($user, $matched_offers, $matched_needs);
-    // return $email;
+    $matched_needs = collect([]);
+    if ($user->offers) {
+        foreach ($user->offers as $offer) {
+            $needs = (new \App\Gateways\MatchGateway)->matchOffer($offer, \Carbon\Carbon::parse('2018-04-15 10:22:28'));
+            if ($needs->count()) {
+                $matched_needs = $matched_needs->concat($needs);
+            }
+        }
+    }
+    $email = new \App\Mail\DailyMatchEmail($user, $matched_offers, $matched_needs);
+    return $email;
 });
 
 Route::prefix('api')->group(function() {
@@ -95,7 +104,7 @@ Route::prefix('api')->group(function() {
 });
 
 Route::middleware('auth')->prefix('api')->group(function() {
-
+    Route::get('/u/{jwt}', ['uses' => 'Api\\UserController@showByToken']);
     Route::post('/offer/{offer}/success', ['uses' => 'Api\\CarpoolController@success']);
     Route::post('/offer/{offer}/unhide', ['uses' => 'Api\\CarpoolController@unhide']);
     Route::post('/offer/{offer}/cancel', ['uses' => 'Api\\CarpoolController@cancel']);
