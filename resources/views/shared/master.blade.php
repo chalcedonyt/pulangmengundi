@@ -36,7 +36,6 @@
         <script>
             window.locale = '{{$locale}}';
         </script>
-        @if (strpos(url('/'), 'localhost') === false)
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117450354-1"></script>
         <script>
@@ -52,7 +51,6 @@
             });
          }
         </script>
-        @endif
         @yield('scripts')
     </body>
 </html>
