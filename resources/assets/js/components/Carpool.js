@@ -271,7 +271,7 @@ export default class Carpool extends Component {
                         id="home.changelog"
                         defaultMessage={
                         `<ul>
-                          <li>Isnin 9am: We have a new collaboration with UndiRabu!</li>
+                          <li>Mon 9am: We have a new collaboration with UndiRabu!</li>
                           <li>Sun 10am: We are starting to send emails to notify riders/drivers of potential matches.</li>
                           <li>Sat 5pm: You can now mark your listing as fulfilled, or cancel it. Please do so as it helps improve our system.</li>
                           <li>Sat 12am: You can now choose to fill in your <strong>contact number</strong> to be shown to others. (Drivers may need to cancel and re-post for this to be reflected)</li>
