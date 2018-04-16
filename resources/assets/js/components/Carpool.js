@@ -236,6 +236,8 @@ export default class Carpool extends Component {
 
   render() {
     const balikUndiHref = `https://balik.undirabu.com/home?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_banner`
+    const hasDriverListing = window.userStatus && window.userStatus.hasDriverListing
+    const hasRiderListing = window.userStatus && window.userStatus.hasRiderListing
     return (
       <div>
         <Jumbotron>
@@ -257,18 +259,30 @@ export default class Carpool extends Component {
                 <Row>
                   <Col md={5} xsHidden={true}>
                     <Button bsSize='large' bsStyle='default' href='/offer'>
-                      <FormattedMessage
+                      {!hasDriverListing
+                      ? <FormattedMessage
                         id="home.driver-btn"
                         defaultMessage={`(Driver) I want to offer a carpool`}
                       />
+                      : <FormattedMessage
+                        id="home.driver-loggedin-btn"
+                        defaultMessage={`(Driver) Manage carpool listing`}
+                      />
+                    }
                     </Button>
                   </Col>
                   <Col md={5} mdOffset={1} xsHidden={true}>
                     <Button bsSize='large' bsStyle='default' href='/need'>
-                      <FormattedMessage
+                    {!hasRiderListing
+                      ? <FormattedMessage
                         id="home.rider-btn"
                         defaultMessage={`(Rider) I am looking for a carpool`}
                       />
+                      : <FormattedMessage
+                        id="home.rider-loggedin-btn"
+                        defaultMessage={`(Rider) Manage carpool request`}
+                      />
+                    }
                     </Button>
                   </Col>
                   <Col lgHidden={true} mdHidden={true} smHidden={true} xsOffset={1} xs={8}>

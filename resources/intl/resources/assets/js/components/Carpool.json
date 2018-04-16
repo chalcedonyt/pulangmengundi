@@ -8,8 +8,16 @@
     "defaultMessage": "(Driver) I want to offer a carpool"
   },
   {
+    "id": "home.driver-loggedin-btn",
+    "defaultMessage": "(Driver) Manage carpool listing"
+  },
+  {
     "id": "home.rider-btn",
     "defaultMessage": "(Rider) I am looking for a carpool"
+  },
+  {
+    "id": "home.rider-loggedin-btn",
+    "defaultMessage": "(Rider) Manage carpool request"
   },
   {
     "id": "home.driver-btn-small",

@@ -8,6 +8,7 @@
 @section('scripts')
 <script>
 window.user = {!!json_encode($user)!!}
+window.userStatus = {!!json_encode($user_status)!!}
 </script>
 <script src="{{mix('js/carpool.js')}}"></script>
 @endsection

@@ -19,6 +19,12 @@ class AppServiceProvider extends ServiceProvider
         }
         \View::composer('*', function($view) {
             $user = \Auth::user() ? \Auth::user()->toArray() : null;
+            $has_need = \Auth::user() && \Auth::user()->need;
+            $has_offers = \Auth::user() && \Auth::user()->offers->count();
+            $view->with('user_status', [
+                'hasDriverListing' => $has_offers,
+                'hasRiderListing' => $has_need,
+            ]);
             $view->with('user', $user);
             $view->with('locale', \LaravelLocalization::getCurrentLocale());
         });

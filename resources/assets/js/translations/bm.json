@@ -13,6 +13,8 @@
 	"home.jumbotron": "Bersedia untuk #PulangMengundi? Kongsi kos perjalanan. Temui kawan baru. Gunakan perkhidmatan kami untuk dipadankan dengan pengundi-pengundi lain untuk #PulangMengundi!",
 	"home.driver-btn": "(Pemandu) Tawarkan kenderaan",
 	"home.rider-btn": "(Penumpang) Saya mahu tumpang",
+	"home.driver-loggedin-btn": "(Pemandu) Urus listing",
+	"home.rider-loggedin-btn": "(Penumpang) Urus listing",
 	"home.driver-btn-small": "(Pemandu)<br />Tawarkan kenderaan",
 	"home.rider-btn-small": "(Penumpang)<br />Saya ingin menumpang",
 	"home.header-update": "Terkini",
