@@ -16,7 +16,7 @@ class DailyMatchEmail extends Mailable
     public $matchedOffers;
     public $matchedNeeds;
     public $matchedSponsors;
-    public $user;
+    public $emailUser;//prevent clashes with global "user"
     public $subject = '';
 
     /**
@@ -26,7 +26,7 @@ class DailyMatchEmail extends Mailable
      */
     public function __construct(User $user, $matched_offers, $matched_needs, $matched_sponsors)
     {
-        $this->user = $user;
+        $this->emailUser = $user;
         $this->matchedOffers = $matched_offers;
         $this->matchedNeeds = $matched_needs;
         $this->matchedSponsors = $matched_sponsors;

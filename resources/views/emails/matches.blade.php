@@ -358,7 +358,7 @@
                         <div style="line-height:120%;color:#0D0D0D;font-family:Verdana; padding-right: 50px; padding-left: 50px; padding-top: 50px; padding-bottom: 5px;">
                           <div style="font-size:12px;line-height:14px;color:#0D0D0D;font-family:Verdana;text-align:left;">
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                              <strong><span style="line-height: 26px; font-size: 22px;">{{$user['name']}},</span></strong>
+                              <strong><span style="line-height: 26px; font-size: 22px;">{{$emailUser->name}},</span></strong>
                               <br>
                               <br>
                               <span style="line-height: 26px; font-size: 22px;">
