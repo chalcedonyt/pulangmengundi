@@ -8,6 +8,10 @@
     "defaultMessage": "Logout"
   },
   {
+    "id": "nav-login",
+    "defaultMessage": "Login"
+  },
+  {
     "id": "nav-faq",
     "defaultMessage": "Guidelines and FAQ"
   },

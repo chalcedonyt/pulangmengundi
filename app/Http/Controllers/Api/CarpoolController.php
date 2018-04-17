@@ -261,6 +261,7 @@ class CarpoolController extends Controller
                 $data['meta']['sponsor_matches'] = $sponsor_matches->toArray();
             }
         }
+        $data['meta']['connections_count'] = \App\Models\InfoRequest::count()*2;
         return response()->json($data);
     }
 

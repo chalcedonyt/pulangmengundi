@@ -25,6 +25,8 @@ const messages = {
   'ms': messages_bm
 }
 const language = window.locale || navigator.language.split(/[-_]/)[0];  // language without region code
+const faqLink = window.locale == 'ms' ? 'https://bm.pulangmengundi.com/faq.html' : 'https://www.pulangmengundi.com/guidelines.html'
+const aboutLink = window.locale == 'ms' ? 'https://bm.pulangmengundi.com/tentang-kami.html' : 'https://www.pulangmengundi.com/about.html'
 ReactDOM.render(
     <BrowserRouter>
       <IntlProvider locale={language} messages={messages[language]}>
@@ -57,25 +59,37 @@ ReactDOM.render(
                   />
                 </NavItem>
               </Nav>
-              {window.user &&
+              {window.user ?
               <Nav pullRight>
                 <NavItem eventKey={5} href='/logout'>
-                  <FormattedMessage
-                    id="nav-logout"
-                    defaultMessage={`Logout`}
-                  />
+                  <strong>
+                    <FormattedMessage
+                      id="nav-logout"
+                      defaultMessage={`Logout`}
+                    />
+                  </strong>
                 </NavItem>
-                <NavItem></NavItem>
+              </Nav>
+              :
+              <Nav pullRight>
+                <NavItem eventKey={5} href='/login'>
+                  <strong>
+                    <FormattedMessage
+                      id="nav-login"
+                      defaultMessage={`Login`}
+                    />
+                  </strong>
+                </NavItem>
               </Nav>
               }
               <Nav pullRight>
-                <NavItem eventKey={3} target="_blank" href='https://www.pulangmengundi.com/guidelines.html'>
+                <NavItem eventKey={3} target="_blank" href={faqLink}>
                   <FormattedMessage
                     id="nav-faq"
                     defaultMessage={`Guidelines and FAQ`}
                   />
                 </NavItem>
-                <NavItem eventKey={4} target="_blank" href='https://www.pulangmengundi.com/about.html'>
+                <NavItem eventKey={4} target="_blank" href={aboutLink}>
                   <FormattedMessage
                     id="nav-about"
                     defaultMessage={`About`}

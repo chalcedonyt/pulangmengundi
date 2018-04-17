@@ -9,9 +9,10 @@ import ContactModal from './ContactModal'
 import OutgoingSponsorModal from './OutgoingSponsorModal'
 import StateSelection from './shared/StateSelection'
 import Progress from './shared/Progress'
-import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
+import {FormattedMessage as FM, FormattedHTMLMessage as FHM} from 'react-intl'
 import { isMobile, MobileView, BrowserView } from "react-device-detect";
-
+import 'react-count-animation/dist/count.min.css';
+import AnimationCount from 'react-count-animation';
 
 export default class Carpool extends Component {
   constructor(props) {
@@ -38,6 +39,7 @@ export default class Carpool extends Component {
       driverLimit:15,
       riderOffset: 0,
       riderLimit: 15,
+      connectionCount: 100
 
     }
     this.handleStateFromChange = this.handleStateFromChange.bind(this)
@@ -91,7 +93,8 @@ export default class Carpool extends Component {
               offerCount,
               needs,
               needCount: meta.count,
-              isLoading: false
+              isLoading: false,
+              connectionCount: meta.connections_count
             })
           })
         })
@@ -248,9 +251,24 @@ export default class Carpool extends Component {
               </div>
             </Col>
             <Col md={9} xs={12}>
-              <h3>#PulangMengundi #CarpoolGE14</h3>
+              <h2 id='main-header'>
+                <FM
+                  id='home.jumbotron-connected'
+                  defaultMessage={`{number} Malaysians connected!`}
+                  values={{
+                    number: <AnimationCount
+                      start={0}
+                      count={this.state.connectionCount}
+                      animation='up'
+                      useGroup={true}
+                      decimals={0}
+                      duration={4000}
+                    />
+                  }}
+                />
+              </h2>
               <p>
-                <FormattedMessage
+                <FM
                   id="home.jumbotron"
                   defaultMessage={`Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!`}
                 />
@@ -260,11 +278,11 @@ export default class Carpool extends Component {
                   <Col md={5} xsHidden={true}>
                     <Button bsSize='large' bsStyle='default' href='/offer'>
                       {!hasDriverListing
-                      ? <FormattedMessage
+                      ? <FM
                         id="home.driver-btn"
                         defaultMessage={`(Driver) I want to offer a carpool`}
                       />
-                      : <FormattedMessage
+                      : <FM
                         id="home.driver-loggedin-btn"
                         defaultMessage={`(Driver) Manage carpool listing`}
                       />
@@ -274,20 +292,22 @@ export default class Carpool extends Component {
                   <Col md={5} mdOffset={1} xsHidden={true}>
                     <Button bsSize='large' bsStyle='default' href='/need'>
                     {!hasRiderListing
-                      ? <FormattedMessage
+                      ? <FM
                         id="home.rider-btn"
                         defaultMessage={`(Rider) I am looking for a carpool`}
                       />
-                      : <FormattedMessage
+                      : <FM
                         id="home.rider-loggedin-btn"
                         defaultMessage={`(Rider) Manage carpool request`}
                       />
                     }
                     </Button>
+                    <br />
+                    <br />
                   </Col>
                   <Col lgHidden={true} mdHidden={true} smHidden={true} xsOffset={1} xs={8}>
                     <Button bsStyle='default' href='/offer'>
-                      <FormattedHTMLMessage
+                      <FHM
                         id="home.driver-btn-small"
                         defaultMessage={`(Driver)<br /> I want to offer a carpool`}
                       />
@@ -295,7 +315,7 @@ export default class Carpool extends Component {
                     <br />
                     <br />
                     <Button bsStyle='default' href='/need'>
-                      <FormattedHTMLMessage
+                      <FHM
                         id="home.rider-btn-small"
                         defaultMessage={`(Rider)<br /> I am looking for a carpool`}
                       />
@@ -307,12 +327,12 @@ export default class Carpool extends Component {
                     <br />
                     <Alert bsStyle='info'>
                       <h4>
-                        <FormattedMessage
+                        <FM
                           id="home.header-update"
                           defaultMessage={`Updates`}
                         />
                       </h4>
-                      <FormattedHTMLMessage
+                      <FHM
                         id="home.changelog"
                         defaultMessage={
                         `<ul>
@@ -329,74 +349,77 @@ export default class Carpool extends Component {
             </Col>
           </Row>
         </Jumbotron>
-        <Panel bsStyle='info'>
+        <Alert bsStyle='info'>
+          <Row>
+            <Col md={1} mdOffset={0} xsOffset={4} xs={1} sm={1} smOffset={0}>
+              <Image width='50' src='https://balik.undirabu.com/wp-content/uploads/2018/04/undirabu-logo-300x300.png' />
+            </Col>
+            <Col md={11} xs={12} sm={11}>
+              <h5>
+                <FM
+                  id="home.undirabu-promo-header"
+                  defaultMessage={`New: Undirabu is sponsoring FREE buses to certain locations throughout Malaysia.`}
+                />
+              </h5>
+              <p>
+                <FM
+                  id="home.undirabu-promo-cta"
+                  defaultMessage={`Check them out at {link}, or do a search to see if they have a bus matching your trip!`}
+                  values={{
+                    'link': <u>
+                      <a href='javascript:;' onClick={(e)=>this.showOutgoingSponsorModal(balikUndiHref)}>balik.undirabu.com</a>
+                    </u>
+                  }}
+                />
+              </p>
+
+            </Col>
+          </Row>
+        </Alert>
+        {this.state.sponsorMatches &&
+        <Alert bsStyle='success'>
+          <h4>
+            <FM
+              id="home.undirabu-promo-matched"
+              defaultMessage={`We have a match for your route from Undirabu!`}
+            /> ({this.state.selectedStateFrom} - {this.state.selectedStateTo})</h4>
+          <ul>
+            {this.state.sponsorMatches.map((match) => (
+              <li key={match.link}>
+                <u>
+                  <a href='javascript:;' onClick={(e)=> this.showOutgoingSponsorModal(`${match.link}?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_search`)}>
+                    <Glyphicon glyph='chevron-right' />&nbsp;
+                    {match.description}
+                  </a>
+                </u>
+              </li>
+            ))}
+          </ul>
+        </Alert>
+        }
+        <OutgoingSponsorModal
+          show={this.state.showOutgoingSponsorModal}
+          outgoingSponsorHref={this.state.outgoingSponsorHref}
+          outgoingSponsor={`balik.undirabu.com`}
+          onProceed={(e)=>this.trackOutgoingSponsor(this.state.outgoingSponsorHref)}
+          onCancel={(e)=>this.hideOutgoingSponsorModal(null)}
+        />
+        <Panel>
+          <Panel.Heading>
+            <h4>
+              Carpool search
+            </h4>
+          </Panel.Heading>
           <Panel.Body>
             <Grid fluid>
-              <Alert bsStyle='info'>
-                <Row>
-                  <Col md={1} mdOffset={0} xsOffset={4} xs={1} sm={1} smOffset={0}>
-                    <Image width='50' src='https://balik.undirabu.com/wp-content/uploads/2018/04/undirabu-logo-300x300.png' />
-                  </Col>
-                  <Col md={11} xs={12} sm={11}>
-                    <h5>
-                      <FormattedMessage
-                        id="home.undirabu-promo-header"
-                        defaultMessage={`New: Undirabu is sponsoring FREE buses to certain locations throughout Malaysia.`}
-                      />
-                    </h5>
-                    <p>
-                      <FormattedMessage
-                        id="home.undirabu-promo-cta"
-                        defaultMessage={`Check them out at {link}, or do a search to see if they have a bus matching your trip!`}
-                        values={{
-                          'link': <u>
-                            <a href='javascript:;' onClick={(e)=>this.showOutgoingSponsorModal(balikUndiHref)}>balik.undirabu.com</a>
-                          </u>
-                        }}
-                      />
-                    </p>
-
-                  </Col>
-                </Row>
-              </Alert>
-              {this.state.sponsorMatches &&
-              <Alert bsStyle='success'>
-                <h4>
-                  <FormattedMessage
-                    id="home.undirabu-promo-matched"
-                    defaultMessage={`We have a match for your route from Undirabu!`}
-                  /> ({this.state.selectedStateFrom} - {this.state.selectedStateTo})</h4>
-                <ul>
-                  {this.state.sponsorMatches.map((match) => (
-                    <li key={match.link}>
-                      <u>
-                        <a href='javascript:;' onClick={(e)=> this.showOutgoingSponsorModal(`${match.link}?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_search`)}>
-                          <Glyphicon glyph='chevron-right' />&nbsp;
-                          {match.description}
-                        </a>
-                      </u>
-                    </li>
-                  ))}
-                </ul>
-              </Alert>
-              }
-              <OutgoingSponsorModal
-                show={this.state.showOutgoingSponsorModal}
-                outgoingSponsorHref={this.state.outgoingSponsorHref}
-                outgoingSponsor={`balik.undirabu.com`}
-                onProceed={(e)=>this.trackOutgoingSponsor(this.state.outgoingSponsorHref)}
-                onCancel={(e)=>this.hideOutgoingSponsorModal(null)}
-              />
               <Row>
                 <Col md={4} mdOffset={2}>
                   <Panel>
                     <Panel.Heading>
-                      <h5>
-                        <FormattedMessage
-                          id="home.btn-search-from"
-                          defaultMessage={`Choose where you are starting from`}
-                        />
-                      </h5>
+                      <FM
+                        id="home.btn-search-from"
+                        defaultMessage={`Choose where you are starting from`}
+                      />
                     </Panel.Heading>
                     <Panel.Body>
                       <StateSelection
@@ -406,7 +429,7 @@ export default class Carpool extends Component {
                       />
                       {this.state.selectedStateFrom &&
                         <Button bsStyle='link' onClick={this.resetSelectedStateFrom}>
-                          <FormattedMessage
+                          <FM
                             id="home.btn-search-clear"
                             defaultMessage={`Clear`}
                           />
@@ -418,12 +441,10 @@ export default class Carpool extends Component {
                 <Col md={4}>
                   <Panel>
                     <Panel.Heading>
-                      <h5>
-                        <FormattedMessage
-                          id="home.btn-search-to"
-                          defaultMessage={`Choose where you are going to`}
-                        />
-                      </h5>
+                      <FM
+                        id="home.btn-search-to"
+                        defaultMessage={`Choose where you are going to`}
+                      />
                     </Panel.Heading>
                     <Panel.Body>
                       <StateSelection
@@ -433,7 +454,7 @@ export default class Carpool extends Component {
                       />
                       {this.state.selectedStateTo &&
                         <Button bsStyle='link' onClick={this.resetSelectedStateTo}>
-                          <FormattedMessage
+                          <FM
                             id="home.btn-search-clear"
                             defaultMessage={`Clear`}
                           />
@@ -457,7 +478,7 @@ export default class Carpool extends Component {
                         <Col md={12} xs={10} sm={10}>
                           <h3>
                             {this.state.offerCount}&nbsp;
-                            <FormattedMessage
+                            <FM
                               id="home.driver-counter"
                               defaultMessage={`Drivers offering carpools`}
                             />&nbsp;&nbsp;
@@ -493,7 +514,7 @@ export default class Carpool extends Component {
                         && this.state.offers.length == 0
                         && (
                           <Alert bsStyle='info'>
-                            <FormattedMessage
+                            <FM
                               id="match.no-results"
                               defaultMessage={`No results found`}
                             />
@@ -504,7 +525,7 @@ export default class Carpool extends Component {
                           <Col xsOffset={4} mdOffset={5} smOffset={5} xs={2} md={2} sm={2}>
                           {this.state.offerCount > this.state.offers.length &&
                             <Button onClick={this.loadMoreDrivers}>
-                              <FormattedMessage
+                              <FM
                                 id='pagination-more'
                                 defaultMessage={`More`}
                               />
@@ -529,7 +550,7 @@ export default class Carpool extends Component {
                       && this.state.offers.length == 0
                       && (
                         <Alert bsStyle='info'>
-                          <FormattedMessage
+                          <FM
                             id="match.no-results"
                             defaultMessage={`No results found`}
                           />
@@ -540,7 +561,7 @@ export default class Carpool extends Component {
                         <Col xsOffset={5} mdOffset={5} smOffset={5} xs={2} md={2} sm={2}>
                         {this.state.offerCount > this.state.offers.length &&
                           <Button onClick={this.loadMoreDrivers}>
-                            <FormattedMessage
+                            <FM
                               id='pagination-more'
                               defaultMessage={`More`}
                             />
@@ -562,7 +583,7 @@ export default class Carpool extends Component {
                         <Col md={12} xs={10} sm={10}>
                           <h3>
                             {this.state.needCount}&nbsp;
-                            <FormattedMessage
+                            <FM
                               id="home.rider-counter"
                               defaultMessage={`Riders looking for carpools`}
                             />
@@ -598,7 +619,7 @@ export default class Carpool extends Component {
                         && this.state.needs.length == 0
                         && (
                           <Alert bsStyle='info'>
-                            <FormattedMessage
+                            <FM
                               id="match.no-results"
                               defaultMessage={`No results found`}
                             />
@@ -629,7 +650,7 @@ export default class Carpool extends Component {
                       && this.state.needs.length == 0
                       && (
                         <Alert bsStyle='info'>
-                          <FormattedMessage
+                          <FM
                             id="match.no-results"
                             defaultMessage={`No results found`}
                           />

@@ -1,5 +1,9 @@
 [
   {
+    "id": "home.jumbotron-connected",
+    "defaultMessage": "{number} Malaysians connected!"
+  },
+  {
     "id": "home.jumbotron",
     "defaultMessage": "Going back to vote? Split the cost, make new friends. Use our tool to match with voters going in the same direction to #pulangmengundi!"
   },
