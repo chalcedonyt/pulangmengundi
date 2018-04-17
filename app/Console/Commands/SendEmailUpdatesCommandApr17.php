@@ -84,7 +84,7 @@ class SendEmailUpdatesCommandApr17 extends Command
                     $msgs[]=$msg;
                     $emails_sent++;
                     $to_id = $user->getKey();
-                    \Mail::to('chalcedonyt@gmail.com')
+                    \Mail::to($user->email)
                     ->send($mail);
                 }
             }
