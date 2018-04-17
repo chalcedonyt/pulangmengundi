@@ -66,16 +66,16 @@ export default class CarpoolNeed extends Component {
         </Panel.Body>
         {this.props.isOwner && this.props.need && !this.props.need.fulfilled &&
         <Panel.Footer>
+          <Button bsStyle='success' onClick={(e)=> this.setCloseModal(true)}>
+            <FormattedMessage
+              id="request.btn-close-cancel"
+              defaultMessage={`I have found a ride! / Close`}
+            />
+          </Button>&nbsp;
           <Button bsStyle='info' href='/need'>
             <FormattedMessage
               id="btn-edit"
               defaultMessage={`Edit`}
-            />
-          </Button>
-          <Button bsStyle='success' onClick={(e)=> this.setCloseModal(true)}>
-            <FormattedMessage
-              id="request.btn-close-cancel"
-              defaultMessage={`Close/Cancel`}
             />
           </Button>
         </Panel.Footer>

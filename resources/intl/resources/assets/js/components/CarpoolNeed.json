@@ -12,12 +12,12 @@
     "defaultMessage": "Gender"
   },
   {
-    "id": "btn-edit",
-    "defaultMessage": "Edit"
+    "id": "request.btn-close-cancel",
+    "defaultMessage": "I have found a ride! / Close"
   },
   {
-    "id": "request.btn-close-cancel",
-    "defaultMessage": "Close/Cancel"
+    "id": "btn-edit",
+    "defaultMessage": "Edit"
   },
   {
     "id": "request.fulfilled",

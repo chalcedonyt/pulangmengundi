@@ -5,7 +5,7 @@ import api from '../utils/api'
 import {Alert, Button, Col, Grid, Image, Panel, Row} from 'react-bootstrap'
 import HideOfferModal from './HideOfferModal'
 import UnhideOfferModal from './UnhideOfferModal'
-import {FormattedMessage} from 'react-intl'
+import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 import moment from 'moment'
 
 export default class CarpoolOffer extends Component {
@@ -125,10 +125,10 @@ export default class CarpoolOffer extends Component {
           <div>
             {this.state.offer.hidden == 0 &&
               <div>
-                <Button bsStyle='info' onClick={(e) => this.setHideModal(true)}>
-                  <FormattedMessage
+                <Button bsStyle='success' onClick={(e) => this.setHideModal(true)}>
+                  <FormattedHTMLMessage
                     id="btn-close-offer"
-                    defaultMessage={`Close offer`}
+                    defaultMessage={`I have matched a passenger! / Close offer`}
                   />
                 </Button>
               </div>

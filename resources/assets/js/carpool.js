@@ -30,7 +30,7 @@ const aboutLink = window.locale == 'ms' ? 'https://bm.pulangmengundi.com/tentang
 ReactDOM.render(
     <BrowserRouter>
       <IntlProvider locale={language} messages={messages[language]}>
-        <div>
+        <div className="container">
           <Navbar fluid>
             <Navbar.Header>
               <Navbar.Brand>
