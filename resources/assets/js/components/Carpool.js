@@ -407,7 +407,9 @@ export default class Carpool extends Component {
         <Panel>
           <Panel.Heading>
             <h4>
-              Carpool search
+              <FM id='home.header-search'
+                defaultMessage={`Carpool search`}
+              />
             </h4>
           </Panel.Heading>
           <Panel.Body>

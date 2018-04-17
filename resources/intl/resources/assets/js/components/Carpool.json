@@ -52,6 +52,10 @@
     "defaultMessage": "We have a match for your route from Undirabu!"
   },
   {
+    "id": "home.header-search",
+    "defaultMessage": "Carpool search"
+  },
+  {
     "id": "home.btn-search-from",
     "defaultMessage": "Choose where you are starting from"
   },
