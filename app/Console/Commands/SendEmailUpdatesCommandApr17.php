@@ -17,7 +17,7 @@ class SendEmailUpdatesCommandApr17 extends Command
      *
      * @var string
      */
-    protected $signature = 'email:match-updates-apr17';
+    protected $signature = 'email:match-updates-apr17 {--fromid= : User id to start from} {--toid= : User id to end at}';
 
     /**
      * The console command description.
@@ -44,13 +44,16 @@ class SendEmailUpdatesCommandApr17 extends Command
      */
     public function handle()
     {
+        $from_id = $this->option('fromid') ?: null;
+        $to_id = $this->option('toid') ?: null;
+
         $match_stats = [
             'users' => 0,
             'matched_drivers' => 0,
             'matched_riders' => 0,
             'msgs' => []
         ];
-        \App\Models\User::with(
+        $query = \App\Models\User::with(
             'need',
             'need.user',
             'need.fromLocation.locationState',
@@ -59,20 +62,39 @@ class SendEmailUpdatesCommandApr17 extends Command
             'offers.user',
             'offers.fromLocation.locationState',
             'offers.toLocation.locationState'
-        )
-        ->orderBy('id')->chunk(50, function ($users) use (&$match_stats) {
+        )->orderBy('id', 'asc');
+
+        if ($from_id) {
+            $query->where('id', '>=', $from_id);
+        }
+        if ($to_id) {
+            $query->where('id', '<=', $to_id);
+        }
+        $this->info(sprintf("Executing emails with sql query %s | args %s, %s", $query->toSql(), $from_id, $to_id));
+
+        $emails_sent = 0;
+        $msgs = [];
+        $from_id = $query->first()->getKey();
+        $to_id = null;
+        $query->chunk(50, function ($users) use (&$emails_sent, &$msgs, &$to_id) {
             foreach ($users as $user) {
                 list($mail, $msg) = (new \App\Gateways\MatchGateway)->getEmailForUser($user, $this->lastSentAt);
-                if ($mail)
+                if ($mail) {
                     $this->info($msg);
+                    $msgs[]=$msg;
+                    $emails_sent++;
+                    $to_id = $user->getKey();
+                    \Mail::to('chalcedonyt@gmail.com')
+                    ->send($mail);
+                }
             }
         });
-        // $msg = sprintf('Email batch run on %s found %d potential user matches', date('r'), $match_stats['users']);
-        // $this->info($msg);
-        // $es = new EmailsSent;
-        // $es->sent_at = date('Y-m-d H:i:s');
-        // $es->emails_sent = $match_stats['users'];
-        // $es->message = implode("\n", $match_stats['msgs']);
-        // $es->save();
+        $es = new EmailsSent;
+        $es->sent_at = date('Y-m-d H:i:s');
+        $es->emails_sent = $emails_sent;
+        $es->message = implode("\n", $msgs);
+        $es->from_user_id = $from_id;
+        $es->to_user_id = $to_id;
+        $es->save();
     }
 }
