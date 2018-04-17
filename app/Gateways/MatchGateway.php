@@ -19,7 +19,7 @@ class MatchGateway
 
         $matched_offers = collect([]);
         $matched_sponsors = collect([]);
-        if ($user->need) {
+        if ($user->need && !$user->need->fulfilled) {
             $matched_offers = $this->matchNeed($user->need, $min_time);
             //append jwt link
             $matched_offers = $matched_offers->map(function ($offer) use ($user) {
@@ -43,6 +43,8 @@ class MatchGateway
         $matched_needs = collect([]);
         if ($user->offers) {
             foreach ($user->offers as $offer) {
+                if ($offer->hidden || $offer->fulfilled)
+                    continue;
                 $needs = $this->matchOffer($offer, $min_time);
                 if ($needs->count()) {
                     $needs = $needs->map(function ($need) use ($user) {

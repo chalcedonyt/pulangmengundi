@@ -34,7 +34,7 @@ class SendEmailUpdatesCommandApr17 extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->lastSentAt = Carbon::parse(\App\Models\EmailsSent::orderBy('id', 'desc')->first()->sent_at);
+        $this->lastSentAt = Carbon::parse(\App\Models\EmailsSent::find(1)->sent_at);
     }
 
     /**
