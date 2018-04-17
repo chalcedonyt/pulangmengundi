@@ -37,7 +37,7 @@
   },
   {
     "id": "home.changelog",
-    "defaultMessage": "<ul>\n                          <li>Mon 9am: We have a new collaboration with UndiRabu!</li>\n                          <li>Sun 10am: We are starting to send emails to notify riders/drivers of potential matches.</li>\n                          <li>Sat 5pm: You can now mark your listing as fulfilled, or cancel it. Please do so as it helps improve our system.</li>\n                          <li>Sat 12am: You can now choose to fill in your <strong>contact number</strong> to be shown to others. (Drivers may need to cancel and re-post for this to be reflected)</li>\n                        </ul>"
+    "defaultMessage": "<ul>\n                          <li>Wed 12am: We have a new partnership with JomBalikUndi, who are organizing car rental groups.</li>\n                          <li>Mon 9am: We have a new collaboration with UndiRabu!</li>\n                          <li>Sun 10am: We are starting to send emails to notify riders/drivers of potential matches.</li>\n                          <li>Sat 5pm: You can now mark your listing as fulfilled, or cancel it. Please do so as it helps improve our system.</li>\n                        </ul>"
   },
   {
     "id": "home.undirabu-promo-header",
@@ -46,6 +46,18 @@
   {
     "id": "home.undirabu-promo-cta",
     "defaultMessage": "Check them out at {link}, or do a search to see if they have a bus matching your trip!"
+  },
+  {
+    "id": "home.jombalikundi-promo-header",
+    "defaultMessage": "New: JomBalikUndi is organizing <strong>Whatsapp groups</strong> to rent cars together."
+  },
+  {
+    "id": "home.jombalikundi-cta",
+    "defaultMessage": "Fill out their {form}."
+  },
+  {
+    "id": "btn-form-here",
+    "defaultMessage": "form here"
   },
   {
     "id": "home.undirabu-promo-matched",
