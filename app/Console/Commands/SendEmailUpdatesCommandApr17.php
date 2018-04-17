@@ -62,15 +62,17 @@ class SendEmailUpdatesCommandApr17 extends Command
         )
         ->orderBy('id')->chunk(50, function ($users) use (&$match_stats) {
             foreach ($users as $user) {
-                $mail = (new \App\Gateways\MatchGateway)->getEmailForUser($user, $this->lastSentAt);
+                list($mail, $msg) = (new \App\Gateways\MatchGateway)->getEmailForUser($user, $this->lastSentAt);
+                if ($mail)
+                    $this->info($msg);
             }
         });
-        $msg = sprintf('Email batch run on %s found %d potential user matches', date('r'), $match_stats['users']);
-        $this->info($msg);
-        $es = new EmailsSent;
-        $es->sent_at = date('Y-m-d H:i:s');
-        $es->emails_sent = $match_stats['users'];
-        $es->message = implode("\n", $match_stats['msgs']);
-        $es->save();
+        // $msg = sprintf('Email batch run on %s found %d potential user matches', date('r'), $match_stats['users']);
+        // $this->info($msg);
+        // $es = new EmailsSent;
+        // $es->sent_at = date('Y-m-d H:i:s');
+        // $es->emails_sent = $match_stats['users'];
+        // $es->message = implode("\n", $match_stats['msgs']);
+        // $es->save();
     }
 }

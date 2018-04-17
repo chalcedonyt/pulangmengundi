@@ -423,11 +423,11 @@
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
                               <span style="line-height: 26px; font-size: 22px;">These routes from UndiRabu match yours:</span>
                             </p>
-                            <ul>
+                            <ul style='list-style-type:none'>
                               @foreach ($matchedSponsors as $match)
                               <li>
                                   <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                                    <a target="_blank" href="{!!$match->link!!}?utm_campaign=carpool.pulangmengundi.com&utm_medium=email_match">{{$match->description}}</a>
+                                    &gt; <a target="_blank" href="{!!$match->link!!}?utm_campaign=carpool.pulangmengundi.com&utm_medium=email_match">{{$match->description}}</a>
                                   </p>
                               </li>
                               @endforeach

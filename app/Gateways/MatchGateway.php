@@ -20,7 +20,7 @@ class MatchGateway
         $matched_offers = collect([]);
         $matched_sponsors = collect([]);
         if ($user->need) {
-            $matched_offers = $this->matchNeed($user->need, $last_sent_at);
+            $matched_offers = $this->matchNeed($user->need, $min_time);
             //append jwt link
             $matched_offers = $matched_offers->map(function ($offer) use ($user) {
                 $jwt = JWT::encode([
@@ -43,26 +43,26 @@ class MatchGateway
         $matched_needs = collect([]);
         if ($user->offers) {
             foreach ($user->offers as $offer) {
-                $needs = $this->matchOffer($offer, $last_sent_at);
+                $needs = $this->matchOffer($offer, $min_time);
                 if ($needs->count()) {
+                    $needs = $needs->map(function ($need) use ($user) {
+                        $jwt = JWT::encode([
+                            'iss' => 'email',
+                            'iat' => time(),
+                            'exp' => time()+(60*60*24*30),
+                            'sub' => $user->getKey(),
+                            'uuid' => $need->user->uuid
+                        ], env('APP_KEY'));
+                        $need->jwt_link = env('APP_URL')."/u/$jwt";
+                        return $need;
+                    });
                     $matched_needs = $matched_needs->concat($needs);
                 }
-                $matched_needs = $matched_needs->map(function ($need) use ($user) {
-                    $jwt = JWT::encode([
-                        'iss' => 'email',
-                        'iat' => time(),
-                        'exp' => time()+(60*60*24*30),
-                        'sub' => $user->getKey(),
-                        'uuid' => $need->user->uuid
-                    ], env('APP_KEY'));
-                    $need->jwt_link = env('APP_URL')."/u/$jwt";
-                    return $need;
-                });
             }
         }
 
         if ($matched_needs->count() || $matched_offers->count() || $matched_sponsors->count()) {
-            $msg = sprintf('Found %d drivers, %d offers, %d sponsor routes for user %d %s',
+            $msg = sprintf('Found %d riders, %d drivers, %d sponsor routes for user %d %s',
                 $matched_needs->count(),
                 $matched_offers->count(),
                 $matched_sponsors->count(),
@@ -77,6 +77,10 @@ class MatchGateway
                 // $match_stats
             ];
         }
+        return [
+            null,
+            null
+        ];
     }
     /**
      * Matches an offer to needs
