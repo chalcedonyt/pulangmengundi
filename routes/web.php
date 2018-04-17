@@ -50,7 +50,7 @@ Route::group([
     Route::middleware(['auth', 'accept-terms'])->group(function() {
         Route::get('/need', function() {
             $prev = str_replace(url('/'), '', url()->previous());
-            if (\Auth::user()->need && $prev != '/my-need') {
+            if (\Auth::user()->need && strpos($prev, 'my-need') === false ) {
                 return redirect('/my-need');
             }
             return view('carpool');
