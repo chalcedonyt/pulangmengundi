@@ -37,4 +37,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\Models\InfoRequest::class);
     }
+
+    public function failedEmails()
+    {
+        return $this->hasMany(\App\Models\FailedEmail::class);
+    }
 }
