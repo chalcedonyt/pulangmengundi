@@ -301,6 +301,12 @@ export default class NeedCarpool extends Component {
                             defaultMessage={`Show the link to my Facebook account.`}
                           />
                           <br />
+                          <Alert>
+                            <FormattedMessage
+                              id="request.share-jbu"
+                              defaultMessage={`We may share your contact number with JomBalikUndi, who are organizing car rental groups. See the main page for more information.`}
+                            />
+                          </Alert>
                           <FormattedMessage
                             id="request.checkbox-show-contact"
                             defaultMessage={`Show my contact number:`}

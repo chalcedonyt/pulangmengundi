@@ -26,6 +26,7 @@ export default class Carpool extends Component {
       showContactModal: false,
       showOutgoingSponsorModal: false,
       outgoingSponsorHref: '',
+      outgoingSponsor: '',
 
       selectedUser: {},
       needCount: null,
@@ -215,9 +216,10 @@ export default class Carpool extends Component {
     })
   }
 
-  showOutgoingSponsorModal(href) {
+  showOutgoingSponsorModal(sponsor, href) {
     this.setState({
       outgoingSponsorHref: href,
+      outgoingSponsor: sponsor,
       showOutgoingSponsorModal: true
     })
   }
@@ -225,13 +227,14 @@ export default class Carpool extends Component {
   hideOutgoingSponsorModal() {
     this.setState({
       outgoingSponsorHref: '',
+      outgoingSponsor: '',
       showOutgoingSponsorModal: false
     })
   }
 
-  trackOutgoingSponsor(href) {
+  trackOutgoingSponsor(sponsor, href) {
     gtag('event', 'OutgoingSponsorLink', {
-      event_category: 'UndiRabu',
+      event_category: sponsor,
       event_label: href
     })
   }
@@ -239,6 +242,7 @@ export default class Carpool extends Component {
 
   render() {
     const balikUndiHref = `https://balik.undirabu.com/home?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_banner`
+    const jomBalikUndiHref = `https://docs.google.com/forms/d/e/1FAIpQLSfdgubPKIXMFXOyLBgWfrlrNhGbvfGR1frrxyPslkMouk7eJg/viewform`
     const hasDriverListing = window.userStatus && window.userStatus.hasDriverListing
     const hasRiderListing = window.userStatus && window.userStatus.hasRiderListing
     return (
@@ -336,10 +340,10 @@ export default class Carpool extends Component {
                         id="home.changelog"
                         defaultMessage={
                         `<ul>
+                          <li>Wed 12am: We have a new partnership with JomBalikUndi, who are organizing car rental groups.</li>
                           <li>Mon 9am: We have a new collaboration with UndiRabu!</li>
                           <li>Sun 10am: We are starting to send emails to notify riders/drivers of potential matches.</li>
                           <li>Sat 5pm: You can now mark your listing as fulfilled, or cancel it. Please do so as it helps improve our system.</li>
-                          <li>Sat 12am: You can now choose to fill in your <strong>contact number</strong> to be shown to others. (Drivers may need to cancel and re-post for this to be reflected)</li>
                         </ul>`}
                       />
                     </Alert>
@@ -354,7 +358,7 @@ export default class Carpool extends Component {
             <Col md={1} mdOffset={0} xsOffset={4} xs={1} sm={1} smOffset={0}>
               <Image width='50' src='https://balik.undirabu.com/wp-content/uploads/2018/04/undirabu-logo-300x300.png' />
             </Col>
-            <Col md={11} xs={12} sm={11}>
+            <Col md={5} xs={12} sm={5}>
               <h5>
                 <FM
                   id="home.undirabu-promo-header"
@@ -367,12 +371,39 @@ export default class Carpool extends Component {
                   defaultMessage={`Check them out at {link}, or do a search to see if they have a bus matching your trip!`}
                   values={{
                     'link': <u>
-                      <a href='javascript:;' onClick={(e)=>this.showOutgoingSponsorModal(balikUndiHref)}>balik.undirabu.com</a>
+                      <a href='javascript:;' onClick={(e)=>this.showOutgoingSponsorModal('UndiRabu', balikUndiHref)}>balik.undirabu.com</a>
                     </u>
                   }}
                 />
               </p>
-
+              <br />
+            </Col>
+            <Col md={1} mdOffset={0} xsOffset={4} xs={1} sm={1} smOffset={0}>
+              <Image width='50' src='/img/whatsapp.jpg' />
+            </Col>
+            <Col md={5} xs={12} sm={5}>
+              <h5>
+                <FHM
+                  id="home.jombalikundi-promo-header"
+                  defaultMessage={`New: JomBalikUndi is organizing <strong>Whatsapp groups</strong> to rent cars together.`}
+                />
+              </h5>
+              <p>
+                <FM
+                  id="home.jombalikundi-cta"
+                  defaultMessage={`Fill out their {form}.`}
+                  values={{
+                    'form': <u>
+                      <a href='javascript:;' onClick={(e)=>this.showOutgoingSponsorModal('JomBalikUndi', jomBalikUndiHref)}>
+                        <FM
+                          id="btn-form-here"
+                          defaultMessage={`form here`}
+                        />
+                      </a>
+                    </u>
+                  }}
+                />
+              </p>
             </Col>
           </Row>
         </Alert>
@@ -387,7 +418,7 @@ export default class Carpool extends Component {
             {this.state.sponsorMatches.map((match) => (
               <li key={match.link}>
                 <u>
-                  <a href='javascript:;' onClick={(e)=> this.showOutgoingSponsorModal(`${match.link}?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_search`)}>
+                  <a href='javascript:;' onClick={(e)=> this.showOutgoingSponsorModal('UndiRabu', `${match.link}?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_search`)}>
                     <Glyphicon glyph='chevron-right' />&nbsp;
                     {match.description}
                   </a>
@@ -400,8 +431,8 @@ export default class Carpool extends Component {
         <OutgoingSponsorModal
           show={this.state.showOutgoingSponsorModal}
           outgoingSponsorHref={this.state.outgoingSponsorHref}
-          outgoingSponsor={`balik.undirabu.com`}
-          onProceed={(e)=>this.trackOutgoingSponsor(this.state.outgoingSponsorHref)}
+          outgoingSponsor={this.state.outgoingSponsor}
+          onProceed={(e)=>this.trackOutgoingSponsor(this.state.outgoingSponsor, this.state.outgoingSponsorHref)}
           onCancel={(e)=>this.hideOutgoingSponsorModal(null)}
         />
         <Panel>
