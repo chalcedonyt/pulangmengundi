@@ -306,7 +306,7 @@ export default class NeedCarpool extends Component {
                           <Alert>
                             <FormattedMessage
                               id="request.share-contact-warning"
-                              defaultMessage={`If you share your contact number, we may use it to organize Whatsapp groups with other riders and drivers.`}
+                              defaultMessage={`We may use your contact number to organize Whatsapp groups with other riders and drivers.`}
                             />
                           </Alert>
                           <FormattedMessage

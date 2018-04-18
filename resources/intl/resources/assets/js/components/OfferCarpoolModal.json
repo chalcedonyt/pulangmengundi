@@ -8,6 +8,10 @@
     "defaultMessage": "Submit carpool offer?"
   },
   {
+    "id": "request.submit-warning",
+    "defaultMessage": "By submitting this offer/request, you allow us to send you email updates about matched drivers/passengers, and to create Whatsapp groups matching you to drivers/passengers."
+  },
+  {
     "id": "offer.info-warning",
     "defaultMessage": "Your name, location and times will be shown to users who match your district or state."
   },

@@ -61,7 +61,7 @@
   },
   {
     "id": "request.share-contact-warning",
-    "defaultMessage": "If you share your contact number, we may use it to organize Whatsapp groups with other riders and drivers."
+    "defaultMessage": "We may use your contact number to organize Whatsapp groups with other riders and drivers."
   },
   {
     "id": "request.checkbox-show-contact",

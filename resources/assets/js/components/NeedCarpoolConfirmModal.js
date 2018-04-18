@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import {Modal, Row, Col, Button} from 'react-bootstrap'
+import {Alert, Modal, Row, Col, Button} from 'react-bootstrap'
 import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 
 export default class NeedCarpoolConfirmModal extends Component {
@@ -25,6 +25,12 @@ export default class NeedCarpoolConfirmModal extends Component {
               defaultMessage={`Submit carpool request?`}
             />
           </h4>
+          <Alert>
+            <FormattedMessage
+              id="request.submit-warning"
+              defaultMessage={`By submitting this offer/request, you allow us to send you email updates about matched drivers/passengers, and to create Whatsapp groups matching you to drivers/passengers.`}
+            />
+          </Alert>
           <p>
             <FormattedMessage
               id="request.dialog-info-1"
