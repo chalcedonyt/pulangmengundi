@@ -1,9 +1,5 @@
 [
   {
-    "id": "request.dialog-header-confirm",
-    "defaultMessage": "Confirm request"
-  },
-  {
     "id": "request.dialog-header-submit-question",
     "defaultMessage": "Submit carpool request?"
   },
@@ -18,6 +14,10 @@
   {
     "id": "request.dialog-info-1",
     "defaultMessage": "You will be shown other voters who are travelling the same way as you, and vice-versa. They will be able to request your contact information."
+  },
+  {
+    "id": "request.dialog-warning",
+    "defaultMessage": "It is an offence to induce someone to vote for a political party. We only provide carpool-matching to connect voters - if anyone tries to induce you to vote for any party, please report this to us."
   },
   {
     "id": "request.header-i-from",

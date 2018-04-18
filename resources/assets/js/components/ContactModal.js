@@ -14,9 +14,13 @@ export default class ContactModal extends Component {
       email: null,
       facebook: null,
       contact_number: null,
-      hasRequested: false
+      hasRequested: false,
+      shouldShowEmail: false,
+      shouldShowContactNumber: false,
     }
     this.handleCaptchaSuccess = this.handleCaptchaSuccess.bind(this)
+    this.handleShowEmail = this.handleShowEmail.bind(this)
+    this.handleShowContactNumber = this.handleShowContactNumber.bind(this)
   }
 
   handleCaptchaSuccess() {
@@ -28,6 +32,27 @@ export default class ContactModal extends Component {
         contact_number,
         hasRequested: true
       })
+    })
+  }
+
+  handleShowEmail() {
+    this.trackContactActivity('ShowedEmail');
+    this.setState({
+      shouldShowEmail: true
+    })
+  }
+
+  handleShowContactNumber() {
+    this.trackContactActivity('ShowedContactNumber');
+    this.setState({
+      shouldShowContactNumber: true
+    })
+  }
+
+  trackContactActivity(type) {
+    gtag('event', 'ContactActivity', {
+      event_category: type,
+      event_label: type
     })
   }
 
@@ -79,32 +104,43 @@ export default class ContactModal extends Component {
         {this.state.hasRequested &&
         <Panel bsStyle='success'>
           <Panel.Body>
-            <p>
-              <FormattedMessage
-                id="contact.after-show-1"
-                defaultMessage={`Get in touch and arrange your trip! Some safety precautions below:`}
-              />
-            </p>
-            <ul>
-              <li>
+            <Alert>
+              <p>
                 <FormattedMessage
-                  id="contact.after-show-2"
-                  defaultMessage={`Exchange contact details (e.g. phone numbers)`}
+                  id="contact.after-show-1"
+                  defaultMessage={`Get in touch and arrange your trip! Some safety precautions below:`}
                 />
-              </li>
-              <li>
+              </p>
+              <ul>
+                <li>
+                  <FormattedMessage
+                    id="contact.after-show-2"
+                    defaultMessage={`Exchange contact details (e.g. phone numbers)`}
+                  />
+                </li>
+                <li>
+                  <FormattedMessage
+                    id="contact.after-show-3"
+                    defaultMessage={`Ensure the other users are real people (e.g. in a video call)`}
+                  />
+                </li>
+                <li>
+                  <FormattedMessage
+                    id="contact.after-show-4"
+                    defaultMessage={`Share the details of your trip and the details of the other ride-sharers with your friends and family`}
+                  />
+                </li>
+              </ul>
+            </Alert>
+            <Alert bsStyle='danger'>
+              <p>
                 <FormattedMessage
-                  id="contact.after-show-3"
-                  defaultMessage={`Ensure the other users are real people (e.g. in a video call)`}
+                  id="request.dialog-warning"
+                  defaultMessage={`It is an offence to induce someone to vote for a political party. `
+                  + `We only provide carpool-matching to connect voters - if anyone tries to induce you to vote for any party, please report this to us.`}
                 />
-              </li>
-              <li>
-                <FormattedMessage
-                  id="contact.after-show-4"
-                  defaultMessage={`Share the details of your trip and the details of the other ride-sharers with your friends and family`}
-                />
-              </li>
-            </ul>
+              </p>
+            </Alert>
           </Panel.Body>
         </Panel>
         }
@@ -124,7 +160,17 @@ export default class ContactModal extends Component {
           <Panel.Body>
             <Row>
               <Col md={6} mdOffset={3}>
-                <Button target="_blank">{this.state.email}</Button>
+                {!this.state.shouldShowEmail &&
+                  <Button target="_blank" onClick={this.handleShowEmail}>
+                    <FormattedMessage
+                      id="contact.click-email"
+                      defaultMessage={`Click to show email address`}
+                    />
+                  </Button>
+                }
+                {this.state.shouldShowEmail &&
+                  <Button target="_blank">{this.state.email}</Button>
+                }
               </Col>
             </Row>
           </Panel.Body>
@@ -146,7 +192,17 @@ export default class ContactModal extends Component {
           <Panel.Body>
             <Row>
               <Col md={6} mdOffset={3}>
-                <Button target="_blank">{this.state.contact_number}</Button>
+                {!this.state.shouldShowContactNumber &&
+                    <Button target="_blank" onClick={this.handleShowContactNumber}>
+                      <FormattedMessage
+                        id="contact.click-contact-number"
+                        defaultMessage={`Click to show contact number`}
+                      />
+                    </Button>
+                  }
+                {this.state.shouldShowContactNumber &&
+                  <Button target="_blank">{this.state.contact_number}</Button>
+                }
               </Col>
             </Row>
           </Panel.Body>
@@ -168,7 +224,7 @@ export default class ContactModal extends Component {
           <Panel.Body>
             <Row>
               <Col md={6} mdOffset={3}>
-                <Button href={this.state.facebook} target="_blank">
+                <Button href={this.state.facebook} onClick={(e)=> this.trackContactActivity('ShowedFacebookProfile')} target="_blank">
                   <FormattedMessage
                     id="contact.btn-open-fb-profile"
                     defaultMessage={`Profile (Opens new window)`}

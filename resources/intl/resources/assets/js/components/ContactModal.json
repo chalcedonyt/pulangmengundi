@@ -32,12 +32,24 @@
     "defaultMessage": "Share the details of your trip and the details of the other ride-sharers with your friends and family"
   },
   {
+    "id": "request.dialog-warning",
+    "defaultMessage": "It is an offence to induce someone to vote for a political party. We only provide carpool-matching to connect voters - if anyone tries to induce you to vote for any party, please report this to us."
+  },
+  {
     "id": "contact.header-email-address",
     "defaultMessage": "Email address for {name}"
   },
   {
+    "id": "contact.click-email",
+    "defaultMessage": "Click to show email address"
+  },
+  {
     "id": "contact.header-contact",
     "defaultMessage": "Contact number for {name}"
+  },
+  {
+    "id": "contact.click-contact-number",
+    "defaultMessage": "Click to show contact number"
   },
   {
     "id": "contact.header-fb-profile",
