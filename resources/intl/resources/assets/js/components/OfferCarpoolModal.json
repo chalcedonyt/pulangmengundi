@@ -20,10 +20,6 @@
     "defaultMessage": "Your name, location and times will be shown to users who match your district or state, and vice-versa. They will be able to request your contact information."
   },
   {
-    "id": "request.dialog-warning",
-    "defaultMessage": "It is an offence to induce someone to vote for a political party. We only provide carpool-matching to connect voters - if anyone tries to induce you to vote for any party, please report this to us."
-  },
-  {
     "id": "request.header-i-from",
     "defaultMessage": "I am currently in"
   },

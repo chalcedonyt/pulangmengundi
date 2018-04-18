@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {Alert, Modal, Row, Col, Button} from 'react-bootstrap'
 import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
+import Disclaimer from './shared/Disclaimer'
 
 export default class OfferCarpoolModal extends Component {
   constructor(props) {
@@ -52,15 +53,7 @@ export default class OfferCarpoolModal extends Component {
             />
           </p>
         </Alert>
-        <Alert bsStyle='danger'>
-            <p>
-              <FormattedMessage
-                id="request.dialog-warning"
-                defaultMessage={`It is an offence to induce someone to vote for a political party. `
-                + `We only provide carpool-matching to connect voters - if anyone tries to induce you to vote for any party, please report this to us.`}
-              />
-            </p>
-          </Alert>
+        <Disclaimer />
         <Row>
           {Array.isArray(this.props.offers) && this.props.offers.map((offer, i) => (
             <Col md={6} xs={6} key={i}>

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {Alert, Modal, Row, Col, Button} from 'react-bootstrap'
 import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
+import Disclaimer from './shared/Disclaimer'
 
 export default class NeedCarpoolConfirmModal extends Component {
 
@@ -42,15 +43,7 @@ export default class NeedCarpoolConfirmModal extends Component {
               />
             </p>
           </Alert>
-          <Alert bsStyle='danger'>
-            <p>
-              <FormattedMessage
-                id="request.dialog-warning"
-                defaultMessage={`It is an offence to induce someone to vote for a political party. `
-                + `We only provide carpool-matching to connect voters - if anyone tries to induce you to vote for any party, please report this to us.`}
-              />
-            </p>
-          </Alert>
+          <Disclaimer />
           <strong>
             <FormattedMessage
               id="request.header-i-from"
