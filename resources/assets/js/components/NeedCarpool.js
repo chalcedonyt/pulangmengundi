@@ -311,7 +311,7 @@ export default class NeedCarpool extends Component {
                           </Alert>
                           <FormattedMessage
                             id="request.checkbox-show-contact"
-                            defaultMessage={`Show my contact number:`}
+                            defaultMessage={`Contact number:`}
                           />
                           <input type='text' size='20' maxLength='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
                         </Panel.Body>

@@ -11,7 +11,7 @@ export default class Terms extends Component {
         <h4>
           <FM
             id="login.login-0"
-            defaultMessage={`Terms`}
+            defaultMessage={`Terms of use`}
           />
         </h4>
         <p className='lead'>

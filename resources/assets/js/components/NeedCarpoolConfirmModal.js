@@ -26,17 +26,28 @@ export default class NeedCarpoolConfirmModal extends Component {
             />
           </h4>
           <Alert>
-            <FormattedMessage
-              id="request.submit-warning"
-              defaultMessage={`By submitting this offer/request, you allow us to send you email updates about matched drivers/passengers, and to create Whatsapp groups matching you to drivers/passengers.`}
-            />
+            <p>
+              <FormattedMessage
+                id="request.submit-warning"
+                defaultMessage={`By submitting this offer/request, you allow us to send you email updates about matched drivers/passengers, and to create Whatsapp groups matching you to drivers/passengers.`}
+              />
+            </p><br />
+            <p>
+              <FormattedMessage
+                id="request.submit-warning-1"
+                defaultMessage={`You also acknowledge and have read our terms and conditions as found {link}`}
+                values={{
+                  'link': <strong><a target="_blank" href='https://www.pulangmengundi.com/terms.html'>pulangmengundi.com/terms.html</a></strong>
+                }}
+              />
+            </p><br />
+            <p>
+              <FormattedMessage
+                id="request.dialog-info-1"
+                defaultMessage={`You will be shown other voters who are travelling the same way as you, and vice-versa. They will be able to request your contact information.`}
+              />
+            </p>
           </Alert>
-          <p>
-            <FormattedMessage
-              id="request.dialog-info-1"
-              defaultMessage={`You will be shown other voters who are travelling the same way as you.`}
-            />
-          </p>
           <strong>
             <FormattedMessage
               id="request.header-i-from"

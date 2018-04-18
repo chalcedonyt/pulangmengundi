@@ -309,7 +309,7 @@ export default class Carpool extends Component {
                     <br />
                     <br />
                   </Col>
-                  <Col lgHidden={true} mdHidden={true} smHidden={true} xsOffset={1} xs={8}>
+                  <Col lgHidden={true} mdHidden={true} smHidden={true} xsOffset={1} xs={7}>
                     <Button bsStyle='default' href='/offer'>
                       <FHM
                         id="home.driver-btn-small"

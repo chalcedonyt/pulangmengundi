@@ -28,17 +28,30 @@ export default class OfferCarpoolModal extends Component {
           />
         </h4>
         <Alert>
-          <FormattedMessage
-            id="request.submit-warning"
-            defaultMessage={`By submitting this offer/request, you allow us to send you email updates about matched drivers/passengers, and to create Whatsapp groups matching you to drivers/passengers.`}
-          />
+          <p>
+            <FormattedMessage
+              id="request.submit-warning"
+              defaultMessage={`By submitting this offer/request, you allow us to send you email updates about matched drivers/passengers, and to create Whatsapp groups matching you to drivers/passengers.`}
+            />
+          </p>
+          <br />
+          <p>
+            <FormattedMessage
+              id="request.submit-warning-1"
+              defaultMessage={`You also acknowledge and have read our terms and conditions as found {link}`}
+              values={{
+                'link': <strong><a target="_blank" href='https://www.pulangmengundi.com/terms.html'>pulangmengundi.com/terms.html</a></strong>
+              }}
+            />
+          </p>
+          <br />
+          <p>
+            <FormattedMessage
+              id="offer.info-warning"
+              defaultMessage={`Your name, location and times will be shown to users who match your district or state, and vice-versa. They will be able to request your contact information.`}
+            />
+          </p>
         </Alert>
-        <p>
-          <FormattedMessage
-            id="offer.info-warning"
-            defaultMessage={`Your name, location and times will be shown to users who match your district or state.`}
-          />
-        </p>
         <Row>
           {Array.isArray(this.props.offers) && this.props.offers.map((offer, i) => (
             <Col md={6} xs={6} key={i}>

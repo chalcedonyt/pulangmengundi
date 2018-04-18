@@ -12,8 +12,12 @@
     "defaultMessage": "By submitting this offer/request, you allow us to send you email updates about matched drivers/passengers, and to create Whatsapp groups matching you to drivers/passengers."
   },
   {
+    "id": "request.submit-warning-1",
+    "defaultMessage": "You also acknowledge and have read our terms and conditions as found {link}"
+  },
+  {
     "id": "offer.info-warning",
-    "defaultMessage": "Your name, location and times will be shown to users who match your district or state."
+    "defaultMessage": "Your name, location and times will be shown to users who match your district or state, and vice-versa. They will be able to request your contact information."
   },
   {
     "id": "request.header-i-from",

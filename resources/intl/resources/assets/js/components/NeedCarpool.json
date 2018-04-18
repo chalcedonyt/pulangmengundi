@@ -65,7 +65,7 @@
   },
   {
     "id": "request.checkbox-show-contact",
-    "defaultMessage": "Show my contact number:"
+    "defaultMessage": "Contact number:"
   },
   {
     "id": "request.warning-select-from",

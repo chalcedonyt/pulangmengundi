@@ -20,8 +20,7 @@ export default class SingleUser extends Component {
     this.handleModalShow = this.handleModalShow.bind(this)
   }
 
-  componentDidMount()
-  {
+  componentDidMount() {
     this.setState({
       isLoading: true
     }, () => {
