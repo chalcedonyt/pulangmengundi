@@ -39,7 +39,7 @@ ReactDOM.render(
                 <FM
                 id="login.login-means-agree"
                 defaultMessage={
-                  `By clicking "login", you acknowledge and agree to the terms above.`
+                  `I acknowledge and agree to the terms above.`
                 }
                 />
               </p>

@@ -141,7 +141,9 @@ export default class NeedCarpool extends Component {
     return (this.state.pollLocation &&
       this.state.fromLocation &&
       this.state.gender &&
-      (this.state.allowEmail || this.state.allowFb))
+      (this.state.allowEmail || this.state.allowFb)
+      && this.state.contactNumber != ''
+    )
     ? 'success'
     : 'warning'
   }
@@ -303,8 +305,8 @@ export default class NeedCarpool extends Component {
                           <br />
                           <Alert>
                             <FormattedMessage
-                              id="request.share-jbu"
-                              defaultMessage={`We may share your contact number with JomBalikUndi, who are organizing car rental groups. See the main page for more information.`}
+                              id="request.share-contact-warning"
+                              defaultMessage={`If you share your contact number, we may use it to organize Whatsapp groups with other riders and drivers.`}
                             />
                           </Alert>
                           <FormattedMessage
@@ -347,6 +349,14 @@ export default class NeedCarpool extends Component {
                                   defaultMessage={`You must show either your email address or Facebook account`}
                                 />
                               </li>}
+                              { (!this.state.contactNumber || this.state.contactNumber == '' ) &&
+                                <li>
+                                <FormattedMessage
+                                  id="request.warning-contact-number"
+                                  defaultMessage={`You must fill in your contact number`}
+                                />
+                              </li>
+                              }
                           </ul>
                         </Alert>
                       }

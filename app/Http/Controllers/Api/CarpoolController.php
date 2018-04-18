@@ -25,6 +25,7 @@ class CarpoolController extends Controller
         $user->contact_number = (string)$request->input('contactNumber');
         $user->allow_email = (int)$request->input('allowEmail');
         $user->allow_fb = (int)$request->input('allowFb');
+        $user->accepted_contact_terms = 1;
         $user->save();
 
         $data = fractal()->item($cp, new \App\Transformers\CarpoolOfferTransformer)->toArray();
@@ -44,6 +45,7 @@ class CarpoolController extends Controller
         $user->contact_number = (string)$request->input('contactNumber');
         $user->allow_email = (int)$request->input('allowEmail');
         $user->allow_fb = (int)$request->input('allowFb');
+        $user->accepted_contact_terms = 1;
         $user->save();
 
         return response()->json($cp->toArray());

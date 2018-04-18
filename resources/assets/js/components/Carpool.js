@@ -340,7 +340,7 @@ export default class Carpool extends Component {
                         id="home.changelog"
                         defaultMessage={
                         `<ul>
-                          <li>Wed 12am: We have a new partnership with JomBalikUndi, who are organizing car rental groups.</li>
+                          <li>Wed 12am: We may now organize Whatsapp groups for riders and drivers to more efficiently match them.</li>
                           <li>Mon 9am: We have a new collaboration with UndiRabu!</li>
                           <li>Sun 10am: We are starting to send emails to notify riders/drivers of potential matches.</li>
                           <li>Sat 5pm: You can now mark your listing as fulfilled, or cancel it. Please do so as it helps improve our system.</li>
@@ -358,7 +358,7 @@ export default class Carpool extends Component {
             <Col md={1} mdOffset={0} xsOffset={4} xs={1} sm={1} smOffset={0}>
               <Image width='50' src='https://balik.undirabu.com/wp-content/uploads/2018/04/undirabu-logo-300x300.png' />
             </Col>
-            <Col md={5} xs={12} sm={5}>
+            <Col md={9} xs={12} sm={5}>
               <h5>
                 <FM
                   id="home.undirabu-promo-header"
@@ -377,33 +377,6 @@ export default class Carpool extends Component {
                 />
               </p>
               <br />
-            </Col>
-            <Col md={1} mdOffset={0} xsOffset={4} xs={1} sm={1} smOffset={0}>
-              <Image width='50' src='/img/whatsapp.jpg' />
-            </Col>
-            <Col md={5} xs={12} sm={5}>
-              <h5>
-                <FHM
-                  id="home.jombalikundi-promo-header"
-                  defaultMessage={`New: JomBalikUndi is organizing <strong>Whatsapp groups</strong> to rent cars together.`}
-                />
-              </h5>
-              <p>
-                <FM
-                  id="home.jombalikundi-cta"
-                  defaultMessage={`Fill out their {form}.`}
-                  values={{
-                    'form': <u>
-                      <a href='javascript:;' onClick={(e)=>this.showOutgoingSponsorModal('JomBalikUndi', jomBalikUndiHref)}>
-                        <FM
-                          id="btn-form-here"
-                          defaultMessage={`form here`}
-                        />
-                      </a>
-                    </u>
-                  }}
-                />
-              </p>
             </Col>
           </Row>
         </Alert>

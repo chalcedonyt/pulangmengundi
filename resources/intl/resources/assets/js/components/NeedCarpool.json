@@ -60,8 +60,8 @@
     "defaultMessage": "Show the link to my Facebook account."
   },
   {
-    "id": "request.share-jbu",
-    "defaultMessage": "We may share your contact number with JomBalikUndi, who are organizing car rental groups. See the main page for more information."
+    "id": "request.share-contact-warning",
+    "defaultMessage": "If you share your contact number, we may use it to organize Whatsapp groups with other riders and drivers."
   },
   {
     "id": "request.checkbox-show-contact",
@@ -82,6 +82,10 @@
   {
     "id": "request.warning-select-contact-detail",
     "defaultMessage": "You must show either your email address or Facebook account"
+  },
+  {
+    "id": "request.warning-contact-number",
+    "defaultMessage": "You must fill in your contact number"
   },
   {
     "id": "request.btn-update",

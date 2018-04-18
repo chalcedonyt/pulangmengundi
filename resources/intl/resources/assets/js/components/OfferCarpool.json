@@ -72,8 +72,12 @@
     "defaultMessage": "Show the link to my Facebook account."
   },
   {
-    "id": "request.checkbox-show-contact",
-    "defaultMessage": "Show my contact number:"
+    "id": "request.share-contact-warning",
+    "defaultMessage": "We may use your contact number to organize Whatsapp groups with other riders and drivers."
+  },
+  {
+    "id": "request.contact-number-header",
+    "defaultMessage": "Contact number"
   },
   {
     "id": "request.warning-select-from",
@@ -90,6 +94,10 @@
   {
     "id": "request.warning-fill-trip-detail",
     "defaultMessage": "You must fill in details for at least one trip"
+  },
+  {
+    "id": "request.warning-contact-number",
+    "defaultMessage": "You must fill in your contact number"
   },
   {
     "id": "offer.btn-submit",

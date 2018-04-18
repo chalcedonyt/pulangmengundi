@@ -147,6 +147,7 @@ export default class OfferCarpool extends Component {
     && ( this.state.willCarpoolToPolls ? this.state.carpoolToPollsDateTime !== null : true )
     && ( this.state.willCarpoolFromPolls || this.state.willCarpoolToPolls )
     && (this.state.allowEmail || this.state.allowFb)
+    && this.state.contactNumber != ''
     return valid ? 'success' : 'warning'
   }
 
@@ -404,11 +405,18 @@ export default class OfferCarpool extends Component {
                         defaultMessage={`Show the link to my Facebook account.`}
                       />
                       <br />
-                      <FormattedMessage
-                        id="request.checkbox-show-contact"
-                        defaultMessage={`Show my contact number:`}
-                      />
-                      <input type='text' size='20' maxLength='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
+                      <Alert>
+                        <FormattedMessage
+                          id="request.share-contact-warning"
+                          defaultMessage={`We may use your contact number to organize Whatsapp groups with other riders and drivers.`}
+                        />
+                      </Alert>
+                      <strong>
+                        <FormattedMessage
+                          id="request.contact-number-header"
+                          defaultMessage={`Contact number`}
+                        />
+                      </strong>: <input type='text' size='20' maxLength='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
                     </Panel.Body>
                   </Panel>
                 </Col>
@@ -449,6 +457,14 @@ export default class OfferCarpool extends Component {
                           defaultMessage={`You must fill in details for at least one trip`}
                         />
                       </li>
+                    }
+                    { (!this.state.contactNumber || this.state.contactNumber == '' ) &&
+                      <li>
+                      <FormattedMessage
+                        id="request.warning-contact-number"
+                        defaultMessage={`You must fill in your contact number`}
+                      />
+                    </li>
                     }
                     </ul>
                   </Alert>
