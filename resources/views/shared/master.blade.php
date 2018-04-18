@@ -36,7 +36,7 @@
         <script>
             window.locale = '{{$locale}}';
         </script>
-        @if (env('APP_ENV')=='production') || !($user && $user['email'] == 'chalcedonyt@gmail.com'))
+        @if (env('APP_ENV')=='production' || !($user && $user['email'] == 'chalcedonyt@gmail.com'))
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117450354-1"></script>
         <script>
