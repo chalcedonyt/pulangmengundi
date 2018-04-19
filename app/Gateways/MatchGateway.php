@@ -99,9 +99,7 @@ class MatchGateway
         ->where('location_id_poll', '=', $offer->toLocation->getKey())
         ->where('fulfilled', '=', '0');
         if ($offer->gender_preference) {
-            $query->whereHas('user', function ($q) use ($offer) {
-                $q->where('gender', '=', $offer->gender_preference);
-            });
+            $query->where('gender', '=', $offer->gender_preference);
         }
         $matches_from = $query->where('updated_at', '>=', $min_time)
         ->get();
@@ -125,9 +123,7 @@ class MatchGateway
         ->pollStateIs($offer->toLocation->state)
         ->where('fulfilled', '=', '0');
         if ($offer->gender_preference) {
-            $query->whereHas('user', function ($q) use ($offer) {
-                $q->where('gender', '=', $offer->gender_preference);
-            });
+            $query->where('gender', '=', $offer->gender_preference);
         }
         $partial_matches_from = $query->where('updated_at', '>=', $min_time)
         ->get();
@@ -166,7 +162,7 @@ class MatchGateway
         ->where('hidden', '=', 0)
         ->where(function ($q) use ($need) {
             $q->whereNull('gender_preference')
-            ->orWhere('gender_preference', '=', $need->user->gender);
+            ->orWhere('gender_preference', '=', $need->gender);
         })
         ->get();
 
@@ -186,7 +182,7 @@ class MatchGateway
         ->toStateIs($need->pollLocation->state)
         ->where(function ($q) use ($need) {
             $q->whereNull('gender_preference')
-            ->orWhere('gender_preference', '=', $need->user->gender);
+            ->orWhere('gender_preference', '=', $need->gender);
         })
         ->where('hidden', '=', 0)
         ->get();
