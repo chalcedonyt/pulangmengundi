@@ -139,7 +139,17 @@ class CarpoolController extends Controller
         $need->gender = $request->input('gender');
         $need->location_id_from = $request->input('fromLocationId');
         $need->location_id_poll = $request->input('pollLocationId');
+        $need->parli_seat_id_string = ''; //reset first
         $need->save();
+
+        $parli_seat_ids = [
+            $need->fromLocation->parli_seat_id,
+            $need->pollLocation->parli_seat_id
+        ];
+        if (!empty($parli_seat_ids) && !in_array('', $parli_seat_ids)) {
+            $need->parli_seat_id_string = implode('%', $parli_seat_ids);
+            $need->save();
+        }
 
         $user = \Auth::user();
         $user->allow_email = (int)$request->input('allowEmail');
