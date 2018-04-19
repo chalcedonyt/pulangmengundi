@@ -86,8 +86,8 @@ class SendEmailUpdatesCommandApr20 extends Command
                     $msgs[]=$msg;
                     $emails_sent++;
                     $to_id = $user->getKey();
-                    // \Mail::to($user->email)
-                    // ->send($mail);
+                    \Mail::to($user->email)
+                    ->send($mail);
                 }
             }
         });
