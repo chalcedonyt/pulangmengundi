@@ -6,6 +6,7 @@ import {Alert, Button, Checkbox, Col, Grid, Row, Panel} from 'react-bootstrap'
 import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
 import ContactModal from './ContactModal'
+import { isMobile, MobileView, BrowserView } from "react-device-detect";
 import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 
 export default class MyCarpoolNeedMyCarpoolNeed extends Component {
@@ -102,38 +103,45 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
                   defaultMessage={`Your matches`}
                 />
               </h3>
-              <Panel>
-                <Panel.Body>
-                  {this.state.offers && this.state.offers.length == 0 &&
-                  <Alert bsStyle='info'>
-                    <p>
-                      <FormattedMessage
-                        id="request.no-match"
-                        defaultMessage={`There is no one matching your travel locations. Check back later!`}
-                      />
-                    </p>
-                    <p>
-                      <FormattedMessage
-                        id="request.we-try"
-                        defaultMessage={`We will try to match you with anyone travelling from the same states.`}
-                      />
-                    </p>
-                  </Alert>
-                  }
-                  <Grid fluid>
-                  {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
-                    <Col key={i} md={6}>
-                      <CarpoolOffer onContact={this.handleContactUser} offer={offer} />
-                    </Col>
-                  ))}
-                  </Grid>
-                </Panel.Body>
-              </Panel>
+              {this.state.offers && this.state.offers.length == 0 &&
+              <Alert bsStyle='info'>
+                <p>
+                  <FormattedMessage
+                    id="request.no-match"
+                    defaultMessage={`There is no one matching your travel locations. Check back later!`}
+                  />
+                </p>
+                <p>
+                  <FormattedMessage
+                    id="request.we-try"
+                    defaultMessage={`We will try to match you with anyone travelling from the same states.`}
+                  />
+                </p>
+              </Alert>
+              }
+              <BrowserView device={!isMobile}>
+                <Panel>
+                  <Panel.Body>
+                    <Grid fluid>
+                    {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
+                      <Col key={i} md={6}>
+                        <CarpoolOffer onContact={this.handleContactUser} offer={offer} />
+                      </Col>
+                    ))}
+                    </Grid>
+                  </Panel.Body>
+                </Panel>
+              </BrowserView>
               {this.state.showContactModal
               && <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false})} />
               }
             </Col>
           </Row>
+          <MobileView device={isMobile}>
+            {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
+                <CarpoolOffer onContact={this.handleContactUser} offer={offer} />
+            ))}
+          </MobileView>
         </div>
       </div>
     )

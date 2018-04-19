@@ -128,7 +128,7 @@ export default class CarpoolOffer extends Component {
                 <Button bsStyle='success' onClick={(e) => this.setHideModal(true)}>
                   <FormattedHTMLMessage
                     id="btn-close-offer"
-                    defaultMessage={`I have matched a passenger! / Close offer`}
+                    defaultMessage={`I have matched a passenger!/<br /> Close offer`}
                   />
                 </Button>
               </div>

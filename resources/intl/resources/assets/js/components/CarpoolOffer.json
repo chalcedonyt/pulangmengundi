@@ -21,7 +21,7 @@
   },
   {
     "id": "btn-close-offer",
-    "defaultMessage": "I have matched a passenger! / Close offer"
+    "defaultMessage": "I have matched a passenger!/<br /> Close offer"
   },
   {
     "id": "request.request-fulfilled",
