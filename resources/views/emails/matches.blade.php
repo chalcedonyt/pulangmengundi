@@ -401,9 +401,13 @@
                               </tr>
                             </table>
                             <br />
-                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">Close (not cancel) your listing <strong>if your request has been fulfilled</strong>.
+                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center"><strong>Close</strong> (not cancel) your listing <strong>if your request has been fulfilled</strong>. You will then stop receiving updates.
                               <strong>Please</strong>, <strong>please</strong> specify if you managed to find a match through us.
                               We can then tell who still needs help and who is still offering help! We are working very hard to work with partners and sponsors to help all of you!
+                            </p>
+                            <br /><br />
+                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                              Tip: If you are a rider and are having trouble finding matches, try using our platform to search for other riders going the same way, and rent a car together.
                             </p>
                             <br /><br />
                             <div align="center" class="img-container center  autowidth  " style="padding-right: 0px;  padding-left: 0px;">

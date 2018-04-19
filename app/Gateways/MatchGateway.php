@@ -9,7 +9,7 @@ use Firebase\JWT\JWT;
 
 class MatchGateway
 {
-    public function getEmailForUser (\App\Models\User $user, \DateTime $last_sent_at = null) {
+    public function getEmailForUser (\App\Models\User $user, \DateTime $last_sent_at = null, $check_sponsors = false) {
         //if user is new, don't need to check whether only to show fresh matches
         if (Carbon::parse($user->created_at)->gt($last_sent_at)) {
             $min_time = null;
@@ -20,7 +20,7 @@ class MatchGateway
         $matched_offers = collect([]);
         $matched_sponsors = collect([]);
         if ($user->need && !$user->need->fulfilled) {
-            $matched_offers = $this->matchNeed($user->need, $min_time);
+            $matched_offers = $this->matchNeed($user->need, $min_time, 'desc');
             //append jwt link
             $matched_offers = $matched_offers->map(function ($offer) use ($user) {
                 $jwt = JWT::encode([
@@ -33,10 +33,11 @@ class MatchGateway
                 $offer->jwt_link = env('APP_URL')."/u/$jwt";
                 return $offer;
             });
-
-            $sponsor_matches = \App\Models\LocationSponsor::statesMatching($user->need->fromLocation->locationState->name, $user->need->pollLocation->locationState->name)->get();
-            if ($sponsor_matches->count()) {
-                $matched_sponsors = $sponsor_matches;
+            if ($check_sponsors) {
+                $sponsor_matches = \App\Models\LocationSponsor::statesMatching($user->need->fromLocation->locationState->name, $user->need->pollLocation->locationState->name)->get();
+                if ($sponsor_matches->count()) {
+                    $matched_sponsors = $sponsor_matches;
+                }
             }
         }
 
@@ -45,7 +46,7 @@ class MatchGateway
             foreach ($user->offers as $offer) {
                 if ($offer->hidden || $offer->fulfilled)
                     continue;
-                $needs = $this->matchOffer($offer, $min_time);
+                $needs = $this->matchOffer($offer, $min_time, 'desc');
                 if ($needs->count()) {
                     $needs = $needs->map(function ($need) use ($user) {
                         $jwt = JWT::encode([
@@ -64,12 +65,13 @@ class MatchGateway
         }
 
         if ($matched_needs->count() || $matched_offers->count() || $matched_sponsors->count()) {
-            $msg = sprintf('Found %d riders, %d drivers, %d sponsor routes for user %d %s',
+            $msg = sprintf('Found %d riders, %d drivers, %d sponsor routes for user %d %s (%s)',
                 $matched_needs->count(),
                 $matched_offers->count(),
                 $matched_sponsors->count(),
                 $user->getKey(),
-                $user->name
+                $user->name,
+                $user->email
             );
             // $match_stats['msgs'][]=$msg;
             // $match_stats['users']++;
@@ -88,16 +90,18 @@ class MatchGateway
      * Matches an offer to needs
      * @param CarpoolOffer $offer
      * @param \Datetime $min_time
+     * @param string $order asc or desc
      * @return Collection<CarpoolNeed>
      */
-    public function matchOffer(CarpoolOffer $offer, \Datetime $min_time = null) {
+    public function matchOffer(CarpoolOffer $offer, \Datetime $min_time = null, $order = 'asc') {
         if (is_null($min_time)) {
             $min_time = '2018-01-01 00:00:00';
         }
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
         ->where('location_id_from', '=', $offer->fromLocation->getKey())
         ->where('location_id_poll', '=', $offer->toLocation->getKey())
-        ->where('fulfilled', '=', '0');
+        ->where('fulfilled', '=', '0')
+        ->orderBy('updated_at', $order);
         if ($offer->gender_preference) {
             $query->where('gender', '=', $offer->gender_preference);
         }
@@ -121,7 +125,8 @@ class MatchGateway
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
         ->fromStateIs($offer->fromLocation->state)
         ->pollStateIs($offer->toLocation->state)
-        ->where('fulfilled', '=', '0');
+        ->where('fulfilled', '=', '0')
+        ->orderBy('updated_at', $order);
         if ($offer->gender_preference) {
             $query->where('gender', '=', $offer->gender_preference);
         }
@@ -150,9 +155,10 @@ class MatchGateway
      * Matches a need to offers
      * @param CarpoolNeed $need
      * @param \Datetime $min_time
+     * @param string $order asc or desc
      * @return Collection<CarpoolOffer>
      */
-    public function matchNeed($need, \Datetime $min_time = null) {
+    public function matchNeed($need, \Datetime $min_time = null, $order = 'asc') {
         if (is_null($min_time)) {
             $min_time = '2018-01-01 00:00:00';
         }
@@ -164,6 +170,7 @@ class MatchGateway
             $q->whereNull('gender_preference')
             ->orWhere('gender_preference', '=', $need->gender);
         })
+        ->orderBy('updated_at', $order)
         ->get();
 
         //don't match reverse
@@ -184,6 +191,7 @@ class MatchGateway
             $q->whereNull('gender_preference')
             ->orWhere('gender_preference', '=', $need->gender);
         })
+        ->orderBy('updated_at', $order)
         ->where('hidden', '=', 0)
         ->get();
 
