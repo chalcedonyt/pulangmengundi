@@ -42,4 +42,15 @@ class CarpoolOffer extends Model
             $q->where('name', '=', $state);
         });
     }
+
+    public function getDjkRouteMatches() {
+        $parli_seat_from = $this->fromLocation->parli_seat_id;
+        $parli_seat_to = $this->fromLocation->parli_seat_to;
+        $route_match = \App\Models\DjkParliSeat::where('parli_seat_id_from', '=', $parli_seat_from)
+        ->where('parli_seat_id_to', '=', $parli_seat_to)
+        ->first();
+
+        if (!$route_match)
+            return null;
+    }
 }
