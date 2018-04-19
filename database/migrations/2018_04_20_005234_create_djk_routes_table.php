@@ -16,7 +16,10 @@ class CreateDjkRoutesTable extends Migration
         Schema::create('djk_routes', function (Blueprint $table) {
             $table->increments('id');
             $table->text('routes');
+            $table->text('route_csv');
         });
+        $path = __DIR__.'/../seeds/artifacts/djk_routes.sql';
+        DB::unprepared(file_get_contents($path));
     }
 
     /**

@@ -49,6 +49,7 @@ class ExtractDjkRoutesCommand extends Command
             $djk_route = new \App\Models\DjkRoute;
             $djk_route->id = $i;
             $djk_route->routes = json_encode($values);
+            $djk_route->route_csv = implode(",", $values);
             $djk_route->save();
             $i++;
         }
