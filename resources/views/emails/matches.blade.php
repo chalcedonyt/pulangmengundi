@@ -406,22 +406,41 @@
                               We can then tell who still needs help and who is still offering help! We are working very hard to work with partners and sponsors to help all of you!
                             </p>
                             <br /><br />
+                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center;color:darkred">
+                              <strong>Important</strong>: There is a bug with Facebook affecting all apps recently that causes <strong>profile links</strong> and pictures not to load. While we develop a workaround, please do the below:
+                            </p>
+                            <br /><br />
+                            <ul>
+                              <li>
+                                  <p style="margin: 0;font-size: 14px;line-height: 17px;text-align:left">
+                                    If you are a <strong>driver</strong>: Please re-list your carpool if you have not put in your contact number.
+                                  </p>
+                              </li>
+                              <br />
+                              <li>
+                                  <p style="margin: 0;font-size: 14px;line-height: 17px;text-align:left">
+                                    If you are a <strong>rider</strong>: Please re-list your request if you have not put in your contact number.
+                                  </p>
+                                </li>
+                            </ul>
+                            </p>
+                              <br /><br />
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
                               Tip: If you are a rider and are having trouble finding matches, try using our platform to search for other riders going the same way, and rent a car together.
                             </p>
                             <br /><br />
                             <div align="center" class="img-container center  autowidth  " style="padding-right: 0px;  padding-left: 0px;">
                               <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px;line-height:0px;"><td style="padding-right: 0px; padding-left: 0px;" align="center"><![endif]-->
-                              <img class="center" align="center" border="0" src="https://balik.undirabu.com/wp-content/uploads/2018/04/undirabu-logo-300x300.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;max-width: 80px"
-                                width="80">
+                              <!-- <img class="center" align="center" border="0" src="https://balik.undirabu.com/wp-content/uploads/2018/04/undirabu-logo-300x300.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;max-width: 80px"
+                                width="80"> -->
                               <!--[if mso]></td></tr></table><![endif]-->
                             </div>
                             <br />
-                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
+                            <!-- <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
                               We are pleased to announce a <strong>strategic partnership</strong> with
                               <a target="_blank" href="https://balik.undirabu.com/home?utm_campaign=carpool.pulangmengundi.com&utm_medium=email_link">balik.undirabu.com</a>,
                               who are sponsoring FREE BUSES to specific locations. Check their site for details.
-                            </p>
+                            </p> -->
                             @if (count($matchedSponsors))
                             <br /></br />
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">

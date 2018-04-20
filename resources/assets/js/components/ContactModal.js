@@ -217,12 +217,26 @@ export default class ContactModal extends Component {
           <Panel.Body>
             <Row>
               <Col md={6} mdOffset={3}>
-                <Button href={this.state.facebook} onClick={(e)=> this.trackContactActivity('ShowedFacebookProfile')} target="_blank">
+                <Alert bsStyle='danger'>
                   <FormattedMessage
-                    id="contact.btn-open-fb-profile"
-                    defaultMessage={`Profile (Opens new window)`}
+                    id="contact.header-fb-warning"
+                    defaultMessage={`Facebook profile links are currently broken. While we work to resolve this, you will need to search the user by name in Facebook to find them.`}
                   />
-                </Button>
+                </Alert>
+                <Row>
+                  <Col md={2} xs={2} sm={2}>
+                    <img src={this.props.user.avatar_url} width={40} />
+                  </Col>
+                  <Col md={6} xs={6} sm={6}>
+                    <Button href={this.state.facebook} onClick={(e)=> this.trackContactActivity('ShowedFacebookProfile')} target="_blank">
+                      Facebook name: {this.props.user.name}
+                      {/* <FormattedMessage
+                        id="contact.btn-open-fb-profile"
+                        defaultMessage={`Profile (Opens new window)`}
+                      /> */}
+                    </Button>
+                  </Col>
+                </Row>
               </Col>
             </Row>
             <br />

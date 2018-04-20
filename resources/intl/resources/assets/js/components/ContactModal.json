@@ -52,8 +52,8 @@
     "defaultMessage": "Facebook profile link for {name}"
   },
   {
-    "id": "contact.btn-open-fb-profile",
-    "defaultMessage": "Profile (Opens new window)"
+    "id": "contact.header-fb-warning",
+    "defaultMessage": "Facebook profile links are currently broken. While we work to resolve this, you will need to search the user by name in Facebook to find them."
   },
   {
     "id": "contact.header-how-to-contact",
