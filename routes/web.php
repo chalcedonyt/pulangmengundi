@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('500', function () {
+    return view('errors.500');
+});
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => [
