@@ -58,6 +58,7 @@ export default class ContactModal extends Component {
   }
 
   render() {
+    const facebookLink = `https://facebook.com/search/people/?q=` + window.encodeURIComponent(this.props.user.name)
     return (
       <Modal show={this.props.show} onHide={this.props.onCancel}>
         <Modal.Header closeButton>
@@ -216,27 +217,20 @@ export default class ContactModal extends Component {
           </Panel.Heading>
           <Panel.Body>
             <Row>
-              <Col md={6} mdOffset={3}>
-                <Alert bsStyle='danger'>
+              <Col mdOffset={3} md={6} xs={12} sm={12}>
+                <img src={this.props.user.avatar_url} width={40} />
+                <strong>FB name: {this.props.user.name}</strong>
+              </Col>
+            </Row>
+            <br />
+            <Row>
+              <Col mdOffset={3} md={6} xs={3} xs={6} smOffset={3} sm={6}>
+                <Button href={facebookLink} onClick={(e)=> this.trackContactActivity('ShowedFacebookProfile')} target="_blank">
                   <FormattedMessage
-                    id="contact.header-fb-warning"
-                    defaultMessage={`Facebook profile links are currently broken. While we work to resolve this, you will need to search the user by name in Facebook to find them.`}
+                    id="contact.btn-open-fb-profile"
+                    defaultMessage={`Search on FB (Opens new window)`}
                   />
-                </Alert>
-                <Row>
-                  <Col md={2} xs={2} sm={2}>
-                    <img src={this.props.user.avatar_url} width={40} />
-                  </Col>
-                  <Col md={6} xs={6} sm={6}>
-                    <Button href={this.state.facebook} onClick={(e)=> this.trackContactActivity('ShowedFacebookProfile')} target="_blank">
-                      Facebook name: {this.props.user.name}
-                      {/* <FormattedMessage
-                        id="contact.btn-open-fb-profile"
-                        defaultMessage={`Profile (Opens new window)`}
-                      /> */}
-                    </Button>
-                  </Col>
-                </Row>
+                </Button>
               </Col>
             </Row>
             <br />

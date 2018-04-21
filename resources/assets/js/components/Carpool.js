@@ -340,8 +340,8 @@ export default class Carpool extends Component {
                         id="home.changelog"
                         defaultMessage={
                         `<ul>
-                          <li>Wed 12am: We may now organize Whatsapp groups for riders and drivers to more efficiently match them.</li>
-                          <li>Mon 9am: We have a new collaboration with UndiRabu!</li>
+                          <li>Sat 7pm: Because changes FB has made, you must search for potential matches by name on FB.</li>
+                          <li>Mon 9am: We have a new collaboration with balik.undirabu.com!</li>
                           <li>Sun 10am: We are starting to send emails to notify riders/drivers of potential matches.</li>
                           <li>Sat 5pm: You can now mark your listing as fulfilled, or cancel it. Please do so as it helps improve our system.</li>
                         </ul>`}

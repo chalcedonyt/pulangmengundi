@@ -37,7 +37,7 @@
   },
   {
     "id": "home.changelog",
-    "defaultMessage": "<ul>\n                          <li>Wed 12am: We may now organize Whatsapp groups for riders and drivers to more efficiently match them.</li>\n                          <li>Mon 9am: We have a new collaboration with UndiRabu!</li>\n                          <li>Sun 10am: We are starting to send emails to notify riders/drivers of potential matches.</li>\n                          <li>Sat 5pm: You can now mark your listing as fulfilled, or cancel it. Please do so as it helps improve our system.</li>\n                        </ul>"
+    "defaultMessage": "<ul>\n                          <li>Sat 7pm: Because changes FB has made, you must search for potential matches by name on FB.</li>\n                          <li>Mon 9am: We have a new collaboration with balik.undirabu.com!</li>\n                          <li>Sun 10am: We are starting to send emails to notify riders/drivers of potential matches.</li>\n                          <li>Sat 5pm: You can now mark your listing as fulfilled, or cancel it. Please do so as it helps improve our system.</li>\n                        </ul>"
   },
   {
     "id": "home.undirabu-promo-header",
