@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
-import {Alert, Button, Checkbox, Col, DropdownButton, FormControl, MenuItem, Radio, Row, Panel} from 'react-bootstrap'
+import {Alert, Button, Checkbox, Col, DropdownButton, FormControl, Image, MenuItem, Radio, Row, Panel} from 'react-bootstrap'
 import DateSelection from './shared/DateSelection'
 import LocationSelection from './shared/LocationSelection'
 import NeedCarpoolConfirmModal from './NeedCarpoolConfirmModal'
@@ -166,24 +166,28 @@ export default class NeedCarpool extends Component {
               />
             </h1>
           }
-          <Alert bsStyle='info'>
-            <p>
-              <FormattedMessage
-                id="request.create-info-1"
-                defaultMessage={`Fill in where you are from, where you are going to vote in, and gender, then submit your offer to the database.`}
-              />
-            </p>
-            <p>
-              <FormattedMessage
-                id="request.create-info-2"
-                defaultMessage={`You will then be able to search for drivers going the same way as you.`}
-              />
-            </p>
-          </Alert>
-          <Row>
-            <Col md={12} xs={12}>
-              <Panel>
-                <Panel.Body>
+          <Panel>
+            <Panel.Body>
+              <Row>
+                <Col md={4}>
+                  <Image width={350} src='/img/carpool-rider-en.jpg' responsive />
+                  <br />
+                </Col>
+                <Col md={8}>
+                  <Alert bsStyle='info'>
+                    <p>
+                      <FormattedMessage
+                        id="request.create-info-1"
+                        defaultMessage={`Fill in where you are from, where you are going to vote in, and gender, then submit your offer to the database.`}
+                      />
+                    </p>
+                    <p>
+                      <FormattedMessage
+                        id="request.create-info-2"
+                        defaultMessage={`You will then be able to search for drivers going the same way as you.`}
+                      />
+                    </p>
+                  </Alert>
                   <Row>
                     <Col md={4}>
                       <Panel>
@@ -206,186 +210,186 @@ export default class NeedCarpool extends Component {
                             defaultMessage={`I am voting in`}
                           />:
                         </Panel.Heading>
-                        <Panel.Body>
-                          <LocationSelection onChange={this.pollLocationChanged} initialLocation={this.state.pollLocation}/>
-                        </Panel.Body>
-                      </Panel>
-                    </Col>
-                    <Col md={4}>
-                      <Panel>
-                        <Panel.Heading>
-                          <FormattedMessage
-                            id="request.header-my-gender"
-                            defaultMessage={`My gender is`}
-                          />
-                        </Panel.Heading>
-                        <Panel.Body>
-                          <div>
-                            <input
-                              type='radio'
-                              name='gender'
-                              value='male'
-                              onChange={(e) => this.handleGenderChange('male')}
-                              checked={this.state.gender == 'male'}
-                              />
-                              <FormattedMessage
-                                id="request.gender-value-male"
-                                defaultMessage={`Male`}
-                              />
-                              <br />
-                            <input
-                              type='radio'
-                              name='gender'
-                              value='female'
-                              onChange={(e) => this.handleGenderChange('female')}
-                              checked={this.state.gender == 'female'}
-                              />
+                      <Panel.Body>
+                        <LocationSelection onChange={this.pollLocationChanged} initialLocation={this.state.pollLocation}/>
+                      </Panel.Body>
+                    </Panel>
+                  </Col>
+                  <Col md={4}>
+                    <Panel>
+                      <Panel.Heading>
+                        <FormattedMessage
+                          id="request.header-my-gender"
+                          defaultMessage={`My gender is`}
+                        />
+                      </Panel.Heading>
+                      <Panel.Body>
+                        <div>
+                          <input
+                            type='radio'
+                            name='gender'
+                            value='male'
+                            onChange={(e) => this.handleGenderChange('male')}
+                            checked={this.state.gender == 'male'}
+                            />
                             <FormattedMessage
-                              id="request.gender-value-female"
-                              defaultMessage={`Female`}
+                              id="request.gender-value-male"
+                              defaultMessage={`Male`}
                             />
                             <br />
-                          </div>
-                        </Panel.Body>
-                      </Panel>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col md={4}>
-                      <Panel>
-                        <Panel.Heading>
+                          <input
+                            type='radio'
+                            name='gender'
+                            value='female'
+                            onChange={(e) => this.handleGenderChange('female')}
+                            checked={this.state.gender == 'female'}
+                            />
                           <FormattedMessage
-                            id="request.create-header-more-info"
-                            defaultMessage={`More information`}
-                          />
-                        </Panel.Heading>
-                        <Panel.Body>
-                        <FormControl
-                          rows={8}
-                          componentClass='textarea'
-                          placeholder='Leave more details here'
-                          value={this.state.information}
-                          onChange={this.handleInformationChange} />
-                        </Panel.Body>
-                      </Panel>
-                    </Col>
-                    <Col md={4}>
-                      <Panel>
-                        <Panel.Heading>
-                          <FormattedMessage
-                            id="request.create-header-what-to-show"
-                            defaultMessage={`What info to show potential matches`}
-                          />
-                        </Panel.Heading>
-                        <Panel.Body>
-                          <Alert bsStyle='info'>
-                            <p>
-                              <FormattedMessage
-                                id="request.info-choose-what-to-show"
-                                defaultMessage={`Choose at least one option below, and optionally your contact number. Your information will be shown to others after they pass a captcha check.`}
-                              />
-                            </p>
-                            <p>
-                              <FormattedMessage
-                                id="request.info-choose-what-to-show-fb"
-                                defaultMessage={`If you choose to show your Facebook account, do be responsive to new FB message requests!`}
-                              />
-                            </p>
-                          </Alert>
-                          <input type="checkbox" onChange={this.toggleAllowEmail} checked={this.state.allowEmail} />
-                          <FormattedMessage
-                            id="request.checkbox-show-email"
-                            defaultMessage={`Show my email address.`}
-                          /><br />
-                          <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />
-                          <FormattedMessage
-                            id="request.checkbox-show-fb"
-                            defaultMessage={`Show the link to my Facebook account.`}
+                            id="request.gender-value-female"
+                            defaultMessage={`Female`}
                           />
                           <br />
-                          <Alert>
-                            <FormattedMessage
-                              id="request.share-contact-warning"
-                              defaultMessage={`We may use your contact number to organize Whatsapp groups with other riders and drivers.`}
-                            />
-                          </Alert>
+                        </div>
+                      </Panel.Body>
+                    </Panel>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={4}>
+                <Panel>
+                  <Panel.Heading>
+                    <FormattedMessage
+                      id="request.create-header-more-info"
+                      defaultMessage={`More information`}
+                    />
+                  </Panel.Heading>
+                  <Panel.Body>
+                  <FormControl
+                    rows={8}
+                    componentClass='textarea'
+                    placeholder='Leave more details here'
+                    value={this.state.information}
+                    onChange={this.handleInformationChange} />
+                  </Panel.Body>
+                </Panel>
+              </Col>
+              <Col md={4}>
+                <Panel>
+                  <Panel.Heading>
+                    <FormattedMessage
+                      id="request.create-header-what-to-show"
+                      defaultMessage={`What info to show potential matches`}
+                    />
+                  </Panel.Heading>
+                  <Panel.Body>
+                    <Alert bsStyle='info'>
+                      <p>
+                        <FormattedMessage
+                          id="request.info-choose-what-to-show"
+                          defaultMessage={`Choose at least one option below, and optionally your contact number. Your information will be shown to others after they pass a captcha check.`}
+                        />
+                      </p>
+                      <p>
+                        <FormattedMessage
+                          id="request.info-choose-what-to-show-fb"
+                          defaultMessage={`If you choose to show your Facebook account, do be responsive to new FB message requests!`}
+                        />
+                      </p>
+                    </Alert>
+                    <input type="checkbox" onChange={this.toggleAllowEmail} checked={this.state.allowEmail} />
+                    <FormattedMessage
+                      id="request.checkbox-show-email"
+                      defaultMessage={`Show my email address.`}
+                    /><br />
+                    <input type="checkbox" onChange={this.toggleAllowFb} checked={this.state.allowFb} />
+                    <FormattedMessage
+                      id="request.checkbox-show-fb"
+                      defaultMessage={`Show the link to my Facebook account.`}
+                    />
+                    <br />
+                    <Alert>
+                      <FormattedMessage
+                        id="request.share-contact-warning"
+                        defaultMessage={`We may use your contact number to organize Whatsapp groups with other riders and drivers.`}
+                      />
+                    </Alert>
+                    <FormattedMessage
+                      id="request.checkbox-show-contact"
+                      defaultMessage={`Contact number:`}
+                    />
+                    <input type='text' size='20' maxLength='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
+                  </Panel.Body>
+                </Panel>
+              </Col>
+              <Col md={4}>
+                {this.getValidationState() !== 'success' &&
+                  <Alert bsStyle='danger'>
+                    <ul>
+                      {!this.state.fromLocation &&
+                        <li>
                           <FormattedMessage
-                            id="request.checkbox-show-contact"
-                            defaultMessage={`Contact number:`}
+                            id="request.warning-select-from"
+                            defaultMessage={`Please select your start location`}
                           />
-                          <input type='text' size='20' maxLength='20' value={this.state.contactNumber} onChange={this.handleContactNumberChange} />
-                        </Panel.Body>
-                      </Panel>
-                    </Col>
-                    <Col md={4}>
-                      {this.getValidationState() !== 'success' &&
-                        <Alert bsStyle='danger'>
-                          <ul>
-                            {!this.state.fromLocation &&
-                              <li>
-                                <FormattedMessage
-                                  id="request.warning-select-from"
-                                  defaultMessage={`Please select your start location`}
-                                />
-                              </li>}
-                            {!this.state.pollLocation &&
-                              <li>
-                                <FormattedMessage
-                                  id="request.warning-select-to"
-                                  defaultMessage={`Please select your voting destination`}
-                                />
-                              </li>}
-                            {!this.state.gender &&
-                              <li>
-                                <FormattedMessage
-                                  id="request.warning-select-gender"
-                                  defaultMessage={`Please select your gender`}
-                                />
-                              </li>}
-                            {!this.state.allowEmail && !this.state.allowFb &&
-                              <li>
-                                <FormattedMessage
-                                  id="request.warning-select-contact-detail"
-                                  defaultMessage={`You must show either your email address or Facebook account`}
-                                />
-                              </li>}
-                              { (!this.state.contactNumber || this.state.contactNumber == '' ) &&
-                                <li>
-                                <FormattedMessage
-                                  id="request.warning-contact-number"
-                                  defaultMessage={`You must fill in your contact number`}
-                                />
-                              </li>
-                              }
-                          </ul>
-                        </Alert>
-                      }
-                    </Col>
-                  </Row>
-                </Panel.Body>
-                {this.getValidationState() == 'success' &&
-                  <Panel.Footer>
-                    <Row>
-                      <Col mdOffset={9} md={3} xsOffset={1} xs={4}>
-                        <Button bsStyle='success' onClick={(e) => this.toggleModalShow(true)}>
-                        {this.state.existingId
-                        ? <FormattedMessage
-                            id="request.btn-update"
-                            defaultMessage={`Update carpool request`}
+                        </li>}
+                      {!this.state.pollLocation &&
+                        <li>
+                          <FormattedMessage
+                            id="request.warning-select-to"
+                            defaultMessage={`Please select your voting destination`}
                           />
-                        : <FormattedMessage
-                            id="request.btn-save"
-                            defaultMessage={`Save carpool request`}
+                        </li>}
+                      {!this.state.gender &&
+                        <li>
+                          <FormattedMessage
+                            id="request.warning-select-gender"
+                            defaultMessage={`Please select your gender`}
                           />
+                        </li>}
+                      {!this.state.allowEmail && !this.state.allowFb &&
+                        <li>
+                          <FormattedMessage
+                            id="request.warning-select-contact-detail"
+                            defaultMessage={`You must show either your email address or Facebook account`}
+                          />
+                        </li>}
+                        { (!this.state.contactNumber || this.state.contactNumber == '' ) &&
+                          <li>
+                          <FormattedMessage
+                            id="request.warning-contact-number"
+                            defaultMessage={`You must fill in your contact number`}
+                          />
+                        </li>
                         }
-                        </Button>
-                      </Col>
-                    </Row>
-                  </Panel.Footer>
+                    </ul>
+                  </Alert>
                 }
-              </Panel>
-            </Col>
-          </Row>
+              </Col>
+            </Row>
+          </Panel.Body>
+          {this.getValidationState() == 'success' &&
+            <Panel.Footer>
+              <Row>
+                <Col mdOffset={9} md={3} xsOffset={1} xs={4}>
+                  <Button bsStyle='success' onClick={(e) => this.toggleModalShow(true)}>
+                  {this.state.existingId
+                  ? <FormattedMessage
+                      id="request.btn-update"
+                      defaultMessage={`Update carpool request`}
+                    />
+                  : <FormattedMessage
+                      id="request.btn-save"
+                      defaultMessage={`Save carpool request`}
+                    />
+                  }
+                  </Button>
+                </Col>
+              </Row>
+            </Panel.Footer>
+          }
+          </Panel>
         </div>
         <NeedCarpoolConfirmModal
           show={this.state.showConfirmModal}

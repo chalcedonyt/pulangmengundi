@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import api from '../utils/api'
-import {Alert, Button, Checkbox, Col, DropdownButton, FormControl, FormGroup, MenuItem, Radio, Row, Panel} from 'react-bootstrap'
+import {Alert, Button, Checkbox, Col, DropdownButton, FormControl, FormGroup, MenuItem, Radio, Row, Panel, Image} from 'react-bootstrap'
 import DateSelection from './shared/DateSelection'
 import LocationSelection from './shared/LocationSelection'
 import OfferCarpoolModal from './OfferCarpoolModal'
@@ -203,97 +203,105 @@ export default class OfferCarpool extends Component {
             </h3>
           </Panel.Heading>
           <Panel.Body>
-            <Alert bsStyle="info">
-              <FormattedHTMLMessage
-                id="offer.create-info"
-                defaultMessage={`Pick where you are leaving from and where you are going to, then check and fill in the timings for at least <strong>one</strong> direction you want to carpool for.`}
-              />
-            </Alert>
             <Row>
               <Col md={4}>
-                <Panel>
-                  <Panel.Heading>
-                    <FormattedMessage
-                      id="request.header-i-from"
-                      defaultMessage={`I am currently in`}
-                    />:
-                  </Panel.Heading>
-                  <Panel.Body>
-                    <LocationSelection onChange={this.startLocationChanged}/>
-                  </Panel.Body>
-                </Panel>
+                <Image width={350} src='/img/carpool-driver-en.jpg' responsive />
+                <br />
               </Col>
-              <Col md={4}>
-                <Panel>
-                  <Panel.Heading>
-                    <FormattedMessage
-                      id="request.header-i-going"
-                      defaultMessage={`I am voting in`}
-                    />:
-                  </Panel.Heading>
-                  <Panel.Body>
-                    <LocationSelection onChange={this.pollLocationChanged}/>
-                  </Panel.Body>
-                </Panel>
-              </Col>
-              <Col md={4}>
-                <Panel>
-                  <Panel.Heading>
-                    <FormattedMessage
-                      id="offer.header-gender-prev"
-                      defaultMessage={`I prefer to carpool with`}
-                    />:
-                  </Panel.Heading>
-                  <Panel.Body>
-                    <Row>
-                      <Col md={8} xs={4}>
-                        <div>
-                        <input
-                          type='radio'
-                          name='gender'
-                          value=''
-                          onChange={(e) => this.handleGenderChange(null)}
-                          checked={this.state.preferredGender == null}
-                          />
-                          <FormattedMessage
-                            id="offer.gender-pref-any"
-                            defaultMessage={`Any gender`}
-                          />
-                          <br />
-                        <input
-                          type='radio'
-                          name='gender'
-                          value='male'
-                          onChange={(e) => this.handleGenderChange('male')}
-                          checked={this.state.preferredGender == 'male'}
-                          />
-                          <FormattedMessage
-                            id="offer.gender-pref-male"
-                            defaultMessage={`Male`}
-                          />
-                          <br />
-                        <input
-                          type='radio'
-                          name='gender'
-                          value='female'
-                          onChange={(e) => this.handleGenderChange('female')}
-                          checked={this.state.preferredGender == 'female'}
-                          />
-                          <FormattedMessage
-                            id="offer.gender-pref-female"
-                            defaultMessage={`Female`}
-                          />
-                          <br />
-                      </div>
-                      </Col>
-                    </Row>
-                  </Panel.Body>
-                </Panel>
+              <Col md={8}>
+                <Alert bsStyle="info">
+                  <FormattedHTMLMessage
+                    id="offer.create-info"
+                    defaultMessage={`Pick where you are leaving from and where you are going to, then check and fill in the timings for at least <strong>one</strong> direction you want to carpool for.`}
+                  />
+                </Alert>
+                <Row>
+                  <Col md={4}>
+                    <Panel>
+                      <Panel.Heading>
+                        <FormattedMessage
+                          id="request.header-i-from"
+                          defaultMessage={`I am currently in`}
+                        />:
+                      </Panel.Heading>
+                      <Panel.Body>
+                        <LocationSelection onChange={this.startLocationChanged}/>
+                      </Panel.Body>
+                    </Panel>
+                  </Col>
+                  <Col md={4}>
+                    <Panel>
+                      <Panel.Heading>
+                        <FormattedMessage
+                          id="request.header-i-going"
+                          defaultMessage={`I am voting in`}
+                        />:
+                      </Panel.Heading>
+                      <Panel.Body>
+                        <LocationSelection onChange={this.pollLocationChanged}/>
+                      </Panel.Body>
+                    </Panel>
+                  </Col>
+                  <Col md={4}>
+                    <Panel>
+                      <Panel.Heading>
+                        <FormattedMessage
+                          id="offer.header-gender-prev"
+                          defaultMessage={`I prefer to carpool with`}
+                        />:
+                      </Panel.Heading>
+                      <Panel.Body>
+                        <Row>
+                          <Col md={8}>
+                            <div>
+                            <input
+                              type='radio'
+                              name='gender'
+                              value=''
+                              onChange={(e) => this.handleGenderChange(null)}
+                              checked={this.state.preferredGender == null}
+                              />
+                              <FormattedMessage
+                                id="offer.gender-pref-any"
+                                defaultMessage={`Any gender`}
+                              />
+                              <br />
+                            <input
+                              type='radio'
+                              name='gender'
+                              value='male'
+                              onChange={(e) => this.handleGenderChange('male')}
+                              checked={this.state.preferredGender == 'male'}
+                              />
+                              <FormattedMessage
+                                id="offer.gender-pref-male"
+                                defaultMessage={`Male`}
+                              />
+                              <br />
+                            <input
+                              type='radio'
+                              name='gender'
+                              value='female'
+                              onChange={(e) => this.handleGenderChange('female')}
+                              checked={this.state.preferredGender == 'female'}
+                              />
+                              <FormattedMessage
+                                id="offer.gender-pref-female"
+                                defaultMessage={`Female`}
+                              />
+                              <br />
+                          </div>
+                          </Col>
+                        </Row>
+                      </Panel.Body>
+                    </Panel>
+                  </Col>
+                </Row>
               </Col>
             </Row>
-            {this.state.startLocation && this.state.pollLocation &&
+          {this.state.startLocation && this.state.pollLocation &&
             <div>
-
+              <br /><br />
               <Row>
                 <Col md={6}>
                   <Panel>
@@ -472,7 +480,7 @@ export default class OfferCarpool extends Component {
                 </Col>
               </Row>
             </div>
-            }
+          }
           </Panel.Body>
           {this.getValidationState() == 'success' &&
           <Panel.Footer>
