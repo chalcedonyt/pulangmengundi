@@ -25,7 +25,7 @@
         <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
     <body>
-        <div class='container container-fluid'>
+        <div class='container'>
             @yield('content')
             <div class="pull-right" id="terms-footer">
                 <a href="https://www.pulangmengundi.com/privacy-policy.html">Privacy Policy</a> | <a href="https://www.pulangmengundi.com/terms.html">Terms</a>
