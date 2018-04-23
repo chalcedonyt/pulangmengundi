@@ -5,7 +5,7 @@
   },
   {
     "id": "offer.create-info",
-    "defaultMessage": "Pick where you are leaving from and where you are going to, then check and fill in the timings for at least <strong>one</strong> direction you want to carpool for."
+    "defaultMessage": "Pick where you are leaving from and where you are going to, then check and fill when you are leaving and returning."
   },
   {
     "id": "request.header-i-from",
@@ -32,16 +32,8 @@
     "defaultMessage": "Female"
   },
   {
-    "id": "offer.checkbox-carpool-to",
-    "defaultMessage": "I am offering a carpool TO the polls"
-  },
-  {
     "id": "offer.info-from-time",
     "defaultMessage": "I'll leave {from} for {to} at:"
-  },
-  {
-    "id": "offer.checkbox-carpool-back",
-    "defaultMessage": "I am offering a carpool BACK after the polls"
   },
   {
     "id": "offer.info-come-back-time",
@@ -93,7 +85,7 @@
   },
   {
     "id": "request.warning-fill-trip-detail",
-    "defaultMessage": "You must fill in details for at least one trip"
+    "defaultMessage": "You must fill in your trip details"
   },
   {
     "id": "request.warning-contact-number",

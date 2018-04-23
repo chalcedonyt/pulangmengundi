@@ -165,6 +165,7 @@ class MatchGateway
         $matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->where('location_id_from', '=', $need->fromLocation->getKey())
         ->where('location_id_to', '=', $need->pollLocation->getKey())
+        ->where('offer_order', '=', 1)
         ->where('hidden', '=', 0)
         ->where(function ($q) use ($need) {
             $q->whereNull('gender_preference')
@@ -187,6 +188,7 @@ class MatchGateway
         $partial_matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->fromStateIs($need->fromLocation->state)
         ->toStateIs($need->pollLocation->state)
+        ->where('offer_order', '=', 1)
         ->where(function ($q) use ($need) {
             $q->whereNull('gender_preference')
             ->orWhere('gender_preference', '=', $need->gender);

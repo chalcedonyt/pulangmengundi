@@ -19,6 +19,7 @@ class CarpoolController extends Controller
            'location_id_from' => $request->input('fromLocationId'),
            'location_id_to' => $request->input('toLocationId'),
            'leave_at' => \Carbon\Carbon::parse($request->input('datetime'))->addHours(8),
+           'offer_order' => $request->input('offerOrder'),
            'user_id' => \Auth::user()->getKey()
         ]);
         $user = \Auth::user();
@@ -68,6 +69,8 @@ class CarpoolController extends Controller
         $matches = collect([]);
         $matcher = new \App\Gateways\MatchGateway();
         foreach ($user->offers as $offer) {
+            if ($offer->offer_order != 1)
+                continue;
             $offer_matches = $matcher->matchOffer($offer);
             if ($offer_matches->count()) {
                 $matches = $matches->concat($offer_matches);
@@ -105,11 +108,17 @@ class CarpoolController extends Controller
 
     public function myOffers(Request $request)
     {
-        $offers = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
+        $offer = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->where('user_id', '=', \Auth::user()->getKey())
-        ->get();
+        ->where('offer_order', '=', 1)
+        ->first();
 
-        $data = fractal()->collection($offers, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
+        $corresponding_offer = CarpoolOffer::where('user_id', '=', \Auth::user()->getKey())
+        ->where('offer_order', '=', 2)
+        ->first();
+        $offer->correspondingOffer = $corresponding_offer;
+
+        $data = fractal()->item($offer, new \App\Transformers\CarpoolOfferTransformer)->toArray();
         return response()->json($data);
     }
 
@@ -179,7 +188,10 @@ class CarpoolController extends Controller
         if (\Auth::user()->getKey() !== $offer->user_id)
             return response("You can't do this", 403);
 
-        $offer->delete();
+        //delete any outstanding offers
+        \Auth::user()->offers->each(function ($offer) {
+            $offer->delete();
+        });
         return response()->json([
             'success' => 1
         ]);
@@ -201,7 +213,8 @@ class CarpoolController extends Controller
     public function offers(Request $request) {
         $limit = 15;
         $offset = $request->input('offset', 0);
-        $query = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState');
+        $query = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
+        ->where('offer_order', '=', 1);
         if (!empty($request->input('state_from')) || !empty($request->input('state_to'))) {
             $state_from = $request->input('state_from');
             $state_to = $request->input('state_to');
@@ -224,10 +237,18 @@ class CarpoolController extends Controller
         ->where('hidden', '=', 0)
         ->offset($offset)
         ->limit($limit)
-        ->get();
+        ->get()->map(function ($offer) {
+            //when the user is travelling back
+           $corresponding_offer = CarpoolOffer::where('user_id', '=', $offer->user_id)
+           ->where('offer_order', '=', 2)
+           ->first();
+           $offer->correspondingOffer = $corresponding_offer;
+           return $offer;
+        });
 
 
-        $data = fractal()->collection($offers, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
+        $data = fractal()->includeCorrespondingOffer()
+        ->collection($offers, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
         $data['meta'] = [
             'count' => $total
         ];

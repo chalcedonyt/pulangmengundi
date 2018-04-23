@@ -94,10 +94,21 @@ export default class CarpoolOffer extends Component {
             <strong>
               <FormattedMessage
                 id="request.travelling-time"
-                defaultMessage={`Time`}
+                defaultMessage={`Travelling at`}
               />:
             </strong>
             <p>{this.state.offer.leave_at_formatted}</p>
+            {this.state.offer.leave_polls_at_formatted &&
+              <div>
+                <strong>
+                  <FormattedMessage
+                    id="request.travelling-return-time"
+                    defaultMessage={`Returning at`}
+                  />:
+                </strong>
+                <p>{this.state.offer.leave_polls_at_formatted}</p>
+              </div>
+            }
             {this.state.offer.gender_preference &&
             <div>
               <strong>

@@ -57,30 +57,27 @@ export default class OfferCarpoolModal extends Component {
         <Row>
           {Array.isArray(this.props.offers) && this.props.offers.map((offer, i) => (
             <Col md={6} xs={6} key={i}>
-              <strong>
-                <FormattedMessage
-                  id="request.header-i-from"
-                  defaultMessage={`I am currently in`}
-                />:
-              </strong>
+              { i == 0 ?
+                <strong>
+                  <FormattedMessage
+                    id="request.header-i-from"
+                    defaultMessage={`Starting`}
+                  />:
+                </strong>
+              : <strong>
+                  <FormattedMessage
+                    id="request.header-i-to"
+                    defaultMessage={`Returning`}
+                  />:
+                </strong>
+
+              }
               <p>
                 {offer.startLocation.name} ({offer.startLocation.state})
               </p>
-              <strong>
-                <FormattedMessage
-                  id="request.header-i-going"
-                  defaultMessage={`I am voting in`}
-                />:
-              </strong>
               <p>
               {offer.endLocation.name} ({offer.endLocation.state})
               </p>
-              <strong>
-                <FormattedMessage
-                  id="offer.dialog-leave-generic"
-                  defaultMessage={`I'll leave at`}
-                />
-                :</strong>
               <p>{offer.datetime.format('MMMM Do YYYY, h:mma')}</p>
             </Col>
           ))}

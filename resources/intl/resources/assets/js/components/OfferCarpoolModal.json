@@ -21,15 +21,11 @@
   },
   {
     "id": "request.header-i-from",
-    "defaultMessage": "I am currently in"
+    "defaultMessage": "Starting"
   },
   {
-    "id": "request.header-i-going",
-    "defaultMessage": "I am voting in"
-  },
-  {
-    "id": "offer.dialog-leave-generic",
-    "defaultMessage": "I'll leave at"
+    "id": "request.header-i-to",
+    "defaultMessage": "Returning"
   },
   {
     "id": "btn-ok",

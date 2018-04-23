@@ -165,6 +165,7 @@ export default class OfferCarpool extends Component {
         datetime: this.state.carpoolToPollsDateTime,
         allowEmail: this.state.allowEmail,
         allowFb: this.state.allowFb,
+        offerOrder: 1,
       }
       apis.push(api.submitCarpoolOffer(params))
     }
@@ -179,6 +180,7 @@ export default class OfferCarpool extends Component {
         information: this.state.information,
         allowEmail: this.state.allowEmail ? 1 : 0,
         allowFb: this.state.allowFb ? 1 : 0,
+        offerOrder: this.state.willCarpoolToPolls ? 2 : 1,
       }
       apis.push(api.submitCarpoolOffer(params))
     }
@@ -212,7 +214,7 @@ export default class OfferCarpool extends Component {
                 <Alert bsStyle="info">
                   <FormattedHTMLMessage
                     id="offer.create-info"
-                    defaultMessage={`Pick where you are leaving from and where you are going to, then check and fill in the timings for at least <strong>one</strong> direction you want to carpool for.`}
+                    defaultMessage={`Pick where you are leaving from and where you are going to, then check and fill when you are leaving and returning.`}
                   />
                 </Alert>
                 <Row>
@@ -305,17 +307,6 @@ export default class OfferCarpool extends Component {
               <Row>
                 <Col md={6}>
                   <Panel>
-                    <Panel.Heading>
-                      <input
-                        type="checkbox"
-                        onChange={this.handleWillCarpoolToPollsChange}
-                        checked={this.state.willCarpoolToPolls}
-                      />&nbsp;
-                      <FormattedMessage
-                        id="offer.checkbox-carpool-to"
-                        defaultMessage={`I am offering a carpool TO the polls`}
-                      />
-                    </Panel.Heading>
                     <Panel.Body>
                       <div>
                         <FormattedMessage
@@ -333,17 +324,6 @@ export default class OfferCarpool extends Component {
                 </Col>
                 <Col md={6}>
                   <Panel>
-                    <Panel.Heading>
-                    <input
-                        type="checkbox"
-                        onChange={this.handleWillCarpoolFromPollsChange}
-                        checked={this.state.willCarpoolFromPolls}
-                      />&nbsp;
-                      <FormattedMessage
-                        id="offer.checkbox-carpool-back"
-                        defaultMessage={`I am offering a carpool BACK after the polls`}
-                      />
-                    </Panel.Heading>
                     <Panel.Body>
                       <div>
                         <FormattedMessage
@@ -462,7 +442,7 @@ export default class OfferCarpool extends Component {
                       <li>
                         <FormattedMessage
                           id="request.warning-fill-trip-detail"
-                          defaultMessage={`You must fill in details for at least one trip`}
+                          defaultMessage={`You must fill in your trip details`}
                         />
                       </li>
                     }

@@ -9,7 +9,11 @@
   },
   {
     "id": "request.travelling-time",
-    "defaultMessage": "Time"
+    "defaultMessage": "Travelling at"
+  },
+  {
+    "id": "request.travelling-return-time",
+    "defaultMessage": "Returning at"
   },
   {
     "id": "request.gender-pref",
