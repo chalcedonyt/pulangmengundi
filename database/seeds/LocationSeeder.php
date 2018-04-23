@@ -11,8 +11,6 @@ class LocationSeeder extends Seeder
      */
     public function run()
     {
-        $path = __DIR__.'/artifacts/locations.sql';
-        DB::unprepared(file_get_contents($path));
         $path = __DIR__.'/artifacts/states.sql';
         DB::unprepared(file_get_contents($path));
         $this->command->info('locations table seeded!');

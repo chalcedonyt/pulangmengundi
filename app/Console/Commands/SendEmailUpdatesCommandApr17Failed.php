@@ -35,7 +35,6 @@ class SendEmailUpdatesCommandApr17Failed extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->lastSentAt = Carbon::parse(\App\Models\EmailsSent::find(1)->sent_at);
     }
 
     /**
@@ -45,6 +44,7 @@ class SendEmailUpdatesCommandApr17Failed extends Command
      */
     public function handle()
     {
+        $this->lastSentAt = Carbon::parse(\App\Models\EmailsSent::find(1)->sent_at);
         $match_stats = [
             'users' => 0,
             'matched_drivers' => 0,

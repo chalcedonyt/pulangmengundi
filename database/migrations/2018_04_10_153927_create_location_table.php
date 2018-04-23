@@ -20,6 +20,8 @@ class CreateLocationTable extends Migration
             $table->string('dun_code');
             $table->index('state');
         });
+        $path = __DIR__.'/../seeds/artifacts/locations.sql';
+        DB::unprepared(file_get_contents($path));
     }
 
     /**

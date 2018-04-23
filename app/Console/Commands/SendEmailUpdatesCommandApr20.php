@@ -34,7 +34,6 @@ class SendEmailUpdatesCommandApr20 extends Command
     public function __construct()
     {
         parent::__construct();
-        $this->lastSentAt = Carbon::parse(\App\Models\EmailsSent::find(1)->sent_at); //using 1 because of the matching bug :(
 
     }
 
@@ -45,6 +44,7 @@ class SendEmailUpdatesCommandApr20 extends Command
      */
     public function handle()
     {
+        $this->lastSentAt = Carbon::parse(\App\Models\EmailsSent::find(1)->sent_at); //using 1 because of the matching bug :(
         $from_id = $this->option('fromid') ?: null;
         $to_id = $this->option('toid') ?: null;
 
