@@ -265,9 +265,7 @@ class CarpoolController extends Controller
             if ($state_from && $state_to) {
                 $query->where(function ($q) use ($state_from, $state_to) {
                     $q->where(function ($q) use ($state_from, $state_to) {
-                        $q->pollStateIs($state_to)->fromStateIs($state_from);
-                    })->orWhere(function ($q) use ($state_from, $state_to) {
-                        $q->pollStateIs($state_from)->fromStateIs($state_to);
+                        $q->fromStateIs($state_to)->pollStateIs($state_from);
                     });
                 });
             } else {
