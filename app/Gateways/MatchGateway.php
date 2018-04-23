@@ -13,10 +13,14 @@ class MatchGateway
      * User has a CarpoolNeed that has been matched
      *
      * @param \App\Models\User $user
+     * @param \DateTime The need must be older than this date
      * @return boolean
      */
-    public function userHasMatchedNeed(\App\Models\User $user): bool {
+    public function userHasMatchedNeed(\App\Models\User $user, \DateTime $max_time = null): bool {
         if ($user->need && !$user->need->fulfilled) {
+            if ($max_time && Carbon::parse($user->need->created_at)->gt($max_time)) {
+                return false;
+            }
             $matched_offers = $this->matchNeed($user->need);
             return $matched_offers->count() > 0;
         }
@@ -29,13 +33,16 @@ class MatchGateway
      * @param \App\Models\User $user
      * @return boolean
      */
-    public function userHasMatchedOffer(\App\Models\User $user): bool {
+    public function userHasMatchedOffer(\App\Models\User $user, \DateTime $max_time = null): bool {
         $offer = CarpoolOffer::where('user_id', '=', $user->getKey())
         ->where('hidden', 0)
         ->where('fulfilled', 0)
         ->where('offer_order', '=', 1)
         ->first();
         if ($offer) {
+            if ($max_time && Carbon::parse($offer->created_at)->gt($max_time)) {
+                return false;
+            }
             $matched_needs = $this->matchOffer($offer);
             return $matched_needs->count() > 0;
         }
