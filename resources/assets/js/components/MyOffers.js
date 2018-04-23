@@ -81,7 +81,10 @@ export default class MyOffers extends Component {
         <Row>
           <Col md={4}>
           {this.state.offer &&
-            <CarpoolOffer onChange={() => { window.location.reload() }} offer={this.state.offer} isOwner={true}/>
+            <CarpoolOffer onChange={() => {
+              //refresh, without query string
+              window.location = window.location.pathname
+            }} offer={this.state.offer} isOwner={true}/>
           }
           </Col>
           <Col md={8}>

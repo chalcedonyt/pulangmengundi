@@ -7,6 +7,7 @@ import HideOfferModal from './HideOfferModal'
 import UnhideOfferModal from './UnhideOfferModal'
 import {FormattedMessage, FormattedHTMLMessage} from 'react-intl'
 import moment from 'moment'
+import QueryString from 'query-string'
 
 export default class CarpoolOffer extends Component {
   constructor(props) {
@@ -25,6 +26,14 @@ export default class CarpoolOffer extends Component {
     this.setCancelModal = this.setCancelModal.bind(this)
   }
 
+  componentDidMount() {
+    const queryParams = QueryString.parse(window.location.search)
+    if (this.props.isOwner && queryParams.show_close_dialog) {
+      this.setState({
+        showHideModal: true
+      })
+    }
+  }
   handleOfferSuccess() {
     api.offerSuccess(this.state.offer.id)
     .then(() => this.props.onChange())

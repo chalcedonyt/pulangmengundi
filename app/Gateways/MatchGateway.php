@@ -51,7 +51,7 @@ class MatchGateway
 
     public function getEmailForUser (\App\Models\User $user, \DateTime $last_sent_at = null, $check_sponsors = false) {
         //if user is new, don't need to check whether only to show fresh matches
-        if (Carbon::parse($user->created_at)->gt($last_sent_at)) {
+        if ($last_sent_at && Carbon::parse($user->created_at)->gt($last_sent_at)) {
             $min_time = null;
         } else {
             $min_time = $last_sent_at;
@@ -71,6 +71,10 @@ class MatchGateway
                     'uuid' => $offer->user->uuid
                 ], env('APP_KEY'));
                 $offer->jwt_link = env('APP_URL')."/u/$jwt";
+                //hack since i screwed up the consolidation and now this logic is also in a transformer
+                if (!$offer->information && $offer->correspondingOffer && $offer->correspondingOffer->information) {
+                    $offer->information = $offer->correspondingOffer->information;
+                }
                 return $offer;
             });
             if ($check_sponsors) {
@@ -84,7 +88,7 @@ class MatchGateway
         $matched_needs = collect([]);
         if ($user->offers) {
             foreach ($user->offers as $offer) {
-                if ($offer->hidden || $offer->fulfilled)
+                if ($offer->hidden || $offer->fulfilled || $offer->offer_order > 1)
                     continue;
                 $needs = $this->matchOffer($offer, $min_time, 'desc');
                 if ($needs->count()) {
@@ -103,7 +107,6 @@ class MatchGateway
                 }
             }
         }
-
         if ($matched_needs->count() || $matched_offers->count() || $matched_sponsors->count()) {
             $msg = sprintf('Found %d riders, %d drivers, %d sponsor routes for user %d %s (%s)',
                 $matched_needs->count(),
@@ -113,10 +116,11 @@ class MatchGateway
                 $user->name,
                 $user->email
             );
+            $is_driver = ($matched_offers->count()) ? false : true;
             // $match_stats['msgs'][]=$msg;
             // $match_stats['users']++;
             return [
-                new \App\Mail\DailyMatchEmail($user, $matched_offers, $matched_needs, $matched_sponsors),
+                new \App\Mail\DailyMatchEmail($user, $matched_offers, $matched_needs, $matched_sponsors, $is_driver),
                 $msg,
                 // $match_stats
             ];
@@ -214,17 +218,6 @@ class MatchGateway
         ->orderBy('updated_at', $order)
         ->get();
 
-        //don't match reverse
-        // $matches_to = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
-        // ->where('location_id_to', '=', $need->fromLocation->getKey())
-        // ->where('location_id_from', '=', $need->pollLocation->getKey())
-        // ->where('hidden', '=', 0)
-        // ->where(function ($q) use ($need) {
-        //     $q->whereNull('gender_preference')
-        //     ->orWhere('gender_preference', '=', $need->user->gender);
-        // })
-        // ->get();
-
         $partial_matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->fromStateIs($need->fromLocation->state)
         ->toStateIs($need->pollLocation->state)
@@ -237,18 +230,14 @@ class MatchGateway
         ->where('hidden', '=', 0)
         ->get();
 
-        //don't match reverse
-        // $partial_matches_to = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
-        // ->toStateIs($need->fromLocation->state)
-        // ->fromStateIs($need->pollLocation->state)
-        // ->where(function ($q) use ($need) {
-        //     $q->whereNull('gender_preference')
-        //     ->orWhere('gender_preference', '=', $need->user->gender);
-        // })
-        // ->where('hidden', '=', 0)
-        // ->get();
-
         $matches = $matches_from->concat($partial_matches_from);
+        $matches = $matches->map(function ($offer) {
+            $corresponding_offer = CarpoolOffer::where('user_id', '=', $offer->user_id)
+            ->where('offer_order', '=', 2)
+            ->first();
+            $offer->correspondingOffer = $corresponding_offer;
+            return $offer;
+        });
         return $matches;
     }
 }

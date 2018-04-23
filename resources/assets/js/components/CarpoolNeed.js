@@ -4,14 +4,24 @@ import ReactDOM from 'react-dom';
 import {Button, Col, Grid, Image, Panel, Row} from 'react-bootstrap'
 import CloseNeedModal from './CloseNeedModal'
 import {FormattedMessage} from 'react-intl'
-export default class CarpoolNeed extends Component {
+import QueryString from 'query-string'
 
+export default class CarpoolNeed extends Component {
   constructor(props) {
     super(props)
     this.state = {
       showCloseModal: false
     }
     this.setCloseModal = this.setCloseModal.bind(this)
+  }
+
+  componentDidMount() {
+    const queryParams = QueryString.parse(window.location.search)
+    if (this.props.isOwner && queryParams.show_close_dialog) {
+      this.setState({
+        showCloseModal: true
+      })
+    }
   }
 
   setCloseModal(showCloseModal) {

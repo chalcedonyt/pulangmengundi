@@ -48,12 +48,16 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
 
   handleNeedSuccess() {
     api.needSuccess(this.state.need.id)
-    .then(() => {window.location.reload()} )
+    .then(() => {
+      window.location = window.location.pathname
+    } )
   }
 
   handleCancelNeed() {
     api.cancelNeed(this.state.need.id)
-    .then(() => {window.location.reload()} )
+    .then(() => {
+      window.location = window.location.pathname
+    } )
   }
 
   render() {
@@ -124,7 +128,7 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
                   <Panel.Body>
                     <Grid fluid>
                     {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
-                      <Col key={i} md={6}>
+                      <Col key={offer.id} md={6}>
                         <CarpoolOffer onContact={this.handleContactUser} offer={offer} />
                       </Col>
                     ))}
@@ -139,7 +143,7 @@ export default class MyCarpoolNeedMyCarpoolNeed extends Component {
           </Row>
           <MobileView device={isMobile}>
             {this.state.offers && this.state.offers.length > 0 && this.state.offers.map((offer, i) => (
-                <CarpoolOffer onContact={this.handleContactUser} offer={offer} />
+                <CarpoolOffer key={offer.id} onContact={this.handleContactUser} offer={offer} />
             ))}
           </MobileView>
         </div>

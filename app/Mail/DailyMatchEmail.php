@@ -18,18 +18,20 @@ class DailyMatchEmail extends Mailable
     public $matchedSponsors;
     public $emailUser;//prevent clashes with global "user"
     public $subject = '';
+    public $isDriver = false;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user, $matched_offers, $matched_needs, $matched_sponsors)
+    public function __construct(User $user, $matched_offers, $matched_needs, $matched_sponsors, $is_driver)
     {
         $this->emailUser = $user;
         $this->matchedOffers = $matched_offers;
         $this->matchedNeeds = $matched_needs;
         $this->matchedSponsors = $matched_sponsors;
+        $this->isDriver = $is_driver;
         if ($matched_needs->count() || $matched_offers->count() || $matched_sponsors->count()) {
             $sponsor_string = $matched_sponsors->count() ? 'and sponsors ' : '';
             $this->subject = $matched_needs->count()
@@ -45,6 +47,6 @@ class DailyMatchEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.matches');
+        return $this->view('emails.matches-apr24');
     }
 }
