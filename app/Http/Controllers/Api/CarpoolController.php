@@ -98,11 +98,17 @@ class CarpoolController extends Controller
         $need = $user->need;
 
         $matcher = new \App\Gateways\MatchGateway();
-        $matches = $matcher->matchNeed($need);
-        $matches = $matches->unique(function ($need) {
-           return $need->id;
+        $offers = $matcher->matchNeed($need);
+        $offers = $offers->unique(function ($offer) {
+           return $offer->id;
+        })->map(function ($offer) {
+            $corresponding_offer = CarpoolOffer::where('user_id', '=', $offer->user_id)
+            ->where('offer_order', '=', 2)
+            ->first();
+            $offer->correspondingOffer = $corresponding_offer;
+            return $offer;
         });
-        $data = fractal()->collection($matches, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
+        $data = fractal()->collection($offers, new \App\Transformers\CarpoolOfferTransformer, 'offers')->toArray();
         return response()->json($data);
     }
 
