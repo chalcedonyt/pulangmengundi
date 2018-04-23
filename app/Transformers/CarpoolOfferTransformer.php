@@ -21,6 +21,7 @@ class CarpoolOfferTransformer extends TransformerAbstract
         unset($data['to_location']);
         if ($offer->correspondingOffer) {
             $data['leave_polls_at_formatted'] = \Carbon\Carbon::parse($offer->correspondingOffer->leave_at)->format('D jS M Y, g:ia');
+            $data['information'] .= $offer->correspondingOffer->information;
         }
         return $data;
     }
