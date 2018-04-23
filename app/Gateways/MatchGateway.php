@@ -9,6 +9,39 @@ use Firebase\JWT\JWT;
 
 class MatchGateway
 {
+    /**
+     * User has a CarpoolNeed that has been matched
+     *
+     * @param \App\Models\User $user
+     * @return boolean
+     */
+    public function userHasMatchedNeed(\App\Models\User $user): bool {
+        if ($user->need && !$user->need->fulfilled) {
+            $matched_offers = $this->matchNeed($user->need);
+            return $matched_offers->count() > 0;
+        }
+        return false;
+    }
+
+    /**
+     * User has a CarpoolOffer that has been matched
+     *
+     * @param \App\Models\User $user
+     * @return boolean
+     */
+    public function userHasMatchedOffer(\App\Models\User $user): bool {
+        $offer = CarpoolOffer::where('user_id', '=', $user->getKey())
+        ->where('hidden', 0)
+        ->where('fulfilled', 0)
+        ->where('offer_order', '=', 1)
+        ->first();
+        if ($offer) {
+            $matched_needs = $this->matchOffer($user->offer);
+            return $matched_needs->count() > 0;
+        }
+        return false;
+    }
+
     public function getEmailForUser (\App\Models\User $user, \DateTime $last_sent_at = null, $check_sponsors = false) {
         //if user is new, don't need to check whether only to show fresh matches
         if (Carbon::parse($user->created_at)->gt($last_sent_at)) {

@@ -35,7 +35,7 @@ export default class CarpoolNeed extends Component {
           </Row>
         }
         </Panel.Heading>
-        <Panel.Body>
+        <Panel.Body className='listing-panel-body'>
           {this.props.need &&
           <div>
             <strong>

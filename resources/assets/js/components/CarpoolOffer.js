@@ -71,7 +71,7 @@ export default class CarpoolOffer extends Component {
             </Col>
           </Row>
         </Panel.Heading>
-        <Panel.Body>
+        <Panel.Body className='listing-panel-body'>
           <div>
             <strong>
               <FormattedMessage

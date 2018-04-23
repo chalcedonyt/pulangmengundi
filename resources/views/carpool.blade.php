@@ -9,6 +9,7 @@
 <script>
 window.user = {!!json_encode($user)!!}
 window.userStatus = {!!json_encode($user_status)!!}
+window.surveyStatus = {!!json_encode($survey_status)!!}
 </script>
 <script src="{{mix('js/carpool.js')}}"></script>
 @endsection
