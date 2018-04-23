@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
             $has_offers = $user && $user->offers->count();
 
             $survey_status = [];
-            if ($user && Carbon::now()->diffInDays($user->created_at) > 4 && $user->survey_taken_at == null) {
+            if ($user && Carbon::now()->diffInDays($user->created_at) > 4 && $user->survey_status == 0) {
                 $gw = new \App\Gateways\MatchGateway;
                 if ($gw->userHasMatchedNeed($user)) {
                     $survey_status = [

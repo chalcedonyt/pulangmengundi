@@ -154,5 +154,7 @@
 	"tnc-5": "Jika anda percaya data yang diperolehi kami tidak tepat, tidak lengkap, mengelirukan atau bukan yang terkini, sila hubungi kami untuk tindakan selanjutnya.",
 	"single.show-profile": "Profile pengguna",
 	"btn-show-profile": "Hubungi",
-	"btn-back-to": "Balik ke"
+	"btn-back-to": "Balik ke",
+	"survey.header": "Bolehkah anda luangkan seminit untuk memberikan kami maklum balas?",
+	"survey.cta": "Kami dapati anda ada permohonan/penawaran yang masih aktif. Maklum balas anda akan membantu memperbaiki sistem padanan kami. Terima kasih!"
 }

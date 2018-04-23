@@ -53,4 +53,13 @@ class UserController extends Controller
         $data = fractal()->item($subject, new \App\Transformers\UserTransformer)->toArray();
         return response()->json($data);
     }
+
+    public function updateSurveyStatus(Request $request) {
+        $user = \Auth::user();
+        $user->survey_status = $request->input('status');
+        $user->save();
+        return response()->json([
+            'success' => 1
+        ]);
+    }
 }

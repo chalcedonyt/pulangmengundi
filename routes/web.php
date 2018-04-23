@@ -111,4 +111,5 @@ Route::middleware('auth')->prefix('api')->group(function() {
     Route::get('/match-my-offers', ['uses' => 'Api\\CarpoolController@matchMyOffers']);
 
     Route::get('/user/{uuid}', ['uses' => 'Api\\UserController@show']);
+    Route::post('/user/survey-status', ['uses' => 'Api\\UserController@updateSurveyStatus']);
 });

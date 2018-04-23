@@ -7,6 +7,7 @@ import CarpoolOffer from './CarpoolOffer'
 import CarpoolNeed from './CarpoolNeed'
 import ContactModal from './ContactModal'
 import OutgoingSponsorModal from './OutgoingSponsorModal'
+import SurveyModal from './SurveyModal'
 import StateSelection from './shared/StateSelection'
 import Progress from './shared/Progress'
 import {FormattedMessage as FM, FormattedHTMLMessage as FHM} from 'react-intl'
@@ -24,6 +25,8 @@ export default class Carpool extends Component {
       selectedStateTo: null,
 
       showContactModal: false,
+      showSurveyModal: false,
+      surveyIsDriver: null,
       showOutgoingSponsorModal: false,
       outgoingSponsorHref: '',
       outgoingSponsor: '',
@@ -60,6 +63,21 @@ export default class Carpool extends Component {
   }
 
   componentDidMount() {
+    if (window.surveyStatus && window.surveyStatus.showRiderSurvey) {
+      window.setTimeout (() => {
+        this.setState({
+          surveyIsDriver: false,
+          showSurveyModal: true,
+        })
+      }, 2000)
+    } else if (window.surveyStatus && window.surveyStatus.showDriverSurvey) {
+      window.setTimeout (() => {
+        this.setState({
+          surveyIsDriver: true,
+          showSurveyModal: true,
+        })
+      }, 2000)
+    }
     this.doSearch()
   }
 
@@ -679,6 +697,9 @@ export default class Carpool extends Component {
         </Grid>
         {this.state.showContactModal &&
           <ContactModal show={this.state.showContactModal} user={this.state.selectedUser} onCancel={(e) => this.setState({showContactModal: false, selectedUser: {}})} />
+        }
+        {this.state.showSurveyModal &&
+          <SurveyModal show={this.state.showSurveyModal} isDriver={this.state.surveyIsDriver} onCancel={(e) => this.setState({showSurveyModal: false})}/>
         }
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
       </div>

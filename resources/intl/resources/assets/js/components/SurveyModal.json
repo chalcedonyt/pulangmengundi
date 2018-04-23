@@ -1,0 +1,10 @@
+[
+  {
+    "id": "survey.header",
+    "defaultMessage": "Can you spare one minute to take a survey?"
+  },
+  {
+    "id": "survey.cta",
+    "defaultMessage": "We notice that you have an outstanding listing, and we are trying to improve the matching experience for all drivers and riders.\n              Your feedback will help a lot!"
+  }
+]

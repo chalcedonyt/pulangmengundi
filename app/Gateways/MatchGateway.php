@@ -36,7 +36,7 @@ class MatchGateway
         ->where('offer_order', '=', 1)
         ->first();
         if ($offer) {
-            $matched_needs = $this->matchOffer($user->offer);
+            $matched_needs = $this->matchOffer($offer);
             return $matched_needs->count() > 0;
         }
         return false;

@@ -146,5 +146,14 @@ module.exports = {
     .then(function (response) {
       return response.data;
     });
+  },
+
+  updateSurveyStatus: (status) => {
+    const encodedURI = window.encodeURI(`${endpoint}/user/survey-status`);
+    return axios.post(encodedURI, {status: status}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   }
 }
