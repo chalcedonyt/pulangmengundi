@@ -178,7 +178,7 @@ export default class OfferCarpool extends Component {
         toLocationId: this.state.startLocation.id,
         fromLocationId: this.state.pollLocation.id,
         datetime: this.state.carpoolFromPollsDateTime,
-        information: this.state.information,
+        // information: this.state.information,
         allowEmail: this.state.allowEmail ? 1 : 0,
         allowFb: this.state.allowFb ? 1 : 0,
         offerOrder: this.state.willCarpoolToPolls ? 2 : 1,
