@@ -46,6 +46,9 @@ class AppServiceProvider extends ServiceProvider
             $view->with('survey_status', $survey_status);
             if ($user)
                 $view->with('user', $user->toArray());
+            else {
+                $view->with('user', []);
+            }
             $view->with('locale', \LaravelLocalization::getCurrentLocale());
         });
     }
