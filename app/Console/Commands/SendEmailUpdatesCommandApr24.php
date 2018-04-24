@@ -63,7 +63,8 @@ class SendEmailUpdatesCommandApr24 extends Command
             'offers.user',
             'offers.fromLocation.locationState',
             'offers.toLocation.locationState'
-        )->doesntHave('failedEmails')
+        )
+        // ->doesntHave('failedEmails')
         ->where('email', 'NOT LIKE', '%hotmail.com%')
         ->where('email', 'NOT LIKE', '%live.com%')
         ->orderBy('id', 'asc');
