@@ -44,7 +44,8 @@ class AppServiceProvider extends ServiceProvider
                 'hasRiderListing' => $has_need,
             ]);
             $view->with('survey_status', $survey_status);
-            $view->with('user', $user->toArray());
+            if ($user)
+                $view->with('user', $user->toArray());
             $view->with('locale', \LaravelLocalization::getCurrentLocale());
         });
     }
