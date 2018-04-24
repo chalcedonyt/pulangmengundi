@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
             if ($user)
                 $view->with('user', $user->toArray());
             else {
-                $view->with('user', []);
+                $view->with('user', null);
             }
             $view->with('locale', \LaravelLocalization::getCurrentLocale());
         });
