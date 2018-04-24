@@ -24,7 +24,7 @@ class SendEmailUpdatesCommandApr24 extends Command
      *
      * @var string
      */
-    protected $description = 'Sends updates with undirabu + survey information';
+    protected $description = 'Sends updates with undirabu + survey information (only for non-hotmail)';
 
     /**
      * Create a new command instance.
