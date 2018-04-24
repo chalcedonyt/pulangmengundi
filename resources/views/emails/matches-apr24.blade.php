@@ -439,8 +439,8 @@
                               @else
                               <a target='_blank' href="https://carpool.pulangmengundi.com/my-need?show_close_dialog=1&utm_campaign=matchUpdate&utm_medium=email">update your listing status on your rider page</a>.
                               @endif
-                            </p><br>
-                            <br />
+                              We will also be automatically closing listings soon for users who are not active on our platform to prioritize people who are actively looking.
+                            </p><br><br />
                             <div align="center" class="img-container center  autowidth  " style="padding-right: 0px;  padding-left: 0px;">
                               <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px;line-height:0px;"><td style="padding-right: 0px; padding-left: 0px;" align="center"><![endif]-->
                               <img class="center" align="center" border="0" src="https://balik.undirabu.com/wp-content/uploads/2018/04/undirabu-logo-300x300.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: 0;height: auto;float: none;max-width: 80px"

@@ -64,6 +64,8 @@ class SendEmailUpdatesCommandApr24 extends Command
             'offers.fromLocation.locationState',
             'offers.toLocation.locationState'
         )->doesntHave('failedEmails')
+        ->where('email', 'NOT LIKE', '%hotmail.com%')
+        ->where('email', 'NOT LIKE', '%live.com%')
         ->orderBy('id', 'asc');
 
         if ($from_id) {
@@ -86,8 +88,8 @@ class SendEmailUpdatesCommandApr24 extends Command
                     $msgs[]=$msg;
                     $emails_sent++;
                     $to_id = $user->getKey();
-                    // \Mail::to($user->email)
-                    // ->send($mail);
+                    \Mail::to($user->email)
+                    ->send($mail);
                 }
             }
         });
