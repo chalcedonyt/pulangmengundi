@@ -149,6 +149,7 @@ export default class NeedCarpool extends Component {
   }
 
   render() {
+    const language = window.locale || navigator.language.split(/[-_]/)[0];  // language without region code
     return (
       <div>
         <div className="container">
@@ -170,7 +171,7 @@ export default class NeedCarpool extends Component {
             <Panel.Body>
               <Row>
                 <Col md={4}>
-                  <Image width={350} src='/img/carpool-rider-en.jpg' responsive />
+                  <Image width={350} src={`/img/carpool-rider-${language}.jpg`} responsive />
                   <br />
                 </Col>
                 <Col md={8}>

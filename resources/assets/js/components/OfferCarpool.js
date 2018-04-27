@@ -194,6 +194,7 @@ export default class OfferCarpool extends Component {
   }
 
   render() {
+    const language = window.locale || navigator.language.split(/[-_]/)[0];  // language without region code
     return (
       <div>
         <Panel bsStyle='primary'>
@@ -208,7 +209,7 @@ export default class OfferCarpool extends Component {
           <Panel.Body>
             <Row>
               <Col md={4}>
-                <Image width={350} src='/img/carpool-driver-en.jpg' responsive />
+                <Image width={350} src={`/img/carpool-driver-${language}.jpg`} responsive />
                 <br />
               </Col>
               <Col md={8}>
