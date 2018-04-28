@@ -446,7 +446,7 @@ export default class Carpool extends Component {
                   </div>
                   <div>
                     <u>
-                      <a target="_blank" href="https://kevinsoo.shinyapps.io/pulangmengundipickups/">
+                      <a target="_blank" href="https://pulangmengundi.shinyapps.io/pickups/">
                         <FM
                           id="home.visualization-2"
                           defaultMessage={`View a visualization here.`}
