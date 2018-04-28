@@ -1,7 +1,7 @@
 [
   {
-    "id": "offer.dialog-hide-question",
-    "defaultMessage": "Hide your carpool offer?"
+    "id": "offer.dialog-unhide-question",
+    "defaultMessage": "Unhide your carpool offer?"
   },
   {
     "id": "offer.warning-undo-hidden-public",

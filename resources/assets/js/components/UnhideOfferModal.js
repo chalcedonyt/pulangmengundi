@@ -15,16 +15,16 @@ export default class UnhideOfferModal extends Component {
       <Modal.Header closeButton>
         <Modal.Title>
           <FormattedMessage
-            id="offer.dialog-hide-question"
-            defaultMessage={`Hide your carpool offer?`}
+            id="offer.dialog-unhide-question"
+            defaultMessage={`Unhide your carpool offer?`}
           />
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h4>
           <FormattedMessage
-            id="offer.dialog-hide-question"
-            defaultMessage={`Hide your carpool offer?`}
+            id="offer.dialog-unhide-question"
+            defaultMessage={`Unhide your carpool offer?`}
           />
           </h4>
         <p>
