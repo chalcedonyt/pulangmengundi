@@ -437,7 +437,26 @@ export default class Carpool extends Component {
           <Panel.Body>
             <Grid fluid>
               <Row>
-                <Col md={4} mdOffset={2}>
+                <Col md={2}>
+                  <div>
+                    <FM
+                      id="home.visualization-1"
+                      defaultMessage={`Where are drivers needed most?`}
+                    />
+                  </div>
+                  <div>
+                    <u>
+                      <a target="_blank" href="https://kevinsoo.shinyapps.io/pulangmengundipickups/">
+                        <FM
+                          id="home.visualization-2"
+                          defaultMessage={`View a visualization here.`}
+                        />
+                      </a>
+                    </u>
+                  </div>
+                  <br />
+                </Col>
+                <Col md={4}>
                   <Panel>
                     <Panel.Heading>
                       <FM

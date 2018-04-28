@@ -56,6 +56,14 @@
     "defaultMessage": "Carpool search"
   },
   {
+    "id": "home.visualization-1",
+    "defaultMessage": "Where are drivers needed most?"
+  },
+  {
+    "id": "home.visualization-2",
+    "defaultMessage": "View a visualization here."
+  },
+  {
     "id": "home.btn-search-from",
     "defaultMessage": "Choose where you are starting from"
   },
