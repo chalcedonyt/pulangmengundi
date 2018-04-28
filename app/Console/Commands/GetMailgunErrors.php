@@ -48,7 +48,7 @@ class GetMailgunErrors extends Command
             'event' => 'failed',
             'ascending' => 'no',
             'from' => 'carpool@pulangmengundi.com',
-             'begin' => 1524191014,
+            // 'begin' => 1524191014,
             'limit' => 200
         ];
         $client = new Client();
