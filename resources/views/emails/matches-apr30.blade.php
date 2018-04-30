@@ -373,9 +373,6 @@
                               </span>
                             </p>
                             <br />
-                            <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
-                              We started pulangmengundi.com because we strongly believe that everyone should exercise their right to vote.
-                            </p>
                             <br />
                             <p style="margin: 0;font-size: 14px;line-height: 17px;text-align: center">
                               Although any people have managed to find carpools, <a href="https://balik.undirabu.com">buses</a>, or <a href="https://subsidy.pulangmengundi.com">subsidies</a>
@@ -397,7 +394,6 @@
                               @else
                               <a target='_blank' href="https://carpool.pulangmengundi.com/my-need?show_close_dialog=1&utm_campaign=matchUpdate&utm_medium=email">update your listing status on your rider page</a>.
                               @endif
-                              We will also be automatically closing listings soon for users who are not active on our platform to prioritize people who are actively looking.
                             </p><br><br />
                             <div align="center" class="img-container center  autowidth  " style="padding-right: 0px;  padding-left: 0px;">
                               <!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr style="line-height:0px;line-height:0px;"><td style="padding-right: 0px; padding-left: 0px;" align="center"><![endif]-->
