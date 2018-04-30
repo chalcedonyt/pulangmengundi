@@ -51,6 +51,9 @@ Route::group([
     });
 
     Route::middleware(['auth', 'accept-terms'])->group(function() {
+        Route::get('fill-email-address', function (Request $request) {
+            return view('login');
+        });
         Route::get('/need', function() {
             $prev = str_replace(url('/'), '', url()->previous());
             if (\Auth::user()->need && strpos($prev, 'my-need') === false ) {
@@ -113,4 +116,6 @@ Route::middleware('auth')->prefix('api')->group(function() {
 
     Route::get('/user/{uuid}', ['uses' => 'Api\\UserController@show']);
     Route::post('/user/survey-status', ['uses' => 'Api\\UserController@updateSurveyStatus']);
+
+    Route::post('/user/update-email', ['uses' => 'Api\\UserController@updateEmail']);
 });

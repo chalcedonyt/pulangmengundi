@@ -33,7 +33,7 @@ class LoginController extends Controller
     public function handleProviderCallback(Request $request)
     {
         $google_user = Socialite::driver('google')->stateless()->user();
-        $user = User::firstOrNew(['email' => $google_user->getEmail()]);
+        $user = User::firstOrNew(['google_id' => $google_user->getId()]);
         $user->google_id = $google_user->getId();
         $user->email = $google_user->getEmail();
         $user->name = $google_user->getName();
@@ -48,23 +48,26 @@ class LoginController extends Controller
         if (empty($user->uuid))
             $user->uuid = str_random(40);
         $user->accepted = 1;
+        $needs_email_address = empty($user->email);
+        if ($needs_email_address) {
+            $user->email = 'pleasefillin@youremail.com';
+        }
         $user->save();
         //assign a cookie that is less than the google expiry for now
         \Auth::login($user, $remember = true);
 
         $redirect = '/';
 
-        if ($request->session()->has('redirect')) {
-            $redirect = $request->session()->get('redirect');
+        if ($needs_email_address) {
+            $redirect = '/fill-email-address';
         }
-        $request->session()->forget('redirect');
         return redirect($redirect);
     }
 
     public function handleFbProviderCallback(Request $request)
     {
         $facebook_user = Socialite::driver('facebook')->stateless()->user();
-        $user = User::firstOrNew(['email' => $facebook_user->getEmail()]);
+        $user = User::firstOrNew(['fb_id' => $facebook_user->getId()]);
         $user->fb_id = $facebook_user->getId();
         $user->name = $facebook_user->getName();
         $user->email = $facebook_user->getEmail();
@@ -81,16 +84,20 @@ class LoginController extends Controller
             $user->uuid = str_random(40);
         }
         $user->accepted = 1;
+        $needs_email_address = empty($user->email);
+        if ($needs_email_address) {
+            $user->email = 'pleasefillin@youremail.com';
+        }
         $user->save();
         //assign a cookie that is less than the google expiry for now
         \Auth::login($user, $remember = true);
 
         $redirect = '/';
 
-        if ($request->session()->has('redirect')) {
-            $redirect = $request->session()->get('redirect');
+        if ($needs_email_address) {
+            $redirect = '/fill-email-address';
         }
-        $request->session()->forget('redirect');
+
         return redirect($redirect);
     }
 }

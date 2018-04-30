@@ -62,4 +62,13 @@ class UserController extends Controller
             'success' => 1
         ]);
     }
+
+    public function updateEmail(Request $request) {
+        $user = \Auth::user();
+        $user->email = $request->input('email');
+        $user->save();
+        return response()->json([
+            'success' => 1
+        ]);
+    }
 }

@@ -155,5 +155,14 @@ module.exports = {
         'Content-Type': 'application/json'
       }
     })
+  },
+
+  updateEmail: (email) => {
+    const encodedURI = window.encodeURI(`${endpoint}/user/update-email`);
+    return axios.post(encodedURI, {email: email}, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
   }
 }
