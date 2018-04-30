@@ -28,16 +28,16 @@ class AppServiceProvider extends ServiceProvider
             $threshold_days = 2;
             $threshold_datetime = new \DateTime(date('Y-m-d', strtotime("-".$threshold_days." days")));
             if ($user && $user->survey_status == 0) {
-                $gw = new \App\Gateways\MatchGateway;
-                if ($gw->userHasMatchedNeed($user, $max_time = $threshold_datetime)) {
-                    $survey_status = [
-                        'showRiderSurvey' => true
-                    ];
-                } else if ($gw->userHasMatchedOffer($user, $max_time = $threshold_datetime)) {
-                    $survey_status = [
-                        'showDriverSurvey' => true
-                    ];
-                }
+                // $gw = new \App\Gateways\MatchGateway;
+                // if ($gw->userHasMatchedNeed($user, $max_time = $threshold_datetime)) {
+                //     $survey_status = [
+                //         'showRiderSurvey' => true
+                //     ];
+                // } else if ($gw->userHasMatchedOffer($user, $max_time = $threshold_datetime)) {
+                //     $survey_status = [
+                //         'showDriverSurvey' => true
+                //     ];
+                // }
             }
             $view->with('user_status', [
                 'hasDriverListing' => $has_offers,
