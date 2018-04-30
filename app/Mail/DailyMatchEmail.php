@@ -47,6 +47,6 @@ class DailyMatchEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.matches-apr28');
+        return $this->view('emails.matches-apr30');
     }
 }
