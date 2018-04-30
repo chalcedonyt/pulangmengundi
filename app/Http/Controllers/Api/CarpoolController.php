@@ -116,7 +116,8 @@ class CarpoolController extends Controller
         $corresponding_offer = CarpoolOffer::where('user_id', '=', \Auth::user()->getKey())
         ->where('offer_order', '=', 2)
         ->first();
-        $offer->correspondingOffer = $corresponding_offer;
+        if ($offer->correspondingOffer)
+            $offer->correspondingOffer = $corresponding_offer;
 
         $data = fractal()->item($offer, new \App\Transformers\CarpoolOfferTransformer)->toArray();
         return response()->json($data);
