@@ -371,54 +371,6 @@ export default class Carpool extends Component {
             </Col>
           </Row>
         </Jumbotron>
-        <Alert bsStyle='info'>
-          <Row>
-            <Col md={1} mdOffset={0} xsOffset={4} xs={1} sm={1} smOffset={0}>
-              <Image width='50' src='https://balik.undirabu.com/wp-content/uploads/2018/04/undirabu-logo-300x300.png' />
-            </Col>
-            <Col md={9} xs={12} sm={5}>
-              <h5>
-                <FM
-                  id="home.undirabu-promo-header"
-                  defaultMessage={`New: Undirabu is sponsoring FREE buses to certain locations throughout Malaysia.`}
-                />
-              </h5>
-              <p>
-                <FM
-                  id="home.undirabu-promo-cta"
-                  defaultMessage={`Check them out at {link}, or do a search to see if they have a bus matching your trip!`}
-                  values={{
-                    'link': <u>
-                      <a href='javascript:;' onClick={(e)=>this.showOutgoingSponsorModal('UndiRabu', balikUndiHref)}>balik.undirabu.com</a>
-                    </u>
-                  }}
-                />
-              </p>
-              <br />
-            </Col>
-          </Row>
-        </Alert>
-        {this.state.sponsorMatches &&
-        <Alert bsStyle='success'>
-          <h4>
-            <FM
-              id="home.undirabu-promo-matched"
-              defaultMessage={`We have a match for your route from Undirabu!`}
-            /> ({this.state.selectedStateFrom} - {this.state.selectedStateTo})</h4>
-          <ul>
-            {this.state.sponsorMatches.map((match) => (
-              <li key={match.link}>
-                <u>
-                  <a href='javascript:;' onClick={(e)=> this.showOutgoingSponsorModal('UndiRabu', `${match.link}?utm_campaign=carpool.pulangmengundi.com&utm_medium=home_search`)}>
-                    <Glyphicon glyph='chevron-right' />&nbsp;
-                    {match.description}
-                  </a>
-                </u>
-              </li>
-            ))}
-          </ul>
-        </Alert>
-        }
         <OutgoingSponsorModal
           show={this.state.showOutgoingSponsorModal}
           outgoingSponsorHref={this.state.outgoingSponsorHref}

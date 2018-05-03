@@ -1,0 +1,10 @@
+[
+  {
+    "id": "login.login-to-site",
+    "defaultMessage": "Login to"
+  },
+  {
+    "id": "login.login-means-agree",
+    "defaultMessage": "I acknowledge and agree to the above. I have also read the full terms at {link}."
+  }
+]
