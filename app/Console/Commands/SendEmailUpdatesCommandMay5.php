@@ -8,7 +8,7 @@ use App\Mail\DailyMatchEmail;
 use App\Models\EmailsSent;
 
 use Carbon\Carbon;
-class SendEmailUpdatesCommandApr30 extends Command
+class SendEmailUpdatesCommandMay5 extends Command
 {
     protected $lastSentAt = null;
 
