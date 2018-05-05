@@ -149,8 +149,7 @@ class MatchGateway
         if ($offer->gender_preference) {
             $query->where('gender', '=', $offer->gender_preference);
         }
-        $matches_from = $query->where('updated_at', '>=', $min_time)
-        ->get();
+        $matches_from = $query->get();
 
         //don't match reverse any more
         // $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
@@ -174,8 +173,7 @@ class MatchGateway
         if ($offer->gender_preference) {
             $query->where('gender', '=', $offer->gender_preference);
         }
-        $partial_matches_from = $query->where('updated_at', '>=', $min_time)
-        ->get();
+        $partial_matches_from = $query->get();
 
         //don't match reverse any more
         // $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
