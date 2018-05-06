@@ -329,18 +329,33 @@ export default class Carpool extends Component {
                   </Col>
                   <Col lgHidden={true} mdHidden={true} smHidden={true} xsOffset={1} xs={7}>
                     <Button bsStyle='default' href='/offer'>
+                    {!hasDriverListing
+                    ?
                       <FHM
                         id="home.driver-btn-small"
                         defaultMessage={`(Driver)<br /> I want to offer a carpool`}
                       />
+                    : <FHM
+                        id="home.driver-loggedin-btn-small"
+                        defaultMessage={`(Driver)<br /> Manage carpool listing`}
+                      />
+                    }
                     </Button>
                     <br />
                     <br />
                     <Button bsStyle='default' href='/need'>
-                      <FHM
-                        id="home.rider-btn-small"
-                        defaultMessage={`(Rider)<br /> I am looking for a carpool`}
-                      />
+                    {!hasRiderListing
+                    ?
+                    <FHM
+                      id="home.rider-btn-small"
+                      defaultMessage={`(Rider)<br /> I am looking for a carpool`}
+                    />
+                    :
+                    <FHM
+                      id="home.rider-loggedin-btn-small"
+                      defaultMessage={`(Rider)<br /> Manage carpool request`}
+                    />
+                    }
                     </Button>
                   </Col>
                 </Row>
