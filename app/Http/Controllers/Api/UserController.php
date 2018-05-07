@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function show($uuid)
     {
-        if (\Auth::user()->requests->count() > 50) {
+        if (\Auth::user()->requests->count() > 150) {
             return response('You have requested too many contacts', 403);
         }
         $user = \App\Models\User::where('uuid', '=', $uuid)->first();
