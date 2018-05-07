@@ -36,8 +36,8 @@ class DailyMatchEmail extends Mailable
         if ($matched_needs->count() || $matched_offers->count() || $matched_sponsors->count()) {
             $sponsor_string = $matched_sponsors->count() ? 'and sponsors ' : '';
             $this->subject = $matched_needs->count()
-            ? sprintf('FOUR days left to #GE14! We have found %d potential rider(s) %sfor you', $matched_needs->count(), $sponsor_string)
-            : sprintf('FOUR days left to #GE14! We have found %d potential driver(s) %sfor you', $matched_offers->count(), $sponsor_string);
+            ? sprintf('#GE14 is TOMORROW! We have found %d potential rider(s) %sfor you', $matched_needs->count(), $sponsor_string)
+            : sprintf('#GE14 is TOMORROW! We have found %d potential driver(s) %sfor you', $matched_offers->count(), $sponsor_string);
         }
     }
 
@@ -48,6 +48,6 @@ class DailyMatchEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.matches-may5');
+        return $this->view('emails.matches-may8');
     }
 }

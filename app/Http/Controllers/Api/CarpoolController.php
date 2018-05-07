@@ -176,9 +176,11 @@ class CarpoolController extends Controller
         if (\Auth::user()->getKey() !== $offer->user_id)
             return response("You can't do this", 403);
 
-        $offer->hidden = 1;
-        $offer->fulfilled = 1;
-        $offer->save();
+        \Auth::user()->offers->each(function ($offer) {
+            $offer->hidden = 1;
+            $offer->fulfilled = 1;
+            $offer->save();
+        });
         return response()->json([
             'success' => 1
         ]);

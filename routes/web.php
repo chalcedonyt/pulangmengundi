@@ -84,7 +84,7 @@ Route::group([
 });
 Route::get('/email-preview/user/{id}', function ($id) {
     $user = \App\Models\User::find($id);
-    $last_sent_at = \Carbon\Carbon::parse('2018-04-28 15:20:10');
+    $last_sent_at = \Carbon\Carbon::parse('2018-05-04 15:20:10');
     // $last_sent_at = null;
     list($email, $output) = (new \App\Gateways\MatchGateway)->getEmailForUser($user, $last_sent_at, $sponsors = true);
     return $email;

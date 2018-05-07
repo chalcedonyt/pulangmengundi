@@ -149,21 +149,10 @@ class MatchGateway
         if ($offer->gender_preference) {
             $query->where('gender', '=', $offer->gender_preference);
         }
+        if (Carbon::parse($offer->user->created_at)->lt($min_time)) {
+            $query->where('updated_at', '>=', $min_time);
+        }
         $matches_from = $query->get();
-
-        //don't match reverse any more
-        // $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
-        // ->where('location_id_poll', '=', $offer->fromLocation->getKey())
-        // ->where('location_id_from', '=', $offer->toLocation->getKey())
-        // ->where('fulfilled', '=', '0');
-        // // ->where('hidden', '=', 0)
-        // if ($offer->gender_preference) {
-        //     $query->whereHas('user', function ($q) use ($offer) {
-        //         $q->where('gender', '=', $offer->gender_preference);
-        //     });
-        // }
-        // $matches_to = $query->where('updated_at', '>=', $min_time)
-        // ->get();
 
         $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
         ->fromStateIs($offer->fromLocation->state)
@@ -173,21 +162,10 @@ class MatchGateway
         if ($offer->gender_preference) {
             $query->where('gender', '=', $offer->gender_preference);
         }
+        if (Carbon::parse($offer->user->created_at)->lt($min_time)) {
+            $query->where('updated_at', '>=', $min_time);
+        }
         $partial_matches_from = $query->get();
-
-        //don't match reverse any more
-        // $query = CarpoolNeed::with('user', 'fromLocation.locationState', 'pollLocation.locationState')
-        // ->pollStateIs($offer->fromLocation->state)
-        // ->fromStateIs($offer->toLocation->state)
-        // ->where('fulfilled', '=', '0');
-        // if ($offer->gender_preference) {
-        //     $query->whereHas('user', function ($q) use ($offer) {
-        //         $q->where('gender', '=', $offer->gender_preference);
-        //     });
-        // }
-        // $partial_matches_to = $query->where('updated_at', '>=', $min_time)
-        // // ->where('hidden', '=', 0)
-        // ->get();
 
         $matches = $matches_from->concat($partial_matches_from);
         return $matches;
@@ -204,29 +182,37 @@ class MatchGateway
         if (is_null($min_time)) {
             $min_time = '2018-01-01 00:00:00';
         }
-        $matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
+        $query = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->where('location_id_from', '=', $need->fromLocation->getKey())
         ->where('location_id_to', '=', $need->pollLocation->getKey())
         ->where('offer_order', '=', 1)
+        ->where('fulfilled', '=', 0)
         ->where('hidden', '=', 0)
         ->where(function ($q) use ($need) {
             $q->whereNull('gender_preference')
             ->orWhere('gender_preference', '=', $need->gender);
         })
-        ->orderBy('updated_at', $order)
-        ->get();
+        ->orderBy('updated_at', $order);
+        if (Carbon::parse($need->user->created_at)->lt($min_time)) {
+            $query->where('updated_at', '>=', $min_time);
+        }
+        $matches_from = $query->get();
 
-        $partial_matches_from = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
+        $query = CarpoolOffer::with('user', 'fromLocation.locationState', 'toLocation.locationState')
         ->fromStateIs($need->fromLocation->state)
         ->toStateIs($need->pollLocation->state)
+        ->where('fulfilled', '=', 0)
         ->where('offer_order', '=', 1)
         ->where(function ($q) use ($need) {
             $q->whereNull('gender_preference')
             ->orWhere('gender_preference', '=', $need->gender);
         })
         ->orderBy('updated_at', $order)
-        ->where('hidden', '=', 0)
-        ->get();
+        ->where('hidden', '=', 0);
+        if (Carbon::parse($need->user->created_at)->lt($min_time)) {
+            $query->where('updated_at', '>=', $min_time);
+        }
+        $partial_matches_from = $query->get();
 
         $matches = $matches_from->concat($partial_matches_from);
         $matches = $matches->map(function ($offer) {
