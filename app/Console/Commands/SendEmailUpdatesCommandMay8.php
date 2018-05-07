@@ -44,7 +44,7 @@ class SendEmailUpdatesCommandMay8 extends Command
      */
     public function handle()
     {
-        $this->lastSentAt = null;
+        $this->lastSentAt = \Carbon\Carbon::parse('2018-05-04 15:20:10');
         $from_id = $this->option('fromid') ?: null;
         $to_id = $this->option('toid') ?: null;
 
