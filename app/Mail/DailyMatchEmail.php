@@ -30,14 +30,21 @@ class DailyMatchEmail extends Mailable
         $this->emailUser = $user;
         $this->matchedOffers = $matched_offers;
         $this->matchedNeeds = $matched_needs;
-        // $this->matchedSponsors = $matched_sponsors;
-        $this->matchedSponsors = collect([]);
+        $matched_sponsors = collect([]);
+        $this->matchedSponsors = $matched_sponsors;
         $this->isDriver = $is_driver;
         if ($matched_needs->count() || $matched_offers->count() || $matched_sponsors->count()) {
             $sponsor_string = $matched_sponsors->count() ? 'and sponsors ' : '';
-            $this->subject = $matched_needs->count()
-            ? sprintf('#GE14 is TOMORROW! We have found %d new potential rider(s) %sfor you', $matched_needs->count(), $sponsor_string)
-            : sprintf('#GE14 is TOMORROW! We have found %d new potential driver(s) %sfor you', $matched_offers->count(), $sponsor_string);
+            switch (true) {
+                case $matched_needs->count():
+                    $this->subject = sprintf('#GE14 is TOMORROW! We have found %d new potential rider(s) for you', $matched_needs->count());
+                    break;
+                case $matched_offers->count():
+                    $this->subject = sprintf('#GE14 is TOMORROW! We have found %d new potential driver(s) for you', $matched_offers->count());
+                    break;
+                default:
+                    $this->subject = sprintf('#GE14 is TOMORROW! Have you found a carpool?');
+            }
         }
     }
 
