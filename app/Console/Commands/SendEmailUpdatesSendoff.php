@@ -8,23 +8,22 @@ use App\Mail\DailyMatchEmail;
 use App\Models\EmailsSent;
 
 use Carbon\Carbon;
-class SendEmailUpdatesCommandMay8 extends Command
-{
-    protected $lastSentAt = null;
 
+class SendEmailUpdatesSendoff extends Command
+{
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'email:match-updates-may8 {--fromid= : User id to start from} {--toid= : User id to end at}';
+    protected $signature = 'email:sendoff {--fromid= : User id to start from} {--toid= : User id to end at}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'The last update';
+    protected $description = 'The sendoff email';
 
     /**
      * Create a new command instance.
@@ -44,31 +43,12 @@ class SendEmailUpdatesCommandMay8 extends Command
      */
     public function handle()
     {
-        $this->lastSentAt = \Carbon\Carbon::parse('2018-05-04 15:20:10');
         $from_id = $this->option('fromid') ?: null;
         $to_id = $this->option('toid') ?: null;
 
-        $match_stats = [
-            'users' => 0,
-            'matched_drivers' => 0,
-            'matched_riders' => 0,
-            'msgs' => []
-        ];
-        $query = \App\Models\User::with(
-            'need',
-            'need.user',
-            'need.fromLocation.locationState',
-            'need.pollLocation.locationState',
-            'offers',
-            'offers.user',
-            'offers.fromLocation.locationState',
-            'offers.toLocation.locationState'
-        )
-        ->doesntHave('failedEmails')
-        ->where(function ($q) {
-            $q->where('email', 'LIKE', '%hotmail.com%')
-            ->orWhere('email', 'LIKE', '%live.com%');
-        })
+        $query = \App\Models\User::doesntHave('failedEmails')
+        ->where('email', 'NOT LIKE', '%hotmail.com%')
+        ->where('email', 'NOT LIKE', '%live.com%')
         ->orderBy('id', 'asc');
 
         if ($from_id) {
@@ -85,10 +65,9 @@ class SendEmailUpdatesCommandMay8 extends Command
         $to_id = null;
         $query->chunk(50, function ($users) use (&$emails_sent, &$msgs, &$to_id) {
             foreach ($users as $user) {
-                list($mail, $msg) = (new \App\Gateways\MatchGateway)->getEmailForUser($user, $this->lastSentAt, $check_sponsors = true);
+                $mail = new \App\Mail\SendOffEmail($user);
                 if ($mail) {
-                    $this->info($msg);
-                    $msgs[]=$msg;
+                    $this->info(sprintf("Sending email to %s", $user->email));
                     $emails_sent++;
                     $to_id = $user->getKey();
                     \Mail::to($user->email)
@@ -96,12 +75,5 @@ class SendEmailUpdatesCommandMay8 extends Command
                 }
             }
         });
-        $es = new EmailsSent;
-        $es->sent_at = date('Y-m-d H:i:s');
-        $es->emails_sent = $emails_sent;
-        $es->message = implode("\n", $msgs);
-        $es->from_user_id = $from_id;
-        $es->to_user_id = $to_id;
-        $es->save();
     }
 }
